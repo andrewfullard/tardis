@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tardis.plasma.properties.partition_function &mdash; TARDIS v3.0.dev3495</title>
+  <title>tardis.plasma.properties.partition_function &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -99,12 +99,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -112,14 +114,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../roadmap.html">Development Roadmap</a></li>
@@ -222,18 +223,17 @@
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    general_level_boltzmann_factor : Pandas DataFrame, dtype float</span>
-<span class="sd">                             Level population proportionality values.</span>
-<span class="sd">                             Evaluated at the radiation temperature.</span>
-<span class="sd">                             Indexed by atomic number, ion number, level number.</span>
-<span class="sd">                             Columns corresponding to zones. Does not consider</span>
-<span class="sd">                             NLTE.</span>
+<span class="sd">        Level population proportionality values.</span>
+<span class="sd">        Evaluated at the radiation temperature.</span>
+<span class="sd">        Indexed by atomic number, ion number, level number.</span>
+<span class="sd">        Columns corresponding to zones. Does not consider</span>
+<span class="sd">        NLTE.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;general_level_boltzmann_factor&quot;</span><span class="p">,)</span>
     <span class="n">latex_name</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;bf_{i,j,k}&quot;</span><span class="p">,)</span>
     <span class="n">latex_formula</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;g_{i,j,k}e^{</span><span class="se">\\</span><span class="s2">dfrac{-</span><span class="se">\\</span><span class="s2">epsilon_{i,j,k}}{k_{</span><span class="se">\</span>
-<span class="s2">        </span><span class="se">\\</span><span class="s2">textrm</span><span class="si">{B}</span><span class="s2">}T_{</span><span class="se">\\</span><span class="s2">textrm</span><span class="si">{rad}</span><span class="s2">}}}&quot;</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s2">&quot;g_{i,j,k}e^{\dfrac{-\epsilon_{i,j,k}}{k_{\textrm</span><span class="si">{B}</span><span class="s2">}T_{\textrm</span><span class="si">{rad}</span><span class="s2">}}}&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
 <div class="viewcode-block" id="LevelBoltzmannFactorLTE.calculate"><a class="viewcode-back" href="../../../../api/tardis.plasma.properties.partition_function.html#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.calculate">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -254,18 +254,17 @@
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    thermal_lte_level_boltzmann_factor : Pandas DataFrame, dtype float</span>
-<span class="sd">                             Level population proportionality values for LTE.</span>
-<span class="sd">                             Evaluated at the temperature of the</span>
-<span class="sd">                             electron gas (thermal). Indexed</span>
-<span class="sd">                             by atomic number, ion number, level number.</span>
-<span class="sd">                             Columns corresponding to zones.</span>
+<span class="sd">        Level population proportionality values for LTE.</span>
+<span class="sd">        Evaluated at the temperature of the</span>
+<span class="sd">        electron gas (thermal). Indexed</span>
+<span class="sd">        by atomic number, ion number, level number.</span>
+<span class="sd">        Columns corresponding to zones.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;thermal_lte_level_boltzmann_factor&quot;</span><span class="p">,)</span>
-    <span class="n">latex_name</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;bf_{i,j,k}^{</span><span class="se">\\</span><span class="s2">textrm</span><span class="si">{LTE}</span><span class="s2">}(T_e)&quot;</span><span class="p">,)</span>
+    <span class="n">latex_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;bf_{i,j,k}^{\textrm</span><span class="si">{LTE}</span><span class="s2">}(T_e)&quot;</span><span class="p">,)</span>
     <span class="n">latex_formula</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;g_{i,j,k}e^{</span><span class="se">\\</span><span class="s2">dfrac{-</span><span class="se">\\</span><span class="s2">epsilon_{i,j,k}}{k_{</span><span class="se">\</span>
-<span class="s2">        </span><span class="se">\\</span><span class="s2">textrm</span><span class="si">{B}</span><span class="s2">}T_{</span><span class="se">\\</span><span class="s2">textrm</span><span class="si">{electron}</span><span class="s2">}}}&quot;</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s2">&quot;g_{i,j,k}e^{\dfrac{-\epsilon_{i,j,k}}{k_{\textrm</span><span class="si">{B}</span><span class="s2">}T_{\textrm</span><span class="si">{electron}</span><span class="s2">}}}&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
 <div class="viewcode-block" id="ThermalLevelBoltzmannFactorLTE.calculate"><a class="viewcode-back" href="../../../../api/tardis.plasma.properties.partition_function.html#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.calculate">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -280,19 +279,18 @@
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    general_level_boltzmann_factor : Pandas DataFrame, dtype float</span>
-<span class="sd">                             Level population proportionality values. Indexed</span>
-<span class="sd">                             by atomic number, ion number, level number.</span>
-<span class="sd">                             Columns corresponding to zones. Dilute radiation</span>
-<span class="sd">                             field means non-metastable level values are</span>
-<span class="sd">                             multiplied by an additional factor W. Does not</span>
-<span class="sd">                             consider NLTE.</span>
+<span class="sd">        Level population proportionality values. Indexed</span>
+<span class="sd">        by atomic number, ion number, level number.</span>
+<span class="sd">        Columns corresponding to zones. Dilute radiation</span>
+<span class="sd">        field means non-metastable level values are</span>
+<span class="sd">        multiplied by an additional factor W. Does not</span>
+<span class="sd">        consider NLTE.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;general_level_boltzmann_factor&quot;</span><span class="p">,)</span>
     <span class="n">latex_name</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;bf_{i,j,k}&quot;</span><span class="p">,)</span>
     <span class="n">latex_formula</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;Wg_{i,j,k}e^{</span><span class="se">\\</span><span class="s2">dfrac{-</span><span class="se">\\</span><span class="s2">epsilon_{i,j,k}}{k_{</span><span class="se">\</span>
-<span class="s2">        </span><span class="se">\\</span><span class="s2">textrm</span><span class="si">{B}</span><span class="s2">}T_{</span><span class="se">\\</span><span class="s2">textrm</span><span class="si">{rad}</span><span class="s2">}}}&quot;</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s2">&quot;Wg_{i,j,k}e^{\dfrac{-\epsilon_{i,j,k}}{k_{\textrm</span><span class="si">{B}</span><span class="s2">}T_{\textrm</span><span class="si">{rad}</span><span class="s2">}}}&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
 <div class="viewcode-block" id="LevelBoltzmannFactorDiluteLTE.calculate"><a class="viewcode-back" href="../../../../api/tardis.plasma.properties.partition_function.html#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.calculate">[docs]</a>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span>
@@ -310,8 +308,8 @@
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    level_boltzmann_factor : Pandas DataFrame, dtype float</span>
-<span class="sd">                             Returns general_level_boltzmann_factor as this</span>
-<span class="sd">                             property is included if NLTE is not used.</span>
+<span class="sd">        Returns general_level_boltzmann_factor as this</span>
+<span class="sd">        property is included if NLTE is not used.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;level_boltzmann_factor&quot;</span><span class="p">,)</span>
@@ -326,8 +324,8 @@
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    level_boltzmann_factor : Pandas DataFrame, dtype float</span>
-<span class="sd">                             Returns general_level_boltzmann_factor but</span>
-<span class="sd">                             updated for those species treated in NLTE.</span>
+<span class="sd">        Returns general_level_boltzmann_factor but</span>
+<span class="sd">        updated for those species treated in NLTE.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;level_boltzmann_factor&quot;</span><span class="p">,)</span>
@@ -445,7 +443,7 @@
                         <span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="n">e</span>
-                <span class="n">general_level_boltzmann_factor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">species</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">general_level_boltzmann_factor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="n">level_boltzmann_factor</span>
                     <span class="o">*</span> <span class="n">g</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
                     <span class="o">/</span> <span class="n">level_boltzmann_factor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -559,13 +557,13 @@
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    partition_function : Pandas DataFrame, dtype float</span>
-<span class="sd">                         Indexed by atomic number, ion number.</span>
-<span class="sd">                         Columns are zones.</span>
+<span class="sd">        Indexed by atomic number, ion number.</span>
+<span class="sd">        Columns are zones.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;partition_function&quot;</span><span class="p">,)</span>
     <span class="n">latex_name</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Z_{i,j}&quot;</span><span class="p">,)</span>
-    <span class="n">latex_formula</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">sum_</span><span class="si">{k}</span><span class="s2">bf_{i,j,k}&quot;</span><span class="p">,)</span>
+    <span class="n">latex_formula</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\sum_</span><span class="si">{k}</span><span class="s2">bf_{i,j,k}&quot;</span><span class="p">,)</span>
 
 <div class="viewcode-block" id="PartitionFunction.calculate"><a class="viewcode-back" href="../../../../api/tardis.plasma.properties.partition_function.html#tardis.plasma.properties.partition_function.PartitionFunction.calculate">[docs]</a>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level_boltzmann_factor</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">level_boltzmann_factor</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
@@ -578,12 +576,12 @@
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    thermal_lte_partition_function : Pandas DataFrame, dtype float</span>
-<span class="sd">                                     Indexed by atomic number, ion number.</span>
-<span class="sd">                                     Columns are zones.</span>
+<span class="sd">        Indexed by atomic number, ion number.</span>
+<span class="sd">        Columns are zones.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;thermal_lte_partition_function&quot;</span><span class="p">,)</span>
-    <span class="n">latex_name</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Z_{i,j}(T_</span><span class="se">\\</span><span class="s2">mathrm</span><span class="si">{e}</span><span class="s2">&quot;</span><span class="p">,)</span>
+    <span class="n">latex_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Z_{i,j}(T_\mathrm</span><span class="si">{e}</span><span class="s2">&quot;</span><span class="p">,)</span>
 
 <div class="viewcode-block" id="ThermalLTEPartitionFunction.calculate"><a class="viewcode-back" href="../../../../api/tardis.plasma.properties.partition_function.html#tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.calculate">[docs]</a>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thermal_lte_level_boltzmann_factor</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">ThermalLTEPartitionFunction</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span>

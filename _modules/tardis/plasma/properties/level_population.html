@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tardis.plasma.properties.level_population &mdash; TARDIS v3.0.dev3495</title>
+  <title>tardis.plasma.properties.level_population &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -99,12 +99,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -112,14 +114,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../roadmap.html">Development Roadmap</a></li>
@@ -210,7 +211,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the level populations</span>
 
-<span class="sd">    Attributes:</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
 <span class="sd">    level_number_density : Pandas DataFrame, dtype float</span>
 <span class="sd">                           Index atom number, ion number, level number.</span>
 <span class="sd">                           Columns are zones.</span>
@@ -218,7 +220,7 @@
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;level_number_density&quot;</span><span class="p">,)</span>
     <span class="n">latex_name</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;N_{i,j,k}&quot;</span><span class="p">,)</span>
-    <span class="n">latex_formula</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;N_{i,j}</span><span class="se">\\</span><span class="s2">dfrac{bf_{i,j,k}}{Z_{i,j}}&quot;</span><span class="p">,)</span>
+    <span class="n">latex_formula</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;N_{i,j}\dfrac{bf_{i,j,k}}{Z_{i,j}}&quot;</span><span class="p">,)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plasma_parent</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LevelNumberDensity</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">plasma_parent</span><span class="p">)</span>
@@ -267,7 +269,8 @@
 
 <div class="viewcode-block" id="LevelNumberDensityHeNLTE"><a class="viewcode-back" href="../../../../api/tardis.plasma.properties.level_population.html#tardis.plasma.properties.level_population.LevelNumberDensityHeNLTE">[docs]</a><span class="k">class</span> <span class="nc">LevelNumberDensityHeNLTE</span><span class="p">(</span><span class="n">LevelNumberDensity</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Attributes:</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
 <span class="sd">    level_number_density : Pandas DataFrame, dtype float</span>
 <span class="sd">                           Index atom number, ion number, level number.</span>
 <span class="sd">                           Columns are zones.</span>

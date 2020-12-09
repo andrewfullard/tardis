@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Initial_t_rad Bug &mdash; TARDIS v3.0.dev3495</title>
+  <title>Initial_t_rad Bug &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -43,6 +43,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="API example for the formal integral" href="integrator.html" />
+    <link rel="prev" title="Access information about individual iterations" href="access_iterations.html" />
     <link href="../../_static/tardis.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -68,7 +70,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -98,13 +100,48 @@
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Running TARDIS</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Additional Interactivity</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="commandline.html">Running TARDIS in the commandline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callback_example.html">Using Custom Callbacks When Running TARDIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="converters/index.html">Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Custom_TARDIS_Model_Tutorial.html">How to run TARDIS with a custom ejecta model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_source.html">Running TARDIS with a custom packet source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="old_gui.html">Old Graphical User Interface (Outdated)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html">Accessing Physical Information</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Initial_t_rad Bug</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Density-and-Abundance-test-files">Density and Abundance test files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#No-initial_t_rad">No initial_t_rad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Debugging-No-initial_t_radiative-run-to-compare-with-Yes-initial_t_radiative-run">Debugging No initial_t_radiative run to compare with Yes initial_t_radiative run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#IMPORTANT:">IMPORTANT:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Debugging-Yes-initial_t_radiative-run">Debugging Yes initial_t_radiative run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">IMPORTANT:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Checking-model.t_radiative-initialization-when-YES-initial_t_rad">Checking model.t_radiative initialization when YES initial_t_rad</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#len(model.t_radiative)-=-6-when-YES-initial_t_rad">len(model.t_radiative) = 6 when YES initial_t_rad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#len(model.t_radiative)-=-5-when-NO-initial_t_rad">len(model.t_radiative) = 5 when NO initial_t_rad</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Checking-self._t_radiative-initialization-when-NO-initial_t_rad-at-line-108">Checking self._t_radiative initialization when NO initial_t_rad at line 108</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CODE-CHANGE:">CODE CHANGE:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="integrator.html">API example for the formal integral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isotope_pd_subclass.html">Extending Pandas DataFrame Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_hdf.html">Storing simulations to HDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hdf_writer.html">Example Usage of HDFWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="physical_quantities.html">Accessing Physical Quantities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using_formal_integral.html">Spectral Synthesis with the Formal Integral Method</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -112,14 +149,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
@@ -176,6 +212,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Additional Interactivity</a> &raquo;</li>
         
       <li>Initial_t_rad Bug</li>
     
@@ -494,9 +532,8 @@ div.rendered_html tbody tr:hover {
   &#34; (e.g. in jupyter console)&#34;, TqdmExperimentalWarning)
 </pre></div></div>
 </div>
-</div>
 <div class="section" id="Density-and-Abundance-test-files">
-<h1>Density and Abundance test files<a class="headerlink" href="#Density-and-Abundance-test-files" title="Permalink to this headline">¶</a></h1>
+<h2>Density and Abundance test files<a class="headerlink" href="#Density-and-Abundance-test-files" title="Permalink to this headline">¶</a></h2>
 <p>Below are the density and abundance data from the test files used for demonstrating this bug.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -541,7 +578,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="section" id="No-initial_t_rad">
-<h1>No initial_t_rad<a class="headerlink" href="#No-initial_t_rad" title="Permalink to this headline">¶</a></h1>
+<h2>No initial_t_rad<a class="headerlink" href="#No-initial_t_rad" title="Permalink to this headline">¶</a></h2>
 <p>Below we run a simple tardis simulation where <code class="docutils literal notranslate"><span class="pre">initial_t_rad</span></code> is not set. The simulation has v_inner_boundary = 3350 km/s and v_outer_boundary = 3750 km/s, both within the velocity range in the density file. The simulation runs fine.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -852,7 +889,7 @@ t_rad [11372.82371614 11426.15383155 11420.35713928 11382.47864204
 </div>
 </div>
 <div class="section" id="Debugging">
-<h1>Debugging<a class="headerlink" href="#Debugging" title="Permalink to this headline">¶</a></h1>
+<h2>Debugging<a class="headerlink" href="#Debugging" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -1264,16 +1301,16 @@ https://pandas.pydata.org/pandas-docs/stable/indexing.html#deprecate-loc-reindex
 </div>
 </div>
 <div class="section" id="id1">
-<h1>Debugging<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h2>Debugging<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="Debugging-No-initial_t_radiative-run-to-compare-with-Yes-initial_t_radiative-run">
 <h2>Debugging No initial_t_radiative run to compare with Yes initial_t_radiative run<a class="headerlink" href="#Debugging-No-initial_t_radiative-run-to-compare-with-Yes-initial_t_radiative-run" title="Permalink to this headline">¶</a></h2>
 <p>We place two breakpoints:</p>
 <p>break 1. tardis/base:37 –&gt; Stops in the run_tardis() function when the simulation is initialized.</p>
 <p>break 2. tardis/simulation/base:436 –&gt; Stops after the Radial1DModel has been built from the config file, but before the plasma has been initialized.</p>
 </div>
-</div>
 <div class="section" id="IMPORTANT:">
-<h1>IMPORTANT:<a class="headerlink" href="#IMPORTANT:" title="Permalink to this headline">¶</a></h1>
+<h2>IMPORTANT:<a class="headerlink" href="#IMPORTANT:" title="Permalink to this headline">¶</a></h2>
 <p>We check the model.t_radiative property INSIDE the assemble_plasma function. Notice that it has len(model.t_radiative) = model.no_of_shells = 5</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
@@ -1350,15 +1387,15 @@ True
 ipdb&gt; exit
 </pre></div></div>
 </div>
+</div>
 <div class="section" id="Debugging-Yes-initial_t_radiative-run">
 <h2>Debugging Yes initial_t_radiative run<a class="headerlink" href="#Debugging-Yes-initial_t_radiative-run" title="Permalink to this headline">¶</a></h2>
 <p>We place the same two breakpoints as above:</p>
 <p>break 1. tardis/base:37 –&gt; Stops in the run_tardis() function when the simulation is initialized.</p>
 <p>break 2. tardis/simulation/base:436 –&gt; Stops after the Radial1DModel has been built from the config file, but before the plasma has been initialized.</p>
 </div>
-</div>
 <div class="section" id="id2">
-<h1>IMPORTANT:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<h2>IMPORTANT:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>We check the model.t_radiative property INSIDE the assemble_plasma function. Notice that it has len(model.t_radiative) = 6 which is NOT EQUAL to model.no_of_shells = 5</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -1434,8 +1471,13 @@ ipdb&gt; exit
 </div>
 </div>
 <div class="section" id="Checking-model.t_radiative-initialization-when-YES-initial_t_rad">
-<h1>Checking model.t_radiative initialization when YES initial_t_rad<a class="headerlink" href="#Checking-model.t_radiative-initialization-when-YES-initial_t_rad" title="Permalink to this headline">¶</a></h1>
+<h2>Checking model.t_radiative initialization when YES initial_t_rad<a class="headerlink" href="#Checking-model.t_radiative-initialization-when-YES-initial_t_rad" title="Permalink to this headline">¶</a></h2>
 <p>In the above debugging blocks, we have identified the following discrepancy INSIDE assemble_plasma():</p>
+<div class="section" id="len(model.t_radiative)-=-6-when-YES-initial_t_rad">
+<h3>len(model.t_radiative) = 6 when YES initial_t_rad<a class="headerlink" href="#len(model.t_radiative)-=-6-when-YES-initial_t_rad" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="len(model.t_radiative)-=-5-when-NO-initial_t_rad">
+<h3>len(model.t_radiative) = 5 when NO initial_t_rad<a class="headerlink" href="#len(model.t_radiative)-=-5-when-NO-initial_t_rad" title="Permalink to this headline">¶</a></h3>
 <p>Therefore, we investigate in the following debugging block how model.t_radiative is initialized. We place a breakpoint at tardis/simulation/base:432 and step INSIDE the Radial1DModel initialization.</p>
 <p>Breakpoints:</p>
 <p>break 1. tardis/simulation/base:432 –&gt; Stops so that we can step INSIDE Radial1DModel initialization from_config().</p>
@@ -1506,8 +1548,9 @@ ipdb&gt; exit
 </pre></div></div>
 </div>
 </div>
+</div>
 <div class="section" id="Checking-self._t_radiative-initialization-when-NO-initial_t_rad-at-line-108">
-<h1>Checking self._t_radiative initialization when NO initial_t_rad at line 108<a class="headerlink" href="#Checking-self._t_radiative-initialization-when-NO-initial_t_rad-at-line-108" title="Permalink to this headline">¶</a></h1>
+<h2>Checking self._t_radiative initialization when NO initial_t_rad at line 108<a class="headerlink" href="#Checking-self._t_radiative-initialization-when-NO-initial_t_rad-at-line-108" title="Permalink to this headline">¶</a></h2>
 <p><strong>IMPORTANT:</strong> We find that len(self._t_radiative) = 5. This is a DISCREPANCY with the YES initial_t_rad case.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
@@ -1593,7 +1636,7 @@ ipdb&gt; exit
 </div>
 </div>
 <div class="section" id="CODE-CHANGE:">
-<h1>CODE CHANGE:<a class="headerlink" href="#CODE-CHANGE:" title="Permalink to this headline">¶</a></h1>
+<h2>CODE CHANGE:<a class="headerlink" href="#CODE-CHANGE:" title="Permalink to this headline">¶</a></h2>
 <p>We propose the following change to tardis/model/base:106</p>
 <p><strong>Line 106 Before Change:</strong> <code class="docutils literal notranslate"><span class="pre">self._t_radiative</span> <span class="pre">=</span> <span class="pre">t_radiative</span></code></p>
 <p><strong>Line 106 After Change:</strong> <code class="docutils literal notranslate"><span class="pre">self._t_radiative</span> <span class="pre">=</span> <span class="pre">t_radiative[1:1</span> <span class="pre">+</span> <span class="pre">self.no_of_shells]</span></code></p>
@@ -2008,12 +2051,22 @@ array([4, 5, 6])
 </div>
 </div>
 </div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="integrator.html" class="btn btn-neutral float-right" title="API example for the formal integral" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="access_iterations.html" class="btn btn-neutral float-left" title="Access information about individual iterations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tardis.io.util &mdash; TARDIS v3.0.dev3495</title>
+  <title>tardis.io.util &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -99,12 +99,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -112,14 +114,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../roadmap.html">Development Roadmap</a></li>
@@ -224,9 +225,8 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">        data_path: str</span>
-<span class="sd">            internal data path of TARDIS</span>
-
+<span class="sd">    data_path : str</span>
+<span class="sd">        internal data path of TARDIS</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TARDIS_PATH</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span></div>
 
@@ -234,10 +234,12 @@
 <div class="viewcode-block" id="quantity_from_str"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.quantity_from_str">[docs]</a><span class="k">def</span> <span class="nf">quantity_from_str</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a string to `astropy.units.Quantity`</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    text:</span>
+<span class="sd">    text :</span>
 <span class="sd">        The string to convert to `astropy.units.Quantity`</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    `astropy.units.Quantity`</span>
@@ -268,11 +270,11 @@
 
 <div class="viewcode-block" id="MockRegexPattern.match"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.MockRegexPattern.match">[docs]</a>    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        text:</span>
+<span class="sd">        text :</span>
 <span class="sd">            A string to be passed to `target_type` for conversion.</span>
+
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        `True` if `text` can be converted to `target_type`.</span>
@@ -297,13 +299,11 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-
-<span class="sd">        node:</span>
+<span class="sd">        node :</span>
 <span class="sd">            The YAML node to be constructed</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-
 <span class="sd">        `astropy.units.Quantity`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -343,16 +343,15 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    base:</span>
+<span class="sd">    base :</span>
 <span class="sd">        The object on which the traversing is done</span>
-<span class="sd">    other:</span>
+<span class="sd">    other :</span>
 <span class="sd">        The object which is traversed along with `base`</span>
-<span class="sd">    func:</span>
+<span class="sd">    func :</span>
 <span class="sd">        A function called for each leaf of `base` and the correspnding leaf of `other`</span>
 <span class="sd">        Signature: `func(item1, item2, *args)`</span>
-<span class="sd">    args:</span>
+<span class="sd">    args :</span>
 <span class="sd">        Arguments passed into `func`</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">base</span><span class="p">:</span>
@@ -395,10 +394,10 @@
         <span class="k">return</span> <span class="n">instance</span>
 
 <div class="viewcode-block" id="HDFWriterMixin.to_hdf_util"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.HDFWriterMixin.to_hdf_util">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">to_hdf_util</span><span class="p">(</span><span class="n">path_or_buf</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">complevel</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">complib</span><span class="o">=</span><span class="s2">&quot;blosc&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        A function to uniformly store TARDIS data</span>
-<span class="sd">        to an HDF file.</span>
+    <span class="k">def</span> <span class="nf">to_hdf_util</span><span class="p">(</span>
+        <span class="n">path_or_buf</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">,</span> <span class="n">complevel</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">complib</span><span class="o">=</span><span class="s2">&quot;blosc&quot;</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A function to uniformly store TARDIS data to an HDF file.</span>
 
 <span class="sd">        Scalars will be stored in a Series under path/scalars</span>
 <span class="sd">        1D arrays will be stored under path/property_name as distinct Series</span>
@@ -408,33 +407,40 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path_or_buf:</span>
-<span class="sd">            Path or buffer to the HDF store</span>
-<span class="sd">        path: str</span>
-<span class="sd">            Path inside the HDF store to store the `elements`</span>
-<span class="sd">        elements: dict</span>
+<span class="sd">        path_or_buf : str or pandas.io.pytables.HDFStore</span>
+<span class="sd">            Path or buffer to the HDF file</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Path inside the HDF file to store the `elements`</span>
+<span class="sd">        elements : dict</span>
 <span class="sd">            A dict of property names and their values to be</span>
 <span class="sd">            stored.</span>
+<span class="sd">        overwrite: bool</span>
+<span class="sd">            If the HDF file path already exists, whether to overwrite it or not</span>
 
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        `overwrite` option doesn&#39;t have any effect when `path_or_buf` is an</span>
+<span class="sd">        HDFStore because the user decides on the mode in which they have</span>
+<span class="sd">        opened the HDFStore (&#39;r&#39;, &#39;w&#39; or &#39;a&#39;).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">we_opened</span> <span class="o">=</span> <span class="kc">False</span>
-
-        <span class="k">try</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>  <span class="c1"># when path_or_buf is a str, the HDFStore should get created</span>
             <span class="n">buf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">HDFStore</span><span class="p">(</span><span class="n">path_or_buf</span><span class="p">,</span> <span class="n">complevel</span><span class="o">=</span><span class="n">complevel</span><span class="p">,</span> <span class="n">complib</span><span class="o">=</span><span class="n">complib</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># Already a HDFStore</span>
+        <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s2">&quot;Expected bytes, got HDFStore&quot;</span><span class="p">:</span>
+                <span class="c1"># when path_or_buf is an HDFStore buffer instead</span>
                 <span class="n">buf</span> <span class="o">=</span> <span class="n">path_or_buf</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">e</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1"># path_or_buf was a string and we opened the HDFStore</span>
-            <span class="n">we_opened</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># path_or_buf was a str</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_or_buf</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
+                <span class="n">buf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span>
+                    <span class="s2">&quot;The specified HDF file already exists. If you still want &quot;</span>
+                    <span class="s2">&quot;to overwrite it, set option overwrite=True&quot;</span>
+                <span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">buf</span><span class="o">.</span><span class="n">is_open</span><span class="p">:</span>
             <span class="n">buf</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
-            <span class="n">we_opened</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="n">scalars</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">elements</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -453,25 +459,17 @@
                         <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># value is a TARDIS object like model, runner or plasma</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">value</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+                    <span class="n">value</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                     <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">value</span><span class="p">])</span>
                     <span class="n">data</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">scalars</span><span class="p">:</span>
-            <span class="n">scalars_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">scalars</span><span class="p">)</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">scalars</span><span class="p">)</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;scalars&quot;</span><span class="p">))</span>
 
-            <span class="c1"># Unfortunately, with to_hdf we cannot append, so merge beforehand</span>
-            <span class="n">scalars_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;scalars&quot;</span><span class="p">)</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">scalars_series</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="n">scalars_path</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scalars_series</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>  <span class="c1"># no scalars in HDFStore</span>
-                <span class="k">pass</span>
-            <span class="n">scalars_series</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;scalars&quot;</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">we_opened</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">buf</span><span class="o">.</span><span class="n">is_open</span><span class="p">:</span>
             <span class="n">buf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="HDFWriterMixin.get_properties"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.HDFWriterMixin.get_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -480,6 +478,10 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">full_hdf_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># If tardis was compiled --with-vpacket-logging, add vpacket properties</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;virt_logging&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">virt_logging</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hdf_properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vpacket_hdf_properties</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optional_hdf_properties</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">hdf_properties</span>
 
 <div class="viewcode-block" id="HDFWriterMixin.convert_to_snake_case"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.HDFWriterMixin.convert_to_snake_case">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -487,20 +489,18 @@
         <span class="n">s1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;(.)([A-Z][a-z]+)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1_\2&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;([a-z0-9])([A-Z])&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1_\2&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="HDFWriterMixin.to_hdf"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.HDFWriterMixin.to_hdf">[docs]</a>    <span class="k">def</span> <span class="nf">to_hdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="HDFWriterMixin.to_hdf"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.HDFWriterMixin.to_hdf">[docs]</a>    <span class="k">def</span> <span class="nf">to_hdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path_or_buf</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        file_path: str</span>
-<span class="sd">            Path or buffer to the HDF store</span>
-<span class="sd">        path: str</span>
-<span class="sd">            Path inside the HDF store to store the `elements`</span>
-<span class="sd">        name: str</span>
-<span class="sd">            Group inside the HDF store to which the `elements` need to be saved</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-
+<span class="sd">        file_path_or_buf : str or pandas.io.pytables.HDFStore</span>
+<span class="sd">            Path or buffer to the HDF file</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Path inside the HDF file to store the `elements`</span>
+<span class="sd">        name : str</span>
+<span class="sd">            Group inside the HDF file to which the `elements` need to be saved</span>
+<span class="sd">        overwrite: bool</span>
+<span class="sd">            If the HDF file path already exists, whether to overwrite it or not</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -510,7 +510,7 @@
 
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_properties</span><span class="p">()</span>
         <span class="n">buff_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">to_hdf_util</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">buff_path</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_hdf_util</span><span class="p">(</span><span class="n">file_path_or_buf</span><span class="p">,</span> <span class="n">buff_path</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="PlasmaWriterMixin"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.PlasmaWriterMixin">[docs]</a><span class="k">class</span> <span class="nc">PlasmaWriterMixin</span><span class="p">(</span><span class="n">HDFWriterMixin</span><span class="p">):</span>
@@ -535,31 +535,36 @@
             <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;nlte_data&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span></div>
 
-<div class="viewcode-block" id="PlasmaWriterMixin.to_hdf"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.PlasmaWriterMixin.to_hdf">[docs]</a>    <span class="k">def</span> <span class="nf">to_hdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PlasmaWriterMixin.to_hdf"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.PlasmaWriterMixin.to_hdf">[docs]</a>    <span class="k">def</span> <span class="nf">to_hdf</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">file_path_or_buf</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">collection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        file_path: str</span>
-<span class="sd">            Path or buffer to the HDF store</span>
-<span class="sd">        path: str</span>
-<span class="sd">            Path inside the HDF store to store the `elements`</span>
-<span class="sd">        name: str</span>
-<span class="sd">            Group inside the HDF store to which the `elements` need to be saved</span>
-<span class="sd">        collection:</span>
+<span class="sd">        file_path_or_buf : str or pandas.io.pytables.HDFStore</span>
+<span class="sd">            Path or buffer to the HDF file</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Path inside the HDF file to store the `elements`</span>
+<span class="sd">        name : str</span>
+<span class="sd">            Group inside the HDF file to which the `elements` need to be saved</span>
+<span class="sd">        collection :</span>
 <span class="sd">            `None` or a `PlasmaPropertyCollection` of which members are</span>
 <span class="sd">            the property types which will be stored. If `None` then</span>
-<span class="sd">            all types of properties will be stored.</span>
-
-<span class="sd">            This acts like a filter, for example if a value of</span>
-<span class="sd">            `property_collections.basic_inputs` is given, only</span>
-<span class="sd">            those input parameters will be stored to the HDF store.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-
+<span class="sd">            all types of properties will be stored. This acts like a filter,</span>
+<span class="sd">            for example if a value of `property_collections.basic_inputs` is</span>
+<span class="sd">            given, only those input parameters will be stored to the HDF file.</span>
+<span class="sd">        overwrite: bool</span>
+<span class="sd">            If the HDF file path already exists, whether to overwrite it or not</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">collection</span> <span class="o">=</span> <span class="n">collection</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PlasmaWriterMixin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PlasmaWriterMixin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span>
+            <span class="n">file_path_or_buf</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">overwrite</span>
+        <span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="download_from_url"><a class="viewcode-back" href="../../../api/tardis.io.util.html#tardis.io.util.download_from_url">[docs]</a><span class="k">def</span> <span class="nf">download_from_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dst</span><span class="p">):</span>

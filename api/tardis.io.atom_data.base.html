@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tardis.io.atom_data.base module &mdash; TARDIS v3.0.dev3495</title>
+  <title>tardis.io.atom_data.base module &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -101,12 +101,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -114,14 +116,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Development Roadmap</a></li>
@@ -254,21 +255,21 @@
 <dl class="py class">
 <dt id="tardis.io.atom_data.base.AtomData">
 <em class="property">class </em><code class="sig-prename descclassname">tardis.io.atom_data.base.</code><code class="sig-name descname">AtomData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom_data</span></em>, <em class="sig-param"><span class="n">ionization_data</span></em>, <em class="sig-param"><span class="n">levels</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">macro_atom_data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">macro_atom_references</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zeta_data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">collision_data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">collision_data_temperatures</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">synpp_refs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">photoionization_data</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/atom_data/base.html#AtomData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.atom_data.base.AtomData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Class for storing atomic data</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl>
-<dt><strong>atom_data: pandas.DataFrame</strong></dt><dd><dl class="simple">
-<dt>A DataFrame containing the <em>basic atomic data</em> with:</dt><dd><p>index: atomic_number;
-columns: symbol, name, mass[u].</p>
+<dt><strong>atom_data</strong><span class="classifier">pandas.DataFrame</span></dt><dd><dl class="simple">
+<dt>A DataFrame containing the <em>basic atomic data</em> with:</dt><dd><p>index : atomic_number;
+columns : symbol, name, mass[u].</p>
 </dd>
 </dl>
 </dd>
-<dt><strong>ionization_data: pandas.DataFrame</strong></dt><dd><blockquote>
+<dt><strong>ionization_data</strong><span class="classifier">pandas.DataFrame</span></dt><dd><blockquote>
 <div><dl class="simple">
-<dt>A DataFrame containing the <em>ionization data</em> with:</dt><dd><p>index: atomic_number, ion_number;
-columns: ionization_energy[eV].</p>
+<dt>A DataFrame containing the <em>ionization data</em> with:</dt><dd><p>index : atomic_number, ion_number;
+columns : ionization_energy[eV].</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -277,58 +278,58 @@ columns: ionization_energy[eV].</p>
 </dd>
 </dl>
 </dd>
-<dt><strong>levels: pandas.DataFrame</strong></dt><dd><dl class="simple">
-<dt>A DataFrame containing the <em>levels data</em> with:</dt><dd><p>index: numerical index;
-columns: atomic_number, ion_number, level_number, energy[eV], g[1], metastable.</p>
+<dt><strong>levels</strong><span class="classifier">pandas.DataFrame</span></dt><dd><dl class="simple">
+<dt>A DataFrame containing the <em>levels data</em> with:</dt><dd><p>index : numerical index;
+columns : atomic_number, ion_number, level_number, energy[eV], g[1], metastable.</p>
 </dd>
 </dl>
 </dd>
-<dt><strong>lines: pandas.DataFrame</strong></dt><dd><dl>
-<dt>A DataFrame containing the <em>lines data</em> with:</dt><dd><p>index: numerical index;
-columns: line_id, atomic_number, ion_number, level_number_lower, level_number_upper,</p>
+<dt><strong>lines</strong><span class="classifier">pandas.DataFrame</span></dt><dd><dl>
+<dt>A DataFrame containing the <em>lines data</em> with:</dt><dd><p>index : numerical index;
+columns : line_id, atomic_number, ion_number, level_number_lower, level_number_upper,</p>
 <blockquote>
 <div><p>wavelength[angstrom], nu[Hz], f_lu[1], f_ul[1], B_ul[?], B_ul[?], A_ul[1/s].</p>
 </div></blockquote>
 </dd>
 </dl>
 </dd>
-<dt><strong>macro_atom_data:</strong></dt><dd><dl>
-<dt>A DataFrame containing the <em>macro atom data</em> with:</dt><dd><p>index: numerical index;
-columns: atomic_number, ion_number, source_level_number, destination_level_number,</p>
+<dt><strong>macro_atom_data :</strong></dt><dd><dl>
+<dt>A DataFrame containing the <em>macro atom data</em> with:</dt><dd><p>index : numerical index;
+columns : atomic_number, ion_number, source_level_number, destination_level_number,</p>
 <blockquote>
 <div><p>transition_line_id, transition_type, transition_probability;</p>
 </div></blockquote>
 </dd>
 </dl>
 </dd>
-<dt><strong>macro_atom_references:</strong></dt><dd><dl class="simple">
-<dt>A DataFrame containing  the <em>macro atom references</em> with:</dt><dd><p>index: numerical index;
-columns: atomic_number, ion_number, source_level_number, count_down, count_up, count_total.</p>
+<dt><strong>macro_atom_references :</strong></dt><dd><dl class="simple">
+<dt>A DataFrame containing  the <em>macro atom references</em> with:</dt><dd><p>index : numerical index;
+columns : atomic_number, ion_number, source_level_number, count_down, count_up, count_total.</p>
 </dd>
 </dl>
 <p>Refer to the docs: <a class="reference external" href="http://tardis.readthedocs.io/en/latest/physics/plasma/macroatom.html">http://tardis.readthedocs.io/en/latest/physics/plasma/macroatom.html</a></p>
 </dd>
-<dt><strong>collision_data: (pandas.DataFrame, np.array)</strong></dt><dd><dl class="simple">
-<dt>A DataFrame containing the <em>electron collisions data</em> with:</dt><dd><p>index: atomic_number, ion_number, level_number_lower, level_number_upper;
-columns: e_col_id, delta_e, g_ratio, c_ul;</p>
+<dt><strong>collision_data</strong><span class="classifier">(pandas.DataFrame, np.array)</span></dt><dd><dl class="simple">
+<dt>A DataFrame containing the <em>electron collisions data</em> with:</dt><dd><p>index : atomic_number, ion_number, level_number_lower, level_number_upper;
+columns : e_col_id, delta_e, g_ratio, c_ul;</p>
 </dd>
 </dl>
 </dd>
-<dt><strong>collision_data_temperatures: np.array</strong></dt><dd><p>An array with the collision temperatures.</p>
+<dt><strong>collision_data_temperatures</strong><span class="classifier">np.array</span></dt><dd><p>An array with the collision temperatures.</p>
 </dd>
-<dt><strong>zeta_data:</strong></dt><dd><p>A DataFrame containing the <em>zeta data</em> for the
+<dt><strong>zeta_data :</strong></dt><dd><p>A DataFrame containing the <em>zeta data</em> for the
 nebular ionization calculation
 (i.e., the fraction of recombinations that go directly to the
 ground state) with:</p>
 <blockquote>
-<div><p>index: atomic_number, ion_charge;
-columns: temperatures[K]</p>
+<div><p>index : atomic_number, ion_charge;
+columns : temperatures[K]</p>
 </div></blockquote>
 </dd>
-<dt><strong>synpp_refs: ?</strong></dt><dd></dd>
-<dt><strong>photoionization_data: pandas.DataFrame</strong></dt><dd><dl class="simple">
-<dt>A DataFrame containing the <em>photoionization data</em> with:</dt><dd><p>index: numerical index;
-columns: atomic_number, ion_number, level_number, nu[Hz], x_sect[cm^2]</p>
+<dt><strong>synpp_refs</strong><span class="classifier">?</span></dt><dd></dd>
+<dt><strong>photoionization_data</strong><span class="classifier">pandas.DataFrame</span></dt><dd><dl class="simple">
+<dt>A DataFrame containing the <em>photoionization data</em> with:</dt><dd><p>index : numerical index;
+columns : atomic_number, ion_number, level_number, nu[Hz], x_sect[cm^2]</p>
 </dd>
 </dl>
 </dd>
@@ -342,18 +343,18 @@ columns: atomic_number, ion_number, level_number, nu[Hz], x_sect[cm^2]</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>prepared: bool</strong></dt><dd></dd>
-<dt><strong>atom_data: pandas.DataFrame</strong></dt><dd></dd>
-<dt><strong>ionization_data: pandas.DataFrame</strong></dt><dd></dd>
-<dt><strong>macro_atom_data_all: pandas.DataFrame</strong></dt><dd></dd>
-<dt><strong>macro_atom_references_all: pandas.DataFrame</strong></dt><dd></dd>
-<dt><strong>collision_data: pandas.DataFrame</strong></dt><dd></dd>
-<dt><strong>collision_data_temperatures: numpy.array</strong></dt><dd></dd>
-<dt><strong>zeta_data: pandas.DataFrame</strong></dt><dd></dd>
-<dt><strong>synpp_refs: pandas.DataFrame</strong></dt><dd></dd>
-<dt><strong>symbol2atomic_number: OrderedDict</strong></dt><dd></dd>
-<dt><strong>atomic_number2symbol OrderedDict</strong></dt><dd></dd>
-<dt><strong>photoionization_data: pandas.DataFrame</strong></dt><dd></dd>
+<dt><strong>prepared</strong><span class="classifier">bool</span></dt><dd></dd>
+<dt><strong>atom_data</strong><span class="classifier">pandas.DataFrame</span></dt><dd></dd>
+<dt><strong>ionization_data</strong><span class="classifier">pandas.DataFrame</span></dt><dd></dd>
+<dt><strong>macro_atom_data_all</strong><span class="classifier">pandas.DataFrame</span></dt><dd></dd>
+<dt><strong>macro_atom_references_all</strong><span class="classifier">pandas.DataFrame</span></dt><dd></dd>
+<dt><strong>collision_data</strong><span class="classifier">pandas.DataFrame</span></dt><dd></dd>
+<dt><strong>collision_data_temperatures</strong><span class="classifier">numpy.array</span></dt><dd></dd>
+<dt><strong>zeta_data</strong><span class="classifier">pandas.DataFrame</span></dt><dd></dd>
+<dt><strong>synpp_refs</strong><span class="classifier">pandas.DataFrame</span></dt><dd></dd>
+<dt><strong>symbol2atomic_number</strong><span class="classifier">OrderedDict</span></dt><dd></dd>
+<dt><strong>atomic_number2symbol</strong><span class="classifier">OrderedDict</span></dt><dd></dd>
+<dt><strong>photoionization_data</strong><span class="classifier">pandas.DataFrame</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -379,7 +380,7 @@ columns: atomic_number, ion_number, level_number, nu[Hz], x_sect[cm^2]</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>fname: str, optional</strong></dt><dd><p>Path to the HDFStore file or name of known atom data file
+<dt><strong>fname</strong><span class="classifier">str, optional</span></dt><dd><p>Path to the HDFStore file or name of known atom data file
 (default: None)</p>
 </dd>
 </dl>
@@ -399,12 +400,12 @@ columns: atomic_number, ion_number, level_number, nu[Hz], x_sect[cm^2]</p>
 atom data.  This function mainly cuts the <cite>levels</cite> and <cite>lines</cite> by
 discarding any data that is not needed (any data for atoms that are not
 needed</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>selected_atoms</strong><span class="classifier"><cite>~set</cite></span></dt><dd><p>set of selected atom numbers, e.g. set([14, 26])</p>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>selected_atoms</strong><span class="classifier">set</span></dt><dd><p>set of selected atom numbers, e.g. set([14, 26])</p>
 </dd>
-<dt><strong>line_interaction_type</strong><span class="classifier"><cite>~str</cite></span></dt><dd><p>can be ‘scatter’, ‘downbranch’ or ‘macroatom’</p>
+<dt><strong>line_interaction_type</strong><span class="classifier">str</span></dt><dd><p>can be ‘scatter’, ‘downbranch’ or ‘macroatom’</p>
 </dd>
 </dl>
 </dd>
@@ -421,19 +422,19 @@ needed</p>
 <dl class="py exception">
 <dt id="tardis.io.atom_data.base.AtomDataMissingError">
 <em class="property">exception </em><code class="sig-prename descclassname">tardis.io.atom_data.base.</code><code class="sig-name descname">AtomDataMissingError</code><a class="reference internal" href="../_modules/tardis/io/atom_data/base.html#AtomDataMissingError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.atom_data.base.AtomDataMissingError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="tardis.io.atom_data.base.AtomDataNotPreparedError">
 <em class="property">exception </em><code class="sig-prename descclassname">tardis.io.atom_data.base.</code><code class="sig-name descname">AtomDataNotPreparedError</code><a class="reference internal" href="../_modules/tardis/io/atom_data/base.html#AtomDataNotPreparedError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.atom_data.base.AtomDataNotPreparedError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="tardis.io.atom_data.base.NLTEData">
 <em class="property">class </em><code class="sig-prename descclassname">tardis.io.atom_data.base.</code><code class="sig-name descname">NLTEData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom_data</span></em>, <em class="sig-param"><span class="n">nlte_species</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/atom_data/base.html#NLTEData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.atom_data.base.NLTEData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <dl class="py method">
 <dt id="tardis.io.atom_data.base.NLTEData.get_collision_matrix">
 <code class="sig-name descname">get_collision_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">species</span></em>, <em class="sig-param"><span class="n">t_electrons</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/atom_data/base.html#NLTEData.get_collision_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.atom_data.base.NLTEData.get_collision_matrix" title="Permalink to this definition">¶</a></dt>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tardis.io.config_reader module &mdash; TARDIS v3.0.dev3495</title>
+  <title>tardis.io.config_reader module &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -101,12 +101,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -114,14 +116,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Development Roadmap</a></li>
@@ -250,9 +251,21 @@
 <div class="section" id="module-tardis.io.config_reader">
 <span id="tardis-io-config-reader-module"></span><h1>tardis.io.config_reader module<a class="headerlink" href="#module-tardis.io.config_reader" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
+<dt id="tardis.io.config_reader.ConfigWriterMixin">
+<em class="property">class </em><code class="sig-prename descclassname">tardis.io.config_reader.</code><code class="sig-name descname">ConfigWriterMixin</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/config_reader.html#ConfigWriterMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.config_reader.ConfigWriterMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tardis.io.util.html#tardis.io.util.HDFWriterMixin" title="tardis.io.util.HDFWriterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.io.util.HDFWriterMixin</span></code></a></p>
+<p>Overrides HDFWriterMixin to obtain HDF properties from configuration keys</p>
+<dl class="py method">
+<dt id="tardis.io.config_reader.ConfigWriterMixin.get_properties">
+<code class="sig-name descname">get_properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/config_reader.html#ConfigWriterMixin.get_properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.config_reader.ConfigWriterMixin.get_properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="tardis.io.config_reader.Configuration">
 <em class="property">class </em><code class="sig-prename descclassname">tardis.io.config_reader.</code><code class="sig-name descname">Configuration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/config_reader.html#Configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.config_reader.Configuration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#tardis.io.config_reader.ConfigurationNameSpace" title="tardis.io.config_reader.ConfigurationNameSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.io.config_reader.ConfigurationNameSpace</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#tardis.io.config_reader.ConfigurationNameSpace" title="tardis.io.config_reader.ConfigurationNameSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.io.config_reader.ConfigurationNameSpace</span></code></a>, <a class="reference internal" href="#tardis.io.config_reader.ConfigWriterMixin" title="tardis.io.config_reader.ConfigWriterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.io.config_reader.ConfigWriterMixin</span></code></a></p>
 <p>Tardis configuration class</p>
 <dl class="py method">
 <dt id="tardis.io.config_reader.Configuration.from_config_dict">
@@ -261,9 +274,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>config_dict</strong><span class="classifier">~dict</span></dt><dd><p>dictionary of a raw unvalidated config file</p>
+<dt><strong>config_dict</strong><span class="classifier">dict</span></dt><dd><p>dictionary of a raw unvalidated config file</p>
 </dd>
-<dt><strong>validate: ~bool</strong></dt><dd><p>Turn validation on or off.</p>
+<dt><strong>validate</strong><span class="classifier">bool</span></dt><dd><p>Turn validation on or off.</p>
 </dd>
 </dl>
 </dd>
@@ -282,38 +295,43 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>fname: str</strong></dt><dd><p>filename or path</p>
+<dt><strong>fname</strong><span class="classifier">str</span></dt><dd><p>filename or path</p>
 </dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="tardis.io.config_reader.Configuration.hdf_name">
+<code class="sig-name descname">hdf_name</code><em class="property"> = 'simulation'</em><a class="headerlink" href="#tardis.io.config_reader.Configuration.hdf_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py exception">
 <dt id="tardis.io.config_reader.ConfigurationError">
 <em class="property">exception </em><code class="sig-prename descclassname">tardis.io.config_reader.</code><code class="sig-name descname">ConfigurationError</code><a class="reference internal" href="../_modules/tardis/io/config_reader.html#ConfigurationError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.config_reader.ConfigurationError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="tardis.io.config_reader.ConfigurationNameSpace">
 <em class="property">class </em><code class="sig-prename descclassname">tardis.io.config_reader.</code><code class="sig-name descname">ConfigurationNameSpace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/config_reader.html#ConfigurationNameSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.config_reader.ConfigurationNameSpace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 <p>The configuration name space class allows to wrap a dictionary and adds
 utility functions for easy access. Accesses like a.b.c are then possible</p>
 <p>Code from <a class="reference external" href="http://goo.gl/KIaq8I">http://goo.gl/KIaq8I</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>config_dict: ~dict</strong></dt><dd><p>configuration dictionary</p>
+<dt><strong>config_dict</strong><span class="classifier">dict</span></dt><dd><p>configuration dictionary</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>config_ns: ConfigurationNameSpace</dt><dd></dd>
+<dt><strong>config_ns</strong><span class="classifier">ConfigurationNameSpace</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -329,7 +347,7 @@ utility functions for easy access. Accesses like a.b.c are then possible</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>config_dict</strong><span class="classifier">~dict</span></dt><dd><p>dictionary of a raw unvalidated config file</p>
+<dt><strong>config_dict</strong><span class="classifier">dict</span></dt><dd><p>dictionary of a raw unvalidated config file</p>
 </dd>
 </dl>
 </dd>
@@ -348,7 +366,7 @@ utility functions for easy access. Accesses like a.b.c are then possible</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>fname: str</strong></dt><dd><p>filename or path</p>
+<dt><strong>fname</strong><span class="classifier">str</span></dt><dd><p>filename or path</p>
 </dd>
 </dl>
 </dd>
@@ -362,7 +380,7 @@ utility functions for easy access. Accesses like a.b.c are then possible</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>config_item_string: ~str</strong></dt><dd><p>string of shape ‘section1.sectionb.param1’</p>
+<dt><strong>config_item_string</strong><span class="classifier">str</span></dt><dd><p>string of shape ‘section1.sectionb.param1’</p>
 </dd>
 </dl>
 </dd>
@@ -376,9 +394,9 @@ utility functions for easy access. Accesses like a.b.c are then possible</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>config_item_string: ~str</strong></dt><dd><p>string of shape ‘section1.sectionb.param1’</p>
+<dt><strong>config_item_string</strong><span class="classifier">str</span></dt><dd><p>string of shape ‘section1.sectionb.param1’</p>
 </dd>
-<dt><strong>value:</strong></dt><dd><p>value to set the parameter with it</p>
+<dt><strong>value :</strong></dt><dd><p>value to set the parameter with it</p>
 </dd>
 </dl>
 </dd>
@@ -388,14 +406,56 @@ utility functions for easy access. Accesses like a.b.c are then possible</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="tardis.io.config_reader.cns_representer">
+<code class="sig-prename descclassname">tardis.io.config_reader.</code><code class="sig-name descname">cns_representer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dumper</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/config_reader.html#cns_representer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.config_reader.cns_representer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents Configuration as dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dumper :</strong></dt><dd><p>YAML dumper object</p>
+</dd>
+<dt><strong>data :</strong></dt><dd><p>ConfigurationNameSpace object</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>yaml dumper representation of Configuration as dict</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="tardis.io.config_reader.parse_convergence_section">
 <code class="sig-prename descclassname">tardis.io.config_reader.</code><code class="sig-name descname">parse_convergence_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">convergence_section_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/config_reader.html#parse_convergence_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.config_reader.parse_convergence_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse the convergence section dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>convergence_section_dict: ~dict</strong></dt><dd><p>dictionary</p>
+<dt><strong>convergence_section_dict</strong><span class="classifier">dict</span></dt><dd><p>dictionary</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tardis.io.config_reader.quantity_representer">
+<code class="sig-prename descclassname">tardis.io.config_reader.</code><code class="sig-name descname">quantity_representer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dumper</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/config_reader.html#quantity_representer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.config_reader.quantity_representer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents Astropy Quantity as str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dumper :</strong></dt><dd><p>YAML dumper object</p>
+</dd>
+<dt><strong>data :</strong></dt><dd><p>ConfigurationNameSpace object</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>yaml dumper representation of Quantity as string</dt><dd></dd>
 </dl>
 </dd>
 </dl>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Change Log &mdash; TARDIS v3.0.dev3495</title>
+  <title>Change Log &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -101,12 +101,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -114,35 +116,16 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Change Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#upcoming-2020-08-05-16-04-00-00">upcoming (2020/08/05 16:04 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3487-2020-07-30-22-18-00-00">v3.0.dev3487 (2020/07/30 22:18 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3484-2020-07-19-14-30-00-00">v3.0.dev3484 (2020/07/19 14:30 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3477-2020-07-09-03-06-00-00">v3.0.dev3477 (2020/07/09 03:06 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3472-2020-06-27-20-11-00-00">v3.0.dev3472 (2020/06/27 20:11 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3463-2020-06-19-22-51-00-00">v3.0.dev3463 (2020/06/19 22:51 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3459-2020-06-12-18-01-00-00">v3.0.dev3459 (2020/06/12 18:01 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3458-2020-06-02-19-11-00-00">v3.0.dev3458 (2020/06/02 19:11 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3448-2020-05-28-17-08-00-00">v3.0.dev3448 (2020/05/28 17:08 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3442-2020-05-21-23-34-00-00">v3.0.dev3442 (2020/05/21 23:34 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3439-2020-05-20-13-25-00-00">v3.0.dev3439 (2020/05/20 13:25 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3424-2020-05-07-15-29-00-00">v3.0.dev3424 (2020/05/07 15:29 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3409-2020-02-25-04-02-00-00">v3.0.dev3409 (2020/02/25 04:02 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-dev3403-2020-02-19-15-55-00-00">v3.0.dev3403 (2020/02/19 15:55 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dev3396-2020-02-07-15-00-00-00">3.0.dev3396 (2020/02/07 15:00 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dev3384-2020-02-02-21-56-00-00">3.0.dev3384 (2020/02/02 21:56 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dev3383-2020-02-02-19-01-00-00">3.0.dev3383 (2020/02/02 19:01 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dev3388-2020-01-25-22-36-00-00">3.0.dev3388 (2020/01/25 22:36 +00:00)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#v3-0-alpha-3-2019-05-13-22-05-00-00">v3.0-alpha.3 (2019/05/13 22:05 +00:00)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upcoming-2019-04-29-20-48-00-00">upcoming (2019/04/29 20:48 +00:00)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v3-0-a1-2019-03-10-15-03-00-00">v3.0.a1 (2019/03/10 15:03 +00:00)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v2-test3-2018-06-18-20-13-00-00">v2_test3 (2018/06/18 20:13 +00:00)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v2-0-2018-04-05-13-03-00-00">v2.0 (2018/04/05 13:03 +00:00)</a></li>
@@ -253,232 +236,9 @@
 </style>
 <div class="section" id="change-log">
 <h1>Change Log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="upcoming-2020-08-05-16-04-00-00">
-<h2>upcoming (2020/08/05 16:04 +00:00)<a class="headerlink" href="#upcoming-2020-08-05-16-04-00-00" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="upcoming-2019-04-29-20-48-00-00">
+<h2>upcoming (2019/04/29 20:48 +00:00)<a class="headerlink" href="#upcoming-2019-04-29-20-48-00-00" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1262">#1262</a> Update package versions (#1262) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1263">#1263</a> Clean up status badge display (#1263) (&#64;chvogl)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1261">#1261</a> Add governance document (#1261) (&#64;wkerzendorf)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3487-2020-07-30-22-18-00-00">
-<h2>v3.0.dev3487 (2020/07/30 22:18 +00:00)<a class="headerlink" href="#v3-0-dev3487-2020-07-30-22-18-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1259">#1259</a> emphasised reporting guidelines in code of conduct (#1259) (&#64;harpolea)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1255">#1255</a> Pin pyne to v0.5 (#1255) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1213">#1213</a> Re-applied Black formatting to tardis after excluding undesired directories (#1213) (&#64;jaladh-singhal)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3484-2020-07-19-14-30-00-00">
-<h2>v3.0.dev3484 (2020/07/19 14:30 +00:00)<a class="headerlink" href="#v3-0-dev3484-2020-07-19-14-30-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1210">#1210</a> [MRG] Using Mamba in Pipelines (#1210) (&#64;kaushik94)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1237">#1237</a> Add new Contribution guidelines (#1237) (&#64;jaladh-singhal)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1238">#1238</a> code of conduct symlink (#1238) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1234">#1234</a> TARDIS Code of Conduct (#1234) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1233">#1233</a> Update of the Governance model (#1233) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1231">#1231</a> Roadmap Documentation Page (#1231) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1227">#1227</a> Update base.py (#1227) (&#64;arjunsavel)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3477-2020-07-09-03-06-00-00">
-<h2>v3.0.dev3477 (2020/07/09 03:06 +00:00)<a class="headerlink" href="#v3-0-dev3477-2020-07-09-03-06-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1218">#1218</a> Move and rename coverage file (#1218) (&#64;arjunsavel)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1224">#1224</a> Added better mission statement (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1190">#1190</a> Change <code class="docutils literal notranslate"><span class="pre">pytestconfig</span></code> to <code class="docutils literal notranslate"><span class="pre">request.config</span></code> (#1190) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1219">#1219</a> Update index.rst (#1219) (&#64;ycamacho)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3472-2020-06-27-20-11-00-00">
-<h2>v3.0.dev3472 (2020/06/27 20:11 +00:00)<a class="headerlink" href="#v3-0-dev3472-2020-06-27-20-11-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1203">#1203</a> Minor changes to the environment file and cleanup (#1203) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1209">#1209</a> add sashank27 orcid (#1209) (&#64;sashank27)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1207">#1207</a> add git-blame-ignore for code style black Changes (#1207) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1201">#1201</a> Code style black (#1201) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1200">#1200</a> Added jaladh-singhal’s orcid (#1200) (&#64;jaladh-singhal)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1197">#1197</a> add arjun’s name to the ORCID list (#1197) (&#64;arjunsavel)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1166">#1166</a> Create a new subpackage for jupyter-widgets and add shell info widgets (#1166) (&#64;jaladh-singhal)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3463-2020-06-19-22-51-00-00">
-<h2>v3.0.dev3463 (2020/06/19 22:51 +00:00)<a class="headerlink" href="#v3-0-dev3463-2020-06-19-22-51-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1195">#1195</a> Fix badges in README.rst (#1195) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1193">#1193</a> Unpin astropy version (#1193) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1191">#1191</a> Add note to tell users which OS are supported (issue #1125) (#1191) (&#64;jordi5)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1158">#1158</a> Make consistency edits to documentation (#1158) (&#64;arjunsavel)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3459-2020-06-12-18-01-00-00">
-<h2>v3.0.dev3459 (2020/06/12 18:01 +00:00)<a class="headerlink" href="#v3-0-dev3459-2020-06-12-18-01-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1185">#1185</a> Upgrade pytest version (#1185) (&#64;epassaro)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3458-2020-06-02-19-11-00-00">
-<h2>v3.0.dev3458 (2020/06/02 19:11 +00:00)<a class="headerlink" href="#v3-0-dev3458-2020-06-02-19-11-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1180">#1180</a> Remove test pipeline (#1180) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1153">#1153</a> update doc page to a notebook (#1153) (&#64;sashank27)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1150">#1150</a> Fix the Plasma tests (#1150) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1178">#1178</a> Fix Jack O`Brien and Jordi Eguren author names (#1178) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1171">#1171</a> Changed a print from python 2 to python 3 (#1171) (&#64;arjunsavel)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1165">#1165</a> Fix callbacks in run_tardis (&#64;Rodot-)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3448-2020-05-28-17-08-00-00">
-<h2>v3.0.dev3448 (2020/05/28 17:08 +00:00)<a class="headerlink" href="#v3-0-dev3448-2020-05-28-17-08-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1173">#1173</a> Fix GUI and plasma tests (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1168">#1168</a> add checkpoint to PR template checklist (#1168) (&#64;harpolea)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1162">#1162</a> Remove duplicated export (#1162) (&#64;epassaro)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3442-2020-05-21-23-34-00-00">
-<h2>v3.0.dev3442 (2020/05/21 23:34 +00:00)<a class="headerlink" href="#v3-0-dev3442-2020-05-21-23-34-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1159">#1159</a> Fixed crash when integrating in parallel.  Crash was previously caused by a double free error.  Removing the last call to free caused the spectrum to be computed incorrectly, indicating that the structure of the parallelism was at fault.  I removed the firstprivate declaration from the first call to omp parallel as there was no need to make copies of the pointers for each thread (was this even a reasonable thing to do since each thread would have to reallocate the arrays anyway?).  There also did not appear to be any need to maintain copies of L or exp_tau for each thread.  I then moved the last call to free outside of the parallel section.  So now there is no memory allocation or deallocation of L or exp_tau in a parallel block, and exp_tau is freed only once as it should be (#1159) (&#64;Rodot-)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1155">#1155</a> add codecov to azure pipelines (#1155) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1157">#1157</a> Update .mailmap (#1157) (&#64;epassaro)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3439-2020-05-20-13-25-00-00">
-<h2>v3.0.dev3439 (2020/05/20 13:25 +00:00)<a class="headerlink" href="#v3-0-dev3439-2020-05-20-13-25-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1142">#1142</a> Split release pipeline (#1142) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1151">#1151</a> Git ignored VSCode specific files (#1151) (&#64;jaladh-singhal)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1149">#1149</a> Made plot size larger in quickstart notebook (#1149) (&#64;jaladh-singhal)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1147">#1147</a> allow downloading of example file in quickstart (#1147) (&#64;sashank27)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1105">#1105</a> Add skip condition if QT_API is no set (issue #1101) (&#64;jordi5)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1143">#1143</a> Set manual trigger on file (compare refdata) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1144">#1144</a> add option to execute quickstart in build (#1144) (&#64;sashank27)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3424-2020-05-07-15-29-00-00">
-<h2>v3.0.dev3424 (2020/05/07 15:29 +00:00)<a class="headerlink" href="#v3-0-dev3424-2020-05-07-15-29-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1133">#1133</a> Solve pending issues of the release pipeline (#1133) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1141">#1141</a> fix warnings in quickstart (#1141) (&#64;sashank27)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1137">#1137</a> Increasing glob-like omission of coverage files (#1137) (&#64;arjunsavel)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1139">#1139</a> Added more file types to git ignore (#1139) (&#64;jaladh-singhal)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1134">#1134</a> Update mailmap (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1135">#1135</a> Running tests on MacOS-10.14 (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1068">#1068</a> Migrate gui to PyQt5 (issue #988) (#1068) (&#64;jordi5)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1085">#1085</a> Solves issue #680 for tardis.util.base (i.e. numpydocs format for doc strings.) (&#64;Phantsure)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1055">#1055</a> renamed capmanager class functions (#1055) (&#64;not4win)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1048">#1048</a> Re-activate TARDIS tests (#1048) (&#64;epassaro)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3409-2020-02-25-04-02-00-00">
-<h2>v3.0.dev3409 (2020/02/25 04:02 +00:00)<a class="headerlink" href="#v3-0-dev3409-2020-02-25-04-02-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1046">#1046</a> Updated zenodo.json (#1046) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1045">#1045</a> Fix file paths at <code class="docutils literal notranslate"><span class="pre">diff</span></code> step in release pipeline (#1045) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1040">#1040</a> Re-activate release job (#1040) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1039">#1039</a> Update .mailmap (#1039) (&#64;epassaro)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-dev3403-2020-02-19-15-55-00-00">
-<h2>v3.0.dev3403 (2020/02/19 15:55 +00:00)<a class="headerlink" href="#v3-0-dev3403-2020-02-19-15-55-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1031">#1031</a> Create Zenodo JSON file (#1031) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1036">#1036</a> Update zenodo.json (#1036) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1035">#1035</a> Update .mailmap (#1035) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1034">#1034</a> Update .mailmap (#1034) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1032">#1032</a> Add Mark Magee to .mailmap (#1032) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1025">#1025</a> Add <code class="docutils literal notranslate"><span class="pre">compilers</span></code> to environment YAML file (#1025) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1026">#1026</a> Minor changes (#1026) (&#64;epassaro)</p></li>
-</ul>
-</div>
-<div class="section" id="dev3396-2020-02-07-15-00-00-00">
-<h2>3.0.dev3396 (2020/02/07 15:00 +00:00)<a class="headerlink" href="#dev3396-2020-02-07-15-00-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1027">#1027</a> Added Mark Magee (#1027) (&#64;MarkMageeAstro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1024">#1024</a> Add epassaro orcid (#1024) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1022">#1022</a> added Alice’s orcid (#1022) (&#64;harpolea)</p></li>
-</ul>
-</div>
-<div class="section" id="dev3384-2020-02-02-21-56-00-00">
-<h2>3.0.dev3384 (2020/02/02 21:56 +00:00)<a class="headerlink" href="#dev3384-2020-02-02-21-56-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1021">#1021</a> Set cron job, disable CI and PR (#1021) (&#64;epassaro)</p></li>
-</ul>
-</div>
-<div class="section" id="dev3383-2020-02-02-19-01-00-00">
-<h2>3.0.dev3383 (2020/02/02 19:01 +00:00)<a class="headerlink" href="#dev3383-2020-02-02-19-01-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1015">#1015</a> Set up release TARDIS version with Azure Pipelines (#1015) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1020">#1020</a> Update .mailmap (#1020) (&#64;livnehra)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1018">#1018</a> Updated .mailmap (#1018) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1010">#1010</a> Pipeline for comparing reference data (#1010) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1016">#1016</a> Removed GH Action for release versions (#1016) (&#64;epassaro)</p></li>
-</ul>
-</div>
-<div class="section" id="dev3388-2020-01-25-22-36-00-00">
-<h2>3.0.dev3388 (2020/01/25 22:36 +00:00)<a class="headerlink" href="#dev3388-2020-01-25-22-36-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1013">#1013</a> Fixed typo (#1013) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1006">#1006</a> Trying to get the right version number for automatic release (#1006) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1008">#1008</a> Improvements for the update_reference section [docs] (#1008) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1011">#1011</a> Gui fix (#1011) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1009">#1009</a> Fix for packet source unit test (#1009) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1007">#1007</a> Fix for vboundary tests (#1007) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/995">#995</a> Checking failing tests on Azure (#995) (&#64;kaushik94)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1005">#1005</a> Add YML file for release version (#1005) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1004">#1004</a> Fixed csvy abundance indexing bug (#1004) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1003">#1003</a> Custom source packets (#1003) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/994">#994</a> Large cleanup operation (#994) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/992">#992</a> Changes made to update_refdata documentation (#992) (&#64;kowal180)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/967">#967</a> log additional properties in hdf witeout when –with-vpacket-logging is present (#967) (&#64;kaushik94)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/969">#969</a> Fixes numpydoc for util (#969) (&#64;kowal180)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/985">#985</a> Fix typo (#985) (&#64;jreichenbach-msu)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/983">#983</a> Fix git clone rendering in installation (#983) (&#64;jreichenbach-msu)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/982">#982</a> Pinned <code class="docutils literal notranslate"><span class="pre">numpy</span></code> to v1.15 (#982) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/978">#978</a> Add further fix to quickstart link (#978) (&#64;jreichenbach-msu)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/975">#975</a> Add links to Quickstart (#975) (&#64;jreichenbach-msu)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/971">#971</a> Fix formal integral spikes bug (see #970) (#971) (&#64;chvogl)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/968">#968</a> Fixed GUI #950 tardis/gui/widgets.py (&#64;jamesgillanders)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/965">#965</a> Isotope time0 (#965) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/966">#966</a> fix AtomData repr. (#966) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/964">#964</a> Raise error if requested atoms are not in the atomic data (#964) (&#64;chvogl)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/959">#959</a> Csvy model config dict (#959) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/949">#949</a> Add issue template (#949) (&#64;Youssef15015)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/960">#960</a> Save integrated spectrum to hdf if requested (#960) (&#64;chvogl)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/957">#957</a> add blondin converter (#957) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/956">#956</a> Dilution factor fix (#956) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/953">#953</a> add code comparison (#953) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/952">#952</a> Base schema fix (#952) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/951">#951</a> Documentation restructure (&#64;wkerzendorf, &#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/26">#26</a> Added Model Doc Page (#26) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/943">#943</a> Update General CI Documentation (#943) (&#64;Youssef15015)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/936">#936</a> csvy_model (&#64;Youssef15015, &#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/940">#940</a> parent 8d9001822f586857f2f8353a56185310832886dc (&#64;Youssef15015)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/942">#942</a> Update self-hossted agent documentaiton (#942) (&#64;Youssef15015)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/946">#946</a> Update build documentation script (&#64;Youssef15015)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/945">#945</a> Revert “Remove PR Trigger” (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/944">#944</a> Remove PR Trigger (&#64;Youssef15015)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/939">#939</a> Deploying documentation using Azure (&#64;Youssef15015)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/940">#940</a> Correct index script spelling (#940) (&#64;Youssef15015)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/928">#928</a> Added csvy parser (#928) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/933">#933</a> Radiative recombination (#933) (&#64;chvogl)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/934">#934</a> Relocated the azure_pipelines.yml into a new directory called pipelines, and renamed it as pipeline_A (#934) (&#64;Youssef15015)</p></li>
-</ul>
-</div>
-<div class="section" id="v3-0-alpha-3-2019-05-13-22-05-00-00">
-<h2>v3.0-alpha.3 (2019/05/13 22:05 +00:00)<a class="headerlink" href="#v3-0-alpha-3-2019-05-13-22-05-00-00" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/930">#930</a> Fix for conda-forge package (#930) (&#64;epassaro)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/918">#918</a> Density docs (#918) (&#64;marxwillia)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/926">#926</a> Adding a TARDIS data repo (#926) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/924">#924</a> Migrate beta_sobolev calculation from cython to numba (#924) (&#64;chvogl)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/925">#925</a> Docs/fix changelog (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/923">#923</a> Fix nlte normalization (&#64;livnehra)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/920">#920</a> Revert “Fix nlte normalization  (#920)” (#922) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/920">#920</a> Fix nlte normalization  (#920) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/921">#921</a> add changes builder to travis process (#921) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/919">#919</a> Add possibility to bias vpacket emission based on optical depth (#919) (&#64;chvogl)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/914">#914</a> make python3 compatible (#914) (&#64;wkerzendorf)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/902">#902</a> general overhaul of the docs for 3.0 (#902) (&#64;wkerzendorf)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/916">#916</a> make python3 compatible (#916) (&#64;wkerzendorf)</p></li>
@@ -619,88 +379,88 @@
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/652">#652</a> [TEP006] Aggregate TARDIS restructure and configuration system cleanup (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/677">#677</a> Update link to tardis_example.yml in documentation - Fix #676 (&#64;unoebauer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/674">#674</a> Change matplotlib backend - fix test_integration remote plotting issue (&#64;unoebauer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/664">#664</a> Kd final test (&#64;wkerzendorf, &#64;yeganer)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/664">#664</a> Kd final test (&#64;wkerzendorf, &#64;kdexd, &#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/21">#21</a> fKd final test (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/668">#668</a> change to tardis atom data on git lfs (&#64;wkerzendorf)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/666">#666</a> Remove News from main TARDIS github page (&#64;unoebauer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/667">#667</a> Update SOCIS and GSOC students credits (&#64;unoebauer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/665">#665</a> Add to_hdf compression (&#64;yeganer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/663">#663</a> Develop (&#64;tardis-sn)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/663">#663</a> Develop (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/657">#657</a> Require pyyaml 3.12 (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/659">#659</a> Update installation docs (&#64;ftsamis)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/653">#653</a> Facility to provide per-setup atom data as well as save report locally. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/653">#653</a> Facility to provide per-setup atom data as well as save report locally. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/641">#641</a> Fix detailed radiative rates (&#64;yeganer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/642">#642</a> Use pytest-html==1.10.0, modify DokuReport class accordingly. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/642">#642</a> Use pytest-html==1.10.0, modify DokuReport class accordingly. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/630">#630</a> [IntegrationTests] Overview page on Dokuwiki.</p></li>
 </ul>
-<p>Running the integration tests will update an overview page on DokuWiki. (&#64;karandesai-96)</p>
+<p>Running the integration tests will update an overview page on DokuWiki. (&#64;kdexd)</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/620">#620</a> Runner script to automate execution of integration tests. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/620">#620</a> Runner script to automate execution of integration tests. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/628">#628</a> Remove exponent property from yaml files with exponential density (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/626">#626</a> Revert “Add exponent as a property for exponential density” (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/542">#542</a> Updates to He NLTE treatment. (&#64;aoifeboyle)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/612">#612</a> Add facility to generate and accept HDF files as reference data for Integration Tests. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/612">#612</a> Add facility to generate and accept HDF files as reference data for Integration Tests. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/614">#614</a> Omit the integration_tests when running coveralls (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/619">#619</a> Fixed incorrect name in error message (&#64;Tobychev)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/618">#618</a> to_hdf: If only the last run is stored, do not add a counter in the name (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/617">#617</a> Add a to_hdf method on TARDISSpectrum (&#64;ftsamis)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/600">#600</a> Parametrize the Slow Test class with two setups. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/600">#600</a> Parametrize the Slow Test class with two setups. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/613">#613</a> Fix bug in montecarlo.pyx (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/595">#595</a> Line absorption rate estimator (&#64;Tobychev)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/606">#606</a> Merge to_hdf (&#64;ftsamis, &#64;wkerzendorf)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/585">#585</a> [TEP002] Add a to_hdf method to the MontecarloRunner (#585) (&#64;ftsamis)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/597">#597</a> Use abundances, densities filepaths relative to w7 config file. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/597">#597</a> Use abundances, densities filepaths relative to w7 config file. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/569">#569</a> Added a conda environment for tardis (&#64;wkerzendorf)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/565">#565</a> Change the way AtomData quantities are initialized (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/599">#599</a> Update the tardis_example tar file provided in the documentation. (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/598">#598</a> Fix convergence handling in run_legacy_simulation - fix issue #593 (&#64;unoebauer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/590">#590</a> Link images of comparison plots in DokuReport using hookwrapper. (&#64;karandesai-96)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/591">#591</a> Fix path of CSS and JS files used in html report. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/590">#590</a> Link images of comparison plots in DokuReport using hookwrapper. (&#64;kdexd)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/591">#591</a> Fix path of CSS and JS files used in html report. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/594">#594</a> Provide tardis.yaml_load shortcut (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/592">#592</a> Fix virt energy (&#64;yeganer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/583">#583</a> Subclass pytest-html’s HTMLReport to DokuReport class for report generation and upload (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/583">#583</a> Subclass pytest-html’s HTMLReport to DokuReport class for report generation and upload (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/587">#587</a> Move the three spectra attributes from Radial1DModel to MontecarloRunner (&#64;ftsamis)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/578">#578</a> Shift slow test related pytest hooks in lower level conftest.py (#578) (Karan Desai)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/578">#578</a> Shift slow test related pytest hooks in lower level conftest.py (#578) (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/581">#581</a> Update several files to match package_template (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/576">#576</a> [config-system] Validator rewrite: Use jsonschema (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/575">#575</a> Replace misused calls to yaml.load with a helper function. (&#64;ftsamis)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/570">#570</a> Enable generation of html report of integration tests, and upload to dokuwiki. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/570">#570</a> Enable generation of html report of integration tests, and upload to dokuwiki. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/574">#574</a> tardis/base.py: Remove duplicate code from run_tardis (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/573">#573</a> io/util.py (YAMLLoader): Use OrderedDict to store loaded YAML (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/572">#572</a> Change the way YAMLLoader resolves some properties (&#64;ftsamis)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/532">#532</a> Documentation overhaul (&#64;unoebauer, &#64;chvogl)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/532">#532</a> Documentation overhaul (&#64;unoebauer, &#64;kdexd, &#64;chvogl)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/571">#571</a> data/tardis_config_definition.yml: Set the exponent property as mandatory when density is exponential. (#571) (&#64;ftsamis)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/566">#566</a> Initial laydown of comparison plots for TestW7. (#566) (Karan Desai)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/566">#566</a> Initial laydown of comparison plots for TestW7. (#566) (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/567">#567</a> Accept keyword arguments for Configuration.from_yaml (&#64;yeganer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/561">#561</a> TestW7: Assertions for spectrum quantities, fixture for handling baseline data. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/561">#561</a> TestW7: Assertions for spectrum quantities, fixture for handling baseline data. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/515">#515</a> [config-system] Add a custom YAML Loader to parse astropy quantities (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/555">#555</a> Use pytest’s monkeypatch.chdir to change the working directory in the config_reader tests (&#64;ftsamis, &#64;lukeshingles)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/558">#558</a> Integration Test class for Stratified W7 setup. (&#64;karandesai-96)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/557">#557</a> Enable skipping slow tests. (&#64;karandesai-96)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/544">#544</a> Continue cmontecarlo tests refactor. Extend #530. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/558">#558</a> Integration Test class for Stratified W7 setup. (&#64;kdexd)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/557">#557</a> Enable skipping slow tests. (&#64;kdexd)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/544">#544</a> Continue cmontecarlo tests refactor. Extend #530. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/543">#543</a> Fix issue #535: Treat rel. paths inside config relative to the config file (&#64;lukeshingles, &#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1">#1</a> Write tests for the issue #535 fix. (&#64;ftsamis)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/551">#551</a> Add SOCIS 2016 advertisement (&#64;unoebauer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/547">#547</a> Fix Issue #548 (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/547">#547</a> Fix Issue #548 (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/545">#545</a> added mailmap to compile the commits for each person (#545) (&#64;wkerzendorf)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/539">#539</a> Adding OSX to our travis build (#539) (&#64;wkerzendorf)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/541">#541</a> Move progress bar update after calculation (#541) (&#64;yeganer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/540">#540</a> Mirroring C enums in Python for CMontecarlo tests. (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/540">#540</a> Mirroring C enums in Python for CMontecarlo tests. (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/538">#538</a> Upgrading to the new Readthedocs infrastructure (#538) (&#64;wkerzendorf)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/530">#530</a> Refactor cmontecarlo testing framework (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/530">#530</a> Refactor cmontecarlo testing framework (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/537">#537</a> Ignore invalid OpenMP nthreads values (#537) (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/533">#533</a> Remove rpacket.recently_crossed_boundary flag (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/514">#514</a> Performance (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/531">#531</a> Organize headers in C-Extension (&#64;yeganer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/526">#526</a> Docs: Include conda-requirements in installation.rst (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/526">#526</a> Docs: Include conda-requirements in installation.rst (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/519">#519</a> Documentation:Installation modify command (&#64;yeganer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/510">#510</a> Updates requirements to solve libgfortran error. Fixes #509 (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/510">#510</a> Updates requirements to solve libgfortran error. Fixes #509 (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/495">#495</a> Fix energy conservation (&#64;unoebauer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/486">#486</a> Bugfix radiative rates type detailed (&#64;chvogl, &#64;unoebauer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/488">#488</a> Fix indentation in c extension (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/494">#494</a> Fix #493 (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/1">#1</a> Add simple test for j_blue_estimator (&#64;unoebauer)</p></li>
-<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/491">#491</a> Include IDE specific auto-generated files in .gitignore. Fixes #490 (&#64;karandesai-96)</p></li>
+<li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/491">#491</a> Include IDE specific auto-generated files in .gitignore. Fixes #490 (&#64;kdexd)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/485">#485</a> Montecarlo progress (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/457">#457</a> Fix Issue #454 (&#64;yeganer)</p></li>
 <li><p><a class="reference external" href="https://github.com/tardis-sn/tardis/pull/484">#484</a> Minor improvement of vpacket logging scheme (&#64;unoebauer)</p></li>

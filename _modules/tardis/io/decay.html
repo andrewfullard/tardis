@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tardis.io.decay &mdash; TARDIS v3.0.dev3495</title>
+  <title>tardis.io.decay &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -99,12 +99,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -112,14 +114,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../roadmap.html">Development Roadmap</a></li>
@@ -257,7 +258,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">            : ~list</span>
+<span class="sd">            : list</span>
 <span class="sd">            list of pyne Materialss</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -277,11 +278,11 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-
-<span class="sd">        t: ~float or ~astropy.units.Quantity</span>
+<span class="sd">        t : float or astropy.units.Quantity</span>
 <span class="sd">            if float it will be understood as days</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">            : decayed abundances</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -298,9 +299,10 @@
 
 <div class="viewcode-block" id="IsotopeAbundances.as_atoms"><a class="viewcode-back" href="../../../api/tardis.io.decay.html#tardis.io.decay.IsotopeAbundances.as_atoms">[docs]</a>    <span class="k">def</span> <span class="nf">as_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Merge Isotope dataframe according to atomic number </span>
+<span class="sd">        Merge Isotope dataframe according to atomic number</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">            : merged isotope abundances</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -308,15 +310,16 @@
 
 <div class="viewcode-block" id="IsotopeAbundances.merge"><a class="viewcode-back" href="../../../api/tardis.io.decay.html#tardis.io.decay.IsotopeAbundances.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Merge Isotope dataframe with abundance passed as parameter </span>
+<span class="sd">        Merge Isotope dataframe with abundance passed as parameter</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        other: pd.DataFrame </span>
+<span class="sd">        other : pd.DataFrame </span>
 <span class="sd">        normalize : bool</span>
 <span class="sd">            If true, resultant dataframe will be normalized</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">            : merged abundances</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">isotope_abundance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_atoms</span><span class="p">()</span>

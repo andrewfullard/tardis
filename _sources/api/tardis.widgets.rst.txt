@@ -7,7 +7,10 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   tardis.widgets.base
+   tardis.widgets.line_info
+   tardis.widgets.plot_util
+   tardis.widgets.shell_info
+   tardis.widgets.util
 
 Module contents
 ---------------

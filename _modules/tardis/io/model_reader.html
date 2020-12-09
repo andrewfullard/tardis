@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tardis.io.model_reader &mdash; TARDIS v3.0.dev3495</title>
+  <title>tardis.io.model_reader &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -99,12 +99,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -112,14 +114,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../roadmap.html">Development Roadmap</a></li>
@@ -222,24 +223,19 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
-<span class="sd">    filename: ~str</span>
+<span class="sd">    filename : str</span>
 <span class="sd">        filename or path of the density file</span>
-
-<span class="sd">    filetype: ~str</span>
+<span class="sd">    filetype : str</span>
 <span class="sd">        type of the density file</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    time_of_model: ~astropy.units.Quantity</span>
+<span class="sd">    time_of_model : astropy.units.Quantity</span>
 <span class="sd">        time at which the model is valid</span>
-
-<span class="sd">    velocity: ~np.ndarray</span>
+<span class="sd">    velocity : np.ndarray</span>
 <span class="sd">        the array containing the velocities</span>
-
-<span class="sd">    unscaled_mean_densities: ~np.ndarray</span>
+<span class="sd">    unscaled_mean_densities : np.ndarray</span>
 <span class="sd">        the array containing the densities</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">file_parsers</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;artis&quot;</span><span class="p">:</span> <span class="n">read_artis_density</span><span class="p">,</span>
@@ -302,20 +298,14 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
-<span class="sd">    abundance_filename: ~str</span>
+<span class="sd">    abundance_filename : str</span>
 <span class="sd">        filename or path of the density file</span>
-
-<span class="sd">    abundance_filetype: ~str</span>
+<span class="sd">    abundance_filetype : str</span>
 <span class="sd">        type of the density file</span>
-
-<span class="sd">    inner_boundary_index: int</span>
+<span class="sd">    inner_boundary_index : int</span>
 <span class="sd">        index of the inner shell, default None</span>
-
-<span class="sd">    outer_boundary_index: int</span>
+<span class="sd">    outer_boundary_index : int</span>
 <span class="sd">        index of the outer shell, default None</span>
-
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">file_parsers</span> <span class="o">=</span> <span class="p">{</span>
@@ -349,14 +339,13 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
-<span class="sd">    abundances_section: ~config.model.abundances</span>
-<span class="sd">    no_of_shells: int</span>
+<span class="sd">    abundances_section : config.model.abundances</span>
+<span class="sd">    no_of_shells : int</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    abundance: ~pandas.DataFrame</span>
-<span class="sd">    isotope_abundance: ~pandas.DataFrame</span>
+<span class="sd">    abundance : pandas.DataFrame</span>
+<span class="sd">    isotope_abundance : pandas.DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">abundance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
         <span class="n">columns</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">no_of_shells</span><span class="p">),</span>
@@ -408,18 +397,14 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
-<span class="sd">    fname: str</span>
+<span class="sd">    fname : str</span>
 <span class="sd">        filename or path with filename</span>
-
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
-<span class="sd">    time_of_model: ~astropy.units.Quantity</span>
+<span class="sd">    time_of_model : astropy.units.Quantity</span>
 <span class="sd">        time at which the model is valid</span>
-
-<span class="sd">    data: ~pandas.DataFrame</span>
+<span class="sd">    data : pandas.DataFrame</span>
 <span class="sd">        data frame containing index, velocity (in km/s) and density</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -450,18 +435,14 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
-<span class="sd">    fname: str</span>
+<span class="sd">    fname : str</span>
 <span class="sd">        filename or path with filename</span>
-
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
-<span class="sd">    time_of_model: ~astropy.units.Quantity</span>
+<span class="sd">    time_of_model : astropy.units.Quantity</span>
 <span class="sd">        time at which the model is valid</span>
-
-<span class="sd">    data: ~pandas.DataFrame</span>
+<span class="sd">    data : pandas.DataFrame</span>
 <span class="sd">        data frame containing index, velocity (in km/s) and density</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -517,22 +498,17 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
-<span class="sd">    fname: str</span>
+<span class="sd">    fname : str</span>
 <span class="sd">        filename or path with filename</span>
-
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
-<span class="sd">    time_of_model: ~astropy.units.Quantity</span>
+<span class="sd">    time_of_model : astropy.units.Quantity</span>
 <span class="sd">        time at which the model is valid</span>
-
-<span class="sd">    velocity: ~np.ndarray</span>
-<span class="sd">    mean_density: ~np.ndarray</span>
-<span class="sd">    electron_densities: ~np.ndarray</span>
-<span class="sd">    temperature: ~np.ndarray</span>
-
+<span class="sd">    velocity : np.ndarray</span>
+<span class="sd">    mean_density : np.ndarray</span>
+<span class="sd">    electron_densities : np.ndarray</span>
+<span class="sd">    temperature : np.ndarray</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
         <span class="s2">&quot;The current CMFGEN model parser is deprecated&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span>
@@ -573,17 +549,14 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
-<span class="sd">    fname: str</span>
+<span class="sd">    fname : str</span>
 <span class="sd">        filename or path with filename</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
-<span class="sd">    index: ~np.ndarray</span>
+<span class="sd">    index : np.ndarray</span>
 <span class="sd">        containing the indices</span>
-
-<span class="sd">    abundances: ~pandas.DataFrame</span>
+<span class="sd">    abundances : pandas.DataFrame</span>
 <span class="sd">        data frame containing index, element1 - element30 and columns according to the shells</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
@@ -603,9 +576,9 @@
 <span class="sd">    first four columns and the following ones contain elemental and isotopic</span>
 <span class="sd">    abundances.</span>
 
-<span class="sd">    WARNING: deprecated</span>
+<span class="sd">    WARNING : deprecated</span>
 
-<span class="sd">    fname: str</span>
+<span class="sd">    fname : str</span>
 <span class="sd">        filename of the csv file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -630,7 +603,7 @@
 
 <span class="sd">    The i-th row specifies the composition in the i-th shell</span>
 
-<span class="sd">    fname: str</span>
+<span class="sd">    fname : str</span>
 <span class="sd">        filename of the csv file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -668,16 +641,14 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
-<span class="sd">    fname: str</span>
+<span class="sd">    fname : str</span>
 <span class="sd">        filename or path with filename</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
-<span class="sd">    index: ~np.ndarray</span>
-<span class="sd">    abundances: ~pandas.DataFrame</span>
-<span class="sd">    isotope_abundance: ~pandas.MultiIndex</span>
+<span class="sd">    index : np.ndarray</span>
+<span class="sd">    abundances : pandas.DataFrame</span>
+<span class="sd">    isotope_abundance : pandas.MultiIndex</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
@@ -718,15 +689,13 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
 <span class="sd">    csvy_data : pandas.DataFrame</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
-<span class="sd">    index : ~np.ndarray</span>
-<span class="sd">    abundances : ~pandas.DataFrame</span>
-<span class="sd">    isotope_abundance : ~pandas.MultiIndex</span>
+<span class="sd">    index : np.ndarray</span>
+<span class="sd">    abundances : pandas.DataFrame</span>
+<span class="sd">    isotope_abundance : pandas.MultiIndex</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">abundance_col_names</span> <span class="o">=</span> <span class="p">[</span>

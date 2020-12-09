@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tardis.plasma.properties.ion_population module &mdash; TARDIS v3.0.dev3495</title>
+  <title>tardis.plasma.properties.ion_population module &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -101,12 +101,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -114,14 +116,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Development Roadmap</a></li>
@@ -255,20 +256,23 @@
 <dt id="tardis.plasma.properties.ion_population.IonNumberDensity">
 <em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.ion_population.</code><code class="sig-name descname">IonNumberDensity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em>, <em class="sig-param"><span class="n">ion_zero_threshold</span><span class="o">=</span><span class="default_value">1e-20</span></em>, <em class="sig-param"><span class="n">electron_densities</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#IonNumberDensity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.IonNumberDensity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
-<p>Attributes:
-ion_number_density : Pandas DataFrame, dtype float</p>
-<blockquote>
-<div><p>Index atom number, ion number. Columns zones.</p>
-</div></blockquote>
-<p>electron_densities : Numpy Array, dtype float</p>
-<p>Convergence process to find the correct solution. A trial value for
-the electron density is initiated in a particular zone. The ion
-number densities are then calculated using the Saha equation. The
-electron density is then re-calculated by using the ion number
-densities to sum over the number of free electrons. If the two values
-for the electron densities are not similar to within the threshold
-value, a new guess for the value of the electron density is chosen
-and the process is repeated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ion_number_density</strong><span class="classifier">Pandas DataFrame, dtype float</span></dt><dd><p>Index atom number, ion number. Columns zones.</p>
+</dd>
+<dt><strong>electron_densities</strong><span class="classifier">Numpy Array, dtype float</span></dt><dd></dd>
+<dt><strong>Convergence process to find the correct solution. A trial value for</strong></dt><dd></dd>
+<dt><strong>the electron density is initiated in a particular zone. The ion</strong></dt><dd></dd>
+<dt><strong>number densities are then calculated using the Saha equation. The</strong></dt><dd></dd>
+<dt><strong>electron density is then re-calculated by using the ion number</strong></dt><dd></dd>
+<dt><strong>densities to sum over the number of free electrons. If the two values</strong></dt><dd></dd>
+<dt><strong>for the electron densities are not similar to within the threshold</strong></dt><dd></dd>
+<dt><strong>value, a new guess for the value of the electron density is chosen</strong></dt><dd></dd>
+<dt><strong>and the process is repeated.</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.ion_population.IonNumberDensity.calculate">
 <code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em>, <em class="sig-param"><span class="n">partition_function</span></em>, <em class="sig-param"><span class="n">number_density</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#IonNumberDensity.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.IonNumberDensity.calculate" title="Permalink to this definition">¶</a></dt>
@@ -295,20 +299,23 @@ and the process is repeated.</p>
 <dt id="tardis.plasma.properties.ion_population.IonNumberDensityHeNLTE">
 <em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.ion_population.</code><code class="sig-name descname">IonNumberDensityHeNLTE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em>, <em class="sig-param"><span class="n">ion_zero_threshold</span><span class="o">=</span><span class="default_value">1e-20</span></em>, <em class="sig-param"><span class="n">electron_densities</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#IonNumberDensityHeNLTE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.IonNumberDensityHeNLTE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
-<p>Attributes:
-ion_number_density : Pandas DataFrame, dtype float</p>
-<blockquote>
-<div><p>Index atom number, ion number. Columns zones.</p>
-</div></blockquote>
-<p>electron_densities : Numpy Array, dtype float</p>
-<p>Convergence process to find the correct solution. A trial value for
-the electron density is initiated in a particular zone. The ion
-number densities are then calculated using the Saha equation. The
-electron density is then re-calculated by using the ion number
-densities to sum over the number of free electrons. If the two values
-for the electron densities are not similar to within the threshold
-value, a new guess for the value of the electron density is chosen
-and the process is repeated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ion_number_density</strong><span class="classifier">Pandas DataFrame, dtype float</span></dt><dd><p>Index atom number, ion number. Columns zones.</p>
+</dd>
+<dt><strong>electron_densities</strong><span class="classifier">Numpy Array, dtype float</span></dt><dd></dd>
+<dt><strong>Convergence process to find the correct solution. A trial value for</strong></dt><dd></dd>
+<dt><strong>the electron density is initiated in a particular zone. The ion</strong></dt><dd></dd>
+<dt><strong>number densities are then calculated using the Saha equation. The</strong></dt><dd></dd>
+<dt><strong>electron density is then re-calculated by using the ion number</strong></dt><dd></dd>
+<dt><strong>densities to sum over the number of free electrons. If the two values</strong></dt><dd></dd>
+<dt><strong>for the electron densities are not similar to within the threshold</strong></dt><dd></dd>
+<dt><strong>value, a new guess for the value of the electron density is chosen</strong></dt><dd></dd>
+<dt><strong>and the process is repeated.</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.ion_population.IonNumberDensityHeNLTE.calculate">
 <code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em>, <em class="sig-param"><span class="n">partition_function</span></em>, <em class="sig-param"><span class="n">number_density</span></em>, <em class="sig-param"><span class="n">helium_population</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#IonNumberDensityHeNLTE.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.IonNumberDensityHeNLTE.calculate" title="Permalink to this definition">¶</a></dt>
@@ -335,12 +342,15 @@ and the process is repeated.</p>
 <dt id="tardis.plasma.properties.ion_population.PhiSahaLTE">
 <em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.ion_population.</code><code class="sig-name descname">PhiSahaLTE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#PhiSahaLTE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.PhiSahaLTE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
-<p>Attributes:
-phi : Pandas DataFrame, dtype float</p>
-<blockquote>
-<div><p>Used for LTE ionization (at the radiation temperature).
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>phi</strong><span class="classifier">Pandas DataFrame, dtype float</span></dt><dd><p>Used for LTE ionization (at the radiation temperature).
 Indexed by atomic number, ion number. Columns are zones.</p>
-</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.ion_population.PhiSahaLTE.broadcast_ionization_energy">
 <code class="sig-name descname">broadcast_ionization_energy</code><em class="property"> = None</em><a class="headerlink" href="#tardis.plasma.properties.ion_population.PhiSahaLTE.broadcast_ionization_energy" title="Permalink to this definition">¶</a></dt>
@@ -353,7 +363,7 @@ Indexed by atomic number, ion number. Columns are zones.</p>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.ion_population.PhiSahaLTE.latex_formula">
-<code class="sig-name descname">latex_formula</code><em class="property"> = ('\\dfrac{2Z_{i,j+1}}{Z_{i,j}}\\Big(                     \\dfrac{2\\pi m_{e}/\\beta_{\\textrm{rad}}}{h^2}                     \\Big)^{3/2}e^{\\dfrac{-\\chi_{i,j}}{kT_{                     \\textrm{rad}}}}',)</em><a class="headerlink" href="#tardis.plasma.properties.ion_population.PhiSahaLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">latex_formula</code><em class="property"> = ('\\dfrac{2Z_{i,j+1}}{Z_{i,j}}\\Big(\\\n                     dfrac{2\\pi m_{e}/\\beta_{\\textrm{rad}}}{h^2}\\\n                     Big)^{3/2}e^{\\dfrac{-\\chi_{i,j}}{kT_{\\textrm{rad}}}}',)</em><a class="headerlink" href="#tardis.plasma.properties.ion_population.PhiSahaLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -372,11 +382,14 @@ Indexed by atomic number, ion number. Columns are zones.</p>
 <dt id="tardis.plasma.properties.ion_population.PhiSahaNebular">
 <em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.ion_population.</code><code class="sig-name descname">PhiSahaNebular</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#PhiSahaNebular"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.PhiSahaNebular" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
-<p>Attributes:
-phi : Pandas DataFrame, dtype float</p>
-<blockquote>
-<div><p>Used for nebular ionization. Indexed by atomic number, ion number. Columns are zones.</p>
-</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>phi</strong><span class="classifier">Pandas DataFrame, dtype float</span></dt><dd><p>Used for nebular ionization. Indexed by atomic number, ion number. Columns are zones.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.ion_population.PhiSahaNebular.calculate">
 <em class="property">static </em><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_rad</span></em>, <em class="sig-param"><span class="n">w</span></em>, <em class="sig-param"><span class="n">zeta_data</span></em>, <em class="sig-param"><span class="n">t_electrons</span></em>, <em class="sig-param"><span class="n">delta</span></em>, <em class="sig-param"><span class="n">g_electron</span></em>, <em class="sig-param"><span class="n">beta_rad</span></em>, <em class="sig-param"><span class="n">partition_function</span></em>, <em class="sig-param"><span class="n">ionization_data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#PhiSahaNebular.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.PhiSahaNebular.calculate" title="Permalink to this definition">¶</a></dt>
@@ -389,7 +402,7 @@ phi : Pandas DataFrame, dtype float</p>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.ion_population.PhiSahaNebular.latex_formula">
-<code class="sig-name descname">latex_formula</code><em class="property"> = ('W(\\delta\\zeta_{i,j}+W(1-\\zeta_{i,j}))\\left(                     \\dfrac{T_{\\textrm{electron}}}{T_{\\textrm{rad}}}                     \\right)^{1/2}',)</em><a class="headerlink" href="#tardis.plasma.properties.ion_population.PhiSahaNebular.latex_formula" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">latex_formula</code><em class="property"> = ('W(\\delta\\zeta_{i,j}+W(1-\\zeta_{i,j}))\\left(\\\n                     dfrac{T_{\\textrm{electron}}}{T_{\\textrm{rad}}}\\right)^{1/2}',)</em><a class="headerlink" href="#tardis.plasma.properties.ion_population.PhiSahaNebular.latex_formula" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -406,16 +419,19 @@ phi : Pandas DataFrame, dtype float</p>
 
 <dl class="py class">
 <dt id="tardis.plasma.properties.ion_population.RadiationFieldCorrection">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.ion_population.</code><code class="sig-name descname">RadiationFieldCorrection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">departure_coefficient</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chi_0_species</span><span class="o">=</span><span class="default_value">20, 2</span></em>, <em class="sig-param"><span class="n">delta_treatment</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#RadiationFieldCorrection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.RadiationFieldCorrection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.ion_population.</code><code class="sig-name descname">RadiationFieldCorrection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">departure_coefficient</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chi_0_species</span><span class="o">=</span><span class="default_value">(20, 2)</span></em>, <em class="sig-param"><span class="n">delta_treatment</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#RadiationFieldCorrection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.RadiationFieldCorrection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
-<p>Attributes:
-delta : Pandas DataFrame, dtype float</p>
-<blockquote>
-<div><p>Calculates the radiation field correction (see Mazzali &amp; Lucy, 1993) if
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>delta</strong><span class="classifier">Pandas DataFrame, dtype float</span></dt><dd><p>Calculates the radiation field correction (see Mazzali &amp; Lucy, 1993) if
 not given as input in the config. file. The default chi_0_species is
 Ca II, which is good for type Ia supernovae. For type II supernovae,
 (1, 1) should be used. Indexed by atomic number, ion number. The columns are zones.</p>
-</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.ion_population.RadiationFieldCorrection.calculate">
 <code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">w</span></em>, <em class="sig-param"><span class="n">ionization_data</span></em>, <em class="sig-param"><span class="n">beta_rad</span></em>, <em class="sig-param"><span class="n">t_electrons</span></em>, <em class="sig-param"><span class="n">t_rad</span></em>, <em class="sig-param"><span class="n">beta_electron</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#RadiationFieldCorrection.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.RadiationFieldCorrection.calculate" title="Permalink to this definition">¶</a></dt>
@@ -440,12 +456,15 @@ Ca II, which is good for type Ia supernovae. For type II supernovae,
 <p>Calculates the ‘Saha factor’ Phi_ik = n_i* / (n_k* n_e), i.e.,
 the ratio of the LTE level population n_i*, and the product of
 the LTE ion density n_k* and the actual electron density n_e.</p>
-<p>Attributes:
-phi_ik: Pandas DataFrame, dtype float</p>
-<blockquote>
-<div><p>Indexed by atom number, ion number, level number.
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>phi_ik</strong><span class="classifier">Pandas DataFrame, dtype float</span></dt><dd><p>Indexed by atom number, ion number, level number.
 Columns are zones.</p>
-</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.ion_population.SahaFactor.calculate">
 <code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">thermal_phi_lte</span></em>, <em class="sig-param"><span class="n">thermal_lte_level_boltzmann_factor</span></em>, <em class="sig-param"><span class="n">thermal_lte_partition_function</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#SahaFactor.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.SahaFactor.calculate" title="Permalink to this definition">¶</a></dt>
@@ -467,12 +486,15 @@ Columns are zones.</p>
 <dt id="tardis.plasma.properties.ion_population.ThermalPhiSahaLTE">
 <em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.ion_population.</code><code class="sig-name descname">ThermalPhiSahaLTE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#ThermalPhiSahaLTE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.ThermalPhiSahaLTE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#tardis.plasma.properties.ion_population.PhiSahaLTE" title="tardis.plasma.properties.ion_population.PhiSahaLTE"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.ion_population.PhiSahaLTE</span></code></a></p>
-<p>Attributes:
-phi : Pandas DataFrame, dtype float</p>
-<blockquote>
-<div><p>Used for LTE ionization (at the electron temperature).
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>phi</strong><span class="classifier">Pandas DataFrame, dtype float</span></dt><dd><p>Used for LTE ionization (at the electron temperature).
 Indexed by atomic number, ion number. Columns are zones.</p>
-</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.ion_population.ThermalPhiSahaLTE.calculate">
 <em class="property">static </em><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">thermal_g_electron</span></em>, <em class="sig-param"><span class="n">beta_electron</span></em>, <em class="sig-param"><span class="n">thermal_lte_partition_function</span></em>, <em class="sig-param"><span class="n">ionization_data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/ion_population.html#ThermalPhiSahaLTE.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.ion_population.ThermalPhiSahaLTE.calculate" title="Permalink to this definition">¶</a></dt>
@@ -480,7 +502,7 @@ Indexed by atomic number, ion number. Columns are zones.</p>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.ion_population.ThermalPhiSahaLTE.latex_formula">
-<code class="sig-name descname">latex_formula</code><em class="property"> = ('\\dfrac{2Z_{i,j+1}}{Z_{i,j}}\\Big(                     \\dfrac{2\\pi m_{e}/\\beta_{\\textrm{electron}}}{h^2}                     \\Big)^{3/2}e^{\\dfrac{-\\chi_{i,j}}{kT_{                     \\textrm{electron}}}}',)</em><a class="headerlink" href="#tardis.plasma.properties.ion_population.ThermalPhiSahaLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">latex_formula</code><em class="property"> = ('\\dfrac{2Z_{i,j+1}}{Z_{i,j}}\\Big(\\\n                     dfrac{2\\pi m_{e}/\\beta_{\\textrm{electron}}}{h^2}\\\n                     Big)^{3/2}e^{\\dfrac{-\\chi_{i,j}}{kT_{\\textrm{electron}}}}',)</em><a class="headerlink" href="#tardis.plasma.properties.ion_population.ThermalPhiSahaLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

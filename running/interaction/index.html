@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Interacting with TARDIS &mdash; TARDIS v3.0.dev3495</title>
+  <title>Additional Interactivity &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -43,8 +43,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Using Custom Callbacks When Running TARDIS" href="callback_example.html" />
-    <link rel="prev" title="Graphical User Interface" href="../gui.html" />
+    <link rel="next" title="Running TARDIS in the commandline" href="commandline.html" />
+    <link rel="prev" title="Generating TARDIS Widgets" href="../tardis_widgets/generating_widgets.html" />
     <link href="../../_static/tardis.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -101,26 +101,30 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Running TARDIS</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../models/index.html">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../configuration/index.html">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../atomic/atomic_data.html">Atomic Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../commandline.html">Running TARDIS in the commandline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../gui.html">Graphical User Interface</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Interacting with TARDIS</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="callback_example.html">Using Custom Callbacks When Running TARDIS</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../custom_source.html">Running TARDIS with a custom packet source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../jupyter-widgets.html">Jupyter Widgets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../converters/index.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Additional Interactivity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html">Running TARDIS in the commandline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callback_example.html">Using Custom Callbacks When Running TARDIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="converters/index.html">Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Custom_TARDIS_Model_Tutorial.html">How to run TARDIS with a custom ejecta model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_source.html">Running TARDIS with a custom packet source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="old_gui.html">Old Graphical User Interface (Outdated)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html">Accessing Physical Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="init_trad_bug.html">Initial_t_rad Bug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrator.html">API example for the formal integral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isotope_pd_subclass.html">Extending Pandas DataFrame Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_hdf.html">Storing simulations to HDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hdf_writer.html">Example Usage of HDFWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="physical_quantities.html">Accessing Physical Quantities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using_formal_integral.html">Spectral Synthesis with the Formal Integral Method</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -128,14 +132,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
@@ -193,9 +196,7 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../index.html">Running TARDIS</a> &raquo;</li>
-        
-      <li>Interacting with TARDIS</li>
+      <li>Additional Interactivity</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -238,13 +239,26 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="interacting-with-tardis">
-<h1>Interacting with TARDIS<a class="headerlink" href="#interacting-with-tardis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="additional-interactivity">
+<h1>Additional Interactivity<a class="headerlink" href="#additional-interactivity" title="Permalink to this headline">¶</a></h1>
 <p>To get more information from each run of TARDIS, one can run it interactively and
 have full access to the model properties (as described in <span class="xref std std-ref">physical_quantities</span>).</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="commandline.html">Running TARDIS in the commandline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="callback_example.html">Using Custom Callbacks When Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converters/index.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom_TARDIS_Model_Tutorial.html">How to run TARDIS with a custom ejecta model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_source.html">Running TARDIS with a custom packet source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="old_gui.html">Old Graphical User Interface (Outdated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Accessing Physical Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="init_trad_bug.html">Initial_t_rad Bug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrator.html">API example for the formal integral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isotope_pd_subclass.html">Extending Pandas DataFrame Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="to_hdf.html">Storing simulations to HDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdf_writer.html">Example Usage of HDFWriter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physical_quantities.html">Accessing Physical Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_formal_integral.html">Spectral Synthesis with the Formal Integral Method</a></li>
 </ul>
 </div>
 </div>
@@ -257,10 +271,10 @@ have full access to the model properties (as described in <span class="xref std 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="callback_example.html" class="btn btn-neutral float-right" title="Using Custom Callbacks When Running TARDIS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="commandline.html" class="btn btn-neutral float-right" title="Running TARDIS in the commandline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../gui.html" class="btn btn-neutral float-left" title="Graphical User Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../tardis_widgets/generating_widgets.html" class="btn btn-neutral float-left" title="Generating TARDIS Widgets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

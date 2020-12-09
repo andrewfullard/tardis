@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tardis.io.decay module &mdash; TARDIS v3.0.dev3495</title>
+  <title>tardis.io.decay module &mdash; TARDIS v3.0.dev1</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                3.0.dev3495
+                3.0.dev1
               </div>
             
           
@@ -101,12 +101,14 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../running/index.html">Running TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/tardis_widgets/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../physics/index.html">Physics overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics/plasma/index.html">Overview of plasma calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -114,14 +116,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../team.html">Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing to TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Development Roadmap</a></li>
@@ -257,8 +258,11 @@
 <dt id="tardis.io.decay.IsotopeAbundances.as_atoms">
 <code class="sig-name descname">as_atoms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/io/decay.html#IsotopeAbundances.as_atoms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.io.decay.IsotopeAbundances.as_atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge Isotope dataframe according to atomic number</p>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>: merged isotope abundances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>: merged isotope abundances</dt><dd></dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -270,10 +274,13 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>t: ~float or ~astropy.units.Quantity</strong></dt><dd><p>if float it will be understood as days</p>
+<dt><strong>t</strong><span class="classifier">float or astropy.units.Quantity</span></dt><dd><p>if float it will be understood as days</p>
 </dd>
-<dt><strong>Returns:</strong></dt><dd><p>: decayed abundances</p>
+</dl>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>: decayed abundances</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -296,11 +303,14 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>other: pd.DataFrame</strong></dt><dd></dd>
+<dt><strong>other</strong><span class="classifier">pd.DataFrame</span></dt><dd></dd>
 <dt><strong>normalize</strong><span class="classifier">bool</span></dt><dd><p>If true, resultant dataframe will be normalized</p>
 </dd>
-<dt><strong>Returns:</strong></dt><dd><p>: merged abundances</p>
+</dl>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>: merged abundances</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -314,7 +324,7 @@ atomic_number and mass_number</p>
 <dl class="field-list">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>: ~list</dt><dd><p>list of pyne Materialss</p>
+<dt>: list</dt><dd><p>list of pyne Materialss</p>
 </dd>
 </dl>
 <dl class="field-list simple">
