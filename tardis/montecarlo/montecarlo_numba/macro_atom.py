@@ -18,7 +18,7 @@ class MacroAtomTransitionType(IntEnum):
     ADIABATIC_COOLING = -4
 
 
-@njit(**njit_dict)
+@njit(**njit_dict, parallel=False)
 def macro_atom(r_packet, numba_plasma):
     """
 
