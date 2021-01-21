@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>tardis.io.decay &mdash; TARDIS v3.0.dev1</title>
   
@@ -19,7 +19,10 @@
   
     <link rel="shortcut icon" href="../../../_static/tardis_logo.ico"/>
   
+
   
+  
+
   
 
   
@@ -32,11 +35,10 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -58,7 +60,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> TARDIS
+            <a href="../../../index.html" class="icon icon-home"> TARDIS
           
 
           
@@ -99,14 +101,15 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../running/components.html">Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../running/tardis_widgets/index.html">Graphical User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../running/interaction/index.html">Additional Interactivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../using/components/index.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../using/gui/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -157,6 +160,8 @@
         <div class="rst-content">
         
           
+
+
 
 
 
@@ -258,9 +263,8 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">            : list</span>
-<span class="sd">            list of pyne Materialss</span>
-<span class="sd">        :return:</span>
+<span class="sd">        list</span>
+<span class="sd">            list of pyne Materials</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">comp_dicts</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">))]</span>
@@ -283,7 +287,8 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">            : decayed abundances</span>
+<span class="sd">        pandas.DataFrame</span>
+<span class="sd">            Decayed abundances</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">materials</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_materials</span><span class="p">()</span>
@@ -303,7 +308,8 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">            : merged isotope abundances</span>
+<span class="sd">        pandas.DataFrame</span>
+<span class="sd">            Merged isotope abundances</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;atomic_number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></div>
@@ -314,13 +320,14 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        other : pd.DataFrame </span>
+<span class="sd">        other : pd.DataFrame</span>
 <span class="sd">        normalize : bool</span>
 <span class="sd">            If true, resultant dataframe will be normalized</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">            : merged abundances</span>
+<span class="sd">        pandas.DataFrame</span>
+<span class="sd">            merged abundances</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">isotope_abundance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_atoms</span><span class="p">()</span>
         <span class="n">isotope_abundance</span> <span class="o">=</span> <span class="n">isotope_abundance</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
@@ -338,28 +345,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2013, TARDIS collaboration
+        &#169; Copyright 2013-2021, TARDIS collaboration.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

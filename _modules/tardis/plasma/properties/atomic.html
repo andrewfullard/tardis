@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>tardis.plasma.properties.atomic &mdash; TARDIS v3.0.dev1</title>
   
@@ -19,7 +19,10 @@
   
     <link rel="shortcut icon" href="../../../../_static/tardis_logo.ico"/>
   
+
   
+  
+
   
 
   
@@ -32,11 +35,10 @@
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -58,7 +60,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> TARDIS
+            <a href="../../../../index.html" class="icon icon-home"> TARDIS
           
 
           
@@ -99,14 +101,15 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../running/components.html">Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../running/tardis_widgets/index.html">Graphical User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../running/interaction/index.html">Additional Interactivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using/components/index.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using/gui/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -157,6 +160,8 @@
         <div class="rst-content">
         
           
+
+
 
 
 
@@ -228,14 +233,17 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    levels : Pandas MultiIndex (atomic_number, ion_number, level_number)</span>
+<span class="sd">    levels : pandas.MultiIndex</span>
+<span class="sd">        (atomic_number, ion_number, level_number)</span>
 <span class="sd">        Index of filtered atomic data. Index used for all other attribute dataframes for this class</span>
-<span class="sd">    excitation_energy : Pandas DataFrame (index=levels), dtype float</span>
-<span class="sd">        Excitation energies of atomic levels</span>
-<span class="sd">    metastability : Pandas DataFrame (index=levels), dtype bool</span>
-<span class="sd">        Records whether atomic levels are metastable</span>
-<span class="sd">    g : Pandas DataFrame (index=levels), dtype float</span>
-<span class="sd">        Statistical weights of atomic levels</span>
+<span class="sd">    excitation_energy : pandas.DataFrame, dtype float</span>
+<span class="sd">        Excitation energies of atomic levels.</span>
+<span class="sd">        Index is levels.</span>
+<span class="sd">    metastability : pandas.DataFrame, dtype bool</span>
+<span class="sd">        Records whether atomic levels are metastable.</span>
+<span class="sd">        Index is levels.</span>
+<span class="sd">    g : pandas.DataFrame (index=levels), dtype float</span>
+<span class="sd">        Statistical weights of atomic levels.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;levels&quot;</span><span class="p">,</span> <span class="s2">&quot;excitation_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;metastability&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)</span>
@@ -265,15 +273,16 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    lines : Pandas DataFrame (wavelength, atomic_number, ion_number, f_ul, f_lu, level_number_lower,</span>
-<span class="sd">                              level_number_upper, nu, B_lu, B_ul, A_ul, wavelength)</span>
-<span class="sd">        All atomic lines data. Index = line_id.</span>
-<span class="sd">    nu : Pandas DataFrame (index=line_id), dtype float</span>
-<span class="sd">        Line frequency data</span>
-<span class="sd">    f_lu : Pandas DataFrame (index=line_id), dtype float</span>
-<span class="sd">        Transition probability data</span>
-<span class="sd">    wavelength_cm : Pandas DataFrame (index=line_id), dtype float</span>
-<span class="sd">        Line wavelengths in cm</span>
+<span class="sd">    lines : pandas.DataFrame</span>
+<span class="sd">        Atomic lines data. Columns are wavelength, atomic_number,ion_number,</span>
+<span class="sd">        f_ul, f_lu, level_number_lower, level_number_upper, nu, B_lu, B_ul, A_ul,</span>
+<span class="sd">        wavelength. Index is line_id.</span>
+<span class="sd">    nu : pandas.DataFrame, dtype float</span>
+<span class="sd">        Line frequency data. Index is line_id.</span>
+<span class="sd">    f_lu : pandas.DataFrame, dtype float</span>
+<span class="sd">        Transition probability data. Index is line_id.</span>
+<span class="sd">    wavelength_cm : pandas.DataFrame, dtype float</span>
+<span class="sd">        Line wavelengths in cm. Index is line_id.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Would like for lines to just be the line_id values</span>
@@ -292,18 +301,14 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    photo_ion_cross_sections : Pandas DataFrame (nu, x_sect,</span>
-<span class="sd">                                                index=[&#39;atomic_number&#39;,</span>
-<span class="sd">                                                       &#39;ion_number&#39;,</span>
-<span class="sd">                                                       &#39;level_number&#39;]),</span>
-<span class="sd">                                                dtype float)</span>
-<span class="sd">        Table of photoionization cross sections as a</span>
-<span class="sd">        function of frequency.</span>
-<span class="sd">    photo_ion_block_references : One-dimensional Numpy Array, dtype int</span>
+<span class="sd">    photo_ion_cross_sections : pandas.DataFrame, dtype float</span>
+<span class="sd">        Photoionization cross sections as a function of frequency.</span>
+<span class="sd">        Columns are nu, x_sect, index=(&#39;atomic_number&#39;,&#39;ion_number&#39;,&#39;level_number&#39;)</span>
+<span class="sd">    photo_ion_block_references : numpy.ndarray, dtype int</span>
 <span class="sd">        Indices where the photoionization data for</span>
 <span class="sd">        a given level starts. Needed for calculation</span>
 <span class="sd">        of recombination rates.</span>
-<span class="sd">    photo_ion_index : Pandas MultiIndex, dtype int</span>
+<span class="sd">    photo_ion_index : pandas.MultiIndex, dtype int</span>
 <span class="sd">        Atomic, ion and level numbers for which</span>
 <span class="sd">        photoionization data exists.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -337,7 +342,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    lines_lower_level_index : One-dimensional Numpy Array, dtype int</span>
+<span class="sd">    lines_lower_level_index : numpy.ndrarray, dtype int</span>
 <span class="sd">        Levels data for lower levels of particular lines</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -355,7 +360,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    lines_upper_level_index : One-dimensional Numpy Array, dtype int</span>
+<span class="sd">    lines_upper_level_index : numpy.ndarray, dtype int</span>
 <span class="sd">        Levels data for upper levels of particular lines</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -373,7 +378,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    atomic_mass : Pandas Series</span>
+<span class="sd">    atomic_mass : pandas.Series</span>
 <span class="sd">        Atomic masses of the elements used. Indexed by atomic number.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -390,7 +395,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    ionization_data : Pandas Series holding ionization energies</span>
+<span class="sd">    ionization_data : pandas.Series</span>
+<span class="sd">        Holding ionization energies</span>
 <span class="sd">        Indexed by atomic number, ion number.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -419,7 +425,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    zeta_data : Pandas DataFrame, dtype float</span>
+<span class="sd">    zeta_data : pandas.DataFrame, dtype float</span>
 <span class="sd">        Zeta data for the elements used. Indexed by atomic number, ion number.</span>
 <span class="sd">        Columns are temperature values up to 40,000 K in iterations of 2,000 K.</span>
 <span class="sd">        The zeta value represents the fraction of recombination events</span>
@@ -501,28 +507,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2013, TARDIS collaboration
+        &#169; Copyright 2013-2021, TARDIS collaboration.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

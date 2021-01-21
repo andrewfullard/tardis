@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>tardis.model.base &mdash; TARDIS v3.0.dev1</title>
   
@@ -19,7 +19,10 @@
   
     <link rel="shortcut icon" href="../../../_static/tardis_logo.ico"/>
   
+
   
+  
+
   
 
   
@@ -32,11 +35,10 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -58,7 +60,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> TARDIS
+            <a href="../../../index.html" class="icon icon-home"> TARDIS
           
 
           
@@ -99,14 +101,15 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../running/components.html">Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../running/tardis_widgets/index.html">Graphical User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../running/interaction/index.html">Additional Interactivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../using/components/index.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../using/gui/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -172,6 +175,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -218,7 +223,8 @@
 
 
 <div class="viewcode-block" id="Radial1DModel"><a class="viewcode-back" href="../../../api/tardis.model.base.html#tardis.model.base.Radial1DModel">[docs]</a><span class="k">class</span> <span class="nc">Radial1DModel</span><span class="p">(</span><span class="n">HDFWriterMixin</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An object that hold information about the individual shells.</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An object that hold information about the individual shells.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -226,8 +232,7 @@
 <span class="sd">        An array with n+1 (for n shells) velocities &quot;cut&quot; to the provided</span>
 <span class="sd">        boundaries</span>
 
-<span class="sd">        .. note:: To access the entire, &quot;uncut&quot;, velocity array,</span>
-<span class="sd">        use `raw_velocity`</span>
+<span class="sd">        .. note:: To access the entire, &quot;uncut&quot;, velocity array, use `raw_velocity`</span>
 <span class="sd">    homologous_density : HomologousDensity</span>
 <span class="sd">    abundance : pd.DataFrame</span>
 <span class="sd">    time_explosion : astropy.units.Quantity</span>
@@ -265,10 +270,10 @@
 <span class="sd">        The number of shells as formed by `v_boundary_inner` and</span>
 <span class="sd">        `v_boundary_outer`</span>
 <span class="sd">    no_of_raw_shells : int</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">hdf_properties</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t_inner&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;t_radiative&#39;</span><span class="p">,</span> <span class="s1">&#39;v_inner&#39;</span><span class="p">,</span> <span class="s1">&#39;v_outer&#39;</span><span class="p">,</span> <span class="s1">&#39;homologous_density&#39;</span><span class="p">]</span>
+    <span class="n">hdf_properties</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t_inner&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;t_radiative&#39;</span><span class="p">,</span> <span class="s1">&#39;v_inner&#39;</span><span class="p">,</span> <span class="s1">&#39;v_outer&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;homologous_density&#39;</span><span class="p">,</span> <span class="s1">&#39;r_inner&#39;</span><span class="p">]</span>
     <span class="n">hdf_name</span> <span class="o">=</span> <span class="s1">&#39;model&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">homologous_density</span><span class="p">,</span> <span class="n">abundance</span><span class="p">,</span> <span class="n">isotope_abundance</span><span class="p">,</span>
@@ -570,7 +575,6 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        Radial1DModel</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">time_explosion</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">supernova</span><span class="o">.</span><span class="n">time_explosion</span><span class="o">.</span><span class="n">cgs</span>
 
@@ -667,7 +671,6 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        Radial1DModel</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">CSVY_SUPPORTED_COLUMNS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;velocity&#39;</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="s1">&#39;t_rad&#39;</span><span class="p">,</span> <span class="s1">&#39;dilution_factor&#39;</span><span class="p">}</span>
 
@@ -825,28 +828,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2013, TARDIS collaboration
+        &#169; Copyright 2013-2021, TARDIS collaboration.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>tardis.montecarlo.montecarlo_numba.r_packet module &mdash; TARDIS v3.0.dev1</title>
   
@@ -19,7 +19,10 @@
   
     <link rel="shortcut icon" href="../_static/tardis_logo.ico"/>
   
+
   
+  
+
   
 
   
@@ -32,11 +35,10 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +62,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> TARDIS
+            <a href="../index.html" class="icon icon-home"> TARDIS
           
 
           
@@ -101,14 +103,15 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../running/components.html">Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../running/tardis_widgets/index.html">Graphical User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../running/interaction/index.html">Additional Interactivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using/components/index.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using/gui/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -193,6 +196,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -212,7 +217,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/api/tardis.montecarlo.montecarlo_numba.r_packet.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -331,33 +336,53 @@ return (mu - beta) / (1.0 - beta * mu);</p>
 <dt id="tardis.montecarlo.montecarlo_numba.r_packet.calculate_distance_boundary">
 <code class="sig-prename descclassname">tardis.montecarlo.montecarlo_numba.r_packet.</code><code class="sig-name descname">calculate_distance_boundary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">r_inner</span></em>, <em class="sig-param"><span class="n">r_outer</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/montecarlo/montecarlo_numba/r_packet.html#calculate_distance_boundary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.montecarlo.montecarlo_numba.r_packet.calculate_distance_boundary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate distance to shell boundary in cm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>r</strong><span class="classifier">float</span></dt><dd><p>radial coordinate of the RPacket</p>
+</dd>
+<dt><strong>mu</strong><span class="classifier">float</span></dt><dd><p>cosine of the direction of movement</p>
+</dd>
+<dt><strong>r_inner</strong><span class="classifier">float</span></dt><dd><p>inner radius of current shell</p>
+</dd>
+<dt><strong>r_outer</strong><span class="classifier">float</span></dt><dd><p>outer radius of current shell</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="tardis.montecarlo.montecarlo_numba.r_packet.calculate_distance_electron">
 <code class="sig-prename descclassname">tardis.montecarlo.montecarlo_numba.r_packet.</code><code class="sig-name descname">calculate_distance_electron</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">electron_density</span></em>, <em class="sig-param"><span class="n">tau_event</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/montecarlo/montecarlo_numba/r_packet.html#calculate_distance_electron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.montecarlo.montecarlo_numba.r_packet.calculate_distance_electron" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate distance to Thomson Scattering</p>
-<p>electron_density: float
-tau_event: float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>electron_density</strong><span class="classifier">float</span></dt><dd></dd>
+<dt><strong>tau_event</strong><span class="classifier">float</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="tardis.montecarlo.montecarlo_numba.r_packet.calculate_distance_line">
 <code class="sig-prename descclassname">tardis.montecarlo.montecarlo_numba.r_packet.</code><code class="sig-name descname">calculate_distance_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">r_packet</span></em>, <em class="sig-param"><span class="n">comov_nu</span></em>, <em class="sig-param"><span class="n">is_last_line</span></em>, <em class="sig-param"><span class="n">nu_line</span></em>, <em class="sig-param"><span class="n">time_explosion</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/montecarlo/montecarlo_numba/r_packet.html#calculate_distance_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.montecarlo.montecarlo_numba.r_packet.calculate_distance_line" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate distance until RPacket is in resonance with the next line
-Parameters
-———-
-r_packet: RPacket
-comov_nu: float</p>
-<blockquote>
-<div><p>comoving frequency at the CURRENT position of the RPacket</p>
-</div></blockquote>
-<dl class="simple">
-<dt>nu_line: float</dt><dd><p>line to check the distance to</p>
+<dd><p>Calculate distance until RPacket is in resonance with the next line</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>r_packet</strong><span class="classifier">tardis.montecarlo.montecarlo_numba.r_packet.RPacket</span></dt><dd></dd>
+<dt><strong>comov_nu</strong><span class="classifier">float</span></dt><dd><p>comoving frequency at the CURRENT position of the RPacket</p>
 </dd>
-<dt>time_explosion: float</dt><dd><p>time since explosion in seconds</p>
+<dt><strong>is_last_line</strong><span class="classifier">bool</span></dt><dd><p>return MISS_DISTANCE if at the end of the line list</p>
 </dd>
-<dt>is_last_line: bool</dt><dd><p>return MISS_DISTANCE if at the end of the line list</p>
+<dt><strong>nu_line</strong><span class="classifier">float</span></dt><dd><p>line to check the distance to</p>
+</dd>
+<dt><strong>time_explosion</strong><span class="classifier">float</span></dt><dd><p>time since explosion in seconds</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -371,6 +396,14 @@ comov_nu: float</p>
 <dt id="tardis.montecarlo.montecarlo_numba.r_packet.calculate_tau_electron">
 <code class="sig-prename descclassname">tardis.montecarlo.montecarlo_numba.r_packet.</code><code class="sig-name descname">calculate_tau_electron</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">electron_density</span></em>, <em class="sig-param"><span class="n">distance</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/montecarlo/montecarlo_numba/r_packet.html#calculate_tau_electron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.montecarlo.montecarlo_numba.r_packet.calculate_tau_electron" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate tau for Thomson scattering</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>electron_density</strong><span class="classifier">float</span></dt><dd></dd>
+<dt><strong>distance</strong><span class="classifier">float</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -392,6 +425,15 @@ comov_nu: float</p>
 <dt id="tardis.montecarlo.montecarlo_numba.r_packet.get_inverse_doppler_factor">
 <code class="sig-prename descclassname">tardis.montecarlo.montecarlo_numba.r_packet.</code><code class="sig-name descname">get_inverse_doppler_factor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">time_explosion</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/montecarlo/montecarlo_numba/r_packet.html#get_inverse_doppler_factor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.montecarlo.montecarlo_numba.r_packet.get_inverse_doppler_factor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate doppler factor for frame transformation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>r</strong><span class="classifier">float</span></dt><dd></dd>
+<dt><strong>mu</strong><span class="classifier">float</span></dt><dd></dd>
+<dt><strong>time_explosion</strong><span class="classifier">float</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -420,9 +462,9 @@ status.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>distance</strong><span class="classifier">float</span></dt><dd><p>distance to move to shell boundary</p>
 </dd>
-<dt><strong>delta_shell: int</strong></dt><dd><p>is +1 if moving outward or -1 if moving inward</p>
+<dt><strong>delta_shell</strong><span class="classifier">int</span></dt><dd><p>is +1 if moving outward or -1 if moving inward</p>
 </dd>
-<dt><strong>no_of_shells: int</strong></dt><dd><p>number of shells in TARDIS simulation</p>
+<dt><strong>no_of_shells</strong><span class="classifier">int</span></dt><dd><p>number of shells in TARDIS simulation</p>
 </dd>
 </dl>
 </dd>
@@ -436,11 +478,11 @@ status.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>r_packet: tardis.montecarlo.montecarlo_numba.r_packet.RPacket</strong></dt><dd><p>r_packet objects</p>
+<dt><strong>r_packet</strong><span class="classifier">tardis.montecarlo.montecarlo_numba.r_packet.RPacket</span></dt><dd><p>r_packet objects</p>
 </dd>
-<dt><strong>time_explosion: float</strong></dt><dd><p>time since explosion in s</p>
+<dt><strong>time_explosion</strong><span class="classifier">float</span></dt><dd><p>time since explosion in s</p>
 </dd>
-<dt><strong>numba_estimator: tardis.montecarlo.montecarlo_numba.numba_interface.NumbaEstimator</strong></dt><dd><p>Estimators object</p>
+<dt><strong>numba_estimator</strong><span class="classifier">tardis.montecarlo.montecarlo_numba.numba_interface.NumbaEstimator</span></dt><dd><p>Estimators object</p>
 </dd>
 <dt><strong>distance</strong><span class="classifier">float</span></dt><dd><p>distance in cm</p>
 </dd>
@@ -469,12 +511,16 @@ status.</p>
 <dt id="tardis.montecarlo.montecarlo_numba.r_packet.trace_packet">
 <code class="sig-prename descclassname">tardis.montecarlo.montecarlo_numba.r_packet.</code><code class="sig-name descname">trace_packet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">r_packet</span></em>, <em class="sig-param"><span class="n">numba_model</span></em>, <em class="sig-param"><span class="n">numba_plasma</span></em>, <em class="sig-param"><span class="n">estimators</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/montecarlo/montecarlo_numba/r_packet.html#trace_packet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.montecarlo.montecarlo_numba.r_packet.trace_packet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Traces the RPacket through the ejecta and stops when an interaction happens (heart of the calculation)</p>
-<p>r_packet: RPacket
-Parameters
-———-
-numba_model: tardis.montecarlo.montecarlo_numba.numba_interface.NumbaModel
-numba_plasma: tardis.montecarlo.montecarlo_numba.numba_interface.NumbaPlasma
-estimators: tardis.montecarlo.montecarlo_numba.numba_interface.Estimators</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>r_packet</strong><span class="classifier">tardis.montecarlo.montecarlo_numba.r_packet.RPacket</span></dt><dd></dd>
+<dt><strong>numba_model</strong><span class="classifier">tardis.montecarlo.montecarlo_numba.numba_interface.NumbaModel</span></dt><dd></dd>
+<dt><strong>numba_plasma</strong><span class="classifier">tardis.montecarlo.montecarlo_numba.numba_interface.NumbaPlasma</span></dt><dd></dd>
+<dt><strong>estimators</strong><span class="classifier">tardis.montecarlo.montecarlo_numba.numba_interface.Estimators</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -484,11 +530,11 @@ estimators: tardis.montecarlo.montecarlo_numba.numba_interface.Estimators</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>estimators: Estimators</strong></dt><dd></dd>
-<dt><strong>r_packet: RPacket</strong></dt><dd></dd>
-<dt><strong>cur_line_id: int</strong></dt><dd></dd>
-<dt><strong>distance_trace: float</strong></dt><dd></dd>
-<dt><strong>time_explosion: float</strong></dt><dd></dd>
+<dt><strong>estimators</strong><span class="classifier">tardis.montecarlo.montecarlo_numba.numba_interface.Estimators</span></dt><dd></dd>
+<dt><strong>r_packet</strong><span class="classifier">tardis.montecarlo.montecarlo_numba.r_packet.RPacket</span></dt><dd></dd>
+<dt><strong>cur_line_id</strong><span class="classifier">int</span></dt><dd></dd>
+<dt><strong>distance_trace</strong><span class="classifier">float</span></dt><dd></dd>
+<dt><strong>time_explosion</strong><span class="classifier">float</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -501,37 +547,29 @@ estimators: tardis.montecarlo.montecarlo_numba.numba_interface.Estimators</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="tardis.montecarlo.montecarlo_numba.single_packet_loop.html" class="btn btn-neutral float-right" title="tardis.montecarlo.montecarlo_numba.single_packet_loop module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="tardis.montecarlo.montecarlo_numba.numba_interface.html" class="btn btn-neutral float-left" title="tardis.montecarlo.montecarlo_numba.numba_interface module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="tardis.montecarlo.montecarlo_numba.single_packet_loop.html" class="btn btn-neutral float-right" title="tardis.montecarlo.montecarlo_numba.single_packet_loop module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tardis.montecarlo.montecarlo_numba.numba_interface.html" class="btn btn-neutral float-left" title="tardis.montecarlo.montecarlo_numba.numba_interface module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2013, TARDIS collaboration
+        &#169; Copyright 2013-2021, TARDIS collaboration.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

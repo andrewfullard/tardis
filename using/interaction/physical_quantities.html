@@ -1,0 +1,2249 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Accessing Physical Quantities &mdash; TARDIS v3.0.dev1</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/tardis_logo.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Spectral Synthesis with the Formal Integral Method" href="using_formal_integral.html" />
+    <link rel="prev" title="Example Usage of HDFWriter" href="hdf_writer.html" />
+    <link href="../../_static/tardis.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> TARDIS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0.dev1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Additional Interactivity</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="commandline.html">Running TARDIS in the commandline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callback_example.html">Using Custom Callbacks When Running TARDIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="converters/index.html">Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Custom_TARDIS_Model_Tutorial.html">How to run TARDIS with a custom ejecta model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_source.html">Running TARDIS with a custom packet source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="old_gui.html">Old Graphical User Interface (Outdated)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html">Accessing Physical Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="init_trad_bug.html">Initial_t_rad Bug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrator.html">API example for the formal integral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isotope_pd_subclass.html">Extending Pandas DataFrame Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_hdf.html">Storing simulations to HDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hdf_writer.html">Example Usage of HDFWriter</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Accessing Physical Quantities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Runing-in-interactive-Python-session">Runing in interactive Python session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Examples-of-finding-physical-quantities">Examples of finding physical quantities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="using_formal_integral.html">Spectral Synthesis with the Formal Integral Method</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TARDIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Additional Interactivity</a> &raquo;</li>
+        
+      <li>Accessing Physical Quantities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/using/interaction/physical_quantities.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<p>This notebook is available at
+<a class="reference external" href="https://github.com/tardis-sn/tardis/tree/master/docs/using/interaction/physical_quantities.ipynb">https://github.com/tardis-sn/tardis/tree/master/docs/using/interaction/physical_quantities.ipynb</a>
+—-</p>
+<div class="section" id="Accessing-Physical-Quantities">
+<h1>Accessing Physical Quantities<a class="headerlink" href="#Accessing-Physical-Quantities" title="Permalink to this headline">¶</a></h1>
+<p>In order to compute the synthetic spectrum, TARDIS must either be told or must calculate many physical properties of the model. To understand and test the code it can be important to look at these values. One easy way to do this is to run TARDIS in an interactive mode and then inspect the model properties.</p>
+<div class="section" id="Runing-in-interactive-Python-session">
+<h2>Runing in interactive Python session<a class="headerlink" href="#Runing-in-interactive-Python-session" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Download the atomic data</span>
+<span class="kn">from</span> <span class="nn">tardis.io.atom_data.util</span> <span class="kn">import</span> <span class="n">download_atom_data</span>
+<span class="n">download_atom_data</span><span class="p">(</span><span class="s1">&#39;kurucz_cd23_chianti_H_He&#39;</span><span class="p">)</span>
+
+<span class="c1"># Download the example configuration file</span>
+<span class="o">!</span>curl -O https://raw.githubusercontent.com/tardis-sn/tardis/master/docs/using/components/models/examples/tardis_example.yml
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[<span class="ansi-bold">tardis.io.atom_data.atom_web_download</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Downloading atomic data from https://media.githubusercontent.com/media/tardis-sn/tardis-refdata/master/atom_data/kurucz_cd23_chianti_H_He.h5 to /home/runner/Downloads/tardis-data/kurucz_cd23_chianti_H_He.h5 (<span class="ansi-bold">atom_web_download.py</span>:48)
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   980  100   980    0     0  11264      0 --:--:-- --:--:-- --:--:-- 11136
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tardis</span> <span class="kn">import</span> <span class="n">run_tardis</span>
+
+<span class="n">simulation</span> <span class="o">=</span> <span class="n">run_tardis</span><span class="p">(</span><span class="s1">&#39;tardis_example.yml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[<span class="ansi-bold">tardis.plasma.standard_plasmas</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Reading Atomic Data from kurucz_cd23_chianti_H_He.h5 (<span class="ansi-bold">standard_plasmas.py</span>:87)
+[<span class="ansi-bold">tardis.io.atom_data.util</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Atom Data kurucz_cd23_chianti_H_He.h5 not found in local path. Exists in TARDIS Data repo /home/runner/Downloads/tardis-data/kurucz_cd23_chianti_H_He.h5 (<span class="ansi-bold">util.py</span>:33)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3418: PerformanceWarning: indexing past lexsort depth may impact performance.
+  exec(code_obj, self.user_global_ns, self.user_ns)
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">tardis.io.atom_data.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Read Atom Data with UUID=6f7b09e887a311e7a06b246e96350010 and MD5=864f1753714343c41f99cb065710cace. (<span class="ansi-bold">base.py</span>:170)
+[<span class="ansi-bold">tardis.io.atom_data.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Non provided atomic data: synpp_refs, photoionization_data (<span class="ansi-bold">base.py</span>:176)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/numba/np/ufunc/parallel.py:355: NumbaWarning: <span class="ansi-bold">The TBB threading layer requires TBB version 2019.5 or later i.e., TBB_INTERFACE_VERSION &gt;= 11005. Found TBB_INTERFACE_VERSION = 9107. The TBB threading layer is disabled.</span>
+  warnings.warn(problem)
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 1/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/interaction.py&#34;, line 21:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def thomson_scatter(r_packet, time_explosion):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/interaction.py&#34;, line 54:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def line_scatter(r_packet, time_explosion, line_interaction_type, numba_plasma):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 342:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def trace_packet(r_packet, numba_model, numba_plasma, estimators):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 497:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def move_r_packet(r_packet, distance, time_explosion, numba_estimator):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 569:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def move_packet_across_shell_boundary(packet, delta_shell, no_of_shells):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/vpacket.py&#34;, line 193:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def trace_vpacket_volley(
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/interaction.py&#34;, line 88:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def line_emission(r_packet, emission_line_id, time_explosion, numba_plasma):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/macro_atom.py&#34;, line 22:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def macro_atom(r_packet, numba_plasma):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 130:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def calculate_distance_line(
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 206:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def calculate_distance_electron(electron_density, tau_event):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 233:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def get_doppler_factor(r, mu, time_explosion):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 254:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def get_inverse_doppler_factor(r, mu, time_explosion):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 284:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def get_random_mu():
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 289:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def update_line_estimators(
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 544:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def set_estimators(r_packet, distance, numba_estimator, comov_nu, comov_energy):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 557:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def set_estimators_full_relativity(
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 597:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def angle_aberration_CMF_to_LF(r_packet, time_explosion, mu):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 608:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def angle_aberration_LF_to_CMF(r_packet, time_explosion, mu):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 621:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def test_for_close_line(r_packet, line_id, nu_line, numba_plasma):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/vpacket.py&#34;, line 138:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def trace_vpacket(v_packet, numba_model, numba_plasma):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 181:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def calculate_distance_line_full_relativity(
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 244:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def get_doppler_factor_partial_relativity(mu, beta):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 249:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def get_doppler_factor_full_relativity(mu, beta):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 274:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def get_inverse_doppler_factor_partial_relativity(mu, beta):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 279:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def get_inverse_doppler_factor_full_relativity(mu, beta):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 326:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def calc_packet_energy_full_relativity(r_packet):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 332:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def calc_packet_energy(r_packet, distance_trace, time_explosion):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 569:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def move_packet_across_shell_boundary(packet, delta_shell, no_of_shells):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/vpacket.py&#34;, line 62:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def trace_vpacket_within_shell(v_packet, numba_model, numba_plasma):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 130:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def calculate_distance_line(
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 220:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def calculate_tau_electron(electron_density, distance):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 86:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def calculate_distance_boundary(r, mu, r_inner, r_outer):
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/base.py:177: NumbaPerformanceWarning: <span class="ansi-bold">
+The keyword argument &#39;parallel=True&#39; was specified but no transformation for parallel execution was possible.
+
+To find out why, try turning on parallel diagnostics, see http://numba.pydata.org/numba-doc/latest/user/parallel.html#diagnostics for help.
+</span><span class="ansi-bold">
+File &#34;../../../../../../../../usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/tardis_sn-3.0.dev1-py3.8-linux-x86_64.egg/tardis/montecarlo/montecarlo_numba/r_packet.py&#34;, line 181:</span>
+<span class="ansi-bold">@njit(**njit_dict)
+</span><span class="ansi-bold">def calculate_distance_line_full_relativity(
+</span><span class="ansi-bold">^</span>
+
+  loop = single_packet_loop(
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 7.94275e+42 erg / s Luminosity absorbed = 2.65805e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                     t_rad    next_t_rad         w    next_w
+        Shell
+        0      9926.501965  10134.733717  0.400392  0.508204
+        5      9852.611678  10222.890845  0.211205  0.197026
+        10     9779.813302  10144.463169  0.142695  0.117179
+        15     9708.082813   9873.477846  0.104556  0.086941
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 9933.952 K -- next t_inner 11472.055 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 2/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.40815e+43 erg / s Luminosity absorbed = 4.77001e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      10134.733717  11468.021903  0.508204  0.548671
+        5      10222.890845  11499.835340  0.197026  0.221374
+        10     10144.463169  11306.370330  0.117179  0.136291
+        15      9873.477846  10953.828130  0.086941  0.102617
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 11472.055 K -- next t_inner 9949.978 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 3/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 8.12624e+42 erg / s Luminosity absorbed = 2.54722e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      11468.021903  10497.008397  0.548671  0.442299
+        5      11499.835340  10799.075913  0.221374  0.164288
+        10     11306.370330  10623.433274  0.136291  0.101820
+        15     10953.828130  10226.187071  0.102617  0.077629
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 9949.978 K -- next t_inner 11360.097 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 4/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.36297e+43 erg / s Luminosity absorbed = 4.49721e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      10497.008397  11615.344313  0.442299  0.497714
+        5      10799.075913  11729.411389  0.164288  0.199205
+        10     10623.433274  11517.190317  0.101820  0.123849
+        15     10226.187071  11103.373456  0.077629  0.093930
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 11360.097 K -- next t_inner 10014.843 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 5/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 8.27895e+42 erg / s Luminosity absorbed = 2.66933e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      11615.344313  10549.514128  0.497714  0.443441
+        5      11729.411389  10919.073481  0.199205  0.162199
+        10     11517.190317  10697.303300  0.123849  0.101289
+        15     11103.373456  10379.863073  0.093930  0.075372
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 10014.843 K -- next t_inner 11328.210 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 6/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.34741e+43 erg / s Luminosity absorbed = 4.44727e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      10549.514128  11567.208184  0.443441  0.504178
+        5      10919.073481  11653.124121  0.162199  0.203042
+        10     10697.303300  11425.955010  0.101289  0.125249
+        15     10379.863073  11082.155938  0.075372  0.094028
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 11328.210 K -- next t_inner 10044.200 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 7/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 8.39001e+42 erg / s Luminosity absorbed = 2.69230e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      11567.208184  10569.747403  0.504178  0.442290
+        5      11653.124121  11099.194259  0.203042  0.153253
+        10     11425.955010  10809.397890  0.125249  0.097256
+        15     11082.155938  10454.841299  0.094028  0.073809
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 10044.200 K -- next t_inner 11285.966 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 8/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.33305e+43 erg / s Luminosity absorbed = 4.33011e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      10569.747403  11547.678162  0.442290  0.500345
+        5      11099.194259  11669.739508  0.153253  0.198338
+        10     10809.397890  11493.569590  0.097256  0.121915
+        15     10454.841299  11083.769586  0.073809  0.092834
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 11285.966 K -- next t_inner 10060.511 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 9/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 8.44283e+42 erg / s Luminosity absorbed = 2.70894e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      11547.678162  10635.099217  0.500345  0.439520
+        5      11669.739508  11035.731464  0.198338  0.158320
+        10     11493.569590  10717.471486  0.121915  0.101642
+        15     11083.769586  10404.049299  0.092834  0.075794
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 10060.511 K -- next t_inner 11268.877 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 10/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.32925e+43 erg / s Luminosity absorbed = 4.25943e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      10635.099217  11500.557678  0.439520  0.506895
+        5      11035.731464  11715.267406  0.158320  0.196690
+        10     10717.471486  11451.270656  0.101642  0.123243
+        15     10404.049299  11094.423438  0.075794  0.092243
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 11268.877 K -- next t_inner 10059.624 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 11/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 8.49497e+42 erg / s Luminosity absorbed = 2.65616e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      11500.557678  10570.856509  0.506895  0.445926
+        5      11715.267406  10957.336276  0.196690  0.162837
+        10     11451.270656  10916.410391  0.123243  0.096229
+        15     11094.423438  10441.053929  0.092243  0.075026
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 10059.624 K -- next t_inner 11233.248 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 12/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.30417e+43 erg / s Luminosity absorbed = 4.28820e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      10570.856509  11533.554419  0.445926  0.494814
+        5      10957.336276  11764.967895  0.162837  0.189464
+        10     10916.410391  11444.191999  0.096229  0.121150
+        15     10441.053929  11084.736033  0.075026  0.090825
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 11233.248 K -- next t_inner 10123.784 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 13/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 8.69244e+42 erg / s Luminosity absorbed = 2.74548e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      11533.554419  10680.784661  0.494814  0.439281
+        5      11764.967895  10887.379428  0.189464  0.170137
+        10     11444.191999  10825.792025  0.121150  0.100780
+        15     11084.736033  10402.120228  0.090825  0.077634
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 10123.784 K -- next t_inner 11175.750 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 14/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.28354e+43 erg / s Luminosity absorbed = 4.15095e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      10680.784661  11437.188130  0.439281  0.496749
+        5      10887.379428  11571.106856  0.170137  0.196714
+        10     10825.792025  11378.137918  0.100780  0.120954
+        15     10402.120228  10957.211814  0.077634  0.092896
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 11175.750 K -- next t_inner 10152.603 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 15/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 8.75331e+42 erg / s Luminosity absorbed = 2.81319e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      11437.188130  10637.774893  0.496749  0.452668
+        5      11571.106856  11002.647927  0.196714  0.166197
+        10     11378.137918  10832.042108  0.120954  0.101284
+        15     10957.211814  10350.602742  0.092896  0.079468
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 10152.603 K -- next t_inner 11168.529 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 16/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.27820e+43 erg / s Luminosity absorbed = 4.15606e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      10637.774893  11420.979987  0.452668  0.499488
+        5      11002.647927  11711.923994  0.166197  0.186857
+        10     10832.042108  11421.346118  0.101284  0.119700
+        15     10350.602742  11076.434180  0.079468  0.089402
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 11168.529 K -- next t_inner 10167.208 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 17/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 8.81647e+42 erg / s Luminosity absorbed = 2.81681e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      11420.979987  10691.849845  0.499488  0.447482
+        5      11711.923994  11042.045712  0.186857  0.164090
+        10     11421.346118  10980.886609  0.119700  0.097369
+        15     11076.434180  10456.662007  0.089402  0.077097
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 10167.208 K -- next t_inner 11144.459 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 18/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.26680e+43 erg / s Luminosity absorbed = 4.12238e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      10691.849845  11404.686443  0.447482  0.497739
+        5      11042.045712  11664.227712  0.164090  0.189070
+        10     10980.886609  11444.220669  0.097369  0.117732
+        15     10456.662007  11052.698087  0.077097  0.089141
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 11144.459 K -- next t_inner 10190.841 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 19/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 8.87081e+42 erg / s Luminosity absorbed = 2.87116e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Plasma stratification:
+                      t_rad    next_t_rad         w    next_w
+        Shell
+        0      11404.686443  10732.832306  0.497739  0.444436
+        5      11664.227712  11084.302807  0.189070  0.162591
+        10     11444.220669  10899.736539  0.117732  0.099122
+        15     11052.698087  10465.941519  0.089141  0.077378
+
+ (<span class="ansi-bold">base.py</span>:436)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  t_inner 10190.841 K -- next t_inner 11136.097 K (<span class="ansi-bold">base.py</span>:437)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 20/20 (<span class="ansi-bold">base.py</span>:324)
+[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
+  (si.m, si.Hz, lambda x: _si.c.value / x),
+ (<span class="ansi-bold">warnings.py</span>:109)
+Running post-merge numba montecarlo (with C close lines)!
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.26319e+43 erg / s Luminosity absorbed = 4.10706e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Simulation finished in 20 iterations and took 56.01 s (<span class="ansi-bold">base.py</span>:381)
+</pre></div></div>
+</div>
+<p>If all goes well, the simulation should run as usual. Afterwards, the information from the simulation will all exist in <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> and can be examined. Some examples for useful/interesting quantities are given below (but much more information is available: contact us via <a class="reference external" href="http://groups.google.com/forum/#!forum/tardis-sn-users">tardis-sn-users</a> if you need further help).</p>
+</div>
+<div class="section" id="Examples-of-finding-physical-quantities">
+<h2>Examples of finding physical quantities<a class="headerlink" href="#Examples-of-finding-physical-quantities" title="Permalink to this headline">¶</a></h2>
+<p>For example, two of our important quantities are the parameters of the radiation field model, <span class="math notranslate nohighlight">\(T_{\rm rad}\)</span> and <span class="math notranslate nohighlight">\(W\)</span>. These exist as <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+<p>Thus <code class="docutils literal notranslate"><span class="pre">simulation.plasma.t_rad</span></code> will give you a list of the <span class="math notranslate nohighlight">\(T_{\rm rad}\)</span>-values for the model zones in cgs units.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">plasma</span><span class="o">.</span><span class="n">t_rad</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([10732.83230561, 10927.53274501, 10999.03829599, 11120.94282301,
+       11127.28373734, 11084.30280677, 11069.78481231, 11066.32255939,
+       11003.06637625, 10955.36419212, 10899.73653924, 10741.06863236,
+       10710.32738348, 10597.49622655, 10549.38977366, 10465.94151931,
+       10371.37042058, 10256.852571  , 10163.04696683, 10074.6905332 ])
+</pre></div></div>
+</div>
+<p>Similarly, the <span class="math notranslate nohighlight">\(W\)</span>-values can be accessed using <code class="docutils literal notranslate"><span class="pre">simulation.plasma.w</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">plasma</span><span class="o">.</span><span class="n">w</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([0.44443637, 0.33019635, 0.2647521 , 0.21476367, 0.18411002,
+       0.16259082, 0.1438536 , 0.12756474, 0.11696926, 0.10710041,
+       0.09912188, 0.09650204, 0.08985915, 0.08622238, 0.0809236 ,
+       0.07737849, 0.07453158, 0.07263538, 0.07025313, 0.06792936])
+</pre></div></div>
+</div>
+<p>Several important quantities that were setup when the model was defined by the configuration file are located in the <code class="docutils literal notranslate"><span class="pre">model</span></code> section of the simulation. For example, the inner and outer velocity boundaries of the zones in the model is given by <code class="docutils literal notranslate"><span class="pre">simulation.model.v_inner.cgs</span></code> and <code class="docutils literal notranslate"><span class="pre">simulation.model.v_outer.cgs</span></code> respectively. These exist as Astropy <a class="reference external" href="http://astropy.readthedocs.org/en/v0.2.1/_generated/astropy.units.quantity.Quantity.html">Quantities</a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">v_inner</span><span class="o">.</span><span class="n">cgs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[1.1 \times 10^{9},~1.145 \times 10^{9},~1.19 \times 10^{9},~1.235 \times 10^{9},~1.28 \times 10^{9},~1.325 \times 10^{9},~1.37 \times 10^{9},~1.415 \times 10^{9},~1.46 \times 10^{9},~1.505 \times 10^{9},~1.55 \times 10^{9},~1.595 \times 10^{9},~1.64 \times 10^{9},~1.685 \times 10^{9},~1.73 \times 10^{9},~1.775 \times 10^{9},~1.82 \times 10^{9},~1.865 \times 10^{9},~1.91 \times 10^{9},~1.955 \times 10^{9}] \; \mathrm{\frac{cm}{s}}$</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">v_outer</span><span class="o">.</span><span class="n">cgs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[1.145 \times 10^{9},~1.19 \times 10^{9},~1.235 \times 10^{9},~1.28 \times 10^{9},~1.325 \times 10^{9},~1.37 \times 10^{9},~1.415 \times 10^{9},~1.46 \times 10^{9},~1.505 \times 10^{9},~1.55 \times 10^{9},~1.595 \times 10^{9},~1.64 \times 10^{9},~1.685 \times 10^{9},~1.73 \times 10^{9},~1.775 \times 10^{9},~1.82 \times 10^{9},~1.865 \times 10^{9},~1.91 \times 10^{9},~1.955 \times 10^{9},~2 \times 10^{9}] \; \mathrm{\frac{cm}{s}}$</div></div>
+</div>
+<p>The average density in the zones is given by <code class="docutils literal notranslate"><span class="pre">simulation.model.density.cgs</span></code>. These also exist as Astropy <a class="reference external" href="http://astropy.readthedocs.org/en/v0.2.1/_generated/astropy.units.quantity.Quantity.html">Quantities</a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">density</span><span class="o">.</span><span class="n">cgs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[7.5428036 \times 10^{-14},~5.728475 \times 10^{-14},~4.3960742 \times 10^{-14},~3.4062874 \times 10^{-14},~2.6631346 \times 10^{-14},~2.0995965 \times 10^{-14},~1.6682872 \times 10^{-14},~1.3353105 \times 10^{-14},~1.0761538 \times 10^{-14},~8.7290848 \times 10^{-15},~7.1236516 \times 10^{-15},~5.8469209 \times 10^{-15},~4.8250928 \times 10^{-15},~4.0023242 \times 10^{-15},~3.3360386 \times 10^{-15},~2.7935404 \times 10^{-15},~2.3495504 \times 10^{-15},~1.9843968 \times 10^{-15},~1.6826769 \times 10^{-15},~1.4322598 \times 10^{-15}] \; \mathrm{\frac{g}{cm^{3}}}$</div></div>
+</div>
+<p>Many other interesting quantities are stored in the <code class="docutils literal notranslate"><span class="pre">plasma</span></code>. For example the calculated ion populations and level populations is given by <code class="docutils literal notranslate"><span class="pre">simulation.plasma.ion_number_density</span></code> and <code class="docutils literal notranslate"><span class="pre">simulation.plasma.level_number_density</span></code> respectively.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">plasma</span><span class="o">.</span><span class="n">ion_number_density</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+      <th>15</th>
+      <th>16</th>
+      <th>17</th>
+      <th>18</th>
+      <th>19</th>
+    </tr>
+    <tr>
+      <th>atomic_number</th>
+      <th>ion_number</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">8</th>
+      <th>0</th>
+      <td>1.607364e+03</td>
+      <td>6.955666e+02</td>
+      <td>3.697626e+02</td>
+      <td>1.867644e+02</td>
+      <td>1.132564e+02</td>
+      <td>7.488695e+01</td>
+      <td>4.831000e+01</td>
+      <td>3.112914e+01</td>
+      <td>2.215686e+01</td>
+      <td>1.563263e+01</td>
+      <td>1.130101e+01</td>
+      <td>9.648039e+00</td>
+      <td>6.887993e+00</td>
+      <td>5.637489e+00</td>
+      <td>4.223516e+00</td>
+      <td>3.379017e+00</td>
+      <td>2.781960e+00</td>
+      <td>2.392747e+00</td>
+      <td>2.011484e+00</td>
+      <td>1.692696e+00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.393589e+08</td>
+      <td>4.095389e+08</td>
+      <td>3.142134e+08</td>
+      <td>2.433382e+08</td>
+      <td>1.901859e+08</td>
+      <td>1.499213e+08</td>
+      <td>1.190876e+08</td>
+      <td>9.527758e+07</td>
+      <td>7.678680e+07</td>
+      <td>6.227860e+07</td>
+      <td>5.082370e+07</td>
+      <td>4.174587e+07</td>
+      <td>3.444558e+07</td>
+      <td>2.858248e+07</td>
+      <td>2.382421e+07</td>
+      <td>1.995368e+07</td>
+      <td>1.678598e+07</td>
+      <td>1.418074e+07</td>
+      <td>1.202638e+07</td>
+      <td>1.023775e+07</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6.766343e+04</td>
+      <td>1.357916e+05</td>
+      <td>1.741244e+05</td>
+      <td>2.643214e+05</td>
+      <td>2.696388e+05</td>
+      <td>2.325511e+05</td>
+      <td>2.209178e+05</td>
+      <td>2.179335e+05</td>
+      <td>1.749693e+05</td>
+      <td>1.479676e+05</td>
+      <td>1.215171e+05</td>
+      <td>6.873230e+04</td>
+      <td>6.136120e+04</td>
+      <td>4.038327e+04</td>
+      <td>3.367241e+04</td>
+      <td>2.449254e+04</td>
+      <td>1.697280e+04</td>
+      <td>1.079050e+04</td>
+      <td>7.388441e+03</td>
+      <td>5.138335e+03</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.271863e-09</td>
+      <td>9.889145e-09</td>
+      <td>2.430754e-08</td>
+      <td>9.100280e-08</td>
+      <td>1.226073e-07</td>
+      <td>1.067628e-07</td>
+      <td>1.180315e-07</td>
+      <td>1.426367e-07</td>
+      <td>1.012080e-07</td>
+      <td>8.146442e-08</td>
+      <td>6.047337e-08</td>
+      <td>1.723716e-08</td>
+      <td>1.565596e-08</td>
+      <td>6.499727e-09</td>
+      <td>4.910059e-09</td>
+      <td>2.606269e-09</td>
+      <td>1.217363e-09</td>
+      <td>4.545916e-10</td>
+      <td>2.042952e-10</td>
+      <td>9.516599e-11</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">20</th>
+      <th>16</th>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+    </tr>
+  </tbody>
+</table>
+<p>94 rows × 20 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">plasma</span><span class="o">.</span><span class="n">level_number_density</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+      <th>15</th>
+      <th>16</th>
+      <th>17</th>
+      <th>18</th>
+      <th>19</th>
+    </tr>
+    <tr>
+      <th>atomic_number</th>
+      <th>ion_number</th>
+      <th>level_number</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">8</th>
+      <th rowspan="5" valign="top">0</th>
+      <th>0</th>
+      <td>844.659308</td>
+      <td>364.525640</td>
+      <td>193.588521</td>
+      <td>97.614174</td>
+      <td>59.189328</td>
+      <td>39.160367</td>
+      <td>25.267687</td>
+      <td>16.282331</td>
+      <td>11.599529</td>
+      <td>8.189415</td>
+      <td>5.924816</td>
+      <td>5.069400</td>
+      <td>3.620730</td>
+      <td>2.968052</td>
+      <td>2.225106</td>
+      <td>1.782261</td>
+      <td>1.469276</td>
+      <td>1.265729</td>
+      <td>1.065434</td>
+      <td>0.897680</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>496.156654</td>
+      <td>214.204948</td>
+      <td>113.773168</td>
+      <td>57.381473</td>
+      <td>34.794234</td>
+      <td>23.018455</td>
+      <td>14.851941</td>
+      <td>9.570431</td>
+      <td>6.817167</td>
+      <td>4.812572</td>
+      <td>3.481394</td>
+      <td>2.977836</td>
+      <td>2.126738</td>
+      <td>1.742975</td>
+      <td>1.306555</td>
+      <td>1.046342</td>
+      <td>0.862421</td>
+      <td>0.742763</td>
+      <td>0.625097</td>
+      <td>0.526571</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>163.869162</td>
+      <td>70.758593</td>
+      <td>37.585046</td>
+      <td>18.957878</td>
+      <td>11.495490</td>
+      <td>7.604689</td>
+      <td>4.906631</td>
+      <td>3.161771</td>
+      <td>2.252063</td>
+      <td>1.589780</td>
+      <td>1.149987</td>
+      <td>0.983518</td>
+      <td>0.702399</td>
+      <td>0.575597</td>
+      <td>0.431456</td>
+      <td>0.345502</td>
+      <td>0.284746</td>
+      <td>0.245213</td>
+      <td>0.206348</td>
+      <td>0.173810</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100.663783</td>
+      <td>45.121096</td>
+      <td>24.290133</td>
+      <td>12.529814</td>
+      <td>7.606471</td>
+      <td>4.992652</td>
+      <td>3.212750</td>
+      <td>2.068939</td>
+      <td>1.456534</td>
+      <td>1.019083</td>
+      <td>0.729479</td>
+      <td>0.605141</td>
+      <td>0.429583</td>
+      <td>0.344243</td>
+      <td>0.255551</td>
+      <td>0.201189</td>
+      <td>0.162592</td>
+      <td>0.136666</td>
+      <td>0.112700</td>
+      <td>0.093103</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.821155</td>
+      <td>0.852014</td>
+      <td>0.465758</td>
+      <td>0.246512</td>
+      <td>0.149848</td>
+      <td>0.097475</td>
+      <td>0.062534</td>
+      <td>0.040241</td>
+      <td>0.027953</td>
+      <td>0.019359</td>
+      <td>0.013692</td>
+      <td>0.010968</td>
+      <td>0.007733</td>
+      <td>0.006040</td>
+      <td>0.004434</td>
+      <td>0.003423</td>
+      <td>0.002705</td>
+      <td>0.002212</td>
+      <td>0.001782</td>
+      <td>0.001440</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">20</th>
+      <th>16</th>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>4435 rows × 20 columns</p>
+</div></div>
+</div>
+<p>These are stored as Pandas <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>. An index can be supplied to obtain the population in a particular zone. E.g., for the ion populations of the innermost zone (index = 0), we will use <code class="docutils literal notranslate"><span class="pre">simulation.plasma.ion_number_density[0]</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">plasma</span><span class="o">.</span><span class="n">ion_number_density</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+atomic_number  ion_number
+8              0             1.607364e+03
+               1             5.393589e+08
+               2             6.766343e+04
+               3             1.271863e-09
+               4             0.000000e+00
+                                 ...
+20             16            0.000000e+00
+               17            0.000000e+00
+               18            0.000000e+00
+               19            0.000000e+00
+               20            0.000000e+00
+Name: 0, Length: 94, dtype: float64
+</pre></div></div>
+</div>
+<p>Ion populations for a particular ionization stage of a particular element can be accessed by specifying an appropriate tuple (𝑍,𝐶), which identifies the element (via atomic number 𝑍 ) and the charge (via the ion charge 𝐶 ). Thus, <code class="docutils literal notranslate"><span class="pre">simulation.plasma.ion_number_density.loc[14,1]</span></code> will identify the ion popuations for Si II (𝑍=14,𝐶=1) in all the zones.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">plasma</span><span class="o">.</span><span class="n">ion_number_density</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0     126445.762092
+1      52002.387028
+2      27129.309356
+3      13270.236419
+4       8024.028610
+5       5358.239300
+6       3464.525435
+7       2230.307830
+8       1612.345260
+9       1150.642694
+10       843.428718
+11       752.357078
+12       541.139209
+13       457.112241
+14       346.936815
+15       284.223478
+16       240.504623
+17       213.988002
+18       185.020161
+19       159.939903
+Name: (14, 1), dtype: float64
+</pre></div></div>
+</div>
+<p>The above examples can be combined to obtain e.g. the Si II population in the innermost zone can be obtained by <code class="docutils literal notranslate"><span class="pre">simulation.plasma.ion_number_density[0].loc[14,1]</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">plasma</span><span class="o">.</span><span class="n">ion_number_density</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+126445.76209244749
+</pre></div></div>
+</div>
+<p>The level populations are stored (and can be accessed) in a similar way - a third label can be used to pick out a particular atomic level. E.g., to pull out the population of the ground state (index 0) of Si II we can use <code class="docutils literal notranslate"><span class="pre">simulation.plasma.level_number_density.loc[14,1,0]</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">simulation</span><span class="o">.</span><span class="n">plasma</span><span class="o">.</span><span class="n">level_number_density</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0     42908.006108
+1     17623.066745
+2      9189.248595
+3      4490.999758
+4      2715.419849
+5      1813.847220
+6      1172.917285
+7       755.090771
+8       546.118636
+9       389.865324
+10      285.884176
+11      255.290195
+12      183.657328
+13      155.254762
+14      117.871302
+15       96.616233
+16       81.803688
+17       72.836189
+18       63.012253
+19       54.499568
+Name: (14, 1, 0), dtype: float64
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Notes">
+<h2>Notes<a class="headerlink" href="#Notes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>If you prefer to work in SI units, all the Astropy Quantities may instead by accessed with “xxx.si”.</p></li>
+<li><p>Information that is not stored as Astropy Quantities (e.g. the ion and level populations used in the example above) are usually stored in cgs units (i.e. cm−3 for the populations).</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="using_formal_integral.html" class="btn btn-neutral float-right" title="Spectral Synthesis with the Formal Integral Method" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hdf_writer.html" class="btn btn-neutral float-left" title="Example Usage of HDFWriter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2013-2021, TARDIS collaboration.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

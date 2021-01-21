@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>tardis.montecarlo.montecarlo_numba.r_packet &mdash; TARDIS v3.0.dev1</title>
   
@@ -19,7 +19,10 @@
   
     <link rel="shortcut icon" href="../../../../_static/tardis_logo.ico"/>
   
+
   
+  
+
   
 
   
@@ -32,11 +35,10 @@
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -58,7 +60,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> TARDIS
+            <a href="../../../../index.html" class="icon icon-home"> TARDIS
           
 
           
@@ -99,14 +101,15 @@
 </ul>
 <p class="caption"><span class="caption-text">Using TARDIS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../running/components.html">Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../running/tardis_widgets/index.html">Graphical User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../running/interaction/index.html">Additional Interactivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using/components/index.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using/gui/index.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../physics/old_physics.html">Old Physics Section (Outdated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -157,6 +160,8 @@
         <div class="rst-content">
         
           
+
+
 
 
 
@@ -285,16 +290,15 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate distance to shell boundary in cm.</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    ------------</span>
-
-<span class="sd">    r: float</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r : float</span>
 <span class="sd">       radial coordinate of the RPacket</span>
-<span class="sd">    mu: float</span>
+<span class="sd">    mu : float</span>
 <span class="sd">       cosine of the direction of movement</span>
-<span class="sd">    r_inner: float</span>
+<span class="sd">    r_inner : float</span>
 <span class="sd">       inner radius of current shell</span>
-<span class="sd">    r_outer: float</span>
+<span class="sd">    r_outer : float</span>
 <span class="sd">       outer radius of current shell</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -331,21 +335,21 @@
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate distance until RPacket is in resonance with the next line</span>
+<span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    r_packet: RPacket</span>
-<span class="sd">    comov_nu: float</span>
+<span class="sd">    r_packet : tardis.montecarlo.montecarlo_numba.r_packet.RPacket</span>
+<span class="sd">    comov_nu : float</span>
 <span class="sd">        comoving frequency at the CURRENT position of the RPacket</span>
-<span class="sd">    nu_line: float</span>
-<span class="sd">        line to check the distance to</span>
-<span class="sd">    time_explosion: float</span>
-<span class="sd">        time since explosion in seconds</span>
-<span class="sd">    is_last_line: bool</span>
+<span class="sd">    is_last_line : bool</span>
 <span class="sd">        return MISS_DISTANCE if at the end of the line list</span>
-
+<span class="sd">    nu_line : float</span>
+<span class="sd">        line to check the distance to</span>
+<span class="sd">    time_explosion : float</span>
+<span class="sd">        time since explosion in seconds</span>
+<span class="sd">    </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">nu</span> <span class="o">=</span> <span class="n">r_packet</span><span class="o">.</span><span class="n">nu</span>
@@ -406,8 +410,10 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate distance to Thomson Scattering</span>
 
-<span class="sd">    electron_density: float</span>
-<span class="sd">    tau_event: float</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    electron_density : float</span>
+<span class="sd">    tau_event : float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># add full_relativity here</span>
     <span class="k">return</span> <span class="n">tau_event</span> <span class="o">/</span> <span class="p">(</span><span class="n">electron_density</span> <span class="o">*</span> <span class="n">numba_config</span><span class="o">.</span><span class="n">SIGMA_THOMSON</span><span class="p">)</span></div>
@@ -418,11 +424,10 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate tau for Thomson scattering</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    ------------</span>
-
-<span class="sd">    electron_density: float</span>
-<span class="sd">    distance: float</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    electron_density : float</span>
+<span class="sd">    distance : float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">electron_density</span> <span class="o">*</span> <span class="n">numba_config</span><span class="o">.</span><span class="n">SIGMA_THOMSON</span> <span class="o">*</span> <span class="n">distance</span></div>
 
@@ -453,12 +458,11 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate doppler factor for frame transformation</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    ------------</span>
-
-<span class="sd">    r: float</span>
-<span class="sd">    mu: float</span>
-<span class="sd">    time_explosion: float</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r : float</span>
+<span class="sd">    mu : float</span>
+<span class="sd">    time_explosion : float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">inv_c</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">C_SPEED_OF_LIGHT</span>
     <span class="n">inv_t</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">time_explosion</span>
@@ -493,12 +497,11 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    estimators: Estimators</span>
-<span class="sd">    r_packet: RPacket</span>
-<span class="sd">    cur_line_id: int</span>
-<span class="sd">    distance_trace: float</span>
-<span class="sd">    time_explosion: float</span>
-
+<span class="sd">    estimators : tardis.montecarlo.montecarlo_numba.numba_interface.Estimators</span>
+<span class="sd">    r_packet : tardis.montecarlo.montecarlo_numba.r_packet.RPacket</span>
+<span class="sd">    cur_line_id : int</span>
+<span class="sd">    distance_trace : float</span>
+<span class="sd">    time_explosion : float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="sd">&quot;&quot;&quot; Actual calculation - simplified below</span>
@@ -543,16 +546,15 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Traces the RPacket through the ejecta and stops when an interaction happens (heart of the calculation)</span>
 
-<span class="sd">    r_packet: RPacket</span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    numba_model: tardis.montecarlo.montecarlo_numba.numba_interface.NumbaModel</span>
-<span class="sd">    numba_plasma: tardis.montecarlo.montecarlo_numba.numba_interface.NumbaPlasma</span>
-<span class="sd">    estimators: tardis.montecarlo.montecarlo_numba.numba_interface.Estimators</span>
+<span class="sd">    r_packet : tardis.montecarlo.montecarlo_numba.r_packet.RPacket</span>
+<span class="sd">    numba_model : tardis.montecarlo.montecarlo_numba.numba_interface.NumbaModel</span>
+<span class="sd">    numba_plasma : tardis.montecarlo.montecarlo_numba.numba_interface.NumbaPlasma</span>
+<span class="sd">    estimators : tardis.montecarlo.montecarlo_numba.numba_interface.Estimators</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">r_inner</span> <span class="o">=</span> <span class="n">numba_model</span><span class="o">.</span><span class="n">r_inner</span><span class="p">[</span><span class="n">r_packet</span><span class="o">.</span><span class="n">current_shell_id</span><span class="p">]</span>
@@ -691,8 +693,6 @@
 
     <span class="c1"># r_packet.next_line_id = cur_line_id</span>
 
-    <span class="n">r_packet</span><span class="o">.</span><span class="n">last_interaction_type</span> <span class="o">=</span> <span class="n">interaction_type</span>
-
     <span class="k">return</span> <span class="n">distance</span><span class="p">,</span> <span class="n">interaction_type</span><span class="p">,</span> <span class="n">delta_shell</span></div>
 
 
@@ -703,12 +703,11 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
-<span class="sd">    r_packet: tardis.montecarlo.montecarlo_numba.r_packet.RPacket</span>
+<span class="sd">    r_packet : tardis.montecarlo.montecarlo_numba.r_packet.RPacket</span>
 <span class="sd">        r_packet objects</span>
-<span class="sd">    time_explosion: float</span>
+<span class="sd">    time_explosion : float</span>
 <span class="sd">        time since explosion in s</span>
-<span class="sd">    numba_estimator: tardis.montecarlo.montecarlo_numba.numba_interface.NumbaEstimator</span>
+<span class="sd">    numba_estimator : tardis.montecarlo.montecarlo_numba.numba_interface.NumbaEstimator</span>
 <span class="sd">        Estimators object</span>
 <span class="sd">    distance : float</span>
 <span class="sd">        distance in cm</span>
@@ -781,10 +780,10 @@
 <span class="sd">    distance : float</span>
 <span class="sd">        distance to move to shell boundary</span>
 
-<span class="sd">    delta_shell: int</span>
+<span class="sd">    delta_shell : int</span>
 <span class="sd">        is +1 if moving outward or -1 if moving inward</span>
 
-<span class="sd">    no_of_shells: int</span>
+<span class="sd">    no_of_shells : int</span>
 <span class="sd">        number of shells in TARDIS simulation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">next_shell_id</span> <span class="o">=</span> <span class="n">packet</span><span class="o">.</span><span class="n">current_shell_id</span> <span class="o">+</span> <span class="n">delta_shell</span>
@@ -832,28 +831,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2013, TARDIS collaboration
+        &#169; Copyright 2013-2021, TARDIS collaboration.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
