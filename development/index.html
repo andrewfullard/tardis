@@ -110,7 +110,7 @@
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -128,14 +128,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Workflow</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="issues.html">Reporting Issues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="debug_numba.html">Debugging numba_montecarlo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="git_workflow.html">General Workflow to add a new feature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="git_workflow.html#preparation-and-working-with-git">Preparation and Working with Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_refdata.html">Procedure to update the reference data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="continuous_integration.html">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation_guidelines.html">Documentation Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_tests.html">Running tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_quality.html">Code Quality Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation_preview.html">Documentation Preview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="matterbridge.html">Matterbridge Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tardis-core-team-instructions">TARDIS core team Instructions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="continuous_integration.html">Continuous Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_refdata.html">Procedure to update the reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="matterbridge.html">Matterbridge Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_numba.html">Debugging numba_montecarlo</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
@@ -248,12 +254,6 @@ to the Astropy team for designing it.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="issues.html">Reporting Issues</a></li>
-<li class="toctree-l1"><a class="reference internal" href="debug_numba.html">Debugging numba_montecarlo</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Git and coding workflow</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="git_workflow.html">General Workflow to add a new feature</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git_workflow.html#preparation-and-working-with-git">Preparation and Working with Git</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="git_workflow.html#creating-a-fork">Creating a fork</a></li>
@@ -271,15 +271,39 @@ to the Astropy team for designing it.</p>
 <li class="toctree-l2"><a class="reference internal" href="git_workflow.html#reviewing-and-helping-others-with-pull-requests">Reviewing and helping others with Pull Requests</a></li>
 </ul>
 </li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">TARDIS core team instructions</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="update_refdata.html">Procedure to update the reference data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="update_refdata.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_guidelines.html">Documentation Guidelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation_guidelines.html#documenting-the-code-you-write">Documenting the code you write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation_guidelines.html#building-documentation-locally">Building documentation locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation_guidelines.html#sharing-the-built-documentation-in-your-pr">Sharing the built documentation in your PR</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="running_tests.html">Running tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_tests.html#running-the-unit-tests">Running the Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_tests.html#generating-plasma-reference">Generating Plasma Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_tests.html#running-the-integration-tests">Running the Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_tests.html#setting-up-the-dokuwiki-report">Setting up the DokuWiki report</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code_quality.html">Code Quality Guidelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code_quality.html#code-style-conventions">Code Style Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_quality.html#docstrings">Docstrings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_quality.html#edge-cases-and-exception-handling">Edge Cases and Exception Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_preview.html">Documentation Preview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation_preview.html#procedure">Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation_preview.html#limitations">Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
+</ul>
+</div>
+<div class="section" id="tardis-core-team-instructions">
+<h2>TARDIS core team Instructions<a class="headerlink" href="#tardis-core-team-instructions" title="Permalink to this headline">¶</a></h2>
+<p>Following are <strong>advanced</strong> development guidelines that are mainly intended for
+the core team (active maintainers) of TARDIS.</p>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="continuous_integration.html">Continuous Integration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="continuous_integration.html#azure-repos">Azure Repos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="continuous_integration.html#azure-pipelines-github-actions">Azure Pipelines &amp; GitHub Actions</a></li>
@@ -290,9 +314,8 @@ to the Astropy team for designing it.</p>
 <li class="toctree-l2"><a class="reference internal" href="continuous_integration.html#tardis-pipelines">TARDIS Pipelines</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="documentation_preview.html">Documentation Preview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="documentation_preview.html#procedure">Procedure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation_preview.html#limitations">Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_refdata.html">Procedure to update the reference data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="update_refdata.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="matterbridge.html">Matterbridge Server</a><ul>
@@ -303,8 +326,9 @@ to the Astropy team for designing it.</p>
 <li class="toctree-l2"><a class="reference internal" href="matterbridge.html#cron-job">Cron job</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug_numba.html">Debugging numba_montecarlo</a></li>
 </ul>
+</div>
 </div>
 </div>
 

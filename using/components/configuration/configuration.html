@@ -123,7 +123,7 @@
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -767,9 +767,9 @@ relative abundance fraction. If it does not add up to 1., TARDIS will warn — b
 boundary. <code class="docutils literal notranslate"><span class="pre">initial_t_rad</span></code> is the initial radiation temperature (will be updated for most modes of TARDIS - see convergence section). For debugging purposes and to compare to
 <span class="xref std std-term">synapps</span> calculations one can disable the electron scattering. TARDIS will issue a warning that this is not physical.
 There are currently two <code class="docutils literal notranslate"><span class="pre">plasma_type</span></code> options available: <code class="docutils literal notranslate"><span class="pre">nebular</span></code> and <code class="docutils literal notranslate"><span class="pre">lte</span></code>, which tell TARDIS how to run the
-ionization equilibrium and level population calculations (see <a class="reference internal" href="../../../physics/plasma/old_plasma.html#plasmas"><span class="std std-ref">Plasma (Outdated)</span></a> for more information).
-The radiative rates describe how to calculate the <span class="math notranslate nohighlight">\(J_\textrm{blue}\)</span> needed for the <span class="xref std std-ref">nlte</span> calculations and
-<span class="xref std std-ref">macroatom</span> calculations. There are three options for <code class="docutils literal notranslate"><span class="pre">radiative_rates_type</span></code>:</p>
+ionization equilibrium and level population calculations (see <a class="reference internal" href="../../../physics/plasma/index.html#plasma"><span class="std std-ref">Plasma</span></a> for more information).
+The radiative rates describe how to calculate the <span class="math notranslate nohighlight">\(J_\textrm{blue}\)</span> needed for the <a class="reference internal" href="../../../physics/plasma/nlte.html#nlte"><span class="std std-ref">NLTE treatment</span></a> calculations and
+<a class="reference internal" href="../../../physics/plasma/macroatom.html#macroatom"><span class="std std-ref">Macro Atom</span></a> calculations. There are three options for <code class="docutils literal notranslate"><span class="pre">radiative_rates_type</span></code>:</p>
 <p>1) <code class="docutils literal notranslate"><span class="pre">lte</span></code>, in which
 <span class="math notranslate nohighlight">\(J_\textrm{blue} = \textrm{Blackbody}(T_\textrm{rad})\)</span></p>
 <p>2) <code class="docutils literal notranslate"><span class="pre">nebular</span></code> in which
@@ -777,7 +777,7 @@ The radiative rates describe how to calculate the <span class="math notranslate 
 <p>3) <code class="docutils literal notranslate"><span class="pre">detailed</span></code> in which the <span class="math notranslate nohighlight">\(J_\textrm{blue}\)</span>
 are calculated using an estimator (this is described in ??????).</p>
 <p>TARDIS currently supports three different kinds of line interaction: <code class="docutils literal notranslate"><span class="pre">scatter</span></code> — a resonance scattering implementation,
-<code class="docutils literal notranslate"><span class="pre">macroatom</span></code> — the most complex form of line interaction described in <span class="xref std std-ref">macroatom</span> and <code class="docutils literal notranslate"><span class="pre">downbranch</span></code> a simplified
+<code class="docutils literal notranslate"><span class="pre">macroatom</span></code> — the most complex form of line interaction described in <a class="reference internal" href="../../../physics/plasma/macroatom.html#macroatom"><span class="std std-ref">Macro Atom</span></a> and <code class="docutils literal notranslate"><span class="pre">downbranch</span></code> a simplified
 version of <code class="docutils literal notranslate"><span class="pre">macroatom</span></code> in which only downward transitions are allowed.</p>
 <p>Finally, <code class="docutils literal notranslate"><span class="pre">w_epsilon</span></code> describes the dilution factor to use to calculate <span class="math notranslate nohighlight">\(J_\textrm{blue}\)</span> that are 0, which
 causes problemsl with the code (so <span class="math notranslate nohighlight">\(J_\textrm{blue}\)</span> are set to a very small number).</p>

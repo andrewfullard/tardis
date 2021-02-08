@@ -1,7 +1,0 @@
-tardis.widgets.kromer\_plot module
-==================================
-
-.. automodule:: tardis.widgets.kromer_plot
-   :members:
-   :undoc-members:
-   :show-inheritance:

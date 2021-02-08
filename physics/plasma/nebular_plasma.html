@@ -108,9 +108,27 @@
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../plasma.html">Plasma</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Plasma</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#properties-inputs-and-outputs">Properties, Inputs and Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#the-plasma-graph">The Plasma Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#updating-the-plasma">Updating the Plasma</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#plasma-calculations">Plasma Calculations</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="lte_plasma.html">LTE Plasma</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Nebular Plasma</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#calculating-zeta">Calculating Zeta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#calculating-delta">Calculating Delta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-calculations">Example Calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="macroatom.html">Macro Atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlte.html">NLTE treatment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helium_nlte.html">Helium NLTE</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -185,7 +203,7 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../plasma.html">Plasma</a> &raquo;</li>
+          <li><a href="index.html">Plasma</a> &raquo;</li>
         
       <li>Nebular Plasma</li>
     
@@ -231,7 +249,7 @@
 }
 </style>
 <div class="section" id="nebular-plasma">
-<h1>Nebular Plasma<a class="headerlink" href="#nebular-plasma" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Nebular Plasma<a class="headerlink" href="#nebular-plasma" title="Permalink to this headline">¶</a></h1>
 <p>The <cite>NebularPlasma</cite> class is a more complex description of the Plasma state than the <cite>LTEPlasma</cite>. It takes a dilution factor
 (W) into account, which deals with the dilution of the radiation field due to geometric, line-blocking and other effects.</p>
 <p>The calculations follow the same steps as <cite>LTEPlasma</cite>; however, the calculations are different and often take into account
@@ -252,7 +270,7 @@ two factors: <span class="math notranslate nohighlight">\(\zeta\)</span> and <sp
 </div>
 <div class="section" id="calculating-delta">
 <h2>Calculating Delta<a class="headerlink" href="#calculating-delta" title="Permalink to this headline">¶</a></h2>
-<p><span class="math notranslate nohighlight">\(\delta\)</span> is a radiation field correction factors which is calculated according to Mazzali &amp; Lucy 1993 (<span class="bibtex" id="id1">[1993A&amp;A…279..447M]</span>; henceforth ML93)</p>
+<p><span class="math notranslate nohighlight">\(\delta\)</span> is a radiation field correction factors which is calculated according to Mazzali &amp; Lucy 1993 (<span class="bibtex" id="id2">[1993A&amp;A…279..447M]</span>; henceforth ML93)</p>
 <p>In ML93, the radiation field correction factor is denoted as <span class="math notranslate nohighlight">\(\delta\)</span> and is calculated in Formula 15 &amp; 20.</p>
 <p>The radiation correction factor changes according to a ionization energy threshold <span class="math notranslate nohighlight">\(\chi_\textrm{T}\)</span>
 and the species ionization threshold (from the ground state) <span class="math notranslate nohighlight">\(\chi_0\)</span>.</p>
@@ -267,7 +285,7 @@ and the species ionization threshold (from the ground state) <span class="math n
 \frac{\chi_0}{k T_\textrm{e}}),\]</div>
 <p>where <span class="math notranslate nohighlight">\(T_\textrm{R}\)</span> is the radiation field temperature, <span class="math notranslate nohighlight">\(T_\textrm{e}\)</span> is the electron temperature and W is the
 dilution factor.</p>
-<p>Now, we can calculate the ionization balance using equation 14 in <span class="bibtex" id="id2">[1993A&amp;A…279..447M]</span>:</p>
+<p>Now, we can calculate the ionization balance using equation 14 in <span class="bibtex" id="id3">[1993A&amp;A…279..447M]</span>:</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\begin{split}\Phi_{i,j} &amp;= \frac{N_{i, j+1} n_e}{N_{i, j}} \\\end{split}\\\begin{split}\Phi_{i, j} &amp;= W \times[\delta \zeta + W ( 1 - \zeta)] \left(\frac{T_\textrm{e}}{T_\textrm{R}}\right)^{1/2}
 \Phi_{i, j}(\textrm{LTE}) \\\end{split}\end{aligned}\end{align} \]</div>

@@ -127,7 +127,7 @@
 <li class="toctree-l2"><a class="reference internal" href="randomsampling.html">Random Sampling Basics</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -248,7 +248,7 @@
 }
 </style>
 <div class="section" id="packet-propagation">
-<h1>Packet Propagation<a class="headerlink" href="#packet-propagation" title="Permalink to this headline">¶</a></h1>
+<span id="propagation"></span><h1>Packet Propagation<a class="headerlink" href="#packet-propagation" title="Permalink to this headline">¶</a></h1>
 <p>The bulk of a Monte Carlo Radiative Transfer calculation is spent on
 determining the propagation history of the different packets. After a packet is
 initialised, it is launched and may then perform interactions with the
@@ -369,7 +369,7 @@ width given by the line profile function (in the case at hand, this width is
 mainly given by thermal broadening) would render the determination of the line
 optical depth accumulated along the photon/packet trajectory a complicated
 task. Fortunately, the typical conditions in supernova ejecta warrant the use
-of the so-called Sobolev approximation (see <span class="xref std std-doc">Sobolev Approximation</span>). Roughly speaking, this approximation replaces the line
+of the so-called Sobolev approximation (see <a class="reference internal" href="../old_physics/old_plasma.html#tau-sobolev"><span class="std std-ref">Sobolev Approximation</span></a>). Roughly speaking, this approximation replaces the line
 profile function with a <span class="math notranslate nohighlight">\(\delta\)</span> distribution around the natural line
 frequency. Thus, photons/packets may only interact with a line transition if
 their co-moving frame frequency exactly equals the natural frequency of the

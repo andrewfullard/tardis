@@ -45,7 +45,7 @@
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="current_public_table.html" />
+    <link rel="next" title="Current Public Atomic Data Table" href="current_public_table.html" />
     <link rel="prev" title="Atomic Data" href="atomic_data.html" />
     <link href="../../../_static/tardis.css" rel="stylesheet" type="text/css">
 
@@ -113,6 +113,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#indexing-fun">Indexing fun</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="current_public_table.html">Current Public Atomic Data Table</a></li>
 </ul>
 </li>
 </ul>
@@ -123,7 +124,7 @@
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -251,7 +252,7 @@
 relatively simple atomic dataset that only contains silicon lines and levels. TARDIS also has a full atomic dataset which contains
 the complete Kurucz dataset (<a class="reference external" href="http://kurucz.harvard.edu/LINELISTS/GFALL/">http://kurucz.harvard.edu/LINELISTS/GFALL/</a>). This full dataset also contains recombination
 coefficients from the ground state (<span class="math notranslate nohighlight">\(\zeta-\textrm{factor}\)</span> used in <a class="reference internal" href="../../../physics/plasma/nebular_plasma.html#calc-zeta-label"><span class="std std-ref">Calculating Zeta</span></a>) and data for calculating the
-branching or macro atom line interaction (<span class="xref std std-ref">macroatom</span>).</p>
+branching or macro atom line interaction (<a class="reference internal" href="../../../physics/plasma/macroatom.html#macroatom"><span class="std std-ref">Macro Atom</span></a>).</p>
 <div class="section" id="hdf5-dataset">
 <h2>HDF5 Dataset<a class="headerlink" href="#hdf5-dataset" title="Permalink to this headline">¶</a></h2>
 <p>As mentioned previously, all atomic data is stored in <a class="reference external" href="http://www.h5py.org/">HDF5 files</a>  that contain tables
@@ -459,7 +460,7 @@ has three states:</p>
 <li><p>0 for downwards internal</p></li>
 <li><p>1 for upwards internal (for more explanations, please</p></li>
 </ul>
-<p>refer to <span class="xref std std-ref">macroatom</span>).</p>
+<p>refer to <a class="reference internal" href="../../../physics/plasma/macroatom.html#macroatom"><span class="std std-ref">Macro Atom</span></a>).</p>
 </div>
 <div class="section" id="macro-atom-data">
 <h3>Macro Atom Data<a class="headerlink" href="#macro-atom-data" title="Permalink to this headline">¶</a></h3>
@@ -509,7 +510,7 @@ has three states:</p>
 <p>Here’s the structure of the probability block. The atomic number, ion number and source level number are the same
 within each block, the destination level number the transition type and transition probability are changing.
 The transition probabilities are only part of the final probability and will be changed during the calculation.
-For details on the macro atom, please refer to <span class="xref std std-ref">macroatom</span>.</p>
+For details on the macro atom, please refer to <a class="reference internal" href="../../../physics/plasma/macroatom.html#macroatom"><span class="std std-ref">Macro Atom</span></a>.</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -686,7 +687,7 @@ of references needed by macro atom or branching line interactions.</p>
 <h2>Indexing fun<a class="headerlink" href="#indexing-fun" title="Permalink to this headline">¶</a></h2>
 <p>The main problem with the atomic data is indexing. Most of these references require multiple numbers, e.g. atomic number,
 ion number and level number. The <a class="reference external" href="https://pandas.pydata.org/">pandas</a> framework provides the ideal functions to accomplish this. In TARDIS, we extensively
-use <a class="reference external" href="https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.MultiIndex.html#pandas.MultiIndex" title="(in pandas v1.3.0.dev0+641.gd558bce8e)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.MultiIndex</span></code></a>, <a class="reference external" href="https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v1.3.0.dev0+641.gd558bce8e)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Series</span></code></a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.0.dev0+641.gd558bce8e)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a>.</p>
+use <a class="reference external" href="https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.MultiIndex.html#pandas.MultiIndex" title="(in pandas v1.3.0.dev0+670.g306ccdbce)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.MultiIndex</span></code></a>, <a class="reference external" href="https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v1.3.0.dev0+670.g306ccdbce)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Series</span></code></a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.0.dev0+670.g306ccdbce)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a>.</p>
 <p>TO BE BETTER DOCUMENTED …</p>
 </div>
 </div>
@@ -697,7 +698,7 @@ use <a class="reference external" href="https://pandas.pydata.org/pandas-docs/de
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="current_public_table.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="current_public_table.html" class="btn btn-neutral float-right" title="Current Public Atomic Data Table" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="atomic_data.html" class="btn btn-neutral float-left" title="Atomic Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

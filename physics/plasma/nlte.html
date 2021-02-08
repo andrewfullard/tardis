@@ -108,9 +108,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../plasma.html">Plasma</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Plasma</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#properties-inputs-and-outputs">Properties, Inputs and Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#the-plasma-graph">The Plasma Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#updating-the-plasma">Updating the Plasma</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#plasma-calculations">Plasma Calculations</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="lte_plasma.html">LTE Plasma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nebular_plasma.html">Nebular Plasma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="macroatom.html">Macro Atom</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">NLTE treatment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helium_nlte.html">Helium NLTE</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -185,7 +198,7 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../plasma.html">Plasma</a> &raquo;</li>
+          <li><a href="index.html">Plasma</a> &raquo;</li>
         
       <li>NLTE treatment</li>
     
@@ -231,7 +244,7 @@
 }
 </style>
 <div class="section" id="nlte-treatment">
-<h1>NLTE treatment<a class="headerlink" href="#nlte-treatment" title="Permalink to this headline">¶</a></h1>
+<span id="nlte"></span><h1>NLTE treatment<a class="headerlink" href="#nlte-treatment" title="Permalink to this headline">¶</a></h1>
 <p>NLTE treatment of lines is available both in ~LTEPlasma and the ~NebularPlasma class. This can be enabled by specifying
 which species should be treated as NLTE with a simple list of tuples (e.g. [(20,1)] for Ca II).</p>
 <p>First let’s dive into the basics:</p>

@@ -7,9 +7,9 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   tardis.widgets.kromer_plot
    tardis.widgets.line_info
    tardis.widgets.plot_util
+   tardis.widgets.sdec_plot
    tardis.widgets.shell_info
    tardis.widgets.util
 

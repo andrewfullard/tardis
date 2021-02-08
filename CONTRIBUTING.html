@@ -110,7 +110,7 @@
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -270,7 +270,7 @@
 <div class="section" id="editing-the-documentation">
 <h3>Editing the Documentation<a class="headerlink" href="#editing-the-documentation" title="Permalink to this headline">¶</a></h3>
 <p>There is always a scope of improvement in documentation to add some missing information or to make it easier for reading. And here lies an opportunity for you, since you can edit the documentation page you want which is stored as a text file in <a class="reference external" href="https://github.com/tardis-sn/tardis/tree/master/docs"><code class="docutils literal notranslate"><span class="pre">docs</span></code></a> directory of TARDIS.</p>
-<p>After editing the file locally, build the docs as described in <a class="reference external" href="#">these instructions</a> and then you can submit your changes to us by making a patch as described in the next section.</p>
+<p>After editing the file locally, build the docs as described in <a class="reference external" href="https://tardis-sn.github.io/tardis/development/documentation_guidelines.html#building-documentation-locally">these instructions</a> and then you can submit your changes to us by making a patch as described in the next section.</p>
 </div>
 <div class="section" id="making-a-patch">
 <h3>Making a Patch<a class="headerlink" href="#making-a-patch" title="Permalink to this headline">¶</a></h3>
@@ -278,8 +278,8 @@
 <p>To contribute your code to TARDIS, you’ll need to make a <a class="reference external" href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request</a> from your fork of TARDIS repository. This development workflow using Git may look daunting at first, but it is not if you follow <a class="reference external" href="https://tardis-sn.github.io/tardis/development/git_workflow.html#preparation-and-working-with-git">this guide</a> that we have prepared for you.</p>
 <p>When you make a pull request, please provide all the necessary information requested by prompts in the pull request body. Also, make sure that the code you’re submitting always accounts for the following three:</p>
 <ul class="simple">
-<li><p><strong>Maintaining code quality:</strong> Your code must follow the PEP8 style guide, should cover edge cases, etc. Check our <a class="reference external" href="#">code quality guidelines</a> for more details.</p></li>
-<li><p><strong>Documenting the code:</strong> You must write docstrings in functions/classes, put a relevant example in TARDIS docs and make sure docs get built correctly. To build the documentation locally, you can follow <a class="reference external" href="#">this guide</a>.</p></li>
+<li><p><strong>Maintaining code quality:</strong> Your code must follow the PEP8 style guide, should cover edge cases, etc. Check our <a class="reference external" href="https://tardis-sn.github.io/tardis/development/code_quality.html">code quality guidelines</a> for more details.</p></li>
+<li><p><strong>Documenting the code:</strong> You must write docstrings in functions/classes, put a relevant example in TARDIS docs and make sure docs get built correctly. This is explained in detail in our <a class="reference external" href="https://tardis-sn.github.io/tardis/development/documentation_guidelines.html">documentation guidelines</a>.</p></li>
 <li><p><strong>Testing the code:</strong> There should be unit-tests for most of the functions/methods and they must pass our testing framework. To run test locally, you can follow <a class="reference external" href="https://tardis-sn.github.io/tardis/development/running_tests.html">this guide</a>.</p></li>
 </ul>
 </div>

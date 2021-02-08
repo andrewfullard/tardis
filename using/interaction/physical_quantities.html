@@ -131,7 +131,7 @@
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -501,7 +501,7 @@ div.rendered_html tbody tr:hover {
 <a class="reference external" href="https://github.com/tardis-sn/tardis/tree/master/docs/using/interaction/physical_quantities.ipynb">https://github.com/tardis-sn/tardis/tree/master/docs/using/interaction/physical_quantities.ipynb</a>
 —-</p>
 <div class="section" id="Accessing-Physical-Quantities">
-<h1>Accessing Physical Quantities<a class="headerlink" href="#Accessing-Physical-Quantities" title="Permalink to this headline">¶</a></h1>
+<span id="physical-quantities"></span><h1>Accessing Physical Quantities<a class="headerlink" href="#Accessing-Physical-Quantities" title="Permalink to this headline">¶</a></h1>
 <p>In order to compute the synthetic spectrum, TARDIS must either be told or must calculate many physical properties of the model. To understand and test the code it can be important to look at these values. One easy way to do this is to run TARDIS in an interactive mode and then inspect the model properties.</p>
 <div class="section" id="Runing-in-interactive-Python-session">
 <h2>Runing in interactive Python session<a class="headerlink" href="#Runing-in-interactive-Python-session" title="Permalink to this headline">¶</a></h2>
@@ -527,7 +527,7 @@ div.rendered_html tbody tr:hover {
 [<span class="ansi-bold">tardis.io.atom_data.atom_web_download</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Downloading atomic data from https://media.githubusercontent.com/media/tardis-sn/tardis-refdata/master/atom_data/kurucz_cd23_chianti_H_He.h5 to /home/runner/Downloads/tardis-data/kurucz_cd23_chianti_H_He.h5 (<span class="ansi-bold">atom_web_download.py</span>:48)
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100   980  100   980    0     0  18846      0 --:--:-- --:--:-- --:--:-- 18846
+100   980  100   980    0     0  11395      0 --:--:-- --:--:-- --:--:-- 11264
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1262,7 +1262,7 @@ Running post-merge numba montecarlo (with C close lines)!
  (<span class="ansi-bold">warnings.py</span>:109)
 Running post-merge numba montecarlo (with C close lines)!
 [<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.26319e+43 erg / s Luminosity absorbed = 4.10706e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
-[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Simulation finished in 20 iterations and took 45.51 s (<span class="ansi-bold">base.py</span>:381)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Simulation finished in 20 iterations and took 47.09 s (<span class="ansi-bold">base.py</span>:381)
 </pre></div></div>
 </div>
 <p>If all goes well, the simulation should run as usual. Afterwards, the information from the simulation will all exist in <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> and can be examined. Some examples for useful/interesting quantities are given below (but much more information is available: contact us via <a class="reference external" href="http://groups.google.com/forum/#!forum/tardis-sn-users">tardis-sn-users</a> if you need further help).</p>

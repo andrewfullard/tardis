@@ -45,8 +45,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Documentation Preview" href="documentation_preview.html" />
-    <link rel="prev" title="Procedure to update the reference data" href="update_refdata.html" />
+    <link rel="next" title="Procedure to update the reference data" href="update_refdata.html" />
+    <link rel="prev" title="Developer FAQ" href="developer_faq.html" />
     <link href="../_static/tardis.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -110,7 +110,7 @@
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -128,35 +128,29 @@
 <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Workflow</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="issues.html">Reporting Issues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="debug_numba.html">Debugging numba_montecarlo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="git_workflow.html">General Workflow to add a new feature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="git_workflow.html#preparation-and-working-with-git">Preparation and Working with Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_refdata.html">Procedure to update the reference data</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Continuous Integration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#azure-repos">Azure Repos</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#azure-pipelines-github-actions">Azure Pipelines &amp; GitHub Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#triggers">Triggers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#variable-syntax">Variable syntax</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#define-variables">Define variables</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#predefined-variables">Predefined variables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#jobs">Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tardis-pipelines">TARDIS Pipelines</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#the-default-template">The default template</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#documentation-pipeline">Documentation pipeline</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Testing pipeline</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#authors-pipeline">Authors pipeline</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#release-pipeline">Release pipeline</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#reference-data-pipeline">Reference data pipeline</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="documentation_guidelines.html">Documentation Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_tests.html">Running tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_quality.html">Code Quality Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation_preview.html">Documentation Preview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="matterbridge.html">Matterbridge Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#tardis-core-team-instructions">TARDIS core team Instructions</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Continuous Integration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#azure-repos">Azure Repos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#azure-pipelines-github-actions">Azure Pipelines &amp; GitHub Actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#triggers">Triggers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#predefined-variables">Predefined variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jobs">Jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tardis-pipelines">TARDIS Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="update_refdata.html">Procedure to update the reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="matterbridge.html">Matterbridge Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_numba.html">Debugging numba_montecarlo</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
@@ -262,8 +256,8 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="continuous-integration">
-<h1>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h1>Continuous Integration<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>We use a so-called <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a> workflow with TARDIS.
 This means that each time a change is proposed (via pull request)
 or a change is merged into the <em>master</em> branch, a service will
@@ -283,9 +277,9 @@ nor storage.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>https://dev.azure.com/tardis-sn/TARDIS/_apis/git/repositories/tardis-refdata/items?path=atom_data/kurucz_cd23_chianti_H_He.h5&amp;resolveLfs=true
 </pre></div>
 </div>
-<p>This mirror is automatically synced by <a href="#id3"><span class="problematic" id="id4">`a GitHub workflow`_</span></a>. If you want
-to <a href="#id5"><span class="problematic" id="id6">`update it manually`_</span></a>, remember to set <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">http.version</span> <span class="pre">HTTP/1.1</span></code>
-to avoid <a href="#id7"><span class="problematic" id="id8">`error 413`_</span></a> while pushing large files.</p>
+<p>This mirror is automatically synced by <a class="reference external" href="https://github.com/tardis-sn/tardis-refdata/blob/master/.github/workflows/sync-mirror.yml">a GitHub workflow</a>. If you want
+to <a class="reference external" href="https://docs.microsoft.com/en-us/azure/devops/repos/git/import-git-repository?view=azure-devops#what-if-my-source-repository-contains-git-lfs-objects">update it manually</a>, remember to set <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">http.version</span> <span class="pre">HTTP/1.1</span></code>
+to avoid <a class="reference external" href="https://developercommunity.visualstudio.com/content/problem/867488/git-lfs-push-got-413-error.html">error 413</a> while pushing large files.</p>
 </div>
 <div class="section" id="azure-pipelines-github-actions">
 <h2>Azure Pipelines &amp; GitHub Actions<a class="headerlink" href="#azure-pipelines-github-actions" title="Permalink to this headline">¶</a></h2>
@@ -511,18 +505,38 @@ email adress). In both cases update <code class="docutils literal notranslate"><
 <h3>Release pipeline<a class="headerlink" href="#release-pipeline" title="Permalink to this headline">¶</a></h3>
 <p>Publishes a new release of TARDIS every sunday at 00:00 UTC.</p>
 </div>
-<div class="section" id="reference-data-pipeline">
-<h3>Reference data pipeline<a class="headerlink" href="#reference-data-pipeline" title="Permalink to this headline">¶</a></h3>
-<p>Generates new reference data according to the changes present in the
-current pull request. Then, compares against reference data present in the
-head of <code class="docutils literal notranslate"><span class="pre">tardis-refdata</span></code> repository by running a notebook. Finally, uploads
-the rendered notebook to the pipeline results.</p>
-<p>To trigger this pipeline is necessary to leave a comment in the GitHub pull
-request.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">AzurePipelines</span> <span class="n">run</span> <span class="n">TARDIS</span> <span class="n">refdata</span>
+<div class="section" id="compare-reference-data-pipeline">
+<h3>Compare reference data pipeline<a class="headerlink" href="#compare-reference-data-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>This pipeline compares two versions of the reference data. It’s triggered manually via
+the Azure Pipelines web UI, or when a TARDIS contributor leaves the following comment
+on a pull request:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">AzurePipelines</span> <span class="n">run</span> <span class="n">compare</span><span class="o">-</span><span class="n">refdata</span>
 </pre></div>
 </div>
 <p>For brevity, you can comment using <code class="docutils literal notranslate"><span class="pre">/azp</span></code> instead of <code class="docutils literal notranslate"><span class="pre">/AzurePipelines</span></code>.</p>
+<p>By default, generates new reference data for the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> of the pull request. Then,
+compares against latest reference data stored in <code class="docutils literal notranslate"><span class="pre">tardis-refdata</span></code> repository. If
+you want to compare two different labels (SHAs, branches, tags, etc.) uncomment and
+set the <code class="docutils literal notranslate"><span class="pre">ref1.hash</span></code> and <code class="docutils literal notranslate"><span class="pre">ref2.hash</span></code> variables in
+<code class="docutils literal notranslate"><span class="pre">.github/workflows/compare-refdata.yml</span></code> on your pull request. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ref1</span><span class="o">.</span><span class="n">hash</span><span class="p">:</span> <span class="s1">&#39;upstream/pr/11&#39;</span>
+<span class="n">ref2</span><span class="o">.</span><span class="n">hash</span><span class="p">:</span> <span class="s1">&#39;upstream/master&#39;</span>
+</pre></div>
+</div>
+<p>The web UI also allows to compare any version of the reference data by providing those
+variables at runtime, but the access to the dashboard is restricted to a small group
+of developers.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If using the Azure dashboard, do not define <code class="docutils literal notranslate"><span class="pre">ref1.hash</span></code> and <code class="docutils literal notranslate"><span class="pre">ref2.hash</span></code>
+between quotation marks or <strong>the pipeline will fail</strong>. This does not apply for
+the YAML file.</p>
+</div>
+<p>Finally, the report is uploaded to the
+<a class="reference external" href="http://opensupernova.org/~azuredevops/files/refdata-results/">OpenSupernova.org server</a>
+following the <code class="docutils literal notranslate"><span class="pre">&lt;pr&gt;/&lt;commit&gt;</span></code> folder structure. If the pipeline fails, also a report is
+generated, but not necessarily gives useful debug information (depends on which step the
+pipeline has failed).</p>
 </div>
 </div>
 </div>
@@ -533,8 +547,8 @@ request.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="documentation_preview.html" class="btn btn-neutral float-right" title="Documentation Preview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="update_refdata.html" class="btn btn-neutral float-left" title="Procedure to update the reference data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="update_refdata.html" class="btn btn-neutral float-right" title="Procedure to update the reference data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="developer_faq.html" class="btn btn-neutral float-left" title="Developer FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

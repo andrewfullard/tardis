@@ -45,6 +45,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Research with TARDIS" href="../../research/index.html" />
+    <link rel="prev" title="Radiative Monte Carlo" href="montecarlo_old.html" />
     <link href="../../_static/tardis.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -106,10 +108,27 @@
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../plasma.html">Plasma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../old_physics/index.html">Old Physics Section (Outdated)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plasma/index.html">Plasma</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Old Physics Section (Outdated)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="montecarlo_old.html">Radiative Monte Carlo</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Plasma (Outdated)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#base-plasma">Base Plasma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plasma-types">Plasma Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../plasma/lte_plasma.html">LTE Plasma</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../plasma/nebular_plasma.html">Nebular Plasma</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sobolev-optical-depth">Sobolev optical depth</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../plasma/macroatom.html">Macro Atom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../plasma/nlte.html">NLTE treatment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
 <ul>
@@ -183,13 +202,15 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="index.html">Old Physics Section (Outdated)</a> &raquo;</li>
+        
       <li>Plasma (Outdated)</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/physics/plasma/old_plasma.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/physics/old_physics/old_plasma.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -227,7 +248,7 @@
 }
 </style>
 <div class="section" id="plasma-outdated">
-<span id="plasmas"></span><h1>Plasma (Outdated)<a class="headerlink" href="#plasma-outdated" title="Permalink to this headline">¶</a></h1>
+<span id="old-plasma"></span><h1>Plasma (Outdated)<a class="headerlink" href="#plasma-outdated" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This information (particularly code examples) is not up-to-date.</p>
@@ -237,7 +258,7 @@ and density. After calculating the state of the plasma, these classes are able t
 for the supernova radiative transfer. The simplest BasePlasma (<code class="xref py py-class docutils literal notranslate"><span class="pre">BasePlasma</span></code>) only calculates the atom number densities, but serves
 as a base for all BasePlasma classes. The next more complex class is <cite>LTEPlasma</cite> which will calculate the aforementioned quantities in
 Local Thermal Equilibrium conditions (LTE). The <code class="xref py py-class docutils literal notranslate"><span class="pre">NebularPlasma</span></code>-class inherits from <cite>LTEPlasma</cite> and uses a more complex
-description of the BasePlasma (for details see <span class="xref std std-ref">nebular_plasma</span>).</p>
+description of the BasePlasma (for details see <a class="reference internal" href="../plasma/nebular_plasma.html#nebular-plasma"><span class="std std-ref">Nebular Plasma</span></a>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In this documentation we use the indices <span class="math notranslate nohighlight">\(i, j, k\)</span> to mean atomic number, ion number and level number respectively.</p>
@@ -272,14 +293,14 @@ setting <cite>BasePlasma.beta_rad</cite> to <span class="math notranslate nohigh
 <h2>Plasma Types<a class="headerlink" href="#plasma-types" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="lte_plasma.html">LTE Plasma</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="lte_plasma.html#example-calculations">Example Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plasma/lte_plasma.html">LTE Plasma</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plasma/lte_plasma.html#example-calculations">Example Calculations</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="nebular_plasma.html">Nebular Plasma</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="nebular_plasma.html#calculating-zeta">Calculating Zeta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nebular_plasma.html#calculating-delta">Calculating Delta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nebular_plasma.html#example-calculations">Example Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plasma/nebular_plasma.html">Nebular Plasma</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plasma/nebular_plasma.html#calculating-zeta">Calculating Zeta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plasma/nebular_plasma.html#calculating-delta">Calculating Delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plasma/nebular_plasma.html#example-calculations">Example Calculations</a></li>
 </ul>
 </li>
 </ul>
@@ -294,8 +315,8 @@ setting <cite>BasePlasma.beta_rad</cite> to <span class="math notranslate nohigh
     (1 - \frac{g_\textrm{lower}}{g_\textrm{upper}}\frac{N_\textrm{upper}}{N_\textrm{lower}})\end{aligned}\end{align} \]</div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="macroatom.html">Macro Atom</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nlte.html">NLTE treatment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plasma/macroatom.html">Macro Atom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plasma/nlte.html">NLTE treatment</a></li>
 </ul>
 </div>
 </div>
@@ -306,6 +327,10 @@ setting <cite>BasePlasma.beta_rad</cite> to <span class="math notranslate nohigh
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../../research/index.html" class="btn btn-neutral float-right" title="Research with TARDIS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="montecarlo_old.html" class="btn btn-neutral float-left" title="Radiative Monte Carlo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

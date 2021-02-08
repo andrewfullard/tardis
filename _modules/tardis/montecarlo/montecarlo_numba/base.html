@@ -108,7 +108,7 @@
 <p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../physics/plasma.html">Plasma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Research with TARDIS</span></p>
@@ -330,16 +330,16 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">output_nus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">packet_collection</span><span class="o">.</span><span class="n">packets_output_nu</span><span class="p">)</span>
     <span class="n">last_interaction_types</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">packet_collection</span><span class="o">.</span><span class="n">packets_output_nu</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">packet_collection</span><span class="o">.</span><span class="n">packets_output_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
     <span class="p">)</span>
     <span class="n">output_energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">packet_collection</span><span class="o">.</span><span class="n">packets_output_nu</span><span class="p">)</span>
 
     <span class="n">last_interaction_in_nus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">packet_collection</span><span class="o">.</span><span class="n">packets_output_nu</span><span class="p">)</span>
     <span class="n">last_line_interaction_in_ids</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">packet_collection</span><span class="o">.</span><span class="n">packets_output_nu</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">packet_collection</span><span class="o">.</span><span class="n">packets_output_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
     <span class="p">)</span>
     <span class="n">last_line_interaction_out_ids</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">packet_collection</span><span class="o">.</span><span class="n">packets_output_nu</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">packet_collection</span><span class="o">.</span><span class="n">packets_output_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
     <span class="p">)</span>
 
     <span class="n">v_packets_energy_hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">spectrum_frequency</span><span class="p">)</span>
