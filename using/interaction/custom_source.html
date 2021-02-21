@@ -36,8 +36,6 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
         <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
@@ -639,9 +637,6 @@ div.rendered_html tbody tr:hover {
  (<span class="ansi-bold">warnings.py</span>:109)
 [<span class="ansi-bold">tardis.io.atom_data.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Read Atom Data with UUID=6f7b09e887a311e7a06b246e96350010 and MD5=864f1753714343c41f99cb065710cace. (<span class="ansi-bold">base.py</span>:170)
 [<span class="ansi-bold">tardis.io.atom_data.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Non provided atomic data: synpp_refs, photoionization_data (<span class="ansi-bold">base.py</span>:176)
-[<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/numba/np/ufunc/parallel.py:355: NumbaWarning: <span class="ansi-bold">The TBB threading layer requires TBB version 2019.5 or later i.e., TBB_INTERFACE_VERSION &gt;= 11005. Found TBB_INTERFACE_VERSION = 9107. The TBB threading layer is disabled.</span>
-  warnings.warn(problem)
- (<span class="ansi-bold">warnings.py</span>:109)
 [<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Starting iteration 1/20 (<span class="ansi-bold">base.py</span>:324)
 [<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/astropy/units/equivalencies.py:124: RuntimeWarning: divide by zero encountered in double_scalars
   (si.m, si.Hz, lambda x: _si.c.value / x),
@@ -1348,7 +1343,7 @@ Running post-merge numba montecarlo (with C close lines)!
  (<span class="ansi-bold">warnings.py</span>:109)
 Running post-merge numba montecarlo (with C close lines)!
 [<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.19472e+43 erg / s Luminosity absorbed = 3.94089e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
-[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Simulation finished in 20 iterations and took 54.64 s (<span class="ansi-bold">base.py</span>:381)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Simulation finished in 20 iterations and took 52.51 s (<span class="ansi-bold">base.py</span>:381)
 [<span class="ansi-bold">tardis.plasma.standard_plasmas</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Reading Atomic Data from kurucz_cd23_chianti_H_He.h5 (<span class="ansi-bold">standard_plasmas.py</span>:87)
 [<span class="ansi-bold">tardis.io.atom_data.util</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Atom Data kurucz_cd23_chianti_H_He.h5 not found in local path. Exists in TARDIS Data repo /home/runner/Downloads/tardis-data/kurucz_cd23_chianti_H_He.h5 (<span class="ansi-bold">util.py</span>:33)
 [<span class="ansi-bold">py.warnings         </span>][<span class="ansi-yellow-intense-fg ansi-bold">WARNING</span>]  /usr/share/miniconda/envs/tardis/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3427: PerformanceWarning: indexing past lexsort depth may impact performance.
@@ -1663,7 +1658,7 @@ Running post-merge numba montecarlo (with C close lines)!
  (<span class="ansi-bold">warnings.py</span>:109)
 Running post-merge numba montecarlo (with C close lines)!
 [<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.26319e+43 erg / s Luminosity absorbed = 4.10706e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
-[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Simulation finished in 20 iterations and took 37.86 s (<span class="ansi-bold">base.py</span>:381)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Simulation finished in 20 iterations and took 37.47 s (<span class="ansi-bold">base.py</span>:381)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1691,7 +1686,7 @@ Running post-merge numba montecarlo (with C close lines)!
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x7f69229a43d0&gt;
+&lt;matplotlib.legend.Legend at 0x7ff290bad970&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">

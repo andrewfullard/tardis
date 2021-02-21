@@ -36,8 +36,6 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
         <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -259,7 +257,7 @@
 <span id="tardis-plasma-properties-level-population-module"></span><h1>tardis.plasma.properties.level_population module<a class="headerlink" href="#module-tardis.plasma.properties.level_population" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="tardis.plasma.properties.level_population.LevelNumberDensity">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.level_population.</code><code class="sig-name descname">LevelNumberDensity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/level_population.html#LevelNumberDensity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.level_population.</span></code><code class="sig-name descname"><span class="pre">LevelNumberDensity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/level_population.html#LevelNumberDensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
 <p>Calculates the level populations</p>
 <dl class="field-list simple">
@@ -273,31 +271,31 @@ Columns are zones.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.level_population.LevelNumberDensity.calculate">
-<code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level_boltzmann_factor</span></em>, <em class="sig-param"><span class="n">ion_number_density</span></em>, <em class="sig-param"><span class="n">levels</span></em>, <em class="sig-param"><span class="n">partition_function</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level_boltzmann_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ion_number_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity.calculate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the level populations from the level_boltzmann_factor,
 ion_number_density and partition_function</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.level_population.LevelNumberDensity.latex_formula">
-<code class="sig-name descname">latex_formula</code><em class="property"> = ('N_{i,j}\\dfrac{bf_{i,j,k}}{Z_{i,j}}',)</em><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity.latex_formula" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_formula</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('N_{i,j}\\dfrac{bf_{i,j,k}}{Z_{i,j}}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity.latex_formula" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.level_population.LevelNumberDensity.latex_name">
-<code class="sig-name descname">latex_name</code><em class="property"> = ('N_{i,j,k}',)</em><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity.latex_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_name</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('N_{i,j,k}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity.latex_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.level_population.LevelNumberDensity.outputs">
-<code class="sig-name descname">outputs</code><em class="property"> = ('level_number_density',)</em><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity.outputs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">outputs</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('level_number_density',)</span></em><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensity.outputs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="tardis.plasma.properties.level_population.LevelNumberDensityHeNLTE">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.level_population.</code><code class="sig-name descname">LevelNumberDensityHeNLTE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/level_population.html#LevelNumberDensityHeNLTE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensityHeNLTE" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.level_population.</span></code><code class="sig-name descname"><span class="pre">LevelNumberDensityHeNLTE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/level_population.html#LevelNumberDensityHeNLTE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensityHeNLTE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#tardis.plasma.properties.level_population.LevelNumberDensity" title="tardis.plasma.properties.level_population.LevelNumberDensity"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.level_population.LevelNumberDensity</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -310,7 +308,7 @@ Columns are zones.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.level_population.LevelNumberDensityHeNLTE.calculate">
-<code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level_boltzmann_factor</span></em>, <em class="sig-param"><span class="n">ion_number_density</span></em>, <em class="sig-param"><span class="n">levels</span></em>, <em class="sig-param"><span class="n">partition_function</span></em>, <em class="sig-param"><span class="n">helium_population_updated</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/level_population.html#LevelNumberDensityHeNLTE.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensityHeNLTE.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level_boltzmann_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ion_number_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">helium_population_updated</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/level_population.html#LevelNumberDensityHeNLTE.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.level_population.LevelNumberDensityHeNLTE.calculate" title="Permalink to this definition">¶</a></dt>
 <dd><p>If one of the two helium NLTE methods is used, this updates
 the helium level populations to the appropriate
 values.</p>

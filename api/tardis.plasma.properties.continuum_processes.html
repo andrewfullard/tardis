@@ -36,8 +36,6 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
         <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -259,7 +257,7 @@
 <span id="tardis-plasma-properties-continuum-processes-module"></span><h1>tardis.plasma.properties.continuum_processes module<a class="headerlink" href="#module-tardis.plasma.properties.continuum_processes" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.continuum_processes.</code><code class="sig-name descname">SpontRecombRateCoeff</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/continuum_processes.html#SpontRecombRateCoeff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.continuum_processes.</span></code><code class="sig-name descname"><span class="pre">SpontRecombRateCoeff</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/continuum_processes.html#SpontRecombRateCoeff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -271,17 +269,17 @@
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff.calculate">
-<code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photo_ion_cross_sections</span></em>, <em class="sig-param"><span class="n">t_electrons</span></em>, <em class="sig-param"><span class="n">photo_ion_block_references</span></em>, <em class="sig-param"><span class="n">photo_ion_index</span></em>, <em class="sig-param"><span class="n">phi_ik</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/continuum_processes.html#SpontRecombRateCoeff.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photo_ion_cross_sections</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_electrons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photo_ion_block_references</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photo_ion_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_ik</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/continuum_processes.html#SpontRecombRateCoeff.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff.calculate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff.latex_name">
-<code class="sig-name descname">latex_name</code><em class="property"> = ('\\alpha^{\\textrm{sp}}',)</em><a class="headerlink" href="#tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff.latex_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_name</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('\\alpha^{\\textrm{sp}}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff.latex_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff.outputs">
-<code class="sig-name descname">outputs</code><em class="property"> = ('alpha_sp',)</em><a class="headerlink" href="#tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff.outputs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">outputs</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('alpha_sp',)</span></em><a class="headerlink" href="#tardis.plasma.properties.continuum_processes.SpontRecombRateCoeff.outputs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

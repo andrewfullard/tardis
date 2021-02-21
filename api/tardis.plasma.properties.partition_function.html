@@ -36,8 +36,6 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
         <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -259,7 +257,7 @@
 <span id="tardis-plasma-properties-partition-function-module"></span><h1>tardis.plasma.properties.partition_function module<a class="headerlink" href="#module-tardis.plasma.properties.partition_function" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.partition_function.</code><code class="sig-name descname">LevelBoltzmannFactorDiluteLTE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorDiluteLTE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.partition_function.</span></code><code class="sig-name descname"><span class="pre">LevelBoltzmannFactorDiluteLTE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorDiluteLTE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -276,29 +274,29 @@ consider NLTE.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.calculate">
-<code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">levels</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">excitation_energy</span></em>, <em class="sig-param"><span class="n">beta_rad</span></em>, <em class="sig-param"><span class="n">w</span></em>, <em class="sig-param"><span class="n">metastability</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorDiluteLTE.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">levels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excitation_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metastability</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorDiluteLTE.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.calculate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.latex_formula">
-<code class="sig-name descname">latex_formula</code><em class="property"> = ('Wg_{i,j,k}e^{\\dfrac{-\\epsilon_{i,j,k}}{k_{\\textrm{B}}T_{\\textrm{rad}}}}',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_formula</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('Wg_{i,j,k}e^{\\dfrac{-\\epsilon_{i,j,k}}{k_{\\textrm{B}}T_{\\textrm{rad}}}}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.latex_name">
-<code class="sig-name descname">latex_name</code><em class="property"> = ('bf_{i,j,k}',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.latex_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_name</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('bf_{i,j,k}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.latex_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.outputs">
-<code class="sig-name descname">outputs</code><em class="property"> = ('general_level_boltzmann_factor',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.outputs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">outputs</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('general_level_boltzmann_factor',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorDiluteLTE.outputs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.partition_function.</code><code class="sig-name descname">LevelBoltzmannFactorLTE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorLTE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.partition_function.</span></code><code class="sig-name descname"><span class="pre">LevelBoltzmannFactorLTE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorLTE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -314,29 +312,29 @@ NLTE.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.calculate">
-<em class="property">static </em><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">excitation_energy</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">beta_rad</span></em>, <em class="sig-param"><span class="n">levels</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorLTE.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.calculate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">excitation_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorLTE.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.calculate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.latex_formula">
-<code class="sig-name descname">latex_formula</code><em class="property"> = ('g_{i,j,k}e^{\\dfrac{-\\epsilon_{i,j,k}}{k_{\\textrm{B}}T_{\\textrm{rad}}}}',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_formula</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('g_{i,j,k}e^{\\dfrac{-\\epsilon_{i,j,k}}{k_{\\textrm{B}}T_{\\textrm{rad}}}}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.latex_name">
-<code class="sig-name descname">latex_name</code><em class="property"> = ('bf_{i,j,k}',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.latex_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_name</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('bf_{i,j,k}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.latex_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.outputs">
-<code class="sig-name descname">outputs</code><em class="property"> = ('general_level_boltzmann_factor',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.outputs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">outputs</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('general_level_boltzmann_factor',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE.outputs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.partition_function.</code><code class="sig-name descname">LevelBoltzmannFactorNLTE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNLTE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.partition_function.</span></code><code class="sig-name descname"><span class="pre">LevelBoltzmannFactorNLTE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNLTE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -349,24 +347,24 @@ updated for those species treated in NLTE.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE.calculate">
-<code class="sig-name descname">calculate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNLTE.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNLTE.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE.calculate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE.from_config">
-<em class="property">static </em><code class="sig-name descname">from_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nlte_conf</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNLTE.from_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE.from_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">from_config</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nlte_conf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNLTE.from_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE.from_config" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE.outputs">
-<code class="sig-name descname">outputs</code><em class="property"> = ('level_boltzmann_factor',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE.outputs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">outputs</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('level_boltzmann_factor',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNLTE.outputs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorNoNLTE">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.partition_function.</code><code class="sig-name descname">LevelBoltzmannFactorNoNLTE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNoNLTE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNoNLTE" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.partition_function.</span></code><code class="sig-name descname"><span class="pre">LevelBoltzmannFactorNoNLTE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNoNLTE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNoNLTE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -379,19 +377,19 @@ property is included if NLTE is not used.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorNoNLTE.calculate">
-<em class="property">static </em><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">general_level_boltzmann_factor</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNoNLTE.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNoNLTE.calculate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">general_level_boltzmann_factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#LevelBoltzmannFactorNoNLTE.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNoNLTE.calculate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.LevelBoltzmannFactorNoNLTE.outputs">
-<code class="sig-name descname">outputs</code><em class="property"> = ('level_boltzmann_factor',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNoNLTE.outputs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">outputs</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('level_boltzmann_factor',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorNoNLTE.outputs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="tardis.plasma.properties.partition_function.PartitionFunction">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.partition_function.</code><code class="sig-name descname">PartitionFunction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#PartitionFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.partition_function.</span></code><code class="sig-name descname"><span class="pre">PartitionFunction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#PartitionFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.plasma.properties.base.html#tardis.plasma.properties.base.ProcessingPlasmaProperty" title="tardis.plasma.properties.base.ProcessingPlasmaProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.base.ProcessingPlasmaProperty</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -404,29 +402,29 @@ Columns are zones.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.partition_function.PartitionFunction.calculate">
-<code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level_boltzmann_factor</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#PartitionFunction.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level_boltzmann_factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#PartitionFunction.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction.calculate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.PartitionFunction.latex_formula">
-<code class="sig-name descname">latex_formula</code><em class="property"> = ('\\sum_{k}bf_{i,j,k}',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction.latex_formula" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_formula</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('\\sum_{k}bf_{i,j,k}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction.latex_formula" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.PartitionFunction.latex_name">
-<code class="sig-name descname">latex_name</code><em class="property"> = ('Z_{i,j}',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction.latex_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_name</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('Z_{i,j}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction.latex_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.PartitionFunction.outputs">
-<code class="sig-name descname">outputs</code><em class="property"> = ('partition_function',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction.outputs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">outputs</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('partition_function',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.PartitionFunction.outputs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.partition_function.</code><code class="sig-name descname">ThermalLTEPartitionFunction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#ThermalLTEPartitionFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.partition_function.</span></code><code class="sig-name descname"><span class="pre">ThermalLTEPartitionFunction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#ThermalLTEPartitionFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#tardis.plasma.properties.partition_function.PartitionFunction" title="tardis.plasma.properties.partition_function.PartitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.partition_function.PartitionFunction</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -439,24 +437,24 @@ Columns are zones.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.calculate">
-<code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">thermal_lte_level_boltzmann_factor</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#ThermalLTEPartitionFunction.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_lte_level_boltzmann_factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#ThermalLTEPartitionFunction.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.calculate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.latex_name">
-<code class="sig-name descname">latex_name</code><em class="property"> = ('Z_{i,j}(T_\\mathrm{e}',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.latex_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_name</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('Z_{i,j}(T_\\mathrm{e}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.latex_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.outputs">
-<code class="sig-name descname">outputs</code><em class="property"> = ('thermal_lte_partition_function',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.outputs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">outputs</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('thermal_lte_partition_function',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLTEPartitionFunction.outputs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.plasma.properties.partition_function.</code><code class="sig-name descname">ThermalLevelBoltzmannFactorLTE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plasma_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#ThermalLevelBoltzmannFactorLTE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.plasma.properties.partition_function.</span></code><code class="sig-name descname"><span class="pre">ThermalLevelBoltzmannFactorLTE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plasma_parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#ThermalLevelBoltzmannFactorLTE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE" title="tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.plasma.properties.partition_function.LevelBoltzmannFactorLTE</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -472,22 +470,22 @@ Columns corresponding to zones.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.calculate">
-<em class="property">static </em><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">excitation_energy</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">beta_electron</span></em>, <em class="sig-param"><span class="n">levels</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#ThermalLevelBoltzmannFactorLTE.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.calculate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">excitation_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_electron</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/plasma/properties/partition_function.html#ThermalLevelBoltzmannFactorLTE.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.calculate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.latex_formula">
-<code class="sig-name descname">latex_formula</code><em class="property"> = ('g_{i,j,k}e^{\\dfrac{-\\epsilon_{i,j,k}}{k_{\\textrm{B}}T_{\\textrm{electron}}}}',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_formula</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('g_{i,j,k}e^{\\dfrac{-\\epsilon_{i,j,k}}{k_{\\textrm{B}}T_{\\textrm{electron}}}}',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.latex_formula" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.latex_name">
-<code class="sig-name descname">latex_name</code><em class="property"> = ('bf_{i,j,k}^{\\textrm{LTE}}(T_e)',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.latex_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">latex_name</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('bf_{i,j,k}^{\\textrm{LTE}}(T_e)',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.latex_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.outputs">
-<code class="sig-name descname">outputs</code><em class="property"> = ('thermal_lte_level_boltzmann_factor',)</em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.outputs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">outputs</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('thermal_lte_level_boltzmann_factor',)</span></em><a class="headerlink" href="#tardis.plasma.properties.partition_function.ThermalLevelBoltzmannFactorLTE.outputs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

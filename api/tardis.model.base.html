@@ -36,8 +36,6 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
         <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -257,7 +255,7 @@
 <span id="tardis-model-base-module"></span><h1>tardis.model.base module<a class="headerlink" href="#module-tardis.model.base" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="tardis.model.base.Radial1DModel">
-<em class="property">class </em><code class="sig-prename descclassname">tardis.model.base.</code><code class="sig-name descname">Radial1DModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/model/base.html#Radial1DModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.model.base.Radial1DModel" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tardis.model.base.</span></code><code class="sig-name descname"><span class="pre">Radial1DModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/model/base.html#Radial1DModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.model.base.Radial1DModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.io.util.html#tardis.io.util.HDFWriterMixin" title="tardis.io.util.HDFWriterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.io.util.HDFWriterMixin</span></code></a></p>
 <p>An object that hold information about the individual shells.</p>
 <dl class="field-list">
@@ -313,22 +311,22 @@ dilution factor.</p>
 </dl>
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.abundance">
-<em class="property">property </em><code class="sig-name descname">abundance</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.abundance" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">abundance</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.abundance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.density">
-<em class="property">property </em><code class="sig-name descname">density</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.density" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">density</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.density" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.dilution_factor">
-<em class="property">property </em><code class="sig-name descname">dilution_factor</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.dilution_factor" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">dilution_factor</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.dilution_factor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.from_config">
-<em class="property">classmethod </em><code class="sig-name descname">from_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/model/base.html#Radial1DModel.from_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.model.base.Radial1DModel.from_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_config</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/model/base.html#Radial1DModel.from_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.model.base.Radial1DModel.from_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new Radial1DModel instance from a Configuration object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -346,7 +344,7 @@ dilution factor.</p>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.from_csvy">
-<em class="property">classmethod </em><code class="sig-name descname">from_csvy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/model/base.html#Radial1DModel.from_csvy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tardis.model.base.Radial1DModel.from_csvy" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_csvy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/model/base.html#Radial1DModel.from_csvy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.model.base.Radial1DModel.from_csvy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new Radial1DModel instance from a Configuration object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -364,102 +362,102 @@ dilution factor.</p>
 
 <dl class="py attribute">
 <dt id="tardis.model.base.Radial1DModel.hdf_name">
-<code class="sig-name descname">hdf_name</code><em class="property"> = 'model'</em><a class="headerlink" href="#tardis.model.base.Radial1DModel.hdf_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">hdf_name</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'model'</span></em><a class="headerlink" href="#tardis.model.base.Radial1DModel.hdf_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="tardis.model.base.Radial1DModel.hdf_properties">
-<code class="sig-name descname">hdf_properties</code><em class="property"> = ['t_inner', 'w', 't_radiative', 'v_inner', 'v_outer', 'homologous_density', 'r_inner']</em><a class="headerlink" href="#tardis.model.base.Radial1DModel.hdf_properties" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">hdf_properties</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['t_inner',</span> <span class="pre">'w',</span> <span class="pre">'t_radiative',</span> <span class="pre">'v_inner',</span> <span class="pre">'v_outer',</span> <span class="pre">'homologous_density',</span> <span class="pre">'r_inner']</span></em><a class="headerlink" href="#tardis.model.base.Radial1DModel.hdf_properties" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.no_of_raw_shells">
-<em class="property">property </em><code class="sig-name descname">no_of_raw_shells</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.no_of_raw_shells" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">no_of_raw_shells</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.no_of_raw_shells" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.no_of_shells">
-<em class="property">property </em><code class="sig-name descname">no_of_shells</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.no_of_shells" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">no_of_shells</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.no_of_shells" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.r_inner">
-<em class="property">property </em><code class="sig-name descname">r_inner</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.r_inner" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">r_inner</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.r_inner" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.r_middle">
-<em class="property">property </em><code class="sig-name descname">r_middle</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.r_middle" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">r_middle</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.r_middle" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.r_outer">
-<em class="property">property </em><code class="sig-name descname">r_outer</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.r_outer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">r_outer</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.r_outer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.radius">
-<em class="property">property </em><code class="sig-name descname">radius</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.radius" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">radius</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.radius" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.t_rad">
-<em class="property">property </em><code class="sig-name descname">t_rad</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.t_rad" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">t_rad</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.t_rad" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.t_radiative">
-<em class="property">property </em><code class="sig-name descname">t_radiative</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.t_radiative" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">t_radiative</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.t_radiative" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.v_boundary_inner">
-<em class="property">property </em><code class="sig-name descname">v_boundary_inner</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_boundary_inner" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">v_boundary_inner</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_boundary_inner" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.v_boundary_inner_index">
-<em class="property">property </em><code class="sig-name descname">v_boundary_inner_index</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_boundary_inner_index" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">v_boundary_inner_index</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_boundary_inner_index" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.v_boundary_outer">
-<em class="property">property </em><code class="sig-name descname">v_boundary_outer</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_boundary_outer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">v_boundary_outer</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_boundary_outer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.v_boundary_outer_index">
-<em class="property">property </em><code class="sig-name descname">v_boundary_outer_index</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_boundary_outer_index" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">v_boundary_outer_index</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_boundary_outer_index" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.v_inner">
-<em class="property">property </em><code class="sig-name descname">v_inner</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_inner" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">v_inner</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_inner" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.v_middle">
-<em class="property">property </em><code class="sig-name descname">v_middle</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_middle" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">v_middle</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_middle" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.v_outer">
-<em class="property">property </em><code class="sig-name descname">v_outer</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_outer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">v_outer</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.v_outer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.velocity">
-<em class="property">property </em><code class="sig-name descname">velocity</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.velocity" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">velocity</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.velocity" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.volume">
-<em class="property">property </em><code class="sig-name descname">volume</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.volume" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">volume</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.volume" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="tardis.model.base.Radial1DModel.w">
-<em class="property">property </em><code class="sig-name descname">w</code><a class="headerlink" href="#tardis.model.base.Radial1DModel.w" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">w</span></code><a class="headerlink" href="#tardis.model.base.Radial1DModel.w" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
