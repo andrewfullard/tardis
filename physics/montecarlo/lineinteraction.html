@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Line Interaction Treatments &mdash; TARDIS v3.0.dev1</title>
@@ -102,13 +103,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Monte Carlo Primer</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basicprinciples.html">Monte Carlo Radiative Transfer - Basic Principles</a></li>
@@ -130,28 +131,28 @@
 <li class="toctree-l1"><a class="reference internal" href="../plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -247,7 +248,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="line-interaction-treatments">
+<section id="line-interaction-treatments">
 <h1>Line Interaction Treatments<a class="headerlink" href="#line-interaction-treatments" title="Permalink to this headline">¶</a></h1>
 <p>TARDIS currently offers different ways to handle line interactions, which may be
 activated via the YAML configuration file. Independently of the chosen
@@ -277,7 +278,7 @@ neglects this effect.</p>
 </div>
 <p>Essentially, the different line interaction treatments only determine how the
 frequency of the packet after the line interaction is determined.</p>
-<div class="section" id="resonant-scattering">
+<section id="resonant-scattering">
 <h2>Resonant Scattering<a class="headerlink" href="#resonant-scattering" title="Permalink to this headline">¶</a></h2>
 <p>The simplest line interaction mode assumes that all interactions with atomic
 line transitions occur resonantly. This implies that in the co-moving frame the
@@ -286,8 +287,8 @@ the Doppler factors due to the frame transformations between co-moving and lab
 frame, the post-interaction frequency is given by</p>
 <div class="math notranslate nohighlight">
 \[\nu_f  = \nu_i \frac{1 - \beta \mu_i}{1 - \beta \mu_f}\]</div>
-</div>
-<div class="section" id="downbranching">
+</section>
+<section id="downbranching">
 <h2>Downbranching<a class="headerlink" href="#downbranching" title="Permalink to this headline">¶</a></h2>
 <p>The so-called downbranching scheme, introduced by <a class="bibtex reference internal" href="../../zreferences.html#lucy1999a" id="id1">[Lucy99b]</a>, is an
 elegant approach to approximately account for fluorescence effects. In this
@@ -298,8 +299,8 @@ re-emission channel is probabilistically selected according to the branching
 ratios of the different allowed de-excitation transitions. For more details
 about the downbranching scheme, we refer to <a class="bibtex reference internal" href="../../zreferences.html#lucy1999a" id="id2">[Lucy99b]</a> and
 <a class="bibtex reference internal" href="../../zreferences.html#kerzendorf2014" id="id3">[KerzendorfSim14]</a>.</p>
-</div>
-<div class="section" id="macro-atom-scheme">
+</section>
+<section id="macro-atom-scheme">
 <h2>Macro Atom Scheme<a class="headerlink" href="#macro-atom-scheme" title="Permalink to this headline">¶</a></h2>
 <p>Finally, as the most sophisticated line interaction treatment, a simplified
 version of the Macro Atom scheme of <a class="bibtex reference internal" href="../../zreferences.html#lucy2002" id="id4">[Lucy02]</a> and <a class="bibtex reference internal" href="../../zreferences.html#lucy2003" id="id5">[Lucy03]</a> is
@@ -317,8 +318,8 @@ about the implementation of the Macro Atom scheme in TARDIS is provided
 <a class="reference internal" href="../plasma/macroatom.html#macroatom"><span class="std std-ref">here</span></a>. For more background information and
 an in-depth derivation of the scheme, we refer to <a class="bibtex reference internal" href="../../zreferences.html#lucy2002" id="id6">[Lucy02]</a> and
 <a class="bibtex reference internal" href="../../zreferences.html#lucy2003" id="id7">[Lucy03]</a>.</p>
-</div>
-<div class="section" id="comparison">
+</section>
+<section id="comparison">
 <h2>Comparison<a class="headerlink" href="#comparison" title="Permalink to this headline">¶</a></h2>
 <p>The different levels of sophistication are illustrated in the following plot,
 taken from <a class="bibtex reference internal" href="../../zreferences.html#kerzendorf2014" id="id8">[KerzendorfSim14]</a> and showing the incident wavelength versus the
@@ -326,8 +327,8 @@ emergent wavelength of Monte Carlo packets in line interactions. The left panel
 shows the situation in the resonant scatter mode, the middle one for the
 downbranching scheme and the right one the macro atom results.</p>
 <a class="reference internal image-reference" href="../../_images/scatter_downbranch_ma.png"><img alt="../../_images/scatter_downbranch_ma.png" src="../../_images/scatter_downbranch_ma.png" style="width: 700px;" /></a>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

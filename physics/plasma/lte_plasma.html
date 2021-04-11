@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>LTE Plasma &mdash; TARDIS v3.0.dev1</title>
@@ -102,13 +103,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Plasma</a><ul class="current">
@@ -130,28 +131,28 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -247,7 +248,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="lte-plasma">
+<section id="lte-plasma">
 <h1>LTE Plasma<a class="headerlink" href="#lte-plasma" title="Permalink to this headline">¶</a></h1>
 <p>The <cite>LTEPlasma</cite> plasma class is the child of <cite>BasePlasma</cite> but is the first class that actually calculates plasma conditions.
 After running exactly through the same steps as <cite>BasePlasma</cite>, <cite>LTEPlasma</cite> will start calculating the <a class="reference external" href="http://en.wikipedia.org/wiki/Partition_function_(statistical_mechanics)">partition functions</a>.</p>
@@ -278,10 +279,10 @@ factor of 1, twice ionized contribute with a factor of two, ….).</p>
 \[N_{i, j, k} = \frac{g_k}{Z_{i, j}}\times N_{i, j} \times e^{-\beta_\textrm{rad} E_k}\]</div>
 <p>This concludes the calculation of the plasma. In the code, the next step is calculating the <span class="math notranslate nohighlight">\(\tau_\textrm{Sobolev}\)</span> using
 the quantities calculated here.</p>
-<div class="section" id="example-calculations">
+<section id="example-calculations">
 <h2>Example Calculations<a class="headerlink" href="#example-calculations" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

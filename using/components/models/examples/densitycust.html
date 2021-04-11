@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Using a custom density profile &mdash; TARDIS v3.0.dev1</title>
@@ -102,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Components</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../configuration/index.html">Configuration</a></li>
@@ -126,34 +127,34 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -253,9 +254,9 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="using-a-custom-density-profile">
+<section id="using-a-custom-density-profile">
 <span id="densitycust"></span><h1>Using a custom density profile<a class="headerlink" href="#using-a-custom-density-profile" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overview">
+<section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>TARDIS also has the capability to work with arbitrary density profiles. This is
 particularly useful if the results of detailed explosion simulations should be
@@ -297,8 +298,8 @@ TARDIS as defining a grid in which the tabulated velocities are
 taken as the outer boundaries of grid cells and the density is
 assumed to be uniform with each cell.</p>
 </div>
-</div>
-<div class="section" id="inner-boundary">
+</section>
+<section id="inner-boundary">
 <h2>Inner Boundary<a class="headerlink" href="#inner-boundary" title="Permalink to this headline">¶</a></h2>
 <p>The first velocity-density pair in a custom density file (given by index 0) specifies the velocity of the inner boundary approximation. The density associated with this velocity is the density within the inner boundary, which does not affect TARDIS spectra. Therefore, the first density (5.4869692e-10 in the example above) can be replaced by a placeholder value. The user can choose to both specify a custom density file AND specify v_inner_boundary or v_outer_boundary in the configuration YAML file for a TARDIS run. However, the YAML-specified values must be within the velocity range specified in the custom density file, otherwise TARDIS will raise an error. When one of the YAML-specified boundary velocities falls within the velocity range specified in the custom density file, then the boundary velocity is set equal to the number in the configuration YAML file. This has the effect of splitting a cell in the custom density file into two parts, a region within the boundary and a region outside the boundary.</p>
 <div class="toctree-wrapper compound">
@@ -319,8 +320,8 @@ assumed to be uniform with each cell.</p>
 realistic model. In any real calculation, better resolution
 (i.e. more grid points) should be used.</p>
 </div>
-</div>
-<div class="section" id="tardis-input-file">
+</section>
+<section id="tardis-input-file">
 <h2>TARDIS input file<a class="headerlink" href="#tardis-input-file" title="Permalink to this headline">¶</a></h2>
 <p>If you create a correctly formatted density profile file (called “density.dat”
 in this example), you can use it in TARDIS by putting the following lines in
@@ -341,8 +342,8 @@ the model section of the YAML file:</p>
 (in which case TARDIS will default to using the full velocity range specified in the density.txt file).
 Values for the boundary velocities that lie outside the range covered by density.txt will not be accepted.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

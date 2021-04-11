@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Access information about individual iterations &mdash; TARDIS v3.0.dev1</title>
@@ -100,13 +101,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Additional Interactivity</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="commandline.html">Running TARDIS in the commandline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="callback_example.html">Using Custom Callbacks When Running TARDIS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="converters/index.html">Converters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Custom_TARDIS_Model_Tutorial.html">How to run TARDIS with a custom ejecta model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_source.html">Running TARDIS with a custom packet source</a></li>
@@ -116,7 +116,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="init_trad_bug.html">Initial_t_rad Bug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrator.html">API example for the formal integral</a></li>
 <li class="toctree-l2"><a class="reference internal" href="isotope_pd_subclass.html">Extending Pandas DataFrame Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="to_hdf.html">Storing simulations to HDF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf_writer.html">Example Usage of HDFWriter</a></li>
@@ -125,34 +124,34 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -250,7 +249,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="access-information-about-individual-iterations">
+<section id="access-information-about-individual-iterations">
 <h1>Access information about individual iterations<a class="headerlink" href="#access-information-about-individual-iterations" title="Permalink to this headline">¶</a></h1>
 <p>Currently we store information about the plasma state and the inner boundary
 for each iteration. This is saved in the simulation object and can be accessed
@@ -268,7 +267,7 @@ via</p>
 <span class="n">mdl</span><span class="o">.</span><span class="n">iterations_t_inner</span>  <span class="c1"># inner boundary temperature</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>

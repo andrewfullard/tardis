@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Old Graphical User Interface (Outdated) &mdash; TARDIS v3.0.dev1</title>
@@ -100,13 +101,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Additional Interactivity</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="commandline.html">Running TARDIS in the commandline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="callback_example.html">Using Custom Callbacks When Running TARDIS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="converters/index.html">Converters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Custom_TARDIS_Model_Tutorial.html">How to run TARDIS with a custom ejecta model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_source.html">Running TARDIS with a custom packet source</a></li>
@@ -121,7 +121,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="access.html">Accessing Physical Information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="init_trad_bug.html">Initial_t_rad Bug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrator.html">API example for the formal integral</a></li>
 <li class="toctree-l2"><a class="reference internal" href="isotope_pd_subclass.html">Extending Pandas DataFrame Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="to_hdf.html">Storing simulations to HDF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf_writer.html">Example Usage of HDFWriter</a></li>
@@ -130,34 +129,34 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -253,7 +252,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="old-graphical-user-interface-outdated">
+<section id="old-graphical-user-interface-outdated">
 <h1>Old Graphical User Interface (Outdated)<a class="headerlink" href="#old-graphical-user-interface-outdated" title="Permalink to this headline">¶</a></h1>
 <p>TARDIS uses the <a class="reference external" href="http://www.riverbankcomputing.com/software/pyqt/download5">PyQt5 framework</a> for its cross-platform
 interface.</p>
@@ -299,7 +298,7 @@ installed TARDIS, go to tardis/tardis/gui, and use the following command.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python interface.py path-to-yaml-configuration-file path-to-atomic-data-file
 </pre></div>
 </div>
-<div class="section" id="running-instructions">
+<section id="running-instructions">
 <h2>Running Instructions<a class="headerlink" href="#running-instructions" title="Permalink to this headline">¶</a></h2>
 <p>Decide which Qt binding you want to use (PySide or PyQt) and
 accordingly set QT_API in shell:</p>
@@ -325,30 +324,30 @@ tardis/tardis/gui. Then use the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">interface</span><span class="o">.</span><span class="n">py</span> <span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">configuration</span><span class="o">-</span><span class="n">file</span> <span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">atomic</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">file</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="gui-layout-and-features">
+</section>
+<section id="gui-layout-and-features">
 <h2>GUI Layout and Features<a class="headerlink" href="#gui-layout-and-features" title="Permalink to this headline">¶</a></h2>
 <p>When you launch the GUI, the first screen that you see will be something like the snapshot below.
 You can inspect the plot of shells on this window and use the toggle button to change between the
 plot of dilution factor and the radiation temperature in shells.</p>
 <a class="reference internal image-reference" href="using/interaction/images/OpeningScreen.png"><img alt="using/interaction/images/OpeningScreen.png" src="using/interaction/images/OpeningScreen.png" style="width: 900px;" /></a>
-<div class="section" id="shell-info">
+<section id="shell-info">
 <h3>Shell Info<a class="headerlink" href="#shell-info" title="Permalink to this headline">¶</a></h3>
 <p>To see the abundances in a shell, double-click on the shell number in the table. You can follow a
 similar strategy in the tables that appear to bring up the ion and level populations for each shell.
 The snapshot below shows all the tables that you can bring up by successively clicking the horizontal
 table headers. This feature is not supported at the moment.</p>
 <a class="reference internal image-reference" href="using/interaction/images/ShellInfo.png"><img alt="using/interaction/images/ShellInfo.png" src="using/interaction/images/ShellInfo.png" style="width: 900px;" /></a>
-</div>
-<div class="section" id="line-info">
+</section>
+<section id="line-info">
 <h3>Line Info<a class="headerlink" href="#line-info" title="Permalink to this headline">¶</a></h3>
 <p>If you switch to the spectrum tab, you can see the spectrum plot and a button to show line info.
 Once again, you can double-click the table headers to get further information. The snapshot below
 shows all the tables that you can bring up in this window. This feature is not supported at the moment.</p>
 <a class="reference internal image-reference" href="using/interaction/images/LineInfo.png"><img alt="using/interaction/images/LineInfo.png" src="using/interaction/images/LineInfo.png" style="width: 900px;" /></a>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

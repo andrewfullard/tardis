@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>How to run TARDIS with a custom ejecta model &mdash; TARDIS v3.0.dev1</title>
@@ -100,13 +101,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Additional Interactivity</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="commandline.html">Running TARDIS in the commandline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="callback_example.html">Using Custom Callbacks When Running TARDIS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="converters/index.html">Converters</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">How to run TARDIS with a custom ejecta model</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Your-custom-density-file">Your custom density file</a></li>
@@ -126,7 +126,6 @@
 <li class="toctree-l2"><a class="reference internal" href="old_gui.html">Old Graphical User Interface (Outdated)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="access.html">Accessing Physical Information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="init_trad_bug.html">Initial_t_rad Bug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrator.html">API example for the formal integral</a></li>
 <li class="toctree-l2"><a class="reference internal" href="isotope_pd_subclass.html">Extending Pandas DataFrame Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="to_hdf.html">Storing simulations to HDF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf_writer.html">Example Usage of HDFWriter</a></li>
@@ -135,34 +134,34 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -507,7 +506,7 @@ div.rendered_html tbody tr:hover {
 <p>This notebook is available at
 <a class="reference external" href="https://github.com/tardis-sn/tardis/tree/master/docs/using/interaction/Custom_TARDIS_Model_Tutorial.ipynb">https://github.com/tardis-sn/tardis/tree/master/docs/using/interaction/Custom_TARDIS_Model_Tutorial.ipynb</a>
 —-</p>
-<div class="section" id="How-to-run-TARDIS-with-a-custom-ejecta-model">
+<section id="How-to-run-TARDIS-with-a-custom-ejecta-model">
 <h1>How to run TARDIS with a custom ejecta model<a class="headerlink" href="#How-to-run-TARDIS-with-a-custom-ejecta-model" title="Permalink to this headline">¶</a></h1>
 <p>This notebook will go through multiple detailed examples of how to properly run TARDIS with a custom ejecta profile specified by a custom density file and a custom abundance file.</p>
 <div class="nbinput nblast docutils container">
@@ -521,7 +520,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="section" id="Your-custom-density-file">
+<section id="Your-custom-density-file">
 <h2>Your custom density file<a class="headerlink" href="#Your-custom-density-file" title="Permalink to this headline">¶</a></h2>
 <p>First, let’s look at an example of a custom density file.</p>
 80 day
@@ -534,12 +533,12 @@ div.rendered_html tbody tr:hover {
 <li><p>The second column lists the velocities of the outer boundary of the cell in km/s.</p></li>
 <li><p>The third column lists the density of the cell.</p></li>
 </ul>
-</div>
-<div class="section" id="Important:">
+</section>
+<section id="Important:">
 <h2>Important:<a class="headerlink" href="#Important:" title="Permalink to this headline">¶</a></h2>
 <p>The <strong>default behavior</strong> of TARDIS is to use the first shell as the inner boundary. This means that v_inner_boundary = 9500, and the corresponding density 9e-16 is ignored because it is within the inner boundary. It can be replaced by an arbitrary number. The outer boundary of the last shell will be used as v_outer_boundary, so the default behavior will set v_outer_boundary = 12000.</p>
-</div>
-<div class="section" id="Your-custom-abundance-file">
+</section>
+<section id="Your-custom-abundance-file">
 <h2>Your custom abundance file<a class="headerlink" href="#Your-custom-abundance-file" title="Permalink to this headline">¶</a></h2>
 <p>Let’s look at an example of a custom density file.</p>
 H He
@@ -549,12 +548,12 @@ H He
 <li><p>The first line indicates which elements (or isotopes) correspond to which columns.</p></li>
 <li><p>After a skipped line, each row specifies the chemical abundance of one shell. Therefore the numbers in a given row should sum to 1.0</p></li>
 </ul>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h2>Important:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Note that there are only 2 shells specified in this abundance file (despite the custom density file having 3 lines). This is because the custom density file specifies the boundaries of the shells, while the abundance file specifies the abundances within each shell.</p>
-</div>
-<div class="section" id="Running-TARDIS-with-the-custom-files">
+</section>
+<section id="Running-TARDIS-with-the-custom-files">
 <h2>Running TARDIS with the custom files<a class="headerlink" href="#Running-TARDIS-with-the-custom-files" title="Permalink to this headline">¶</a></h2>
 <p>Now let’s run TARDIS using the example custom files.</p>
 <div class="nbinput docutils container">
@@ -830,16 +829,16 @@ densities loaded by TARDIS: (NOTE that the density in the first line of the file
 [7.5e-14 2.5e-15] g / cm3
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Specifying-boundary-velocities-in-the-config-file">
+</section>
+<section id="Specifying-boundary-velocities-in-the-config-file">
 <h2>Specifying boundary velocities in the config file<a class="headerlink" href="#Specifying-boundary-velocities-in-the-config-file" title="Permalink to this headline">¶</a></h2>
 <p>In addition to specifying custom density and abundance files, the user can set the v_inner_boundary and v_outer_boundary velocities in the YAML config file. This can cause some confusion, so we carefully go through some examples.</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>Important:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Boundary velocities set in the YAML config file must be <strong>within</strong> the velocity range specified in the custom density file (if one is provided).</p>
-</div>
-<div class="section" id="Example-1)-v_inner_boundary-lower-than-first-velocity-in-density-file">
+</section>
+<section id="Example-1)-v_inner_boundary-lower-than-first-velocity-in-density-file">
 <h2>Example 1) v_inner_boundary lower than first velocity in density file<a class="headerlink" href="#Example-1)-v_inner_boundary-lower-than-first-velocity-in-density-file" title="Permalink to this headline">¶</a></h2>
 <p>In this example, the first velocity in the density file is 9500 km/s. The user can specify in the config file the velocity of the inner boundary to a lower velocity, say v_inner_boundary = 9000 km/s. This will cause TARDIS to raise an error.</p>
 <div class="nbinput docutils container">
@@ -905,8 +904,8 @@ densities loaded by TARDIS: (NOTE that the density in the first line of the file
 <span class="ansi-red-fg">ValueError</span>: v_boundary_inner is lower than the lowest shell in the model.
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Example-2)-v_outer_boundary-larger-than-last-velocity-in-density-file">
+</section>
+<section id="Example-2)-v_outer_boundary-larger-than-last-velocity-in-density-file">
 <h2>Example 2) v_outer_boundary larger than last velocity in density file<a class="headerlink" href="#Example-2)-v_outer_boundary-larger-than-last-velocity-in-density-file" title="Permalink to this headline">¶</a></h2>
 <p>In this example, the last velocity in the density file is 12000 km/s. The user can specify in the config file the velocity of the outer boundary to a larger velocity, say v_outer_boundary = 13000 km/s. This will cause TARDIS to raise an error.</p>
 <div class="nbinput docutils container">
@@ -972,8 +971,8 @@ densities loaded by TARDIS: (NOTE that the density in the first line of the file
 <span class="ansi-red-fg">ValueError</span>: v_boundary_outer is larger than the largest shell in the model.
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Example-3)-v_boundaries-in-config-file-are-within-density-file-velocity-range">
+</section>
+<section id="Example-3)-v_boundaries-in-config-file-are-within-density-file-velocity-range">
 <h2>Example 3) v_boundaries in config file are within density file velocity range<a class="headerlink" href="#Example-3)-v_boundaries-in-config-file-are-within-density-file-velocity-range" title="Permalink to this headline">¶</a></h2>
 <p>Here the user sets v_inner_boundary = 9700 and v_outer_boundary = 11500 in the config file. Both values fall within the velocity range specified by the custom density file.</p>
 <div class="nbinput docutils container">
@@ -1239,12 +1238,12 @@ densities loaded by TARDIS: (NOTE that the density in the first line of the file
 [7.5e-14 2.5e-15] g / cm3
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>Important:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>Notice that the inner and outer boundary velocities are the ones specifically set by the user.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

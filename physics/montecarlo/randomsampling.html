@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Random Sampling Basics &mdash; TARDIS v3.0.dev1</title>
@@ -102,13 +103,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Monte Carlo Primer</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basicprinciples.html">Monte Carlo Radiative Transfer - Basic Principles</a></li>
@@ -132,28 +133,28 @@
 <li class="toctree-l1"><a class="reference internal" href="../plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -249,7 +250,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="random-sampling-basics">
+<section id="random-sampling-basics">
 <h1>Random Sampling Basics<a class="headerlink" href="#random-sampling-basics" title="Permalink to this headline">¶</a></h1>
 <p>Monte Carlo radiative transfer calculations require a probabilistic
 representation of the relevant physical processes. This involves assigning
@@ -265,7 +266,7 @@ Radiative transfer calculation. From a probability theory point of view, this
 just implies finding a mapping between the probability distribution governing the
 physical process and the one underlying the Random Number Generator. This
 process is typically referred to as random sampling.</p>
-<div class="section" id="inverse-transformation-method">
+<section id="inverse-transformation-method">
 <h2>Inverse transformation method<a class="headerlink" href="#inverse-transformation-method" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -299,12 +300,12 @@ distribution sampling method relies on finding the analytic inverse function of
 the cumulative distribution function governing the physical processes to be
 sampled. If this is not possible, other sampling methods, such as von-Neumann
 rejection sampling techniques, have to be used.</p>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>A few examples are provided to illustrate the random sampling process using the
 inverse transformation technique.</p>
-<div class="section" id="isotropic-scattering">
+<section id="isotropic-scattering">
 <h3>Isotropic Scattering<a class="headerlink" href="#isotropic-scattering" title="Permalink to this headline">¶</a></h3>
 <p>Consider the case of an isotropic scattering.
 Here, all scattering angles are equally likely. Thus, the corresponding
@@ -315,8 +316,8 @@ f_{\mu}(\mu) &amp;= \frac{1}{2} (\mu - 1).\end{split}\]</div>
 <p>This leads to the sampling rule</p>
 <div class="math notranslate nohighlight">
 \[\mu = 2 z - 1.\]</div>
-</div>
-<div class="section" id="next-interaction-location">
+</section>
+<section id="next-interaction-location">
 <h3>Next Interaction Location<a class="headerlink" href="#next-interaction-location" title="Permalink to this headline">¶</a></h3>
 <p>The probability of a packet interacting after covering an optical depth
 <span class="math notranslate nohighlight">\(\tau\)</span> is given by</p>
@@ -329,9 +330,9 @@ f_{\tau}(\tau) &amp;= 1 - \exp(-\tau).\end{split}\]</div>
 <p>which is equivalent to</p>
 <div class="math notranslate nohighlight">
 \[\tau = - \mathrm{ln}z.\]</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

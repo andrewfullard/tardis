@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Running tests &mdash; TARDIS v3.0.dev1</title>
@@ -100,29 +101,29 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Workflow</a><ul class="current">
@@ -146,11 +147,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -246,7 +247,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="running-tests">
+<section id="running-tests">
 <h1>Running tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">¶</a></h1>
 <p>There are two basic categories of tests in TARDIS: 1) the unit
 tests, and 2) the integration tests. Unit tests check the outputs of individual functions,
@@ -256,7 +257,7 @@ to TARDIS. The integration tests are much more costly and thus are only executed
 every few days on a dedicated server.</p>
 <p>All of them are based on the excellent <code class="docutils literal notranslate"><span class="pre">astropy-setup-helpers</span></code> package and
 <a class="reference external" href="https://docs.pytest.org/en/latest/">pytest</a>.</p>
-<div class="section" id="running-the-unit-tests">
+<section id="running-the-unit-tests">
 <h2>Running the Unit Tests<a class="headerlink" href="#running-the-unit-tests" title="Permalink to this headline">¶</a></h2>
 <p>This is very straightforward to run on your own machine. For very simple unit
 tests, you can run this with:</p>
@@ -269,16 +270,16 @@ downloaded
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt; python setup.py <span class="nb">test</span> --args<span class="o">=</span><span class="s2">&quot;--tardis-refdata=/path/to/tardis-refdata/&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="generating-plasma-reference">
+</section>
+<section id="generating-plasma-reference">
 <h2>Generating Plasma Reference<a class="headerlink" href="#generating-plasma-reference" title="Permalink to this headline">¶</a></h2>
 <p>You can generate Plasma Reference by the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt; pytest -rs tardis/plasma/tests/test_complete_plasmas.py
 --tardis-refdata<span class="o">=</span><span class="s2">&quot;/path/to/tardis-refdata/&quot;</span> --generate-reference
 </pre></div>
 </div>
-</div>
-<div class="section" id="running-the-integration-tests">
+</section>
+<section id="running-the-integration-tests">
 <h2>Running the Integration Tests<a class="headerlink" href="#running-the-integration-tests" title="Permalink to this headline">¶</a></h2>
 <p>These tests require reference files against which the results of the various
 tardis runs are tested. So you first need to either download the current
@@ -339,8 +340,8 @@ needed is:</p>
 <span class="s2">--less-packets&quot;</span> --remote-data
 </pre></div>
 </div>
-</div>
-<div class="section" id="setting-up-the-dokuwiki-report">
+</section>
+<section id="setting-up-the-dokuwiki-report">
 <h2>Setting up the DokuWiki report<a class="headerlink" href="#setting-up-the-dokuwiki-report" title="Permalink to this headline">¶</a></h2>
 <p>A normal <a class="reference external" href="https://www.dokuwiki.org/dokuwiki">DokuWiki</a> installation is performed on the required server. Before the
 connection works one is requires to set the option remote access in the
@@ -353,8 +354,8 @@ will appear.</p>
 otherwise, it won’t show nice html page reports.</p>
 <p>Finally, one has to call the <cite>python setup.py test</cite> with the <code class="docutils literal notranslate"><span class="pre">--remote-data</span></code>
 option to allow posting to an external DokuWiki server.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

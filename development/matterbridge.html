@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Matterbridge Server &mdash; TARDIS v3.0.dev1</title>
@@ -100,29 +101,29 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Workflow</a><ul class="current">
@@ -153,11 +154,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -253,9 +254,9 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="matterbridge-server">
+<section id="matterbridge-server">
 <h1>Matterbridge Server<a class="headerlink" href="#matterbridge-server" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overview">
+<section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>We use Matterbridge to connect channels across different messaging platforms
 such as <em>Slack</em>, <em>Mattermost</em> and <em>Gitter</em>. Matterbridge provides binaries
@@ -274,28 +275,28 @@ Linux service.</p>
 <p>Since this server runs Ubuntu 14.04 we use an <a class="reference external" href="https://www.digitalocean.com/community/tutorials/the-upstart-event-system-what-it-is-and-how-to-use-it">Upstart script</a> instead of a
 <a class="reference external" href="https://freedesktop.org/software/systemd/man/systemd.service.html">Systemd service</a> file, but a Systemd file is also included in our repository.
 A <em>cron</em> job restarts the service periodically to prevent disconnections.</p>
-</div>
-<div class="section" id="configuration">
+</section>
+<section id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>Use the TOML file in <code class="docutils literal notranslate"><span class="pre">tardis-matterbridge</span></code> as an example. You can set up
 as many gateways as you want!</p>
-<div class="section" id="slack">
+<section id="slack">
 <h3>Slack<a class="headerlink" href="#slack" title="Permalink to this headline">¶</a></h3>
 <p>Follow the <a class="reference external" href="https://github.com/42wim/matterbridge/wiki/Slack-bot-setup">steps for Slack in the Matterbridge wiki</a> and read carefully
 <a class="reference external" href="https://github.com/42wim/matterbridge/issues/964#issuecomment-612721850">this comment</a> (do not add any scopes manually!). Copy the token to use
 later in the TOML file.</p>
-</div>
-<div class="section" id="gitter">
+</section>
+<section id="gitter">
 <h3>Gitter<a class="headerlink" href="#gitter" title="Permalink to this headline">¶</a></h3>
 <p>Create a new GitHub dedicated account to use as a bot, refer to <a class="reference external" href="https://developer.gitter.im/docs/authentication">this link</a>
 and copy the token to use later in the TOML file.</p>
-</div>
-<div class="section" id="mattermost">
+</section>
+<section id="mattermost">
 <h3>Mattermost<a class="headerlink" href="#mattermost" title="Permalink to this headline">¶</a></h3>
 <p>Follow the <a class="reference external" href="https://github.com/42wim/matterbridge/wiki/Section-Mattermost-%28basic%29">steps for Mattermost in the Matterbridge wiki</a>.</p>
-</div>
-</div>
-<div class="section" id="first-time-setup">
+</section>
+</section>
+<section id="first-time-setup">
 <h2>First-time setup<a class="headerlink" href="#first-time-setup" title="Permalink to this headline">¶</a></h2>
 <p>Follow these steps to set up the server:</p>
 <ol class="arabic simple">
@@ -309,8 +310,8 @@ and copy the token to use later in the TOML file.</p>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">matterbridge</span> <span class="pre">start</span></code>.</p></li>
 <li><p>Test your gateways.</p></li>
 </ol>
-</div>
-<div class="section" id="update-server-configuration">
+</section>
+<section id="update-server-configuration">
 <h2>Update server configuration<a class="headerlink" href="#update-server-configuration" title="Permalink to this headline">¶</a></h2>
 <p>After updating the TOML file, follow these steps:</p>
 <ol class="arabic simple">
@@ -320,12 +321,12 @@ and copy the token to use later in the TOML file.</p>
 <li><p>Test your gateways.</p></li>
 <li><p>If everything is ok, make a pull request to <code class="docutils literal notranslate"><span class="pre">tardis-matterbridge</span></code> with your new TOML file.</p></li>
 </ol>
-</div>
-<div class="section" id="cron-job">
+</section>
+<section id="cron-job">
 <h2>Cron job<a class="headerlink" href="#cron-job" title="Permalink to this headline">¶</a></h2>
 <p>To edit the cron job, <em>ssh</em> to <a class="reference external" href="http://opensupernova.org">OpenSupernova.org</a> and run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">crontab</span> <span class="pre">-e</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

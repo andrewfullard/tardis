@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Installation &mdash; TARDIS v3.0.dev1</title>
@@ -108,40 +109,40 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -235,7 +236,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="installation">
+<section id="installation">
 <span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <p>Before installing TARDIS, please check its <a class="reference internal" href="#requirements-label"><span class="std std-ref">requirements</span></a>. We provide <a class="reference internal" href="#anaconda-inst-label"><span class="std std-ref">instructions</span></a> for installing TARDIS using
 Anaconda. If you encounter problems, consult the
@@ -249,13 +250,13 @@ installed TARDIS, check out the “Using TARDIS” section (in sidebar) for inst
 <li><p>We strongly recommend installing TARDIS within an Anaconda environment and to always use the latest GitHub development version.</p></li>
 </ul>
 </div>
-<div class="section" id="requirements">
+<section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>You can see a list of all the requirements of TARDIS in the <a class="reference external" href="https://raw.githubusercontent.com/tardis-sn/tardis/master/tardis_env3.yml">environment definition file</a>.</p>
 <p>TARDIS is using Astropy’s excellent installation helpers and thus uses similar
 instructions to Astropy.</p>
-</div>
-<div class="section" id="installing-tardis-with-anaconda">
+</section>
+<section id="installing-tardis-with-anaconda">
 <span id="anaconda-inst-label"></span><h2>Installing TARDIS with Anaconda<a class="headerlink" href="#installing-tardis-with-anaconda" title="Permalink to this headline">¶</a></h2>
 <p>We highly recommend using the <a class="reference external" href="https://www.anaconda.com/">Anaconda</a> Python environment to install TARDIS (or
 any other scientific packages for that matter). Anaconda has the advantage of
@@ -298,7 +299,7 @@ then install TARDIS, as follows:</p>
 <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
-<div class="section" id="enabling-parallel-execution-with-openmp">
+<section id="enabling-parallel-execution-with-openmp">
 <span id="install-openmp"></span><h3>Enabling parallel execution with OpenMP<a class="headerlink" href="#enabling-parallel-execution-with-openmp" title="Permalink to this headline">¶</a></h3>
 <p>Manually, cloning the repository enables other options such as running the code in parallel (enabling OpenMP).
 In general, we encourage downloading the compilers from <cite>conda</cite> as we then can ensure that they work with TARDIS.
@@ -318,9 +319,9 @@ Within the TARDIS conda environment do:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">openmp</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="installation-troubles-faq">
+</section>
+</section>
+<section id="installation-troubles-faq">
 <span id="troubleshooting-inst-label"></span><h2>Installation Troubles (FAQ)<a class="headerlink" href="#installation-troubles-faq" title="Permalink to this headline">¶</a></h2>
 <p>We highly encourage with any installation problems to try the recommended install
 method because this often fixes problems. Here are some common problems when
@@ -365,8 +366,8 @@ may encounter the following error:</p>
 </dd>
 </dl>
 <p>Then, <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">build</span> <span class="pre">install</span></code> should run without problems.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

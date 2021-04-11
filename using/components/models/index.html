@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Model &mdash; TARDIS v3.0.dev1</title>
@@ -100,7 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Components</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../configuration/index.html">Configuration</a></li>
@@ -124,34 +125,34 @@
 <li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -247,7 +248,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="model">
+<section id="model">
 <h1>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h1>
 <p>TARDIS requires a model of the homologously expanding ejecta in order to run a simulation.
 A model will include information like the velocity shell structure, abundances, density, etc.
@@ -258,7 +259,7 @@ the CSVY file format and <a class="reference internal" href="../configuration/co
 <p class="admonition-title">Note</p>
 <p>We highly recommend using the cleaner CSVY format.</p>
 </div>
-<div class="section" id="csvy-model">
+<section id="csvy-model">
 <h2>CSVY Model<a class="headerlink" href="#csvy-model" title="Permalink to this headline">¶</a></h2>
 <p>The TARDIS YAML delimiter for CSVY files is <code class="docutils literal notranslate"><span class="pre">---</span></code>. This means that each CSVY model
 file has the following structure: The first line of the file is the YAML delimiter,
@@ -272,8 +273,8 @@ in the main TARDIS configuration file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">csvy_model</span><span class="p">:</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">csvy</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-csvy-model">
+</section>
+<section id="example-csvy-model">
 <h2>Example CSVY Model<a class="headerlink" href="#example-csvy-model" title="Permalink to this headline">¶</a></h2>
 <p>Below we provide an example model.csvy file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
@@ -308,8 +309,8 @@ in the main TARDIS configuration file:</p>
 <span class="mi">12000</span><span class="p">,</span> <span class="mf">9e-11</span><span class="p">,</span> <span class="mi">7000</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.58</span><span class="p">,</span> <span class="mf">0.02</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-the-config-model">
+</section>
+<section id="using-the-config-model">
 <h2>Using the Config Model<a class="headerlink" href="#using-the-config-model" title="Permalink to this headline">¶</a></h2>
 <p>Although we strongly recommend using the CSVY Model, TARDIS also allows the user
 to define custom density and abundance profiles in separate files and reference
@@ -325,8 +326,8 @@ see the following links:</p>
 <li class="toctree-l1"><a class="reference internal" href="examples/abundancecust.html">Using a custom stratified composition</a></li>
 </ul>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

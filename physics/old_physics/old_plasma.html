@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Plasma (Outdated) &mdash; TARDIS v3.0.dev1</title>
@@ -102,13 +103,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plasma/index.html">Plasma</a></li>
@@ -131,28 +132,28 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -248,7 +249,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="plasma-outdated">
+<section id="plasma-outdated">
 <span id="old-plasma"></span><h1>Plasma (Outdated)<a class="headerlink" href="#plasma-outdated" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -266,7 +267,7 @@ description of the BasePlasma (for details see <a class="reference internal" hre
 </div>
 <p>All plasma calculations follow the same basic procedure in calculating the plasma state.
 This is always accomplished with the function <code class="docutils literal notranslate"><span class="pre">update_radiationfield</span></code>. This block diagram shows the basic procedure</p>
-<div class="section" id="base-plasma">
+<section id="base-plasma">
 <h2>Base Plasma<a class="headerlink" href="#base-plasma" title="Permalink to this headline">¶</a></h2>
 <p><cite>BasePlasma</cite> serves as the base class for all plasmas and can just calculate the atom number densities for a given input of
 abundance fraction.</p>
@@ -289,8 +290,8 @@ setting <cite>BasePlasma.beta_rad</cite> to <span class="math notranslate nohigh
 <span class="go">           26                0.5  539183641.472</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="plasma-types">
+</section>
+<section id="plasma-types">
 <h2>Plasma Types<a class="headerlink" href="#plasma-types" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
@@ -306,8 +307,8 @@ setting <cite>BasePlasma.beta_rad</cite> to <span class="math notranslate nohigh
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="sobolev-optical-depth">
+</section>
+<section id="sobolev-optical-depth">
 <span id="tau-sobolev"></span><h2>Sobolev optical depth<a class="headerlink" href="#sobolev-optical-depth" title="Permalink to this headline">¶</a></h2>
 <p>This function calculates the Sobolev optical depth <span class="math notranslate nohighlight">\(\tau_\textrm{Sobolev}\)</span></p>
 <div class="math notranslate nohighlight">
@@ -320,8 +321,8 @@ setting <cite>BasePlasma.beta_rad</cite> to <span class="math notranslate nohigh
 <li class="toctree-l1"><a class="reference internal" href="../plasma/nlte.html">NLTE treatment</a></li>
 </ul>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

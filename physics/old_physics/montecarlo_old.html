@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Radiative Monte Carlo &mdash; TARDIS v3.0.dev1</title>
@@ -102,13 +103,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plasma/index.html">Plasma</a></li>
@@ -124,28 +125,28 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -241,12 +242,12 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="radiative-monte-carlo">
+<section id="radiative-monte-carlo">
 <span id="montecarlo"></span><h1>Radiative Monte Carlo<a class="headerlink" href="#radiative-monte-carlo" title="Permalink to this headline">¶</a></h1>
 <p>We assume the supernova is in homologous expansion, and we assume that
 there is photon injection from an inner boundary, and we assume an outer boundary
 where these photons can leave the simulation again.</p>
-<div class="section" id="monte-carlo-packets">
+<section id="monte-carlo-packets">
 <h2>Monte Carlo packets<a class="headerlink" href="#monte-carlo-packets" title="Permalink to this headline">¶</a></h2>
 <p>Monte Carlo packets have a frequency, angle (<span class="math notranslate nohighlight">\(\mu=\cos{\theta}\)</span> )
 and an energy: <span class="math notranslate nohighlight">\(P(\nu, \mu, \epsilon)\)</span>. A large number <span class="math notranslate nohighlight">\(n\)</span> is generated
@@ -283,14 +284,14 @@ d_\textrm{rest \rightarrow comoving} = 1 - \mu_\textrm{out} v(r) / c \\
 E_\textrm{after scatter} = E_\textrm{before scatter} \times \frac{1 - \mu_\textrm{in} v(r) / c}{1 - \mu_\textrm{out} v(r) / c}\end{split}\]</div>
 <p>This way, the Monte Carlo packets can gain or lose energy in the simulation:</p>
 <p>(<a class="reference external" href="../../physics/pyplot/plot_mu_in_out_packet.py">Source code</a>, <a class="reference external" href="../../physics/pyplot/plot_mu_in_out_packet.png">png</a>, <a class="reference external" href="../../physics/pyplot/plot_mu_in_out_packet.hires.png">hires.png</a>, <a class="reference external" href="../../physics/pyplot/plot_mu_in_out_packet.pdf">pdf</a>)</p>
-<div class="figure align-default">
+<figure class="align-default">
 <img alt="../../_images/plot_mu_in_out_packet.png" class="plot-directive" src="../../_images/plot_mu_in_out_packet.png" />
-</div>
+</figure>
 <p>The spectrum is then generated as a weighted histogram. For each bin with edges
 <span class="math notranslate nohighlight">\(\nu_{n}, \nu_{n+1}\)</span>, we get all the packets that left the simulation through
 the outer boundary and add up their remaining energies.</p>
-</div>
-<div class="section" id="monte-carlo-geometry">
+</section>
+<section id="monte-carlo-geometry">
 <h2>Monte Carlo Geometry<a class="headerlink" href="#monte-carlo-geometry" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>Before any packet action is performed, we calculate four different distances</dt><dd><p>( <span class="math notranslate nohighlight">\(d_\textrm{inner}, d_\textrm{outer}, d_\textrm{line}, d_{\textrm{e}^{-}}\)</span> )</p>
@@ -300,8 +301,8 @@ the outer boundary and add up their remaining energies.</p>
 <a class="reference internal image-reference" href="physics/graphics/d_outer.png"><img alt="physics/graphics/d_outer.png" src="physics/graphics/d_outer.png" style="width: 400px;" /></a>
 <p>The calculations for the distance to the inner boundary:</p>
 <a class="reference internal image-reference" href="physics/graphics/d_inner.png"><img alt="physics/graphics/d_inner.png" src="physics/graphics/d_inner.png" style="width: 400px;" /></a>
-</div>
-<div class="section" id="radiation-field-estimators">
+</section>
+<section id="radiation-field-estimators">
 <h2>Radiation field estimators<a class="headerlink" href="#radiation-field-estimators" title="Permalink to this headline">¶</a></h2>
 <p>During the Monte Carlo run, we collect two estimators for the radiation field:</p>
 <div class="math notranslate nohighlight">
@@ -332,8 +333,8 @@ dilution factor</p>
 <div class="math notranslate nohighlight">
 \[W = \frac{\pi J}{\sigma_{SB} T_{R}^4} = \frac{1}{4\sigma_{SB} T_{R}^4\, \Delta t\, V} J_\textrm{estimator}.\]</div>
 <p>There endeth the lesson.</p>
-</div>
-<div class="section" id="algorithm-flowchart">
+</section>
+<section id="algorithm-flowchart">
 <h2>Algorithm Flowchart<a class="headerlink" href="#algorithm-flowchart" title="Permalink to this headline">¶</a></h2>
 <div class="graphviz"><img src="../../_images/graphviz-5c3e2d339ff399365ffea4cff4f64e31f3e6151a.png" alt="digraph g{
   a -&gt; b -&gt; c
@@ -354,8 +355,8 @@ dilution factor</p>
   g [label=&quot;Update line\nprobabilities.&quot;, shape=&quot;box&quot;, fillcolor=&quot;white&quot;, style=&quot;filled,rounded&quot;]
   h [label=&quot;New random direction,\nupdated energy,\nmoving packet to current position,\nupdating event random number.&quot;, shape=&quot;box&quot;, fillcolor=&quot;white&quot;, style=&quot;filled,rounded&quot;]
 }" class="graphviz" /></div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

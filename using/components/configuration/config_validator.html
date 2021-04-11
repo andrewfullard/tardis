@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Configuration Validator &mdash; TARDIS v3.0.dev1</title>
@@ -100,7 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Components</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Configuration</a><ul class="current">
@@ -120,34 +121,34 @@
 <li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -245,7 +246,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="configuration-validator">
+<section id="configuration-validator">
 <h1>Configuration Validator<a class="headerlink" href="#configuration-validator" title="Permalink to this headline">¶</a></h1>
 <p>The default config validator takes a user configuration and a default configuration and creates a consistent and valid configuration for TARDIS based on the constraints given in the default configuration. Both input data are normally given as a YAML dictionary with a consistent hierarchical structure, i.e. for every item in the user configuration there has to be a declaration in the default configuration at the same hierarchical level. This declaration can be either an unspecific empty level declaration like:
 - Main_level:</p>
@@ -282,7 +283,7 @@
 - Range: The property type range specifies a range via start and end. Note: <code class="docutils literal notranslate"><span class="pre">abs(start</span> <span class="pre">-</span> <span class="pre">end</span> <span class="pre">)</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.
 - Quantity_range: Like property type range but with quantities as start and stop. The consistency of the units is checked.</p>
 <p>Additionally to the four standard keywords the types integer, float, and quantity can have the keywords <code class="docutils literal notranslate"><span class="pre">allowed_value</span></code> and <code class="docutils literal notranslate"><span class="pre">allowed_type</span></code>. <code class="docutils literal notranslate"><span class="pre">allowed_value</span></code> specifies the allowed values in a list, whereas <code class="docutils literal notranslate"><span class="pre">allowed_type</span></code> specifies a range of allowed values, such as “x&gt;10”.</p>
-<div class="section" id="container">
+<section id="container">
 <h2>Container<a class="headerlink" href="#container" title="Permalink to this headline">¶</a></h2>
 <p>For more complex configurations with dependencies, you can use the containers that allow branching in the configuration. A container is declared in the default configuration file by setting the  <code class="docutils literal notranslate"><span class="pre">property_type</span></code> to container property and specifying the properties of the container with keyword type. The <code class="docutils literal notranslate"><span class="pre">property_type</span></code> of this section is container-declaration that allows you to specify the possible container items with the keyword container. For every specified container item, the code expects the declaration of all sub items. The keywords for this are “_“ + “name of the container item”.
 If the type declaration for this container is finished, you can specify all container items like normal items. Here is an example for a container configuration with two branches:</p>
@@ -357,8 +358,8 @@ If the type declaration for this container is finished, you can specify all cont
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="how-to-use">
+</section>
+<section id="how-to-use">
 <h2>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h2>
 <p>To use the default parser create a new config object form the class ConfigurationValidator either from a dictionaries or from YAML files:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">My_config</span> <span class="o">=</span> <span class="n">ConfigurationValidator</span><span class="p">(</span><span class="n">default</span> <span class="n">configuration</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">user</span> <span class="n">configuration</span> <span class="n">dictionary</span><span class="p">)</span>
@@ -367,8 +368,8 @@ If the type declaration for this container is finished, you can specify all cont
 <p>or
 - My_config = ConfigurationValidator.from_yaml (default configuration file, user configuration file).</p>
 <p>To access the configuration for TARDIS, use the method <code class="docutils literal notranslate"><span class="pre">get_config</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

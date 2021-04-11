@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Direct integration of the radiation field &mdash; TARDIS v3.0.dev1</title>
@@ -102,13 +103,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Monte Carlo Primer</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basicprinciples.html">Monte Carlo Radiative Transfer - Basic Principles</a></li>
@@ -130,28 +131,28 @@
 <li class="toctree-l1"><a class="reference internal" href="../plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -247,7 +248,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="direct-integration-of-the-radiation-field">
+<section id="direct-integration-of-the-radiation-field">
 <span id="source-integration"></span><h1>Direct integration of the radiation field<a class="headerlink" href="#direct-integration-of-the-radiation-field" title="Permalink to this headline">¶</a></h1>
 <p><a class="bibtex reference internal" href="../../zreferences.html#lucy1999a" id="id1">[Lucy99b]</a> describes an alternative method for the generation of
 synthetic supernova spectra. Instead of using the frequency and energy of
@@ -264,7 +265,7 @@ synthesis process.</p>
 Please consult the corresponding section below to ensure that these
 limitations do not apply to your application.</p>
 </div>
-<div class="section" id="estimators">
+<section id="estimators">
 <h2>Estimators<a class="headerlink" href="#estimators" title="Permalink to this headline">¶</a></h2>
 <p>The procedure relies on determining line absorption rates, which are calculated
 during the Monte Carlo simulation by incrementing the volume-based estimator</p>
@@ -299,8 +300,8 @@ volume-based estimators according to</p>
 <p>and</p>
 <div class="math notranslate nohighlight">
 \[J_{lu}^r = J_{lu}^b e^{-\tau_{lu}} + S_{ul} (1 + e^{-\tau_{lu}})\]</div>
-</div>
-<div class="section" id="integration">
+</section>
+<section id="integration">
 <h2>Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h2>
 <p>Calculating the emergent spectrum proceeds by casting rays parallel to the line
 of sight to the observer through the ejecta. The distance along these rays will
@@ -330,8 +331,8 @@ I_k^r  \right]\]</div>
 on the ray, the limiting specific intensity for the final integration can be
 calculated. The boundary conditions for this process are either <span class="math notranslate nohighlight">\(I_0^r =
 B_\nu(T)\)</span> if the ray intersects the photosphere or <span class="math notranslate nohighlight">\(I_0^r = 0\)</span> otherwise.</p>
-</div>
-<div class="section" id="implementation-details">
+</section>
+<section id="implementation-details">
 <h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h2>
 <p>We seek to integrate all emissions at a certain wavelength <span class="math notranslate nohighlight">\(\nu\)</span> along a
 ray with impact parameter <span class="math notranslate nohighlight">\(p\)</span>. Because the supernova ejecta is expanding
@@ -366,8 +367,8 @@ minimum co-moving frequency that will give the specified lab frame frequency.
 This allows us to find the section of the line list with the transitions whose
 resonances have to be considered in the calculation of the limiting specific
 intensity.</p>
-</div>
-<div class="section" id="current-limitations">
+</section>
+<section id="current-limitations">
 <h2>Current Limitations<a class="headerlink" href="#current-limitations" title="Permalink to this headline">¶</a></h2>
 <p>The current implementation of the formal integral has some limitations:</p>
 <ul class="simple">
@@ -380,8 +381,8 @@ negative intensities.</p></li>
 </ul>
 <p>It is always advised to check the results of the formal integration against the
 spectrum constructed from the emerging Monte Carlo packets.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

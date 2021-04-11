@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Volume-based Monte Carlo Estimators &mdash; TARDIS v3.0.dev1</title>
@@ -102,13 +103,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../using/components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using/interaction/index.html">Additional Interactivity</a></li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Monte Carlo Primer</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basicprinciples.html">Monte Carlo Radiative Transfer - Basic Principles</a></li>
@@ -128,28 +129,28 @@
 <li class="toctree-l1"><a class="reference internal" href="../plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -245,7 +246,7 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="volume-based-monte-carlo-estimators">
+<section id="volume-based-monte-carlo-estimators">
 <h1>Volume-based Monte Carlo Estimators<a class="headerlink" href="#volume-based-monte-carlo-estimators" title="Permalink to this headline">¶</a></h1>
 <p>An integral part of Monte Carlo radiative transfer calculations consists of
 reconstructing macroscopic radiation field properties from the ensemble of
@@ -253,7 +254,7 @@ packet interaction histories. TARDIS uses volume-based Monte Carlo estimators
 for this purpose. This concept was originally developed by <a class="bibtex reference internal" href="../../zreferences.html#lucy1999" id="id1">[Lucy99a]</a> and
 successively refined, for example, by <a class="bibtex reference internal" href="../../zreferences.html#lucy1999a" id="id2">[Lucy99b]</a>, <a class="bibtex reference internal" href="../../zreferences.html#lucy2002" id="id3">[Lucy02]</a> and
 <a class="bibtex reference internal" href="../../zreferences.html#lucy2003" id="id4">[Lucy03]</a>.</p>
-<div class="section" id="basic-principle">
+<section id="basic-principle">
 <h2>Basic Principle<a class="headerlink" href="#basic-principle" title="Permalink to this headline">¶</a></h2>
 <p>The basic principle underlying volume-based estimators is best illustrated
 by the example of reconstructing the mean radiation field energy density within
@@ -282,8 +283,8 @@ least one packet passed through the control volume. Additionally, as one packet
 may generally contribute multiple times to the estimator (e.g. if it is
 deflected by a scattering), these estimators typically suffer from less Monte
 Carlo noise than simple counting reconstruction schemes.</p>
-</div>
-<div class="section" id="volume-based-estimators-in-tardis">
+</section>
+<section id="volume-based-estimators-in-tardis">
 <h2>Volume-based Estimators in TARDIS<a class="headerlink" href="#volume-based-estimators-in-tardis" title="Permalink to this headline">¶</a></h2>
 <p>Within TARDIS, volume-based estimators are used to reconstruct the mean
 intensity and the mean frequency of the radiation field (see also
@@ -326,8 +327,8 @@ the Macro Atom treatment and in the ionisation calculation.</p>
 estimator, in particular, for a motivation of the expansion factor involving
 the time since explosion <span class="math notranslate nohighlight">\(t_{\mathrm{exp}}\)</span>, we refer to
 <a class="bibtex reference internal" href="../../zreferences.html#lucy2003" id="id6">[Lucy03]</a>, section 6.2.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

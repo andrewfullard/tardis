@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Accessing Physical Quantities &mdash; TARDIS v3.0.dev1</title>
@@ -102,20 +103,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/quickstart.html">Quickstart for TARDIS</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Using TARDIS</span></p>
+<p><span class="caption-text">Using TARDIS</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../components/index.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gui/index.html">Graphical User Interface</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Additional Interactivity</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="commandline.html">Running TARDIS in the commandline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="callback_example.html">Using Custom Callbacks When Running TARDIS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="converters/index.html">Converters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Custom_TARDIS_Model_Tutorial.html">How to run TARDIS with a custom ejecta model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_source.html">Running TARDIS with a custom packet source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="old_gui.html">Old Graphical User Interface (Outdated)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="access.html">Accessing Physical Information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="init_trad_bug.html">Initial_t_rad Bug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrator.html">API example for the formal integral</a></li>
 <li class="toctree-l2"><a class="reference internal" href="isotope_pd_subclass.html">Extending Pandas DataFrame Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="to_hdf.html">Storing simulations to HDF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf_writer.html">Example Usage of HDFWriter</a></li>
@@ -129,34 +128,34 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">The Physics of TARDIS</span></p>
+<p><span class="caption-text">The Physics of TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/montecarlo/index.html">Monte Carlo Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/plasma/index.html">Plasma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../physics/old_physics/index.html">Old Physics Section (Outdated)</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Research with TARDIS</span></p>
+<p><span class="caption-text">Research with TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../research/index.html">Overview</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Team &amp; Credits</span></p>
+<p><span class="caption-text">Team &amp; Credits</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../team_and_governance/index.html">Team and Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits &amp; Publication Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Contributing to TARDIS</span></p>
+<p><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Developer Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Development Roadmap</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">tardis</a></li>
 </ul>
-<p class="caption"><span class="caption-text">References</span></p>
+<p><span class="caption-text">References</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../zreferences.html">TARDIS Papers and useful References</a></li>
 </ul>
@@ -501,10 +500,10 @@ div.rendered_html tbody tr:hover {
 <p>This notebook is available at
 <a class="reference external" href="https://github.com/tardis-sn/tardis/tree/master/docs/using/interaction/physical_quantities.ipynb">https://github.com/tardis-sn/tardis/tree/master/docs/using/interaction/physical_quantities.ipynb</a>
 —-</p>
-<div class="section" id="Accessing-Physical-Quantities">
+<section id="Accessing-Physical-Quantities">
 <span id="physical-quantities"></span><h1>Accessing Physical Quantities<a class="headerlink" href="#Accessing-Physical-Quantities" title="Permalink to this headline">¶</a></h1>
 <p>In order to compute the synthetic spectrum, TARDIS must either be told or must calculate many physical properties of the model. To understand and test the code it can be important to look at these values. One easy way to do this is to run TARDIS in an interactive mode and then inspect the model properties.</p>
-<div class="section" id="Runing-in-interactive-Python-session">
+<section id="Runing-in-interactive-Python-session">
 <h2>Runing in interactive Python session<a class="headerlink" href="#Runing-in-interactive-Python-session" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -528,7 +527,7 @@ div.rendered_html tbody tr:hover {
 [<span class="ansi-bold">tardis.io.atom_data.atom_web_download</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Downloading atomic data from https://media.githubusercontent.com/media/tardis-sn/tardis-refdata/master/atom_data/kurucz_cd23_chianti_H_He.h5 to /home/runner/Downloads/tardis-data/kurucz_cd23_chianti_H_He.h5 (<span class="ansi-bold">atom_web_download.py</span>:48)
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100   980  100   980    0     0  37692      0 --:--:-- --:--:-- --:--:-- 37692
+100   980  100   980    0     0  20000      0 --:--:-- --:--:-- --:--:-- 20000
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1260,12 +1259,12 @@ Running post-merge numba montecarlo (with C close lines)!
  (<span class="ansi-bold">warnings.py</span>:109)
 Running post-merge numba montecarlo (with C close lines)!
 [<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Luminosity emitted = 1.26319e+43 erg / s Luminosity absorbed = 4.10706e+42 erg / s Luminosity requested = 1.05928e+43 erg / s (<span class="ansi-bold">base.py</span>:444)
-[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Simulation finished in 20 iterations and took 57.47 s (<span class="ansi-bold">base.py</span>:381)
+[<span class="ansi-bold">tardis.simulation.base</span>][<span class="ansi-white-intense-fg ansi-bold">INFO</span>   ]  Simulation finished in 20 iterations and took 46.31 s (<span class="ansi-bold">base.py</span>:381)
 </pre></div></div>
 </div>
 <p>If all goes well, the simulation should run as usual. Afterwards, the information from the simulation will all exist in <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> and can be examined. Some examples for useful/interesting quantities are given below (but much more information is available: contact us via <a class="reference external" href="http://groups.google.com/forum/#!forum/tardis-sn-users">tardis-sn-users</a> if you need further help).</p>
-</div>
-<div class="section" id="Examples-of-finding-physical-quantities">
+</section>
+<section id="Examples-of-finding-physical-quantities">
 <h2>Examples of finding physical quantities<a class="headerlink" href="#Examples-of-finding-physical-quantities" title="Permalink to this headline">¶</a></h2>
 <p>For example, two of our important quantities are the parameters of the radiation field model, <span class="math notranslate nohighlight">\(T_{\rm rad}\)</span> and <span class="math notranslate nohighlight">\(W\)</span>. These exist as <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 <p>Thus <code class="docutils literal notranslate"><span class="pre">simulation.plasma.t_rad</span></code> will give you a list of the <span class="math notranslate nohighlight">\(T_{\rm rad}\)</span>-values for the model zones in cgs units.</p>
@@ -2186,15 +2185,15 @@ Name: (14, 1), dtype: float64
 Name: (14, 1, 0), dtype: float64
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Notes">
+</section>
+<section id="Notes">
 <h2>Notes<a class="headerlink" href="#Notes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>If you prefer to work in SI units, all the Astropy Quantities may instead by accessed with “xxx.si”.</p></li>
 <li><p>Information that is not stored as Astropy Quantities (e.g. the ion and level populations used in the example above) are usually stored in cgs units (i.e. cm−3 for the populations).</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
