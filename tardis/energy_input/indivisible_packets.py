@@ -723,7 +723,7 @@ def main_gamma_ray_loop(
     print("Total RF energy")
     print(total_rf_energy)
 
-    energy_bins = np.logspace(2, 4, spectrum_bins)
+    energy_bins = np.logspace(2, np.log10(4000), spectrum_bins)
     energy_out = np.zeros((len(energy_bins - 1), time_steps))
 
     # Process packets
