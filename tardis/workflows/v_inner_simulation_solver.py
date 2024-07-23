@@ -27,6 +27,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
     def __init__(
         self,
+        configuration,
         mean_optical_depth="rossland",
     ):
         """
@@ -36,7 +37,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             mean_optical_depth (str): 'rossland' or 'planck'
                 Method of estimating the mean optical depth
         """
-        super().__init__()
+        super().__init__(configuration)
         self.mean_optical_depth = mean_optical_depth
 
         self.v_inner_convergence_solver = ConvergenceSolver(
@@ -244,24 +245,6 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
         self.plasma_solver.update(**update_properties)
 
-    def solve_montecarlo(self, no_of_real_packets, no_of_virtual_packets):
-        transport_state = self.transport_solver.initialize_transport_state(
-            self.simulation_state,
-            self.plasma_solver,
-            no_of_real_packets,
-            no_of_virtual_packets=no_of_virtual_packets,
-            iteration=self.completed_iterations,
-        )
-
-        virtual_packet_energies = self.transport.run(
-            transport_state,
-            time_explosion=self.simulation_state.time_explosion,
-            iteration=self.completed_iterations,
-            total_iterations=self.total_iterations,
-            show_progress_bars=self.show_progress_bars,
-        )
-
-        return transport_state, virtual_packet_energies
 
     def solve_spectrum(
         self,
@@ -333,9 +316,9 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             if converged and self.convergence_strategy.stop_if_converged:
                 break
 
-        transport_state, virtual_packet_energies = self.solve_montecarlo()
-        self.solve_spectrum(
+        transport_state, virtual_packet_energies = self.solve_montecarlo(self.final_iteration_packet_count, self.virtual_packet_count
+        )
+        self.initialize_spectrum_solver(
             transport_state,
             virtual_packet_energies,
-            self.integrated_spectrum_settings,
         )
