@@ -2,20 +2,16 @@ import logging
 from pathlib import Path
 
 import numpy as np
-import pandas as pd
 from astropy import units as u
-from IPython.display import display
 
 from tardis import constants as const
 from tardis.io.atom_data.base import AtomData
-from tardis.io.logger.logger import logging_state
 from tardis.model import SimulationState
 from tardis.plasma.standard_plasmas import assemble_plasma
 from tardis.simulation.convergence import ConvergenceSolver
 from tardis.spectrum.base import SpectrumSolver
 from tardis.spectrum.formal_integral import FormalIntegrator
 from tardis.transport.montecarlo.base import MonteCarloTransportSolver
-from tardis.util.base import is_notebook
 
 # logging support
 logger = logging.getLogger(__name__)
@@ -91,18 +87,19 @@ class StandardSimulationSolver:
         self.integrated_spectrum_settings = configuration.spectrum.integrated
         self.spectrum_solver = SpectrumSolver.from_config(configuration)
 
+        # Convergence solvers
         self.convergence_strategy = (
             configuration.montecarlo.convergence_strategy
         )
 
-        # Convergence solvers
-        self.t_radiative_convergence_solver = ConvergenceSolver(
+        self.convergence_solvers = {}
+        self.convergence_solvers["t_radiative"] = ConvergenceSolver(
             self.convergence_strategy.t_rad
         )
-        self.dilution_factor_convergence_solver = ConvergenceSolver(
+        self.convergence_solvers["dilution_factor"] = ConvergenceSolver(
             self.convergence_strategy.w
         )
-        self.t_inner_convergence_solver = ConvergenceSolver(
+        self.convergence_solvers["t_inner"] = ConvergenceSolver(
             self.convergence_strategy.t_inner
         )
 
@@ -122,10 +119,9 @@ class StandardSimulationSolver:
 
         try:
             atom_data = AtomData.from_hdf(atom_data_fname)
-        except TypeError as e:
-            print(
-                e,
-                "Error might be from the use of an old-format of the atomic database, \n"
+        except TypeError:
+            logger.exception(
+                "TypeError might be from the use of an old-format of the atomic database, \n"
                 "please see https://github.com/tardis-sn/tardis-refdata/tree/master/atom_data"
                 " for the most recent version.",
             )
@@ -150,7 +146,9 @@ class StandardSimulationSolver:
         (
             estimated_t_radiative,
             estimated_dilution_factor,
-        ) = self.transport_solver.transport_state.calculate_radiationfield_properties()
+        ) = (
+            self.transport_solver.transport_state.calculate_radiationfield_properties()
+        )
 
         estimated_t_inner = self.estimate_t_inner(
             self.simulation_state.t_inner,
@@ -158,103 +156,81 @@ class StandardSimulationSolver:
             emitted_luminosity,
             t_inner_update_exponent=self.convergence_strategy.t_inner_update_exponent,
         )
-        return (
-            estimated_t_radiative,
-            estimated_dilution_factor,
-            estimated_t_inner,
-        )
+        return {
+            "t_radiative": estimated_t_radiative,
+            "dilution_factor": estimated_dilution_factor,
+            "t_inner": estimated_t_inner,
+        }
 
     def check_convergence(
         self,
-        estimated_t_radiative,
-        estimated_dilution_factor,
-        estimated_t_inner,
+        estimated_values,
     ):
-        t_radiative_converged = (
-            self.t_radiative_convergence_solver.get_convergence_status(
-                self.simulation_state.t_radiative.value,
-                estimated_t_radiative.value,
-                self.simulation_state.no_of_shells,
-            )
-        )
+        convergence_statuses = []
 
-        dilution_factor_converged = (
-            self.dilution_factor_convergence_solver.get_convergence_status(
-                self.simulation_state.dilution_factor,
-                estimated_dilution_factor,
-                self.simulation_state.no_of_shells,
+        for key, solver in self.convergence_solvers.items():
+            current_value = getattr(self.simulation_state, key)
+            estimated_value = estimated_values[key]
+            no_of_shells = (
+                self.simulation_state.no_of_shells if key != "t_inner" else 1
             )
-        )
-
-        t_inner_converged = (
-            self.t_inner_convergence_solver.get_convergence_status(
-                self.simulation_state.t_inner.value,
-                estimated_t_inner.value,
-                1,
+            convergence_statuses.append(
+                solver.get_convergence_status(
+                    current_value, estimated_value, no_of_shells
+                )
             )
-        )
 
-        if np.all(
-            [
-                t_radiative_converged,
-                dilution_factor_converged,
-                t_inner_converged,
-            ]
-        ):
+        if np.all(convergence_statuses):
             hold_iterations = self.convergence_strategy.hold_iterations
             self.consecutive_converges_count += 1
             logger.info(
                 f"Iteration converged {self.consecutive_converges_count:d}/{(hold_iterations + 1):d} consecutive "
                 f"times."
             )
-            # If an iteration has converged, require hold_iterations more
-            # iterations to converge before we conclude that the Simulation
-            # is converged.
             return self.consecutive_converges_count == hold_iterations + 1
 
         self.consecutive_converges_count = 0
         return False
 
+    def solve_simulation_state(
+        self,
+        estimated_values,
+    ):
+        next_values = {}
+
+        for key, solver in self.convergence_solvers.items():
+            if (
+                key == "t_inner"
+                and (self.completed_iterations + 1)
+                % self.convergence_strategy.lock_t_inner_cycles
+                != 0
+            ):
+                next_values[key] = getattr(self.simulation_state, key)
+            else:
+                next_values[key] = solver.converge(
+                    getattr(self.simulation_state, key), estimated_values[key]
+                )
+
+        self.simulation_state.t_radiative = next_values["t_radiative"]
+        self.simulation_state.dilution_factor = next_values["dilution_factor"]
+        self.simulation_state.blackbody_packet_source.temperature = next_values[
+            "t_inner"
+        ]
+
     def solve_plasma(
         self,
         transport_state,
-        estimated_t_radiative,
-        estimated_dilution_factor,
-        estimated_t_inner,
     ):
-        next_t_radiative = self.t_radiative_convergence_solver.converge(
-            self.simulation_state.t_radiative,
-            estimated_t_radiative,
-        )
-        next_dilution_factor = self.dilution_factor_convergence_solver.converge(
-            self.simulation_state.dilution_factor,
-            estimated_dilution_factor,
-        )
-        if (
-            self.completed_iterations + 1
-        ) % self.convergence_strategy.lock_t_inner_cycles == 0:
-            next_t_inner = self.t_inner_convergence_solver.converge(
-                self.simulation_state.t_inner,
-                estimated_t_inner,
-            )
-        else:
-            next_t_inner = self.simulation_state.t_inner
-
-        self.simulation_state.t_radiative = next_t_radiative
-        self.simulation_state.dilution_factor = next_dilution_factor
-        self.simulation_state.blackbody_packet_source.temperature = next_t_inner
-
         update_properties = dict(
             t_rad=self.simulation_state.t_radiative,
             w=self.simulation_state.dilution_factor,
         )
         # A check to see if the plasma is set with JBluesDetailed, in which
         # case it needs some extra kwargs.
-        estimators = transport_state.radfield_mc_estimators
         if "j_blue_estimator" in self.plasma_solver.outputs_dict:
             update_properties.update(
-                t_inner=next_t_inner,
-                j_blue_estimator=estimators.j_blue_estimator,
+                t_inner=self.simulation_state.blackbody_packet_source.temperature,
+                j_blue_estimator=transport_state.radfield_mc_estimators.j_blue_estimator,
             )
 
         self.plasma_solver.update(**update_properties)
@@ -276,6 +252,10 @@ class StandardSimulationSolver:
             show_progress_bars=False,
         )
 
+        output_energy = transport_state.packet_collection.output_energies
+        if np.sum(output_energy < 0) == len(output_energy):
+            logger.critical("No r-packet escaped through the outer boundary.")
+
         return transport_state, virtual_packet_energies
 
     def initialize_spectrum_solver(
@@ -287,9 +267,9 @@ class StandardSimulationSolver:
         self.spectrum_solver.transport_state = transport_state
 
         if virtual_packet_energies is not None:
-            self.spectrum_solver._montecarlo_virtual_luminosity.value[:] = (
-                virtual_packet_energies
-            )
+            self.spectrum_solver._montecarlo_virtual_luminosity.value[
+                :
+            ] = virtual_packet_energies
 
         if self.integrated_spectrum_settings is not None:
             # Set up spectrum solver integrator
@@ -307,12 +287,6 @@ class StandardSimulationSolver:
                 self.real_packet_count
             )
 
-            output_energy = transport_state.packet_collection.output_energies
-            if np.sum(output_energy < 0) == len(output_energy):
-                logger.critical(
-                    "No r-packet escaped through the outer boundary."
-                )
-
             self.spectrum_solver.transport_state = transport_state
 
             emitted_luminosity = (
@@ -321,24 +295,15 @@ class StandardSimulationSolver:
                 )
             )
 
-            (
-                estimated_t_radiative,
-                estimated_dilution_factor,
-                estimated_t_inner,
-            ) = self.get_convergence_estimates(emitted_luminosity)
-
-            self.solve_plasma(
-                transport_state,
-                estimated_t_radiative,
-                estimated_dilution_factor,
-                estimated_t_inner,
+            estimated_values = self.get_convergence_estimates(
+                emitted_luminosity
             )
 
-            converged = self.check_convergence(
-                estimated_t_radiative,
-                estimated_dilution_factor,
-                estimated_t_inner,
-            )
+            self.solve_simulation_state(estimated_values)
+
+            self.solve_plasma(transport_state)
+
+            converged = self.check_convergence(estimated_values)
             self.completed_iterations += 1
 
             if converged and self.convergence_strategy.stop_if_converged:
