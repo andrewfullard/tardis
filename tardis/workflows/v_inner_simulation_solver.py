@@ -17,6 +17,8 @@ logger = logging.getLogger(__name__)
 # TODO:
 # Option to estimate initial v_inner from electron opacity
 # Add option for desired optical depth
+# Think about csvy vs other formats for specifying grid
+# Handle non-explicit formats when going out of the simulation
 
 
 class InnerVelocitySimulationSolver(StandardSimulationSolver):
@@ -25,8 +27,6 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
     def __init__(
         self,
-        convergence_strategy,
-        atom_data_path,
         mean_optical_depth="rossland",
     ):
         """
@@ -36,7 +36,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             mean_optical_depth (str): 'rossland' or 'planck'
                 Method of estimating the mean optical depth
         """
-        super().__init__(convergence_strategy, atom_data_path)
+        super().__init__()
         self.mean_optical_depth = mean_optical_depth
 
         self.v_inner_convergence_solver = ConvergenceSolver(
@@ -107,8 +107,9 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
         self.consecutive_converges_count = 0
         return False
+    
 
-    def estimate_v_inner(self, input_v_inner, damping_constant):
+    def estimate_v_inner(self):
         """Compute the Rossland Mean Optical Depth,
         Estimate location where v_inner makes t=2/3 (or target)
         Extrapolate with exponential fits
@@ -125,7 +126,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
         interpolator = interp1d(
             tau_integ,
-            self.simulation_state.geometry.v_inner,
+            self.simulation_state.v_inner, # Only use the active values as we only need a numerical estimate, not an index
             fill_value="extrapolate",
         )
         # TODO: Make sure eastimed_v_inner is within the bounds of the simulation!
@@ -147,9 +148,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             emitted_luminosity,
             t_inner_update_exponent=self.convergence_strategy.t_inner_update_exponent,
         )
-        estimated_v_inner = self.estimate_v_inner(
-            self.simulation_state.geometry.v_inner_boundary, self.plasma
-        )
+        estimated_v_inner = self.estimate_v_inner()
         return (
             estimated_t_radiative,
             estimated_dilution_factor,
@@ -171,9 +170,17 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             estimated_t_radiative,
             estimated_dilution_factor,
             estimated_t_inner,
+            estimated_v_inner
         )
 
         return converged
+    
+    def clip(self, property):
+        """Clips a shell-dependent array to the current index"""
+
+        return property[
+            self.simulation_state.geometry.v_inner_boundary_index : self.simulation_state.geometry.v_outer_boundary_index
+        ]
 
     def solve_plasma(
         self,
@@ -191,7 +198,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             estimated_dilution_factor,
         )
         next_v_inner = self.v_inner_convergence_solver.converge(
-            self.simulation_state.v_inner_boundary,
+            self.simulation_state.v_boundary_inner,
             estimated_v_inner,
         )  # TODO: Add option to lock cycles as well
 
@@ -204,17 +211,19 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             )
         else:
             next_t_inner = self.simulation_state.t_inner
-
+        self.simulation_state.geometry.v_boundary_inner = (
+                    next_v_inner  # TODO: Check reset previously masked values, should automattically happen but not sure, make sure we're setting the correct property
+                )
         self.simulation_state.t_radiative = next_t_radiative
         self.simulation_state.dilution_factor = next_dilution_factor
         self.simulation_state.blackbody_packet_source.temperature = next_t_inner
-        self.simulation_state.v_inner_boundary = (
-            next_v_inner  # TODO: Reset previously masked values
-        )
 
+        
+        # TODO: Figure out how to handle the missing/extra plasma properties
         update_properties = dict(
             t_rad=self.simulation_state.t_radiative,
             w=self.simulation_state.dilution_factor,
+            r_inner=self.simulation_state.r_inner.to(u.cm)
         )
         # A check to see if the plasma is set with JBluesDetailed, in which
         # case it needs some extra kwargs.
