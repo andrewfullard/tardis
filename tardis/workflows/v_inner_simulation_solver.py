@@ -40,74 +40,9 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         super().__init__(configuration)
         self.mean_optical_depth = mean_optical_depth
 
-        self.v_inner_convergence_solver = ConvergenceSolver(
+        self.convergence_solvers["v_inner"] = ConvergenceSolver(
             self.convergence_strategy.v_inner
         )
-
-    def _get_convergence_status(
-        self,
-        t_radiative,
-        dilution_factor,
-        t_inner,
-        v_inner,
-        estimated_t_radiative,
-        estimated_dilution_factor,
-        estimated_t_inner,
-        estimated_v_inner,
-    ):
-        t_radiative_converged = (
-            self.t_radiative_convergence_solver.get_convergence_status(
-                t_radiative.value,
-                estimated_t_radiative.value,
-                self.simulation_state.no_of_shells,
-            )
-        )
-
-        dilution_factor_converged = (
-            self.dilution_factor_convergence_solver.get_convergence_status(
-                dilution_factor,
-                estimated_dilution_factor,
-                self.simulation_state.no_of_shells,
-            )
-        )
-
-        t_inner_converged = (
-            self.t_inner_convergence_solver.get_convergence_status(
-                t_inner.value,
-                estimated_t_inner.value,
-                1,
-            )
-        )
-
-        v_inner_converged = (
-            self.v_inner_convergence_solver.get_convergence_status(
-                v_inner.value,
-                estimated_v_inner.value,
-                1,
-            )
-        )
-
-        if np.all(
-            [
-                t_radiative_converged,
-                dilution_factor_converged,
-                t_inner_converged,
-                v_inner_converged,
-            ]
-        ):
-            hold_iterations = self.convergence_strategy.hold_iterations
-            self.consecutive_converges_count += 1
-            logger.info(
-                f"Iteration converged {self.consecutive_converges_count:d}/{(hold_iterations + 1):d} consecutive "
-                f"times."
-            )
-            # If an iteration has converged, require hold_iterations more
-            # iterations to converge before we conclude that the Simulation
-            # is converged.
-            return self.consecutive_converges_count == hold_iterations + 1
-
-        self.consecutive_converges_count = 0
-        return False
     
 
     def estimate_v_inner(self):
@@ -120,7 +55,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
         tau_integ = np.log(
             get_tau_integ(
-                self.plasma,
+                self.plasma_solver,
                 self.simulation_state,
             )[self.mean_optical_depth]
         )
@@ -133,15 +68,14 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         # TODO: Make sure eastimed_v_inner is within the bounds of the simulation!
         estimated_v_inner = interpolator(self.TAU_TARGET)
 
-        return estimated_v_inner
+        return estimated_v_inner * u.cm/u.s
 
     def get_convergence_estimates(self, emitted_luminosity):
+
         (
             estimated_t_radiative,
             estimated_dilution_factor,
-        ) = (
-            self.transport_solver.transport_state.calculate_radiationfield_properties()
-        )
+        ) = self.transport_solver.transport_state.calculate_radiationfield_properties()
 
         estimated_t_inner = self.estimate_t_inner(
             self.simulation_state.t_inner,
@@ -149,32 +83,45 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             emitted_luminosity,
             t_inner_update_exponent=self.convergence_strategy.t_inner_update_exponent,
         )
+
         estimated_v_inner = self.estimate_v_inner()
-        return (
-            estimated_t_radiative,
-            estimated_dilution_factor,
-            estimated_t_inner,
-            estimated_v_inner,
-        )
+
+        return {
+            "t_radiative": estimated_t_radiative,
+            "dilution_factor": estimated_dilution_factor,
+            "t_inner": estimated_t_inner,
+            "v_inner": estimated_v_inner,
+        }
 
     def check_convergence(
         self,
-        estimated_t_radiative,
-        estimated_dilution_factor,
-        estimated_t_inner,
-        estimated_v_inner,
+        estimated_values,
     ):
-        converged = self._get_convergence_status(
-            self.simulation_state.t_radiative,
-            self.simulation_state.dilution_factor,
-            self.simulation_state.t_inner,
-            estimated_t_radiative,
-            estimated_dilution_factor,
-            estimated_t_inner,
-            estimated_v_inner
-        )
+        convergence_statuses = []
 
-        return converged
+        for key, solver in self.convergence_solvers.items():
+            current_value = getattr(self.simulation_state, key)
+            estimated_value = estimated_values[key]
+            no_of_shells = (
+                self.simulation_state.no_of_shells if key not in ["t_inner", "v_inner"] else 1
+            )
+            convergence_statuses.append(
+                solver.get_convergence_status(
+                    current_value, estimated_value, no_of_shells
+                )
+            )
+
+        if np.all(convergence_statuses):
+            hold_iterations = self.convergence_strategy.hold_iterations
+            self.consecutive_converges_count += 1
+            logger.info(
+                f"Iteration converged {self.consecutive_converges_count:d}/{(hold_iterations + 1):d} consecutive "
+                f"times."
+            )
+            return self.consecutive_converges_count == hold_iterations + 1
+
+        self.consecutive_converges_count = 0
+        return False
     
     def clip(self, property):
         """Clips a shell-dependent array to the current index"""
@@ -183,140 +130,84 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             self.simulation_state.geometry.v_inner_boundary_index : self.simulation_state.geometry.v_outer_boundary_index
         ]
 
+    def solve_simulation_state(
+        self,
+        estimated_values,
+    ):
+        next_values = {}
+
+        for key, solver in self.convergence_solvers.items():
+            if (
+                key == "t_inner"
+                and (self.completed_iterations + 1)
+                % self.convergence_strategy.lock_t_inner_cycles
+                != 0
+            ):
+                next_values[key] = getattr(self.simulation_state, key)
+            else:
+                next_values[key] = solver.converge(
+                    getattr(self.simulation_state, key), estimated_values[key]
+                )
+        
+        self.simulation_state.t_radiative = next_values["t_radiative"]
+        self.simulation_state.dilution_factor = next_values["dilution_factor"]
+        self.simulation_state.blackbody_packet_source.temperature = next_values[
+            "t_inner"
+        ]
+        self.simulation_state.geometry.v_inner_boundary = next_values[
+            "v_inner"
+        ]
+        
     def solve_plasma(
         self,
-        estimated_t_radiative,
-        estimated_dilution_factor,
-        estimated_t_inner,
-        estimated_v_inner,
+        transport_state,
     ):
-        next_t_radiative = self.t_rad_convergence_solver.converge(
-            self.simulation_state.t_radiative,
-            estimated_t_radiative,
-        )
-        next_dilution_factor = self.dilution_factor_convergence_solver.converge(
-            self.simulation_state.dilution_factor,
-            estimated_dilution_factor,
-        )
-        next_v_inner = self.v_inner_convergence_solver.converge(
-            self.simulation_state.v_boundary_inner,
-            estimated_v_inner,
-        )  # TODO: Add option to lock cycles as well
-
-        if (
-            self.iterations_executed + 1
-        ) % self.convergence_strategy.lock_t_inner_cycles == 0:
-            next_t_inner = self.t_inner_convergence_solver.converge(
-                self.simulation_state.t_inner,
-                estimated_t_inner,
-            )
-        else:
-            next_t_inner = self.simulation_state.t_inner
-        self.simulation_state.geometry.v_boundary_inner = (
-                    next_v_inner  # TODO: Check reset previously masked values, should automattically happen but not sure, make sure we're setting the correct property
-                )
-        self.simulation_state.t_radiative = next_t_radiative
-        self.simulation_state.dilution_factor = next_dilution_factor
-        self.simulation_state.blackbody_packet_source.temperature = next_t_inner
-
-        
-        # TODO: Figure out how to handle the missing/extra plasma properties
         update_properties = dict(
             t_rad=self.simulation_state.t_radiative,
             w=self.simulation_state.dilution_factor,
-            r_inner=self.simulation_state.r_inner.to(u.cm)
         )
         # A check to see if the plasma is set with JBluesDetailed, in which
         # case it needs some extra kwargs.
-
-        estimators = self.transport.transport_state.radfield_mc_estimators
-        if "j_blue_estimator" in self.plasma.outputs_dict:
+        if "j_blue_estimator" in self.plasma_solver.outputs_dict:
             update_properties.update(
-                t_inner=next_t_inner,
-                j_blue_estimator=estimators.j_blue_estimator,
-            )
-        if "gamma_estimator" in self.plasma.outputs_dict:
-            update_properties.update(
-                gamma_estimator=estimators.photo_ion_estimator,
-                alpha_stim_estimator=estimators.stim_recomb_estimator,
-                bf_heating_coeff_estimator=estimators.bf_heating_estimator,
-                stim_recomb_cooling_coeff_estimator=estimators.stim_recomb_cooling_estimator,
+                t_inner=self.simulation_state.blackbody_packet_source.temperature,
+                j_blue_estimator=transport_state.radfield_mc_estimators.j_blue_estimator,
             )
 
         self.plasma_solver.update(**update_properties)
 
 
-    def solve_spectrum(
-        self,
-        transport_state,
-        virtual_packet_energies=None,
-        integrated_spectrum_settings=None,
-    ):
-        # Set up spectrum solver
-        self.spectrum_solver.transport_state = transport_state
-        if virtual_packet_energies is not None:
-            self.spectrum_solver._montecarlo_virtual_luminosity.value[
-                :
-            ] = virtual_packet_energies
-
-        if integrated_spectrum_settings is not None:
-            # Set up spectrum solver integrator
-            self.spectrum_solver.integrator_settings = (
-                integrated_spectrum_settings
-            )
-            self.spectrum_solver._integrator = FormalIntegrator(
-                self.simulation_state, self.plasma, self.transport
-            )
-
-    def calculate_emitted_luminosity(self, transport_state):
-        self.spectrum_solver.transport_state = transport_state
-
-        output_energy = (
-            self.transport.transport_state.packet_collection.output_energies
-        )
-        if np.sum(output_energy < 0) == len(output_energy):
-            logger.critical("No r-packet escaped through the outer boundary.")
-
-        emitted_luminosity = self.spectrum_solver.calculate_emitted_luminosity(
-            self.luminosity_nu_start, self.luminosity_nu_end
-        )
-        return emitted_luminosity
-
     def solve(self):
         converged = False
         while self.completed_iterations < self.total_iterations - 1:
-            transport_state, virtual_packet_energies = self.solve_montecarlo()
-
-            emitted_luminosity = self.calculate_emitted_luminosity(
-                transport_state
+            transport_state, virtual_packet_energies = self.solve_montecarlo(
+                self.real_packet_count
             )
 
-            (
-                estimated_t_radiative,
-                estimated_dilution_factor,
-                estimated_t_inner,
-                estimated_v_inner,
-            ) = self.get_convergence_estimates(emitted_luminosity)
+            self.spectrum_solver.transport_state = transport_state
 
-            self.solve_plasma(
-                estimated_t_radiative,
-                estimated_dilution_factor,
-                estimated_t_inner,
-                estimated_v_inner,
+            emitted_luminosity = (
+                self.spectrum_solver.calculate_emitted_luminosity(
+                    self.luminosity_nu_start, self.luminosity_nu_end
+                )
             )
 
-            converged = self.check_convergence(
-                estimated_t_radiative,
-                estimated_dilution_factor,
-                estimated_t_inner,
-                estimated_v_inner,
+            estimated_values = self.get_convergence_estimates(
+                emitted_luminosity
             )
+
+            self.solve_simulation_state(estimated_values)
+
+            self.solve_plasma(transport_state)
+
+            converged = self.check_convergence(estimated_values)
             self.completed_iterations += 1
 
             if converged and self.convergence_strategy.stop_if_converged:
                 break
 
-        transport_state, virtual_packet_energies = self.solve_montecarlo(self.final_iteration_packet_count, self.virtual_packet_count
+        transport_state, virtual_packet_energies = self.solve_montecarlo(
+            self.final_iteration_packet_count, self.virtual_packet_count
         )
         self.initialize_spectrum_solver(
             transport_state,
