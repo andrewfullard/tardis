@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 import numpy as np
+import numpy.ma as ma
 from astropy import units as u
 
 from tardis.io.configuration.config_reader import Configuration
@@ -134,15 +135,11 @@ class SimulationState(HDFWriterMixin):
 
     @dilution_factor.setter
     def dilution_factor(self, new_dilution_factor):
-        if len(new_dilution_factor) == self.no_of_shells:
-            self.radiation_field_state.dilution_factor[
-                self.geometry.v_inner_boundary_index : self.geometry.v_outer_boundary_index
-            ] = new_dilution_factor
-        else:
-            raise ValueError(
-                "Trying to set dilution_factor for unmatching number"
-                "of shells."
-            )
+
+        self.radiation_field_state.dilution_factor[
+            self.geometry.v_inner_boundary_index : self.geometry.v_outer_boundary_index
+        ] = new_dilution_factor
+
 
     @property
     def t_radiative(self):
@@ -152,14 +149,22 @@ class SimulationState(HDFWriterMixin):
 
     @t_radiative.setter
     def t_radiative(self, new_t_radiative):
-        if len(new_t_radiative) == self.no_of_shells:
-            self.radiation_field_state.t_radiative[
-                self.geometry.v_inner_boundary_index : self.geometry.v_outer_boundary_index
-            ] = new_t_radiative
-        else:
-            raise ValueError(
-                "Trying to set t_radiative for different number of shells."
-            )
+
+        self.radiation_field_state.t_radiative[
+            self.geometry.v_inner_boundary_index : self.geometry.v_outer_boundary_index
+        ] = new_t_radiative
+
+    @property
+    def property_mask(self):
+        mask = np.zeros((len(self.geometry.r_inner)), dtype=bool)
+        mask[self.geometry.v_inner_boundary_index : self.geometry.v_outer_boundary_index] = True
+        return mask
+    
+    @property
+    def property_where(self):
+
+        return np.where(self.property_mask)
+
 
     @property
     def elemental_number_density(self):
@@ -207,6 +212,10 @@ class SimulationState(HDFWriterMixin):
     @property
     def v_boundary_inner(self):
         return self.geometry.v_inner_boundary
+
+    @property
+    def v_inner_boundary(self):
+        return self.v_boundary_inner
 
     @property
     def v_boundary_outer(self):
