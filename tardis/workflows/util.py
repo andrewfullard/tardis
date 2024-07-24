@@ -26,7 +26,7 @@ def get_tau_integ(plasma, simulation_state, bin_size=100):
     taus = taus[1:n_bins*bin_size+1]
     freqs = freqs[1:n_bins*bin_size+1]
 
-    ct = simulation_state.time_explosion.cgs.value
+    ct = simulation_state.time_explosion.cgs.value * const.c.cgs.value
     t_rad = simulation_state.t_radiative.cgs.value
 
     h = const.h.cgs.value

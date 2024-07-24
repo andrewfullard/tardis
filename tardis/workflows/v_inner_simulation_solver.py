@@ -10,6 +10,7 @@ from tardis.workflows.standard_simulation_solver import StandardSimulationSolver
 from tardis.workflows.util import get_tau_integ
 
 from scipy.interpolate import interp1d
+import copy
 
 # logging support
 logger = logging.getLogger(__name__)
@@ -40,10 +41,11 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         super().__init__(configuration)
         self.mean_optical_depth = mean_optical_depth
 
-        self.convergence_solvers["v_inner"] = ConvergenceSolver(
-            self.convergence_strategy.v_inner
+        self.convergence_solvers["v_inner_boundary"] = ConvergenceSolver(
+            self.convergence_strategy.v_inner_boundary
         )
     
+        self.property_mask = self.simulation_state.property_mask
 
     def estimate_v_inner(self):
         """Compute the Rossland Mean Optical Depth,
@@ -70,27 +72,40 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
         return estimated_v_inner * u.cm/u.s
 
-    def get_convergence_estimates(self, emitted_luminosity):
+    def get_convergence_estimates(self, transport_state):
 
         (
             estimated_t_radiative,
             estimated_dilution_factor,
         ) = self.transport_solver.transport_state.calculate_radiationfield_properties()
 
-        estimated_t_inner = self.estimate_t_inner(
-            self.simulation_state.t_inner,
-            self.luminosity_requested,
-            emitted_luminosity,
-            t_inner_update_exponent=self.convergence_strategy.t_inner_update_exponent,
+        self.initialize_spectrum_solver(
+            transport_state,
+            None,
+        )
+
+        emitted_luminosity = self.spectrum_solver.calculate_emitted_luminosity(
+            self.luminosity_nu_start, self.luminosity_nu_end
+        )
+
+        luminosity_ratios = (
+            (emitted_luminosity / self.luminosity_requested).to(1).value
+        )
+
+        estimated_t_inner = (
+            self.simulation_state.t_inner
+            * luminosity_ratios
+            ** self.convergence_strategy.t_inner_update_exponent
         )
 
         estimated_v_inner = self.estimate_v_inner()
+        print(estimated_v_inner)
 
         return {
             "t_radiative": estimated_t_radiative,
             "dilution_factor": estimated_dilution_factor,
             "t_inner": estimated_t_inner,
-            "v_inner": estimated_v_inner,
+            "v_inner_boundary": estimated_v_inner,
         }
 
     def check_convergence(
@@ -100,11 +115,31 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         convergence_statuses = []
 
         for key, solver in self.convergence_solvers.items():
+
             current_value = getattr(self.simulation_state, key)
             estimated_value = estimated_values[key]
-            no_of_shells = (
-                self.simulation_state.no_of_shells if key not in ["t_inner", "v_inner"] else 1
-            )
+            print('Check Convergence')
+            print(key, estimated_value)
+            print(current_value)
+            if hasattr(current_value, '__len__') and (key not in ["t_inner", "v_inner_boundary"]):
+                print(key, 'has', '__len__')
+                new_value = estimated_value
+                current_value_expanded = np.empty(len(self.simulation_state.geometry.r_inner), dtype=current_value.dtype)
+                current_value_expanded[self.simulation_state.property_mask] = current_value
+                new_value_expanded = np.empty_like(current_value_expanded)
+                new_value_expanded[self.new_property_mask] = new_value
+                joint_mask = self.simulation_state.property_mask & self.new_property_mask
+                if hasattr(current_value, 'unit'):
+                    current_value_expanded = current_value_expanded * current_value.unit
+                    new_value_expanded = new_value_expanded * current_value.unit
+                estimated_value = new_value_expanded[joint_mask]
+                current_value = current_value_expanded[joint_mask]
+                no_of_shells = len(current_value)
+            else:
+                no_of_shells = (
+                    self.simulation_state.no_of_shells if key not in ["t_inner", "v_inner_boundary"] else 1
+                )
+            
             convergence_statuses.append(
                 solver.get_convergence_status(
                     current_value, estimated_value, no_of_shells
@@ -135,36 +170,63 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         estimated_values,
     ):
         next_values = {}
+        print(estimated_values)
+        self.new_property_mask = self.simulation_state.property_mask
+        self.old_property_mask = self.property_mask
 
         for key, solver in self.convergence_solvers.items():
             if (
-                key == "t_inner"
+                key in ["t_inner"]
                 and (self.completed_iterations + 1)
                 % self.convergence_strategy.lock_t_inner_cycles
                 != 0
             ):
                 next_values[key] = getattr(self.simulation_state, key)
             else:
+                print('key', key)
+                print(getattr(self.simulation_state, key))
+                print(estimated_values[key])
+                current_value = getattr(self.simulation_state, key)
+                new_value = estimated_values[key]
+                if hasattr(current_value, '__len__') and key not in ["t_inner", "v_inner_boundary"]:
+                    print(key, 'has', '__len__')
+                    current_value_expanded = np.empty(len(self.simulation_state.geometry.r_inner), dtype=current_value.dtype)
+                    current_value_expanded[self.simulation_state.property_mask] = current_value
+                    new_value_expanded = np.empty_like(current_value_expanded)
+                    new_value_expanded[self.new_property_mask] = new_value
+                    joint_mask = self.simulation_state.property_mask & self.new_property_mask
+                    if hasattr(current_value, 'unit'):
+                        current_value_expanded = current_value_expanded * current_value.unit
+                        new_value_expanded = new_value_expanded * current_value.unit
+                    new_value = new_value_expanded[joint_mask]
+                    current_value = current_value_expanded[joint_mask]
                 next_values[key] = solver.converge(
-                    getattr(self.simulation_state, key), estimated_values[key]
-                )
+                    current_value, new_value
+                ) # TODO: This needs to be changed to account for changing array sizes
         
         self.simulation_state.t_radiative = next_values["t_radiative"]
         self.simulation_state.dilution_factor = next_values["dilution_factor"]
         self.simulation_state.blackbody_packet_source.temperature = next_values[
             "t_inner"
         ]
+        print('next v_inner', next_values["v_inner_boundary"])
         self.simulation_state.geometry.v_inner_boundary = next_values[
-            "v_inner"
+            "v_inner_boundary"
         ]
+        self.property_mask = self.new_property_mask
+
         
     def solve_plasma(
         self,
         transport_state,
     ):
+        # TODO: Find properties that need updating with shells
+
         update_properties = dict(
             t_rad=self.simulation_state.t_radiative,
             w=self.simulation_state.dilution_factor,
+            r_inner=self.simulation_state.r_inner.to(u.cm),
+            number_density=self.simulation_state.elemental_number_density,
         )
         # A check to see if the plasma is set with JBluesDetailed, in which
         # case it needs some extra kwargs.
@@ -186,14 +248,8 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
             self.spectrum_solver.transport_state = transport_state
 
-            emitted_luminosity = (
-                self.spectrum_solver.calculate_emitted_luminosity(
-                    self.luminosity_nu_start, self.luminosity_nu_end
-                )
-            )
-
             estimated_values = self.get_convergence_estimates(
-                emitted_luminosity
+                transport_state
             )
 
             self.solve_simulation_state(estimated_values)
