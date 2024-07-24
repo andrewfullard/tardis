@@ -20,7 +20,19 @@ __all__ = [
     "ContinuumInteractionSpecies",
     "NLTEIonizationSpecies",
     "NLTEExcitationSpecies",
+    "RInner"
 ]
+
+
+class RInner(ArrayInput):
+    """
+    Attributes
+    ----------
+    r_inner : Numpy Array, dtype float
+    """
+
+    outputs = ("r_inner",)
+    latex_name = (r"R_{\textrm{inner}}",)
 
 
 class TRadiative(ArrayInput):
