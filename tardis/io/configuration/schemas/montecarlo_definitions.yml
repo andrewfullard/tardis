@@ -59,7 +59,7 @@ definitions:
               type: string
               default: 'damped'
               description: THIS IS A DUMMY VARIABLE DO NOT USE
-        v_inner:
+        v_inner_boundary:
           type: object
           additionalProperties: false
           properties:
