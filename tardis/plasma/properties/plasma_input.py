@@ -20,9 +20,20 @@ __all__ = [
     "ContinuumInteractionSpecies",
     "NLTEIonizationSpecies",
     "NLTEExcitationSpecies",
-    "RInner"
+    "RInner",
+    "Volume"
 ]
 
+
+class Volume(ArrayInput):
+    """
+    Attributes
+    ----------
+    r_inner : Numpy Array, dtype float
+    """
+
+    outputs = ("volume",)
+    latex_name = (r"V",)
 
 class RInner(ArrayInput):
     """

@@ -126,6 +126,7 @@ def assemble_plasma(config, simulation_state, atom_data=None):
         nlte_ionization_species=nlte_ionization_species,
         nlte_excitation_species=nlte_excitation_species,
         r_inner=simulation_state.r_inner.to(u.cm),
+        volume=simulation_state.volume
     )
 
     plasma_modules = basic_inputs + basic_properties

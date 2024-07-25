@@ -8,6 +8,7 @@ from tardis.simulation.convergence import ConvergenceSolver
 from tardis.spectrum.formal_integral import FormalIntegrator
 from tardis.workflows.standard_simulation_solver import StandardSimulationSolver
 from tardis.workflows.util import get_tau_integ
+from tardis.plasma.standard_plasmas import assemble_plasma
 
 from scipy.interpolate import interp1d
 import copy
@@ -46,6 +47,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         )
     
         self.property_mask = self.simulation_state.property_mask
+
 
     def estimate_v_inner(self):
         """Compute the Rossland Mean Optical Depth,
@@ -87,7 +89,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         emitted_luminosity = self.spectrum_solver.calculate_emitted_luminosity(
             self.luminosity_nu_start, self.luminosity_nu_end
         )
-
+        print("Emitted Luminosity:", emitted_luminosity)
         luminosity_ratios = (
             (emitted_luminosity / self.luminosity_requested).to(1).value
         )
@@ -99,6 +101,10 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         )
 
         estimated_v_inner = self.estimate_v_inner()
+        if estimated_v_inner < self.simulation_state.geometry.v_inner[0]:
+            estimated_v_inner = self.simulation_state.geometry.v_inner[0]
+        elif estimated_v_inner > self.simulation_state.geometry.v_inner[-1]:
+            estimated_v_inner = self.simulation_state.geometry.v_inner[-1]
         print(estimated_v_inner)
 
         return {
@@ -134,17 +140,18 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
                     new_value_expanded = new_value_expanded * current_value.unit
                 estimated_value = new_value_expanded[joint_mask]
                 current_value = current_value_expanded[joint_mask]
-                no_of_shells = len(current_value)
-            else:
-                no_of_shells = (
-                    self.simulation_state.no_of_shells if key not in ["t_inner", "v_inner_boundary"] else 1
-                )
+
+            
+            no_of_shells = (
+                self.simulation_state.no_of_shells if key not in ["t_inner", "v_inner_boundary"] else 1
+            )
             
             convergence_statuses.append(
                 solver.get_convergence_status(
                     current_value, estimated_value, no_of_shells
                 )
             )
+            print('Status:', convergence_statuses[-1])
 
         if np.all(convergence_statuses):
             hold_iterations = self.convergence_strategy.hold_iterations
@@ -153,6 +160,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
                 f"Iteration converged {self.consecutive_converges_count:d}/{(hold_iterations + 1):d} consecutive "
                 f"times."
             )
+            print('Converged this iteration!')
             return self.consecutive_converges_count == hold_iterations + 1
 
         self.consecutive_converges_count = 0
@@ -227,6 +235,9 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             w=self.simulation_state.dilution_factor,
             r_inner=self.simulation_state.r_inner.to(u.cm),
             number_density=self.simulation_state.elemental_number_density,
+            volume=self.simulation_state.volume,
+            abundance=self.simulation_state.abundance,
+            lines=None,
         )
         # A check to see if the plasma is set with JBluesDetailed, in which
         # case it needs some extra kwargs.
@@ -246,8 +257,6 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
                 self.real_packet_count
             )
 
-            self.spectrum_solver.transport_state = transport_state
-
             estimated_values = self.get_convergence_estimates(
                 transport_state
             )
@@ -258,7 +267,8 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
             converged = self.check_convergence(estimated_values)
             self.completed_iterations += 1
-
+            if converged:
+                print("SIMULATION CONVERGED!")
             if converged and self.convergence_strategy.stop_if_converged:
                 break
 

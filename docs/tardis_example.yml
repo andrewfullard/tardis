@@ -11,9 +11,9 @@ model:
   structure:
     type: specific
     velocity:
-      start: 1.1e4 km/s
+      start: 0.7e4 km/s
       stop: 20000 km/s
-      num: 20
+      num: 50
     density:
       type: branch85_w7
 
@@ -36,7 +36,7 @@ plasma:
 montecarlo:
   seed: 23111963
   no_of_packets: 4.0e+4
-  iterations: 20
+  iterations: 40
   nthreads: 1
 
   last_no_of_packets: 1.e+5
@@ -46,12 +46,19 @@ montecarlo:
     type: damped
     damping_constant: 1.0
     threshold: 0.05
-    fraction: 0.8
+    fraction: 1.0
     hold_iterations: 3
     t_inner:
       damping_constant: 0.5
+      threshold: 0.005
+    v_inner_boundary:
+        damping_constant: 0.25
+        threshold: 0.005
+    stop_if_converged: yes
 
 spectrum:
   start: 500 angstrom
   stop: 20000 angstrom
   num: 10000
+  integrated:
+      compute: GPU

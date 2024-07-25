@@ -330,6 +330,7 @@ class IonNumberDensity(ProcessingPlasmaProperty):
     @staticmethod
     def _calculate_block_ids(phi):
         return calculate_block_ids_from_dataframe(phi)
+    
 
     def calculate(self, phi, partition_function, number_density):
         if self._electron_densities is None:

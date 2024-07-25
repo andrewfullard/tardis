@@ -3,7 +3,7 @@
 from astropy import units as u, constants as const
 import numpy as np
 
-def get_tau_integ(plasma, simulation_state, bin_size=100):
+def get_tau_integ(plasma, simulation_state, bin_size=10):
 
     index = plasma.atomic_data.lines.nu.index
     taus = plasma.tau_sobolevs.loc[index]

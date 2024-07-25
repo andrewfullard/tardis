@@ -143,6 +143,7 @@ class StandardSimulationSolver:
         emitted_luminosity = self.spectrum_solver.calculate_emitted_luminosity(
             self.luminosity_nu_start, self.luminosity_nu_end
         )
+        print("Emitted Luminosity:", emitted_luminosity)
 
         luminosity_ratios = (
             (emitted_luminosity / self.luminosity_requested).to(1).value
