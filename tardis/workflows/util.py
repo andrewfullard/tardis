@@ -27,7 +27,7 @@ def get_tau_integ(plasma, simulation_state, bin_size=10):
     freqs = freqs[1:n_bins*bin_size+1]
 
     ct = simulation_state.time_explosion.cgs.value * const.c.cgs.value
-    t_rad = simulation_state.t_radiative.cgs.value
+    t_rad = simulation_state.radiation_field_state.t_radiative.cgs.value
 
     h = const.h.cgs.value
     c = const.c.cgs.value
@@ -48,7 +48,7 @@ def get_tau_integ(plasma, simulation_state, bin_size=10):
     kappa_tot = kappa_thom + kappa_exp
     kappa_rossland = ((udnu*kappa_tot**-1).sum(axis=0)/(udnu.sum(axis=0)))**-1
 
-    dr = (simulation_state.r_outer-simulation_state.r_inner).cgs.value
+    dr = (simulation_state.geometry.r_outer-simulation_state.geometry.r_inner).cgs.value
     dtau = kappa_planck*dr
     planck_integ_tau = np.cumsum(dtau[::-1])[::-1]
     rossland_integ_tau = np.cumsum((kappa_rossland*dr)[::-1])[::-1]

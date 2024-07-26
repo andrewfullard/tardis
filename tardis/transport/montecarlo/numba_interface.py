@@ -112,11 +112,37 @@ class OpacityState(object):
         self.photo_ion_activation_idx = photo_ion_activation_idx
         self.k_packet_idx = k_packet_idx
 
+def slice(self, i, j):
+
+    return OpacityState(self.electron_densities[i:j],
+        self.t_electrons[i:j],
+        self.line_list_nu,
+        self.tau_sobolev[i:j],
+        self.transition_probabilities[i:j],
+        self.line2macro_level_upper,
+        self.macro_block_references,
+        self.transition_type,
+        self.destination_level_id,
+        self.transition_line_id,
+        self.bf_threshold_list_nu,
+        self.p_fb_deactivation,
+        self.photo_ion_nu_threshold_mins,
+        self.photo_ion_nu_threshold_maxs,
+        self.photo_ion_block_references,
+        self.chi_bf[i:j],
+        self.x_sect,
+        self.phot_nus,
+        self.ff_opacity_factor,
+        self.emissivities[i:j],
+        self.photo_ion_activation_idx,
+        self.k_packet_idx,)
+
 
 def opacity_state_initialize(
     plasma,
     line_interaction_type,
     disable_line_scattering,
+    slice=None
 ):
     """
     Initialize the OpacityState object and copy over the data over from TARDIS Plasma
@@ -222,7 +248,32 @@ def opacity_state_initialize(
         emissivities = np.zeros((0, 0), dtype=np.float64)
         photo_ion_activation_idx = np.zeros(0, dtype=np.int64)
         k_packet_idx = np.int64(-1)
-
+ 
+    if slice is not None:
+        i, j = slice
+        return OpacityState(
+            electron_densities[i:j],
+            t_electrons[i:j],
+            line_list_nu,
+            tau_sobolev[:, i:j],
+            transition_probabilities[:, i:j],
+            line2macro_level_upper,
+            macro_block_references,
+            transition_type,
+            destination_level_id,
+            transition_line_id,
+            bf_threshold_list_nu,
+            p_fb_deactivation,
+            photo_ion_nu_threshold_mins,
+            photo_ion_nu_threshold_maxs,
+            photo_ion_block_references,
+            chi_bf,
+            x_sect,
+            phot_nus,
+            ff_opacity_factor,
+            emissivities,
+            photo_ion_activation_idx,
+            k_packet_idx,)
     return OpacityState(
         electron_densities,
         t_electrons,

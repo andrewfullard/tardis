@@ -66,7 +66,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
         interpolator = interp1d(
             tau_integ,
-            self.simulation_state.v_inner, # Only use the active values as we only need a numerical estimate, not an index
+            self.simulation_state.geometry.v_inner, # Only use the active values as we only need a numerical estimate, not an index
             fill_value="extrapolate",
         )
         # TODO: Make sure eastimed_v_inner is within the bounds of the simulation!
@@ -101,10 +101,10 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         )
 
         estimated_v_inner = self.estimate_v_inner()
-        if estimated_v_inner < self.simulation_state.geometry.v_inner[0]:
-            estimated_v_inner = self.simulation_state.geometry.v_inner[0]
-        elif estimated_v_inner > self.simulation_state.geometry.v_inner[-1]:
-            estimated_v_inner = self.simulation_state.geometry.v_inner[-1]
+        if estimated_v_inner < self.simulation_state.geometry.v_inner[1]:
+            estimated_v_inner = self.simulation_state.geometry.v_inner[1]
+        elif estimated_v_inner > self.simulation_state.geometry.v_inner[-2]:
+            estimated_v_inner = self.simulation_state.geometry.v_inner[-2]
         print(estimated_v_inner)
 
         return {
@@ -124,26 +124,35 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
             current_value = getattr(self.simulation_state, key)
             estimated_value = estimated_values[key]
+        
+
             print('Check Convergence')
             print(key, estimated_value)
             print(current_value)
+            joint_mask = np.ones(5)
             if hasattr(current_value, '__len__') and (key not in ["t_inner", "v_inner_boundary"]):
-                print(key, 'has', '__len__')
-                new_value = estimated_value
-                current_value_expanded = np.empty(len(self.simulation_state.geometry.r_inner), dtype=current_value.dtype)
-                current_value_expanded[self.simulation_state.property_mask] = current_value
-                new_value_expanded = np.empty_like(current_value_expanded)
-                new_value_expanded[self.new_property_mask] = new_value
-                joint_mask = self.simulation_state.property_mask & self.new_property_mask
-                if hasattr(current_value, 'unit'):
-                    current_value_expanded = current_value_expanded * current_value.unit
-                    new_value_expanded = new_value_expanded * current_value.unit
-                estimated_value = new_value_expanded[joint_mask]
-                current_value = current_value_expanded[joint_mask]
+                if current_value.shape == estimated_value.shape:
+                        pass
+                else:
+                    print(key, 'has', '__len__')
+                    new_value = estimated_value
+                    current_value_expanded = np.empty(len(self.simulation_state.geometry.r_inner), dtype=current_value.dtype)
+                    current_value_expanded[self.simulation_state.property_mask] = current_value
+                    new_value_expanded = np.empty_like(current_value_expanded)
+                    new_value_expanded[self.new_property_mask] = new_value
+                    joint_mask = self.simulation_state.property_mask & self.new_property_mask
+                    if hasattr(current_value, 'unit'):
+                        current_value_expanded = current_value_expanded * current_value.unit
+                        new_value_expanded = new_value_expanded * current_value.unit
+                    estimated_value = new_value_expanded[joint_mask]
+                    current_value = current_value_expanded[joint_mask]
 
             
+            #no_of_shells = (
+            #    self.simulation_state.no_of_shells if key not in ["t_inner", "v_inner_boundary"] else 1
+            #)
             no_of_shells = (
-                self.simulation_state.no_of_shells if key not in ["t_inner", "v_inner_boundary"] else 1
+                joint_mask.sum() if key not in ["t_inner", "v_inner_boundary"] else 1
             )
             
             convergence_statuses.append(
@@ -177,6 +186,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         self,
         estimated_values,
     ):
+
         next_values = {}
         print(estimated_values)
         self.new_property_mask = self.simulation_state.property_mask
@@ -191,23 +201,29 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             ):
                 next_values[key] = getattr(self.simulation_state, key)
             else:
+
                 print('key', key)
                 print(getattr(self.simulation_state, key))
                 print(estimated_values[key])
                 current_value = getattr(self.simulation_state, key)
                 new_value = estimated_values[key]
                 if hasattr(current_value, '__len__') and key not in ["t_inner", "v_inner_boundary"]:
-                    print(key, 'has', '__len__')
-                    current_value_expanded = np.empty(len(self.simulation_state.geometry.r_inner), dtype=current_value.dtype)
-                    current_value_expanded[self.simulation_state.property_mask] = current_value
-                    new_value_expanded = np.empty_like(current_value_expanded)
-                    new_value_expanded[self.new_property_mask] = new_value
-                    joint_mask = self.simulation_state.property_mask & self.new_property_mask
-                    if hasattr(current_value, 'unit'):
-                        current_value_expanded = current_value_expanded * current_value.unit
-                        new_value_expanded = new_value_expanded * current_value.unit
-                    new_value = new_value_expanded[joint_mask]
-                    current_value = current_value_expanded[joint_mask]
+                    if current_value.shape == new_value.shape:
+                        pass
+                    else:
+                        print(key, 'has', '__len__')
+                        print('shape current:', current_value.shape)
+                        print('shape next:', new_value.shape)
+                        current_value_expanded = np.empty(len(self.simulation_state.geometry.r_inner), dtype=current_value.dtype)
+                        current_value_expanded[self.simulation_state.property_mask] = current_value
+                        new_value_expanded = np.empty_like(current_value_expanded)
+                        new_value_expanded[self.new_property_mask] = new_value
+                        joint_mask = self.simulation_state.property_mask & self.new_property_mask
+                        if hasattr(current_value, 'unit'):
+                            current_value_expanded = current_value_expanded * current_value.unit
+                            new_value_expanded = new_value_expanded * current_value.unit
+                        new_value = new_value_expanded[joint_mask]
+                        current_value = current_value_expanded[joint_mask]
                 next_values[key] = solver.converge(
                     current_value, new_value
                 ) # TODO: This needs to be changed to account for changing array sizes
@@ -230,14 +246,12 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
     ):
         # TODO: Find properties that need updating with shells
 
+        #self.simulation_state.radiation_field_state.t_radiative[self.simulation_state.radiation_field_state.t_radiative.value==0] = 10000.0 * u.K
+        #self.simulation_state.radiation_field_state.dilution_factor[self.simulation_state.radiation_field_state.dilution_factor==0] = 1.0
+
         update_properties = dict(
-            t_rad=self.simulation_state.t_radiative,
-            w=self.simulation_state.dilution_factor,
-            r_inner=self.simulation_state.r_inner.to(u.cm),
-            number_density=self.simulation_state.elemental_number_density,
-            volume=self.simulation_state.volume,
-            abundance=self.simulation_state.abundance,
-            lines=None,
+            t_rad=self.simulation_state.radiation_field_state.t_radiative,
+            w=self.simulation_state.radiation_field_state.dilution_factor,
         )
         # A check to see if the plasma is set with JBluesDetailed, in which
         # case it needs some extra kwargs.
