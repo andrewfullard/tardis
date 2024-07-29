@@ -100,11 +100,14 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             ** self.convergence_strategy.t_inner_update_exponent
         )
 
+        
         estimated_v_inner = self.estimate_v_inner()
         if estimated_v_inner < self.simulation_state.geometry.v_inner[1]:
             estimated_v_inner = self.simulation_state.geometry.v_inner[1]
         elif estimated_v_inner > self.simulation_state.geometry.v_inner[-2]:
             estimated_v_inner = self.simulation_state.geometry.v_inner[-2]
+
+        estimated_v_inner  = self.simulation_state.v_inner_boundary
         print(estimated_v_inner)
 
         return {
@@ -135,12 +138,17 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
                         pass
                 else:
                     print(key, 'has', '__len__')
+                    print('shape current:', current_value.shape)
+                    print('shape next:', estimated_value.shape)
                     new_value = estimated_value
                     current_value_expanded = np.empty(len(self.simulation_state.geometry.r_inner), dtype=current_value.dtype)
                     current_value_expanded[self.simulation_state.property_mask] = current_value
                     new_value_expanded = np.empty_like(current_value_expanded)
                     new_value_expanded[self.new_property_mask] = new_value
                     joint_mask = self.simulation_state.property_mask & self.new_property_mask
+                    print(joint_mask)
+                    print('diff:', current_value_expanded - new_value_expanded)
+                    
                     if hasattr(current_value, 'unit'):
                         current_value_expanded = current_value_expanded * current_value.unit
                         new_value_expanded = new_value_expanded * current_value.unit
@@ -211,6 +219,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
                     if current_value.shape == new_value.shape:
                         pass
                     else:
+                        breakpoint()
                         print(key, 'has', '__len__')
                         print('shape current:', current_value.shape)
                         print('shape next:', new_value.shape)
@@ -219,6 +228,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
                         new_value_expanded = np.empty_like(current_value_expanded)
                         new_value_expanded[self.new_property_mask] = new_value
                         joint_mask = self.simulation_state.property_mask & self.new_property_mask
+                        print(joint_mask)
                         if hasattr(current_value, 'unit'):
                             current_value_expanded = current_value_expanded * current_value.unit
                             new_value_expanded = new_value_expanded * current_value.unit
