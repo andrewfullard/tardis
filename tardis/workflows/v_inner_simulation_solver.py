@@ -46,7 +46,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
             self.convergence_strategy.v_inner_boundary
         )
     
-        self.property_mask = self.simulation_state.property_mask
+        self.property_mask_ = self.simulation_state.property_mask
 
 
     def estimate_v_inner(self):
@@ -73,6 +73,17 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         estimated_v_inner = interpolator(self.TAU_TARGET)
 
         return estimated_v_inner * u.cm/u.s
+
+    @property
+    def property_mask(self):
+        mask = np.zeros((len(self.simulation_state.geometry.r_inner)), dtype=bool)
+        mask[self.simulation_state.geometry.v_inner_boundary_index : self.geometry.simulation_state.v_outer_boundary_index] = True
+        return mask
+    
+    @property
+    def property_where(self):
+
+        return np.where(self.property_mask)
 
     def get_convergence_estimates(self, transport_state):
 
@@ -142,10 +153,10 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
                     print('shape next:', estimated_value.shape)
                     new_value = estimated_value
                     current_value_expanded = np.empty(len(self.simulation_state.geometry.r_inner), dtype=current_value.dtype)
-                    current_value_expanded[self.simulation_state.property_mask] = current_value
+                    current_value_expanded[self.property_mask] = current_value
                     new_value_expanded = np.empty_like(current_value_expanded)
                     new_value_expanded[self.new_property_mask] = new_value
-                    joint_mask = self.simulation_state.property_mask & self.new_property_mask
+                    joint_mask = self.property_mask & self.new_property_mask
                     print(joint_mask)
                     print('diff:', current_value_expanded - new_value_expanded)
                     
@@ -197,8 +208,8 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
 
         next_values = {}
         print(estimated_values)
-        self.new_property_mask = self.simulation_state.property_mask
-        self.old_property_mask = self.property_mask
+        self.new_property_mask = self.property_mask
+        self.old_property_mask = self.property_mask_
 
         for key, solver in self.convergence_solvers.items():
             if (
@@ -224,10 +235,10 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
                         print('shape current:', current_value.shape)
                         print('shape next:', new_value.shape)
                         current_value_expanded = np.empty(len(self.simulation_state.geometry.r_inner), dtype=current_value.dtype)
-                        current_value_expanded[self.simulation_state.property_mask] = current_value
+                        current_value_expanded[self.property_mask] = current_value
                         new_value_expanded = np.empty_like(current_value_expanded)
                         new_value_expanded[self.new_property_mask] = new_value
-                        joint_mask = self.simulation_state.property_mask & self.new_property_mask
+                        joint_mask = self.property_mask & self.new_property_mask
                         print(joint_mask)
                         if hasattr(current_value, 'unit'):
                             current_value_expanded = current_value_expanded * current_value.unit
@@ -247,7 +258,7 @@ class InnerVelocitySimulationSolver(StandardSimulationSolver):
         self.simulation_state.geometry.v_inner_boundary = next_values[
             "v_inner_boundary"
         ]
-        self.property_mask = self.new_property_mask
+        self.property_mask_ = self.new_property_mask
 
         
     def solve_plasma(
