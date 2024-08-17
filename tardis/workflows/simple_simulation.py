@@ -9,7 +9,7 @@ from tardis import constants as const
 from tardis.io.atom_data.base import AtomData
 from tardis.model import SimulationState
 from tardis.plasma.radiation_field import DilutePlanckianRadiationField
-from tardis.plasma.standard_plasmas import assemble_plasma
+from tardis.plasma.assembly.legacy_assembly import assemble_plasma
 from tardis.simulation.convergence import ConvergenceSolver
 from tardis.spectrum.base import SpectrumSolver
 from tardis.spectrum.formal_integral import FormalIntegrator
@@ -19,6 +19,8 @@ from tardis.spectrum.luminosity import (
 from tardis.transport.montecarlo.base import MonteCarloTransportSolver
 from tardis.util.base import is_notebook
 from tardis.workflows.workflow_logging import WorkflowLogging
+from tardis.opacities.opacity_solver import OpacitySolver
+from tardis.opacities.macro_atom.macroatom_solver import MacroAtomSolver
 
 # logging support
 logger = logging.getLogger(__name__)
@@ -116,6 +118,15 @@ class SimpleSimulation(WorkflowLogging):
         self.convergence_solvers["t_inner"] = ConvergenceSolver(
             self.convergence_strategy.t_inner
         )
+
+        self.opacity_solver = OpacitySolver(
+            line_interaction_type=configuration.plasma.line_interaction_type,
+            disable_line_scattering=False,
+        )
+        if configuration.plasma.line_interaction_type == "scatter":
+            self.macro_atom_solver = None
+        else:
+            self.macro_atom_solver = MacroAtomSolver()
 
     def _get_atom_data(self, configuration):
         """Process atomic data from the configuration
@@ -268,6 +279,11 @@ class SimpleSimulation(WorkflowLogging):
         ----------
         estimated_values : dict
             Estimated from the previous iterations
+
+        Returns
+        -------
+        next_values : dict
+            The next values assigned to the simulation state
         """
         next_values = {}
 
@@ -290,6 +306,8 @@ class SimpleSimulation(WorkflowLogging):
             "t_inner"
         ]
 
+        return next_values
+
     def solve_plasma(self, estimated_radfield_properties):
         """Update the plasma solution with the new radiation field estimates
 
@@ -304,8 +322,8 @@ class SimpleSimulation(WorkflowLogging):
             If the plasma solver radiative rates type is unknown
         """
         radiation_field = DilutePlanckianRadiationField(
-            temperature=self.simulation_state.t_radiative,
-            dilution_factor=self.simulation_state.dilution_factor,
+            temperature=self.simulation_state.radiation_field_state.temperature,
+            dilution_factor=self.simulation_state.radiation_field_state.dilution_factor,
         )
         update_properties = dict(
             dilute_planckian_radiation_field=radiation_field
@@ -350,7 +368,37 @@ class SimpleSimulation(WorkflowLogging):
 
         self.plasma_solver.update(**update_properties)
 
-    def solve_montecarlo(self, no_of_real_packets, no_of_virtual_packets=0):
+    def solve_opacity(self):
+        """Solves the opacity state and any associated objects
+
+        Returns
+        -------
+        dict
+            opacity_state : tardis.opacities.opacity_state.OpacityState
+                State of the line opacities
+            macro_atom_state : tardis.opacities.macro_atom.macro_atom_state.MacroAtomState or None
+                State of the macro atom
+        """
+        opacity_state = self.opacity_solver.solve(self.plasma_solver)
+
+        if self.macro_atom_solver is None:
+            macro_atom_state = None
+        else:
+            macro_atom_state = self.macro_atom_solver.solve(
+                self.plasma_solver,
+                self.plasma_solver.atomic_data,
+                opacity_state.tau_sobolev,
+                self.plasma_solver.stimulated_emission_factor,
+            )
+
+        return {
+            "opacity_state": opacity_state,
+            "macro_atom_state": macro_atom_state,
+        }
+
+    def solve_montecarlo(
+        self, opacity, no_of_real_packets, no_of_virtual_packets=0
+    ):
         """Solve the MonteCarlo process
 
         Parameters
@@ -367,8 +415,14 @@ class SimpleSimulation(WorkflowLogging):
         ndarray
             Array of unnormalized virtual packet energies in each frequency bin
         """
+
+        opacity_state = opacity["opacity_state"]
+        macro_atom_state = opacity["macro_atom_state"]
+
         transport_state = self.transport_solver.initialize_transport_state(
             self.simulation_state,
+            opacity_state,
+            macro_atom_state,
             self.plasma_solver,
             no_of_real_packets,
             no_of_virtual_packets=no_of_virtual_packets,
@@ -426,8 +480,11 @@ class SimpleSimulation(WorkflowLogging):
             logger.info(
                 f"\n\tStarting iteration {(self.completed_iterations + 1):d} of {self.total_iterations:d}"
             )
+
+            opacity = self.solve_opacity()
+
             transport_state, virtual_packet_energies = self.solve_montecarlo(
-                self.real_packet_count
+                opacity, self.real_packet_count
             )
 
             (
@@ -451,8 +508,11 @@ class SimpleSimulation(WorkflowLogging):
             logger.error(
                 "\n\tITERATIONS HAVE NOT CONVERGED, starting final iteration"
             )
+        opacity = self.solve_opacity()
         transport_state, virtual_packet_energies = self.solve_montecarlo(
-            self.final_iteration_packet_count, self.virtual_packet_count
+            opacity,
+            self.final_iteration_packet_count,
+            self.virtual_packet_count,
         )
 
         self.initialize_spectrum_solver(
