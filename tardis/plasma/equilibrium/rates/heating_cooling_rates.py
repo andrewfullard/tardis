@@ -76,7 +76,7 @@ class BoundFreeThermalRates:
             level=[0, 1, 2]
         ).first()
         nu_is = nu_i.loc[self.photoionization_cross_sections.index].to_numpy()
-        n_cells = level_population.columns
+        cell_index = level_population.columns
 
         ### HEATING
         # Lucy 03 eq 58
@@ -181,10 +181,13 @@ class BoundFreeThermalRates:
         else:
             stimulated_recombination_cooling_rate = pd.DataFrame(
                 np.zeros(
-                    (len(spontaneous_recombination_cooling_rate), len(n_cells))
+                    (
+                        len(spontaneous_recombination_cooling_rate),
+                        len(cell_index),
+                    )
                 ),
                 index=spontaneous_recombination_cooling_rate.index,
-                columns=n_cells,
+                columns=cell_index,
             )
 
         cooling_rate = (
@@ -388,10 +391,10 @@ class CollisionalBoundThermalRates:
             Heating and cooling rates for the collisional bound process for all cells.
         """
         lower_index = collisional_excitation_rate_coefficient.index.droplevel(
-            "level_number_upper"
+            "level_number_destination"
         )
         upper_index = collisional_excitation_rate_coefficient.index.droplevel(
-            "level_number_lower"
+            "level_number_source"
         )
 
         lower_level_number_density = level_population.loc[lower_index]
