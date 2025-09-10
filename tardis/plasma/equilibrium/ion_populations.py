@@ -1,3 +1,4 @@
+import copy
 import logging
 
 import astropy.units as u
@@ -119,7 +120,9 @@ class IonPopulationSolver:
             > LOWER_ION_LEVEL_H
         )
 
-        new_electron_energy_distribution = thermal_electron_energy_distribution
+        new_electron_energy_distribution = copy.copy(
+            thermal_electron_energy_distribution
+        )
 
         for iteration in range(self.max_solver_iterations):
             self.rates_matrices = self.rate_matrix_solver.solve(
