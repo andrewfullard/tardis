@@ -9,6 +9,8 @@ from tardis.plasma.properties.base import (
 __all__ = [
     "PreviousElectronDensities",
     "PreviousBetaSobolev",
+    "PreviousIonNumberDensity",
+    "PreviousLevelNumberDensity",
 ]
 
 logger = logging.getLogger(__name__)
@@ -39,6 +41,30 @@ class PreviousBetaSobolev(PreviousIterationProperty):
     """
 
     outputs = ("previous_beta_sobolev",)
+
+    def set_initial_value(self, kwargs):
+        initial_value = pd.DataFrame(
+            1.0,
+            index=kwargs["atomic_data"].lines.index,
+            columns=kwargs["number_density"].columns,
+        )
+        self._set_initial_value(initial_value)
+
+
+class PreviousIonNumberDensity(PreviousIterationProperty):
+    outputs = ("previous_ion_number_density",)
+
+    def set_initial_value(self, kwargs):
+        initial_value = pd.DataFrame(
+            1.0,
+            index=kwargs["atomic_data"].lines.index,
+            columns=kwargs["number_density"].columns,
+        )
+        self._set_initial_value(initial_value)
+
+
+class PreviousLevelNumberDensity(PreviousIterationProperty):
+    outputs = ("previous_level_number_density",)
 
     def set_initial_value(self, kwargs):
         initial_value = pd.DataFrame(

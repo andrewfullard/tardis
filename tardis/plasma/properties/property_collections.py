@@ -17,6 +17,9 @@ basic_inputs = PlasmaPropertyCollection(
         ContinuumInteractionSpecies,
         NLTEIonizationSpecies,
         NLTEExcitationSpecies,
+        PreviousIonNumberDensity,
+        PreviousLevelNumberDensity,
+        PreviousElectronDensities,
     ]
 )
 basic_properties = PlasmaPropertyCollection(
@@ -102,22 +105,14 @@ continuum_interaction_properties = PlasmaPropertyCollection(
         ThermalGElectron,
         ThermalPhiSahaLTE,
         SahaFactor,
-        CorrPhotoIonRateCoeff,
         SpontRecombCoolingRateCoeff,
         YgInterpolator,
-        CollExcRateCoeff,
-        CollDeexcRateCoeff,
-        RawCollisionTransProbs,
         MarkovChainIndex,
-        FreeFreeCoolingRate,
-        FreeBoundCoolingRate,
         LevelNumberDensityLTE,
         PhotoIonBoltzmannFactor,
         FreeBoundEmissionCDF,
         LevelIdxs2LineIdx,
         LevelIdxs2TransitionIdx,
-        CollIonRateCoeffSeaton,
-        CollRecombRateCoeff,
         ContinuumInteractionHandler,
     ]
 )
