@@ -391,10 +391,18 @@ class CollisionalBoundThermalRates:
             Heating and cooling rates for the collisional bound process for all cells.
         """
         lower_index = collisional_excitation_rate_coefficient.index.droplevel(
-            "level_number_destination"
+            [
+                "ion_number_source",
+                "ion_number_destination",
+                "level_number_destination",
+            ]
         )
         upper_index = collisional_excitation_rate_coefficient.index.droplevel(
-            "level_number_source"
+            [
+                "ion_number_source",
+                "ion_number_destination",
+                "level_number_source",
+            ]
         )
 
         lower_level_number_density = level_population.loc[lower_index]

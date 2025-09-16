@@ -143,6 +143,6 @@ class ThermalBalanceSolver:
         total_heating_rate = total_heating - total_cooling
         fractional_heating_rate = (
             total_heating - total_cooling
-        ) / total_cooling
+        ) / total_cooling  # check why this instead of a sum of both
 
         return total_heating_rate, fractional_heating_rate
