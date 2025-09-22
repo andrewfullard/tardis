@@ -162,10 +162,12 @@ class EstimatedPhotoionizationRateSolver(AnalyticPhotoionizationRateSolver):
             self.level2continuum_edge_idx
         )
 
-        photoionization_rate_coeff = photoionization_rate_coeff_solver.solve(
-            radfield_mc_estimators,
-            time_simulation,
-            volume,
+        photoionization_rate_coeff, stimulated_recombination_rate_coeff = (
+            photoionization_rate_coeff_solver.solve(
+                radfield_mc_estimators,
+                time_simulation,
+                volume,
+            )
         )
 
         spontaneous_recombination_rate_coeff = (
