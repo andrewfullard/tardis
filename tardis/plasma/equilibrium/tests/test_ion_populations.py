@@ -13,8 +13,8 @@ from tardis.plasma.radiation_field import (
 )
 
 
-def test_solve(rate_matrix_solver, regression_data):
-    ion_population_solver = IonPopulationSolver(rate_matrix_solver)
+def test_solve(analytic_rate_matrix_solver, regression_data):
+    ion_population_solver = IonPopulationSolver(analytic_rate_matrix_solver)
 
     radiation_field = DilutePlanckianRadiationField(
         np.ones(20) * 10000 * u.K, dilution_factor=np.ones(20) * 0.5
@@ -60,7 +60,7 @@ def test_solve(rate_matrix_solver, regression_data):
     charge_conservation = False
 
     actual_ion_population, actual_electron_density = (
-        ion_population_solver.solve(
+        ion_population_solver.solve_analytic(
             radiation_field,
             thermal_electron_energy_distribution,
             elemental_number_density,

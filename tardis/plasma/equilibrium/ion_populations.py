@@ -62,26 +62,24 @@ class IonPopulationSolver:
 
         return np.hstack(balance_array)
 
-    def solve(
+    def __solve_ion_population_iteration(
         self,
-        radiation_field,
+        solve_rate_matrix_func,
         thermal_electron_energy_distribution,
         elemental_number_density,
         lte_level_population,
         estimated_level_population,
         lte_ion_population,
         estimated_ion_population,
-        partition_function,
-        boltzmann_factor,
         charge_conservation=False,
         tolerance=1e-14,
     ):
-        """Solves the normalized ion population values from the rate matrices.
+        """Common solver logic for ion population calculations.
 
         Parameters
         ----------
-        radiation_field : RadiationField
-            A radiation field that can compute its mean intensity.
+        solve_rate_matrix_func : callable
+            Function that calls the appropriate rate matrix solver with correct arguments.
         thermal_electron_energy_distribution : ThermalElectronEnergyDistribution
             Electron properties.
         elemental_number_density : pd.DataFrame
@@ -125,17 +123,15 @@ class IonPopulationSolver:
         )
 
         for iteration in range(self.max_solver_iterations):
-            self.rates_matrices = self.rate_matrix_solver.solve(
-                radiation_field,
+            self.rates_matrices = solve_rate_matrix_func(
                 new_electron_energy_distribution,
                 lte_level_population.loc[lower_ion_level_index],
                 estimated_level_population.loc[lower_ion_level_index],
                 lte_ion_population.loc[upper_ion_population_index],
                 estimated_ion_population.loc[upper_ion_population_index],
-                partition_function,
-                boltzmann_factor,
                 charge_conservation,
             )
+
             solved_matrices = pd.DataFrame(
                 index=self.rates_matrices.index,
                 columns=self.rates_matrices.columns,
@@ -196,3 +192,162 @@ class IonPopulationSolver:
             )
 
         return ion_population_solution, electron_population_solution
+
+    def solve_analytic(
+        self,
+        radiation_field,
+        thermal_electron_energy_distribution,
+        elemental_number_density,
+        lte_level_population,
+        estimated_level_population,
+        lte_ion_population,
+        estimated_ion_population,
+        partition_function,
+        boltzmann_factor,
+        charge_conservation=False,
+        tolerance=1e-14,
+    ):
+        """Solves the normalized ion population values from the rate matrices.
+
+        Parameters
+        ----------
+        radiation_field : RadiationField
+            A radiation field that can compute its mean intensity.
+        thermal_electron_energy_distribution : ThermalElectronEnergyDistribution
+            Electron properties.
+        elemental_number_density : pd.DataFrame
+            Elemental number density. Index is atomic number, columns are cells.
+        lte_level_population : pd.DataFrame
+            LTE level number density. Columns are cells.
+        estimated_level_population : pd.DataFrame
+            Estimated level number density. Columns are cells.
+        lte_ion_population : pd.DataFrame
+            LTE ion number density. Columns are cells.
+        estimated_ion_population : pd.DataFrame
+            Estimated ion number density. Columns are cells.
+        charge_conservation : bool, optional
+            Whether to include a charge conservation row in the rate matrix.
+        tolerance : float, optional
+            Tolerance for convergence of the ion population solver.
+
+        Returns
+        -------
+        pd.DataFrame
+            Normalized ion population values indexed by atomic number, ion
+            number and ion number. Columns are cells.
+        pd.DataFrame
+            Normalized electron fraction values. Columns are cells.
+        """
+
+        def solve_rate_matrix(
+            electron_energy_dist,
+            lte_level_pop_lower,
+            estimated_level_pop_lower,
+            lte_ion_pop_upper,
+            estimated_ion_pop_upper,
+            charge_conservation,
+        ):
+            return self.rate_matrix_solver.solve_analytic(
+                radiation_field,
+                electron_energy_dist,
+                lte_level_pop_lower,
+                estimated_level_pop_lower,
+                lte_ion_pop_upper,
+                estimated_ion_pop_upper,
+                partition_function,
+                boltzmann_factor,
+                charge_conservation,
+            )
+
+        return self.__solve_ion_population_iteration(
+            solve_rate_matrix,
+            thermal_electron_energy_distribution,
+            elemental_number_density,
+            lte_level_population,
+            estimated_level_population,
+            lte_ion_population,
+            estimated_ion_population,
+            charge_conservation,
+            tolerance,
+        )
+
+    def solve_estimated(
+        self,
+        thermal_electron_energy_distribution,
+        radfield_mc_estimators,
+        elemental_number_density,
+        time_simulation,
+        volume,
+        lte_level_population,
+        estimated_level_population,
+        lte_ion_population,
+        estimated_ion_population,
+        partition_function,
+        boltzmann_factor,
+        charge_conservation=False,
+        tolerance=1e-14,
+    ):
+        """Solves the normalized ion population values from the rate matrices.
+
+        Parameters
+        ----------
+        radiation_field : RadiationField
+            A radiation field that can compute its mean intensity.
+        thermal_electron_energy_distribution : ThermalElectronEnergyDistribution
+            Electron properties.
+        elemental_number_density : pd.DataFrame
+            Elemental number density. Index is atomic number, columns are cells.
+        lte_level_population : pd.DataFrame
+            LTE level number density. Columns are cells.
+        estimated_level_population : pd.DataFrame
+            Estimated level number density. Columns are cells.
+        lte_ion_population : pd.DataFrame
+            LTE ion number density. Columns are cells.
+        estimated_ion_population : pd.DataFrame
+            Estimated ion number density. Columns are cells.
+        charge_conservation : bool, optional
+            Whether to include a charge conservation row in the rate matrix.
+        tolerance : float, optional
+            Tolerance for convergence of the ion population solver.
+
+        Returns
+        -------
+        pd.DataFrame
+            Normalized ion population values indexed by atomic number, ion
+            number and ion number. Columns are cells.
+        pd.DataFrame
+            Normalized electron fraction values. Columns are cells.
+        """
+
+        def solve_rate_matrix(
+            electron_energy_dist,
+            lte_level_pop_lower,
+            estimated_level_pop_lower,
+            lte_ion_pop_upper,
+            estimated_ion_pop_upper,
+            charge_conservation,
+        ):
+            return self.rate_matrix_solver.solve_estimated(
+                electron_energy_dist,
+                radfield_mc_estimators,
+                time_simulation,
+                volume,
+                lte_level_pop_lower,
+                estimated_level_pop_lower,
+                lte_ion_pop_upper,
+                partition_function,
+                boltzmann_factor,
+                charge_conservation,
+            )
+
+        return self.__solve_ion_population_iteration(
+            solve_rate_matrix,
+            thermal_electron_energy_distribution,
+            elemental_number_density,
+            lte_level_population,
+            estimated_level_population,
+            lte_ion_population,
+            estimated_ion_population,
+            charge_conservation,
+            tolerance,
+        )

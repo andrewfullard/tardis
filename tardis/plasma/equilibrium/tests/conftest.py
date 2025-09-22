@@ -108,7 +108,7 @@ def collisional_simulation_state(new_chianti_atomic_dataset_si):
 
 
 @pytest.fixture
-def photoionization_rate_solver(mock_photoionization_cross_sections):
+def analytic_photoionization_rate_solver(mock_photoionization_cross_sections):
     return AnalyticPhotoionizationRateSolver(
         mock_photoionization_cross_sections
     )
@@ -120,11 +120,11 @@ def collisional_ionization_rate_solver(mock_photoionization_cross_sections):
 
 
 @pytest.fixture
-def rate_matrix_solver(
-    photoionization_rate_solver, collisional_ionization_rate_solver
+def analytic_rate_matrix_solver(
+    analytic_photoionization_rate_solver, collisional_ionization_rate_solver
 ):
     return IonRateMatrix(
-        photoionization_rate_solver, collisional_ionization_rate_solver
+        analytic_photoionization_rate_solver, collisional_ionization_rate_solver
     )
 
 

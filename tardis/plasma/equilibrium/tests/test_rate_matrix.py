@@ -40,7 +40,7 @@ def test_rate_matrix_solver(
 
 @pytest.mark.parametrize("charge_conservation", [True, False])
 def test_ion_rate_matrix_solver(
-    photoionization_rate_solver,
+    analytic_photoionization_rate_solver,
     collisional_ionization_rate_solver,
     collisional_simulation_state,
     mock_boltzmann_factor,
@@ -48,7 +48,7 @@ def test_ion_rate_matrix_solver(
     regression_data,
 ):
     rate_matrix_solver = IonRateMatrix(
-        photoionization_rate_solver, collisional_ionization_rate_solver
+        analytic_photoionization_rate_solver, collisional_ionization_rate_solver
     )
 
     rad_field = DilutePlanckianRadiationField(
@@ -78,7 +78,7 @@ def test_ion_rate_matrix_solver(
     level_population = lte_level_population.copy() * 1.4
     ion_population = lte_ion_population.copy() * 3.0
 
-    actual = rate_matrix_solver.solve(
+    actual = rate_matrix_solver.solve_analytic(
         rad_field,
         electron_dist,
         lte_level_population,

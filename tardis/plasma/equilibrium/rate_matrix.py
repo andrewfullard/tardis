@@ -186,71 +186,35 @@ class IonRateMatrix:
             shape=(ion_states, ion_states),
         )
 
-    def solve(
+    def __build_rate_matrices(
         self,
-        radiation_field,
-        thermal_electron_energy_distribution,
-        lte_level_population,
-        level_population,
-        lte_ion_population,
-        ion_population,
-        partition_function,
-        boltzmann_factor,
+        photoion_rates_df,
+        recomb_rates_df,
+        collisional_ionization_rates_df,
+        collision_recombination_rates_df,
         charge_conservation=False,
     ):
-        """Compute the ionization rate matrix.
+        """Build rate matrices from photoionization, recombination, and collisional rates.
 
         Parameters
         ----------
-        radiation_field : RadiationField
-            A radiation field that can compute its mean intensity.
-        thermal_electron_energy_distribution : ThermalElectronEnergyDistribution
-            Electron properties.
-        lte_level_population : pd.DataFrame
-            LTE level number density. Columns are cells.
-        level_population : pd.DataFrame
-            Estimated level number density. Columns are cells.
-        lte_ion_population : pd.DataFrame
-            LTE ion number density. Columns are cells.
-        ion_population : pd.DataFrame
-            Estimated ion number density. Columns are cells.
+        photoion_rates_df : pd.DataFrame
+            Photoionization rates DataFrame.
+        recomb_rates_df : pd.DataFrame
+            Recombination rates DataFrame.
+        collisional_ionization_rates_df : pd.DataFrame
+            Collisional ionization rates DataFrame.
+        collision_recombination_rates_df : pd.DataFrame
+            Collisional recombination rates DataFrame.
         charge_conservation : bool, optional
             Whether to include a charge conservation row in the rate matrix.
 
         Returns
         -------
         pd.DataFrame
-            A DataFrame of rate matrices indexed by atomic number and ion number,
+            A DataFrame of rate matrices indexed by atomic number,
             with each column being a cell. Each entry is a numpy array.
         """
-        photoion_rates_df, recomb_rates_df = (
-            self.radiative_ionization_rate_solver.solve(
-                radiation_field,
-                thermal_electron_energy_distribution,
-                lte_level_population,
-                level_population,
-                lte_ion_population,
-                ion_population,
-                partition_function,
-                boltzmann_factor,
-            )
-        )
-
-        # Lucy 2003 Eq 14
-        level_to_ion_population_factor = lte_level_population / (
-            lte_ion_population.values
-            * thermal_electron_energy_distribution.number_density.value
-        )
-
-        collisional_ionization_rates_df, collision_recombination_rates_df = (
-            self.collisional_ionization_rate_solver.solve(
-                thermal_electron_energy_distribution,
-                level_to_ion_population_factor,
-                partition_function,
-                boltzmann_factor,
-            )
-        )
-
         grouped_photoion_rates_df = self.__calculate_total_grouped_rates(
             photoion_rates_df
         )
@@ -321,3 +285,161 @@ class IonRateMatrix:
         rate_matrices.index.names = ["atomic_number"]
 
         return rate_matrices
+
+    def solve_analytic(
+        self,
+        radiation_field,
+        thermal_electron_energy_distribution,
+        lte_level_population,
+        level_population,
+        lte_ion_population,
+        ion_population,
+        partition_function,
+        boltzmann_factor,
+        charge_conservation=False,
+    ):
+        """Compute the ionization rate matrix.
+
+        Parameters
+        ----------
+        radiation_field : RadiationField
+            A radiation field that can compute its mean intensity.
+        thermal_electron_energy_distribution : ThermalElectronEnergyDistribution
+            Electron properties.
+        lte_level_population : pd.DataFrame
+            LTE level number density. Columns are cells.
+        level_population : pd.DataFrame
+            Estimated level number density. Columns are cells.
+        lte_ion_population : pd.DataFrame
+            LTE ion number density. Columns are cells.
+        ion_population : pd.DataFrame
+            Estimated ion number density. Columns are cells.
+        partition_function : pd.DataFrame
+            Partition function values. Index is atomic number and ion number,
+            columns are cells.
+        boltzmann_factor : pd.DataFrame
+            Boltzmann factor values. Index is atomic number, ion number and level number,
+            columns are cells.
+        charge_conservation : bool, optional
+            Whether to include a charge conservation row in the rate matrix.
+
+        Returns
+        -------
+        pd.DataFrame
+            A DataFrame of rate matrices indexed by atomic number and ion number,
+            with each column being a cell. Each entry is a numpy array.
+        """
+        photoion_rates_df, recomb_rates_df = (
+            self.radiative_ionization_rate_solver.solve(
+                radiation_field,
+                thermal_electron_energy_distribution,
+                lte_level_population,
+                level_population,
+                lte_ion_population,
+                ion_population,
+                partition_function,
+                boltzmann_factor,
+            )
+        )
+
+        # Lucy 2003 Eq 14
+        level_to_ion_population_factor = lte_level_population / (
+            lte_ion_population.values
+            * thermal_electron_energy_distribution.number_density.value
+        )
+
+        collisional_ionization_rates_df, collision_recombination_rates_df = (
+            self.collisional_ionization_rate_solver.solve(
+                thermal_electron_energy_distribution,
+                level_to_ion_population_factor,
+                partition_function,
+                boltzmann_factor,
+            )
+        )
+
+        return self.__build_rate_matrices(
+            photoion_rates_df,
+            recomb_rates_df,
+            collisional_ionization_rates_df,
+            collision_recombination_rates_df,
+            charge_conservation,
+        )
+
+    def solve_estimated(
+        self,
+        thermal_electron_energy_distribution,
+        radfield_mc_estimators,
+        time_simulation,
+        volume,
+        lte_level_population,
+        level_population,
+        lte_ion_population,
+        partition_function,
+        boltzmann_factor,
+        charge_conservation=False,
+    ):
+        """Compute the ionization rate matrix.
+
+        Parameters
+        ----------
+        thermal_electron_energy_distribution : ThermalElectronEnergyDistribution
+            Electron properties.
+        radfield_mc_estimators : RadiationFieldMCEstimators
+            Radiation field estimators from the Monte Carlo calculation.
+        time_simulation : float
+            The simulation time.
+        volume : np.ndarray
+            The volume of the cells.
+        lte_level_population : pd.DataFrame
+            LTE level number density. Columns are cells.
+        level_population : pd.DataFrame
+            Estimated level number density. Columns are cells.
+        lte_ion_population : pd.DataFrame
+            LTE ion number density. Columns are cells.
+        partition_function : pd.DataFrame
+            Partition function values. Index is atomic number and ion number,
+            columns are cells.
+        boltzmann_factor : pd.DataFrame
+            Boltzmann factor values. Index is atomic number, ion number and level number,
+            columns are cells.
+        charge_conservation : bool, optional
+            Whether to include a charge conservation row in the rate matrix.
+
+        Returns
+        -------
+        pd.DataFrame
+            A DataFrame of rate matrices indexed by atomic number and ion number,
+            with each column being a cell. Each entry is a numpy array.
+        """
+        photoion_rates_df, recomb_rates_df = (
+            self.radiative_ionization_rate_solver.solve(
+                thermal_electron_energy_distribution,
+                radfield_mc_estimators,
+                time_simulation,
+                volume,
+                level_population,
+            )
+        )
+
+        # Lucy 2003 Eq 14
+        level_to_ion_population_factor = lte_level_population / (
+            lte_ion_population.values
+            * thermal_electron_energy_distribution.number_density.value
+        )
+
+        collisional_ionization_rates_df, collision_recombination_rates_df = (
+            self.collisional_ionization_rate_solver.solve(
+                thermal_electron_energy_distribution,
+                level_to_ion_population_factor,
+                partition_function,
+                boltzmann_factor,
+            )
+        )
+
+        return self.__build_rate_matrices(
+            photoion_rates_df,
+            recomb_rates_df,
+            collisional_ionization_rates_df,
+            collision_recombination_rates_df,
+            charge_conservation,
+        )
