@@ -335,6 +335,7 @@ class IonPopulationSolver:
                 lte_level_pop_lower,
                 estimated_level_pop_lower,
                 lte_ion_pop_upper,
+                estimated_ion_pop_upper,
                 partition_function,
                 boltzmann_factor,
                 charge_conservation,

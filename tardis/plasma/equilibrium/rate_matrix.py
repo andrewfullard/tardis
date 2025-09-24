@@ -374,6 +374,7 @@ class IonRateMatrix:
         lte_level_population,
         level_population,
         lte_ion_population,
+        ion_population,
         partition_function,
         boltzmann_factor,
         charge_conservation=False,
@@ -417,7 +418,10 @@ class IonRateMatrix:
                 radfield_mc_estimators,
                 time_simulation,
                 volume,
+                lte_level_population,
                 level_population,
+                lte_ion_population,
+                ion_population,
             )
         )
 

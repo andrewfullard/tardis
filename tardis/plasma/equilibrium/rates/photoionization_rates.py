@@ -133,7 +133,10 @@ class EstimatedPhotoionizationRateSolver(AnalyticPhotoionizationRateSolver):
         radfield_mc_estimators,
         time_simulation,
         volume,
+        lte_level_population,
         level_population,
+        lte_ion_population,
+        ion_population,
     ):
         """Solve the photoionization and spontaneous recombination rates in the
         case where the radiation field is estimated by Monte Carlo processes.
@@ -170,13 +173,25 @@ class EstimatedPhotoionizationRateSolver(AnalyticPhotoionizationRateSolver):
             )
         )
 
+        lte_nlte_level_population_ratio = (
+            ion_population / lte_ion_population
+        ).values * (lte_level_population / level_population)
+
+        corrected_photoionization_rate_coeff = (
+            photoionization_rate_coeff
+            - lte_nlte_level_population_ratio
+            * stimulated_recombination_rate_coeff
+        )
+
         spontaneous_recombination_rate_coeff = (
             self.spontaneous_recombination_rate_coeff_solver.solve(
                 electron_energy_distribution.temperature
             )
         )
 
-        photoionization_rate = photoionization_rate_coeff * level_population
+        photoionization_rate = (
+            corrected_photoionization_rate_coeff * level_population
+        )
 
         recombination_rate = (
             spontaneous_recombination_rate_coeff
