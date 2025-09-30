@@ -192,15 +192,21 @@ class LevelBoltzmannFactorNLTE(ProcessingPlasmaProperty):
             radiative_transitions = atomic_data.lines.loc[species_slice, :]
             radiative_rate_solver = RadiativeRatesSolver(radiative_transitions)
 
+            if atomic_data.collision_data == "dummy value":
+                col_strengths = atomic_data.yg_data.loc[species_slice, :]
+                col_type = "cmfgen"
+            else:
+                col_strengths = atomic_data.collision_data.loc[species_slice, :]
+                col_type = "chianti"
+
             col_strength_temperatures = atomic_data.collision_data_temperatures
-            col_strengths = atomic_data.collision_data.loc[species_slice, :]
 
             collisional_rate_solver = ThermalCollisionalRateSolver(
                 atomic_data.levels,
                 radiative_transitions,
                 col_strength_temperatures,
                 col_strengths,
-                "chianti",
+                col_type,
             )
             rate_solvers = [
                 (radiative_rate_solver, "radiative"),
