@@ -137,6 +137,9 @@ class EstimatedPhotoionizationRateSolver(AnalyticPhotoionizationRateSolver):
         level_population,
         lte_ion_population,
         ion_population,
+        level_to_ion_population_factor,
+        partition_function,
+        level_boltzmann_factor,
     ):
         """Solve the photoionization and spontaneous recombination rates in the
         case where the radiation field is estimated by Monte Carlo processes.
@@ -170,6 +173,7 @@ class EstimatedPhotoionizationRateSolver(AnalyticPhotoionizationRateSolver):
                 radfield_mc_estimators,
                 time_simulation,
                 volume,
+                level_to_ion_population_factor,
             )
         )
 
@@ -187,16 +191,20 @@ class EstimatedPhotoionizationRateSolver(AnalyticPhotoionizationRateSolver):
             self.spontaneous_recombination_rate_coeff_solver.solve(
                 electron_energy_distribution.temperature
             )
+        ) * level_to_ion_population_factor
+
+        # TODO: Update for non-Hydrogenic species
+        fractional_level_population = (
+            level_boltzmann_factor / partition_function
         )
 
         photoionization_rate = (
-            corrected_photoionization_rate_coeff * level_population
+            corrected_photoionization_rate_coeff * fractional_level_population
         )
 
         recombination_rate = (
             spontaneous_recombination_rate_coeff
-            * level_population
-            * electron_energy_distribution.number_density
+            * level_to_ion_population_factor
         )
 
         photoionization_rate = reindex_ionization_rate_dataframe(

@@ -2,6 +2,14 @@ import numpy as np
 import pandas as pd
 from scipy.sparse import coo_matrix
 
+from tardis.plasma.equilibrium.rates.collisional_ionization_rates import (
+    CollisionalIonizationRateSolver,
+)
+from tardis.plasma.equilibrium.rates.photoionization_rates import (
+    AnalyticPhotoionizationRateSolver,
+    EstimatedPhotoionizationRateSolver,
+)
+
 
 class RateMatrix:
     def __init__(
@@ -111,8 +119,9 @@ class RateMatrix:
 class IonRateMatrix:
     def __init__(
         self,
-        radiative_ionization_rate_solver,
-        collisional_ionization_rate_solver,
+        radiative_ionization_rate_solver: AnalyticPhotoionizationRateSolver
+        | EstimatedPhotoionizationRateSolver,
+        collisional_ionization_rate_solver: CollisionalIonizationRateSolver,
     ):
         """Constructs the ionization rate matrix from radiative and collisional
         ionization rate solvers.
@@ -412,6 +421,12 @@ class IonRateMatrix:
             A DataFrame of rate matrices indexed by atomic number and ion number,
             with each column being a cell. Each entry is a numpy array.
         """
+        # Lucy 2003 Eq 14
+        level_to_ion_population_factor = lte_level_population / (
+            lte_ion_population.values
+            * thermal_electron_energy_distribution.number_density.value
+        )
+
         photoion_rates_df, recomb_rates_df = (
             self.radiative_ionization_rate_solver.solve(
                 thermal_electron_energy_distribution,
@@ -422,13 +437,10 @@ class IonRateMatrix:
                 level_population,
                 lte_ion_population,
                 ion_population,
+                level_to_ion_population_factor,
+                partition_function,
+                boltzmann_factor,
             )
-        )
-
-        # Lucy 2003 Eq 14
-        level_to_ion_population_factor = lte_level_population / (
-            lte_ion_population.values
-            * thermal_electron_energy_distribution.number_density.value
         )
 
         collisional_ionization_rates_df, collision_recombination_rates_df = (
