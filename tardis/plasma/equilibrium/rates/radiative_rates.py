@@ -76,3 +76,15 @@ class RadiativeRatesSolver:
         )
 
         return rates_df
+
+
+class ScaledRadiativeRatesSolver(RadiativeRatesSolver):
+    einstein_coefficients: pd.DataFrame
+
+    def __init__(self, einstein_coefficients):
+        super().__init__(einstein_coefficients)
+
+    def solve(self, radiation_field, beta_sobolevs):
+        rates_df = super().solve(radiation_field)
+
+        return rates_df * beta_sobolevs

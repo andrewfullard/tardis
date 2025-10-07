@@ -23,4 +23,5 @@ from tardis.plasma.equilibrium.rates.photoionization_strengths import (
 )
 from tardis.plasma.equilibrium.rates.radiative_rates import (
     RadiativeRatesSolver,
+    ScaledRadiativeRatesSolver,
 )
