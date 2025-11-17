@@ -26,7 +26,7 @@ class RadiativeRatesSolver:
             kind=SORTING_ALGORITHM
         )
 
-    def solve(self, radiation_field):
+    def solve_basic_rates(self, radiation_field):
         mean_intensity = radiation_field.calculate_mean_intensity(
             self.einstein_coefficients.nu.values
         )
@@ -45,11 +45,13 @@ class RadiativeRatesSolver:
         )
         r_ul = r_ul.add(self.einstein_coefficients["A_ul"], axis=0)
 
+        return r_lu, r_ul
+
+    def finalize_dataframe(self, r_lu, r_ul):
         # swapping as source is upper and destination is lower
         r_ul.index = r_ul.index.swaplevel(
             "level_number_lower", "level_number_upper"
         )
-
         rates_df = pd.concat([r_lu, r_ul])
         rates_df.index.names = [
             "atomic_number",
@@ -74,8 +76,12 @@ class RadiativeRatesSolver:
                 "level_number_destination",
             ]
         )
-
         return rates_df
+
+    def solve(self, radiation_field):
+        r_lu, r_ul = self.solve_basic_rates(radiation_field)
+
+        return self.finalize_dataframe(r_lu, r_ul)
 
 
 class ScaledRadiativeRatesSolver(RadiativeRatesSolver):
@@ -85,6 +91,10 @@ class ScaledRadiativeRatesSolver(RadiativeRatesSolver):
         super().__init__(einstein_coefficients)
 
     def solve(self, radiation_field, beta_sobolevs):
-        rates_df = super().solve(radiation_field)
+        r_lu, r_ul = self.solve_basic_rates(radiation_field)
 
-        return rates_df * beta_sobolevs
+        # scale by beta Sobolev factors as per Lucy 2003 Eq 10
+        r_ul = r_ul.multiply(beta_sobolevs, axis=0)
+        r_lu = r_lu.multiply(beta_sobolevs, axis=0)
+
+        return self.finalize_dataframe(r_lu, r_ul)

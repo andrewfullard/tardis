@@ -33,6 +33,7 @@ class RateMatrix:
         self,
         radiation_field,
         thermal_electron_energy_distribution,
+        beta_sobolevs=None,
     ):
         """Construct the compiled rate matrix dataframe.
 
@@ -51,12 +52,18 @@ class RateMatrix:
             with each column being a cell.
         """
         required_arg = {
-            "radiative": radiation_field,
-            "electron": thermal_electron_energy_distribution.temperature,
+            "radiative": [
+                radiation_field,
+            ],
+            "electron": [
+                thermal_electron_energy_distribution.temperature,
+            ],
+            "scaled_radiative": [radiation_field, beta_sobolevs],
         }
 
         rates_df_list = [
-            solver.solve(required_arg[arg]) for solver, arg in self.rate_solvers
+            solver.solve(*required_arg[arg])
+            for solver, arg in self.rate_solvers
         ]
         # Extract all indexes
         all_indexes = set()
