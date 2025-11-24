@@ -5,9 +5,50 @@ import astropy.units as u
 import numpy as np
 import pandas as pd
 
+from tardis.plasma.equilibrium.indexing import (
+    calculate_block_ids_from_dataframe,
+)
+
 logger = logging.getLogger(__name__)
 
 LOWER_ION_LEVEL_H = 0
+
+
+def calculate_ion_number_density(
+    saha_factor,
+    partition_function,
+    elemental_number_density,
+    electron_number_density,
+    block_ids,
+    ion_zero_threshold,
+):
+    if block_ids is None:
+        block_ids = calculate_block_ids_from_dataframe(saha_factor)
+
+    ion_populations = np.empty_like(partition_function.values)
+
+    phi_electron = np.nan_to_num(
+        saha_factor.values / electron_number_density.values
+    )
+
+    for i, start_id in enumerate(block_ids[:-1]):
+        end_id = block_ids[i + 1]
+        current_phis = phi_electron[start_id:end_id]
+        phis_product = np.cumprod(current_phis, 0)
+
+        tmp_ion_populations = np.empty(
+            (current_phis.shape[0] + 1, current_phis.shape[1])
+        )
+        tmp_ion_populations[0] = elemental_number_density.values[i] / (
+            1 + np.sum(phis_product, axis=0)
+        )
+        tmp_ion_populations[1:] = tmp_ion_populations[0] * phis_product
+
+        ion_populations[start_id + i : end_id + 1 + i] = tmp_ion_populations
+
+    ion_populations[ion_populations < ion_zero_threshold] = 0.0
+
+    return pd.DataFrame(data=ion_populations, index=partition_function.index)
 
 
 class IonPopulationSolver:

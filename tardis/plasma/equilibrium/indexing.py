@@ -61,3 +61,11 @@ def calculate_lines_upper_level_index(levels, lines):
     )
     lines_index = lines.index.droplevel("level_number_lower")
     return np.array(levels_index.loc[lines_index])
+
+
+def initialize_indices(levels, partition_function):
+    indexer = pd.Series(
+        np.arange(partition_function.shape[0]),
+        index=partition_function.index,
+    )
+    return indexer.loc[levels.droplevel(2)].values

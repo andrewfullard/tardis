@@ -1,6 +1,35 @@
 import numpy as np
 import pandas as pd
 
+from tardis.plasma.equilibrium.indexing import (
+    initialize_indices,
+)
+
+
+def calculate_level_number_density(
+    level_boltzmann_factor,
+    ion_number_density,
+    levels,
+    partition_function,
+):
+    """
+    Calculate the level populations from the level_boltzmann_factor,
+    ion_number_density and partition_function
+    """
+    ion2level_idx = initialize_indices(levels, partition_function)
+
+    partition_function_broadcast = partition_function.values[ion2level_idx]
+    level_population_fraction = (
+        level_boltzmann_factor.values / partition_function_broadcast
+    )
+    ion_number_density_broadcast = ion_number_density.values[ion2level_idx]
+    level_number_density = (
+        level_population_fraction * ion_number_density_broadcast
+    )
+    return pd.DataFrame(
+        level_number_density, index=level_boltzmann_factor.index
+    )
+
 
 class LevelPopulationSolver:
     def __init__(self, rates_matrices: pd.DataFrame, levels: pd.DataFrame):

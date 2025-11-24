@@ -466,3 +466,72 @@ class IonRateMatrix:
             collision_recombination_rates_df,
             charge_conservation,
         )
+
+
+class LTEIonRateMatrix:
+    @staticmethod
+    def _prepare_phi(phi, ion_index):
+        # Check for Nans
+        no_nans = pd.isnull(phi).sum().sum()
+        if no_nans:
+            # maybe add a warning
+            phi = phi.fillna(phi.min().min())
+
+        # Zero phi values pose a problem for the root finding algorithm. Set them to a small value.
+        phi[phi == 0.0] = 1.0e-10 * phi[phi > 0.0].min().min()
+
+        atomic_number = phi.index.get_level_values(0).values
+        ion_number = phi.index.get_level_values(1).values
+        new_index = pd.MultiIndex.from_arrays([atomic_number, ion_number - 1])
+        phi_prep = phi.set_index(new_index).reindex(ion_index).fillna(0.0)
+        return phi_prep
+
+    def solve(self, phi, ion_index, charge_conservation=False):
+        """Compute the LTE ionization rate matrix.
+
+        Parameters
+        ----------
+        phi : pd.DataFrame
+            Saha factor DataFrame indexed by atomic number and ion number.
+        ion_index : pd.Index
+            Index of all ion states.
+        charge_conservation : bool, optional
+            Whether to include a charge conservation row in the rate matrix.
+
+        Returns
+        -------
+        pd.DataFrame
+            A DataFrame of rate matrices indexed by atomic number,
+            with each column being a cell. Each entry is a numpy array.
+        """
+        phi_grouped = phi.groupby(level=("atomic_number"))
+
+        rate_matrices = pd.DataFrame(
+            index=phi_grouped.groups.keys(),
+            columns=phi.columns,
+        )
+
+        phi_prep = self._prepare_phi(phi, ion_index)
+
+        for atomic_number in phi_grouped.groups.keys():
+            ion_states = atomic_number + 1
+            for shell in range(len(phi.columns)):
+                lte_diag = -phi_prep[shell].values
+                lte_offdiag = (lte_diag != 0).astype(float)[:-1]
+
+                matrix_array = np.diag(lte_diag) + np.diag(lte_offdiag, k=1)
+
+                matrix_array[1, :] = 1
+                if charge_conservation:
+                    charge_conservation_row = np.hstack(
+                        (np.arange(0, ion_states), -1)
+                    )
+                    matrix_array = np.pad(matrix_array, ((0, 0), (0, 1)))
+                    matrix_array = np.vstack(
+                        (charge_conservation_row, matrix_array)
+                    )
+                rate_matrices.loc[atomic_number, shell] = matrix_array
+
+        rate_matrices.index.names = ["atomic_number"]
+
+        return rate_matrices
