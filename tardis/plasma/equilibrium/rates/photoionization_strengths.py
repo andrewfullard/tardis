@@ -429,7 +429,7 @@ class AnalyticCorrectedPhotoionizationCoeffSolver(
         return corrected_photoionization_rate_coeff
 
 
-class EstimatedPhotoionizationCoeffSolver:
+class EstimatedPhotoionizationCoeffSolver_Full:
     def __init__(
         self,
         level2continuum_edge_idx,
@@ -481,3 +481,47 @@ class EstimatedPhotoionizationCoeffSolver:
         stimulated_recombination_rate_coeff *= photoionization_normalization
 
         return photoionization_rate_coeff, stimulated_recombination_rate_coeff
+
+
+class EstimatedPhotoionizationCoeffSolver:
+    def __init__(
+        self,
+        level2continuum_edge_idx,
+    ):
+        self.level2continuum_edge_idx = level2continuum_edge_idx
+
+    def solve(
+        self,
+        radfield_mc_estimators,
+        time_simulation,
+        volume,
+        level_to_ion_population_factor,
+    ):
+        """
+        Solve for the continuum properties.
+
+        Parameters
+        ----------
+        radfield_mc_estimators : RadiationFieldMCEstimators
+            The Monte Carlo estimators for the radiation field.
+        time_simulation : float
+            The simulation time.
+        volume : float
+            The volume of the cells.
+        level_to_ion_population_factor : pd.DataFrame
+            The factor from Lucy 2003 Eq 14.
+
+        Returns
+        -------
+        ContinuumProperties
+            The calculated continuum properties.
+
+        Notes
+        -----
+        Lucy 2003 Eq 44, 45.
+        """
+        return (
+            radfield_mc_estimators.photo_ion_estimator,
+            radfield_mc_estimators.stim_recomb_estimator
+            * level_to_ion_population_factor,
+        )
