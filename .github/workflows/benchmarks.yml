@@ -13,7 +13,6 @@ on:
       - opened
       - reopened
       - synchronize
-      - labeled # benchmarks label required
       - ready_for_review
   workflow_dispatch:
 
@@ -38,10 +37,9 @@ jobs:
   build:
     if: github.repository_owner == 'tardis-sn' &&
       (github.event_name == 'push' ||
-      (!github.event.pull_request.draft) ||
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request' &&
-      contains(github.event.pull_request.labels.*.name, 'benchmarks')))
+      !github.event.pull_request.draft))
     runs-on: ubuntu-latest
     needs: [test-cache]
     steps:
