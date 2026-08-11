@@ -2,7 +2,6 @@ import importlib
 
 import numpy as np
 import pandas as pd
-from astropy import units as u
 
 from tardis.plasma import BasePlasma
 from tardis.plasma.base import PlasmaSolverSettings
@@ -16,12 +15,14 @@ from tardis.plasma.properties import (
     RadiationFieldCorrection,
     StimulatedEmissionFactor,
 )
-from tardis.plasma.radiation_field import DilutePlanckianRadiationField
 from tardis.util.base import species_string_to_tuple
 
 
 def map_species_from_string(species):
-    return [species_string_to_tuple(spec) for spec in species]
+    return [
+        spec if isinstance(spec, tuple) else species_string_to_tuple(spec)
+        for spec in species
+    ]
 
 
 def convert_species_to_multi_index(species_strs):
@@ -69,6 +70,8 @@ class PlasmaSolverFactory:
         atom_data,
         config=None,
     ) -> None:
+        self.plasma_modules = []
+        self.property_kwargs = {}
         if config is not None:
             self.parse_plasma_config(config.plasma)
         self.atom_data = atom_data
@@ -125,17 +128,14 @@ class PlasmaSolverFactory:
         """
         self.plasma_collection = importlib.import_module(property_collections)
 
-        if self.continuum_interaction_species:
-            raise PlasmaConfigError(
-                "Continuum interactions are supported only by the IIP workflow."
-            )
-
         self.atom_data.prepare_atom_data(
             selected_atomic_numbers,
             line_interaction_type=self.line_interaction_type,
             continuum_interaction_species=self.continuum_interaction_species_multi_index,
             nlte_species=self.legacy_nlte_species,
         )
+
+        self.check_continuum_interaction_species()
 
         self.plasma_modules = (
             self.plasma_collection.basic_inputs
@@ -146,15 +146,58 @@ class PlasmaSolverFactory:
         self.property_kwargs[RadiationFieldCorrection] = dict(
             delta_treatment=self.delta_treatment
         )
-        if (config is not None) and len(self.legacy_nlte_species) > 0:
+        continuum_enabled = bool(self.continuum_interaction_species)
+        if continuum_enabled:
+            if self.helium_treatment != "none":
+                raise PlasmaConfigError(
+                    "Continuum interactions require helium_treatment to be 'none'."
+                )
+            self.plasma_modules += self.plasma_collection.non_nlte_properties
+        elif (config is not None) and len(self.legacy_nlte_species) > 0:
             self.setup_legacy_nlte(config.plasma.nlte)
         else:
             self.plasma_modules += self.plasma_collection.non_nlte_properties
 
-        if self.line_interaction_type in ("downbranch", "macroatom"):
-            self.plasma_modules += self.plasma_collection.macro_atom_properties
+        if continuum_enabled or self.line_interaction_type in (
+            "downbranch",
+            "macroatom",
+        ):
+            if continuum_enabled:
+                self.plasma_modules += (
+                    self.plasma_collection.continuum_macro_atom_properties
+                )
+            else:
+                self.plasma_modules += self.plasma_collection.macro_atom_properties
 
-        self.setup_helium_treatment()
+        if continuum_enabled:
+            self.plasma_modules += self.plasma_collection.continuum_inputs
+            self.plasma_modules += self.plasma_collection.continuum_properties
+            self.property_kwargs[HydrogenContinuumFractionalHeating] = dict(
+                photo_ion_cross_sections=self.atom_data.photoionization_data
+            )
+            self.property_kwargs[StimulatedEmissionFactor] = dict(
+                nlte_species=set(self.legacy_nlte_species)
+            )
+        else:
+            self.setup_helium_treatment()
+
+    def check_continuum_interaction_species(self):
+        """Validate that configured continuum species are selected atoms."""
+        if not self.continuum_interaction_species:
+            return
+
+        continuum_atoms = (
+            self.continuum_interaction_species_multi_index.get_level_values(
+                "atomic_number"
+            )
+        )
+        if not np.all(
+            continuum_atoms.isin(self.atom_data.selected_atomic_numbers)
+        ):
+            raise PlasmaConfigError(
+                "Not all continuum interaction species belong to atoms that "
+                "have been specified in the configuration."
+            )
 
     def setup_helium_treatment(self):
         """
@@ -372,238 +415,3 @@ class PlasmaSolverFactory:
             plasma_solver_settings=plasma_solver_settings,
             **plasma_assemble_kwargs,
         )
-
-
-class IIPPlasmaSolverFactory:
-    """Simplified plasma solver factory that produces only IIP plasmas."""
-
-    excitation_analytical_approximation = "dilute-lte"
-    ionization_analytical_approximation = "nebular"
-
-    link_t_rad_t_electron: float = 1.0
-    radiative_rates_type: str = "dilute-blackbody"
-    line_interaction_type: str = "macroatom"
-
-    ## Continuum Interaction
-    continuum_interaction_species: list = []
-
-    plasma_modules: list = []
-    property_kwargs: dict = {}
-    plasma_collection = None
-
-    def __init__(self, atom_data, config=None) -> None:
-        self.plasma_modules = []
-        self.property_kwargs = {}
-        self.atom_data = atom_data
-        self.plasma_collection = importlib.import_module(
-            "tardis.plasma.properties.iip_property_collections"
-        )
-        if config is not None:
-            self.link_t_rad_t_electron = config.plasma.link_t_rad_t_electron
-            self.radiative_rates_type = config.plasma.radiative_rates_type
-            self.line_interaction_type = config.plasma.line_interaction_type
-            self.continuum_interaction_species = (
-                config.plasma.continuum_interaction.species
-            )
-            self.nlte_species = config.plasma.nlte.species
-
-    @property
-    def continuum_interaction_species_multi_index(self):
-        return convert_species_to_multi_index(
-            self.continuum_interaction_species
-        )
-
-    def set_continuum_interaction_species_from_string(
-        self, continuum_interaction_species
-    ):
-        """
-        Set the continuum interaction species from a list of species strings.
-
-        Parameters
-        ----------
-        continuum_interaction_species : list of str
-            List of species strings representing the continuum interaction species.
-
-        Returns
-        -------
-        None
-        """
-        self.continuum_interaction_species = [
-            species_string_to_tuple(species)
-            for species in continuum_interaction_species
-        ]
-
-    def check_continuum_interaction_species(self):
-        """
-        Check if all continuum interaction species belong to atoms that have been specified in the configuration.
-
-        Raises
-        ------
-            PlasmaConfigError: If not all continuum interaction species belong to specified atoms.
-        """
-        if len(self.continuum_interaction_species) == 0:
-            return
-
-        continuum_atoms = (
-            self.continuum_interaction_species_multi_index.get_level_values(
-                "atomic_number"
-            )
-        )
-
-        continuum_atoms_in_selected_atoms = np.all(
-            continuum_atoms.isin(self.atom_data.selected_atomic_numbers)
-        )
-
-        if not continuum_atoms_in_selected_atoms:
-            raise PlasmaConfigError(
-                "Not all continuum interaction species "
-                "belong to atoms that have been specified "
-                "in the configuration."
-            )
-
-    def prepare_factory(
-        self,
-        selected_atomic_numbers,
-        property_collections,
-        nlte_species,
-        config=None,
-    ):
-        """Set up the IIP plasma factory with minimal configuration."""
-        self.plasma_collection = importlib.import_module(property_collections)
-
-        self.atom_data.prepare_atom_data(
-            selected_atomic_numbers,
-            line_interaction_type=self.line_interaction_type,
-            continuum_interaction_species=self.continuum_interaction_species_multi_index,
-            nlte_species=nlte_species,
-        )
-
-        self.check_continuum_interaction_species()
-
-        self.plasma_modules = (
-            self.plasma_collection.basic_inputs
-            + self.plasma_collection.basic_properties
-        )
-
-        self.plasma_modules += (
-            self.plasma_collection.dilute_lte_excitation_properties
-        )
-        self.plasma_modules += (
-            self.plasma_collection.nebular_ionization_properties
-        )
-
-        self.plasma_modules += self.plasma_collection.non_nlte_properties
-
-        self.plasma_modules += self.plasma_collection.macro_atom_properties
-
-        # Hydrogen continuum properties
-        self.plasma_modules += self.plasma_collection.hydrogen_continuum_inputs
-        self.plasma_modules += (
-            self.plasma_collection.hydrogen_continuum_properties
-        )
-
-        # Set up property kwargs for hydrogen continuum
-        hydrogen_photoionization_kwargs = dict(
-            photo_ion_cross_sections=self.atom_data.photoionization_data
-        )
-        self.property_kwargs[HydrogenContinuumFractionalHeating] = (
-            hydrogen_photoionization_kwargs
-        )
-        self.property_kwargs[StimulatedEmissionFactor] = dict(
-            nlte_species=set(nlte_species)
-        )
-
-    def initialize_j_blues(self, dilute_planckian_radiation_field, lines_df):
-        """Initialize j_blues for the given radiation field."""
-        j_blues = pd.DataFrame(
-            dilute_planckian_radiation_field.calculate_mean_intensity(
-                lines_df.nu.values
-            ),
-            index=lines_df.index,
-        )
-        return j_blues
-
-    def assemble(
-        self,
-        number_densities,
-        dilute_planckian_radiation_field,
-        time_explosion,
-        electron_densities=None,
-        **kwargs,
-    ):
-        """Assemble a IIP plasma."""
-        plasma_solver_settings = PlasmaSolverSettings(
-            RADIATIVE_RATES_TYPE=self.radiative_rates_type
-        )
-
-        plasma_assemble_kwargs = dict(
-            time_explosion=time_explosion,
-            dilute_planckian_radiation_field=dilute_planckian_radiation_field,
-            number_density=number_densities,
-            link_t_rad_t_electron=self.link_t_rad_t_electron,
-            atomic_data=self.atom_data,
-            j_blues=None,
-            continuum_interaction_species=self.continuum_interaction_species_multi_index,
-        )
-
-        if electron_densities is not None:
-            electron_densities = pd.Series(electron_densities.cgs.value)
-            self.property_kwargs[IonNumberDensity] = dict(
-                electron_densities=electron_densities
-            )
-
-        plasma_assemble_kwargs.update(kwargs)
-        return IIPPlasma(
-            plasma_properties=self.plasma_modules,
-            property_kwargs=self.property_kwargs,
-            plasma_solver_settings=plasma_solver_settings,
-            **plasma_assemble_kwargs,
-        )
-
-
-class IIPPlasma(BasePlasma):
-    """Standard ``BasePlasma`` with the IIP iteration update contract."""
-
-    def update_radiationfield(
-        self,
-        t_rad,
-        dilution_factor,
-        j_blues,
-        photoionization_rate_estimator=None,
-        stimulated_recombination_rate_estimator=None,
-        bound_free_heating_estimator=None,
-        stimulated_recombination_cooling_estimator=None,
-        free_free_heating_estimator=None,
-        initialize=False,
-    ):
-        """Update the radiation field and estimator-backed equilibrium state."""
-        if not isinstance(t_rad, u.Quantity):
-            t_rad = t_rad * u.K
-        if isinstance(j_blues, pd.DataFrame):
-            j_blues = j_blues.copy()
-            j_blues.columns = np.arange(j_blues.shape[1])
-        iteration = self.get_value("iteration") or 0
-        next_iteration = 0 if initialize else iteration + 1
-        update_kwargs = dict(
-            dilute_planckian_radiation_field=DilutePlanckianRadiationField(
-                t_rad, dilution_factor
-            ),
-            j_blues=j_blues,
-            iteration=next_iteration,
-            previous_beta_sobolev=self.get_value("beta_sobolev").copy(),
-            previous_electron_densities=self.get_value("electron_densities"),
-            previous_ion_number_density=self.get_value(
-                "ion_number_density"
-            ).copy(),
-            previous_level_number_density=self.get_value(
-                "level_number_density"
-            ).copy(),
-        )
-        update_kwargs.update(
-            photoionization_rate_estimator=photoionization_rate_estimator,
-            stimulated_recombination_rate_estimator=stimulated_recombination_rate_estimator,
-            bound_free_heating_estimator=bound_free_heating_estimator,
-            stimulated_recombination_cooling_estimator=stimulated_recombination_cooling_estimator,
-            free_free_heating_estimator=free_free_heating_estimator,
-        )
-        self.update(**update_kwargs)

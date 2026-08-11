@@ -19,7 +19,7 @@ from tardis.opacities.opacity_solver import OpacitySolver
 from tardis.opacities.opacity_state_continuum import (
     ContinuumOpacityState,
 )
-from tardis.plasma.assembly import IIPPlasmaSolverFactory
+from tardis.plasma.assembly import PlasmaSolverFactory
 from tardis.plasma.equilibrium.continuum import build_continuum_rate_state
 from tardis.plasma.radiation_field import DilutePlanckianRadiationField
 from tardis.simulation.convergence import ConvergenceSolver
@@ -86,11 +86,10 @@ class TypeIIPWorkflow:
             )
         )
 
-        factory = IIPPlasmaSolverFactory(self.atom_data, self.configuration)
+        factory = PlasmaSolverFactory(self.atom_data, self.configuration)
         factory.prepare_factory(
             self.simulation_state.abundance.index,
-            "tardis.plasma.properties.iip_property_collections",
-            [(1, 0)],
+            "tardis.plasma.properties.legacy_property_collections",
             self.configuration,
         )
 
@@ -486,10 +485,14 @@ class TypeIIPWorkflow:
         j_blues_df : pd.DataFrame
             J_blues DataFrame for the radiation field
         """
-        self.plasma_solver.update_radiationfield(
-            self.simulation_state.t_radiative,
-            self.simulation_state.dilution_factor,
-            j_blues_df,
+        self.plasma_solver.store_previous_properties()
+        self.plasma_solver.update(
+            dilute_planckian_radiation_field=DilutePlanckianRadiationField(
+                self.simulation_state.t_radiative,
+                self.simulation_state.dilution_factor,
+            ),
+            j_blues=j_blues_df,
+            iteration=self.plasma_solver.iteration + 1,
             **continuum_estimators,
         )
 

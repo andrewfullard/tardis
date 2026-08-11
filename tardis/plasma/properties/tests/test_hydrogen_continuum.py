@@ -6,13 +6,13 @@ import pandas as pd
 import pandas.testing as pdt
 import pytest
 
-from tardis.plasma.assembly.base import IIPPlasmaSolverFactory
+from tardis.plasma.assembly.base import PlasmaSolverFactory
 from tardis.plasma.properties.hydrogen_continuum import (
     HydrogenContinuumLTEPopulations,
     IIPContinuumPopulations,
 )
-from tardis.plasma.properties.iip_property_collections import (
-    hydrogen_continuum_properties,
+from tardis.plasma.properties.legacy_property_collections import (
+    continuum_properties,
 )
 from tardis.plasma.properties.radiative_properties import (
     StimulatedEmissionFactor,
@@ -22,7 +22,7 @@ from tardis.plasma.properties.radiative_properties import (
 def test_iip_continuum_outputs_have_one_coupled_owner() -> None:
     owners = [
         property_class
-        for property_class in hydrogen_continuum_properties
+        for property_class in continuum_properties
         if {
             "hydrogen_continuum_level_boltzmann_factor",
             "hydrogen_continuum_partition_function",
@@ -81,7 +81,7 @@ def test_lte_populations_use_current_electron_densities() -> None:
     )
 
 
-def test_iip_factory_configures_public_stimulated_emission_factor() -> None:
+def test_standard_factory_configures_continuum_stimulated_emission_factor() -> None:
     class AtomData:
         photoionization_data = object()
         selected_atomic_numbers = pd.Index([1, 6])
@@ -90,14 +90,14 @@ def test_iip_factory_configures_public_stimulated_emission_factor() -> None:
             return None
 
     atom_data = AtomData()
-    factory = IIPPlasmaSolverFactory(atom_data)
-    factory.continuum_interaction_species = []
+    factory = PlasmaSolverFactory(atom_data)
+    factory.continuum_interaction_species = ["H I"]
+    factory.legacy_nlte_species = [(1, 0), (6, 1)]
     nlte_species = [(1, 0), (6, 1)]
 
     factory.prepare_factory(
         [1, 6],
-        "tardis.plasma.properties.iip_property_collections",
-        nlte_species,
+        "tardis.plasma.properties.legacy_property_collections",
     )
 
     assert factory.property_kwargs[StimulatedEmissionFactor] == {

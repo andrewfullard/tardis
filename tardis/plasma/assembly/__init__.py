@@ -1,7 +1,3 @@
-from tardis.plasma.assembly.base import (
-    IIPPlasma,
-    IIPPlasmaSolverFactory,
-    PlasmaSolverFactory,
-)
+from tardis.plasma.assembly.base import PlasmaSolverFactory
 
-__all__ = ["IIPPlasma", "IIPPlasmaSolverFactory", "PlasmaSolverFactory"]
+__all__ = ["PlasmaSolverFactory"]

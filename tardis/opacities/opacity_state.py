@@ -7,6 +7,7 @@ from numba import float64, int64
 
 from tardis.opacities.continuum.continuum_state import ContinuumState
 from tardis.opacities.macro_atom.macroatom_state import MacroAtomState
+from tardis.opacities.opacity_state_continuum import ContinuumOpacityState
 from tardis.opacities.opacity_state_numba import OpacityStateNumba
 from tardis.opacities.opacity_state_numba_iip import OpacityStateNumbaIIP
 from tardis.plasma.base import BasePlasma
@@ -53,7 +54,7 @@ class OpacityState:
         line_list_nu: pd.Series,
         tau_sobolev: pd.DataFrame,
         beta_sobolev: pd.DataFrame | None,
-        continuum_state: ContinuumState | None,
+        continuum_state: ContinuumState | ContinuumOpacityState | None,
     ) -> None:
         """
         Initialize the Python-native opacity state.
@@ -122,6 +123,7 @@ class OpacityState:
         plasma: BasePlasma,
         tau_sobolev: pd.DataFrame,
         beta_sobolev: pd.DataFrame | None,
+        continuum_state: ContinuumState | ContinuumOpacityState | None = None,
     ) -> Self:
         """
         Construct an opacity state from a plasma object.
@@ -134,6 +136,8 @@ class OpacityState:
             Sobolev optical depths for each line and shell.
         beta_sobolev : pd.DataFrame or None
             Sobolev escape probabilities for each line and shell.
+        continuum_state : object, optional
+            Structured continuum opacity inputs for the current iteration.
 
         Returns
         -------

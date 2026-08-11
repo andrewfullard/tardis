@@ -1,4 +1,4 @@
-"""Property collections used by the equilibrium-backed IIP plasma."""
+"""Property collections retained for legacy-oracle tests."""
 
 from tardis.opacities.tau_sobolev import BetaSobolev, TauSobolev
 from tardis.plasma.properties import (
@@ -98,13 +98,8 @@ nebular_ionization_properties = PlasmaPropertyCollection(
 )
 non_nlte_properties = PlasmaPropertyCollection([LevelBoltzmannFactorNoNLTE])
 macro_atom_properties = PlasmaPropertyCollection(
-    [
-        TauSobolev,
-        BetaSobolev,
-        MacroAtomData,
-    ]
+    [TauSobolev, BetaSobolev, MacroAtomData]
 )
-
 hydrogen_continuum_inputs = PlasmaPropertyCollection(
     [
         Iteration,

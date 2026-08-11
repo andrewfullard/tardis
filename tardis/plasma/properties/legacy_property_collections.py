@@ -42,6 +42,39 @@ lte_excitation_properties = PlasmaPropertyCollection([LevelBoltzmannFactorLTE])
 macro_atom_properties = PlasmaPropertyCollection(
     [BetaSobolev, TransitionProbabilities, MacroAtomData]
 )
+continuum_macro_atom_properties = PlasmaPropertyCollection(
+    [BetaSobolev, MacroAtomData]
+)
+continuum_inputs = PlasmaPropertyCollection(
+    [
+        Iteration,
+        PhotoIonizationData,
+        PreviousElectronDensities,
+        PreviousBetaSobolev,
+        PreviousIonNumberDensity,
+        PreviousLevelNumberDensity,
+        CollisionalIonizationRateCoefficient,
+        CollisionalExcitationRateCoefficient,
+        CollisionalDeexcitationRateCoefficient,
+        FreeFreeHeatingEstimator,
+        BoundFreeHeatingEstimator,
+        StimulatedRecombinationCoolingEstimator,
+        PhotoionizationRateEstimator,
+        StimulatedRecombinationRateEstimator,
+    ]
+)
+continuum_properties = PlasmaPropertyCollection(
+    [
+        ThermalLevelBoltzmannFactorLTE,
+        ThermalLTEPartitionFunction,
+        ThermalGElectron,
+        NLTEData,
+        IIPContinuumPopulations,
+        HydrogenContinuumLTEPopulations,
+        HydrogenContinuumFractionalHeating,
+        HydrogenContinuumIonRatio,
+    ]
+)
 nebular_ionization_properties = PlasmaPropertyCollection(
     [PhiSahaNebular, ZetaData, BetaElectron, RadiationFieldCorrection]
 )
