@@ -184,11 +184,31 @@ class BoundFreeThermalRates:
             ),
             index=self.photoionization_index,
         )
-        integrated_cooling_coefficient.loc[(1, 0, 0)] = 0.0
+        ground_state_mask = (
+            integrated_cooling_coefficient.index.get_level_values("ion_number")
+            == 0
+        ) & (
+            integrated_cooling_coefficient.index.get_level_values("level_number")
+            == 0
+        )
+        integrated_cooling_coefficient.loc[ground_state_mask] = 0.0
+
+        upper_ion_index = pd.MultiIndex.from_arrays(
+            [
+                integrated_cooling_coefficient.index.get_level_values(
+                    "atomic_number"
+                ),
+                integrated_cooling_coefficient.index.get_level_values(
+                    "ion_number"
+                )
+                + 1,
+            ],
+            names=["atomic_number", "ion_number"],
+        )
 
         ion_cooling_factor = (
             thermal_electron_distribution.number_density.value
-            * ion_population.loc[(1, 1)]
+            * ion_population.loc[upper_ion_index].to_numpy()
         )
         spontaneous_cooling_rate = (
             integrated_cooling_coefficient
@@ -364,9 +384,22 @@ class CollisionalIonizationThermalRates:
             * const.h.cgs.value
         )
 
+        upper_ion_index = pd.MultiIndex.from_arrays(
+            [
+                collisional_ionization_rate_coefficient.index.get_level_values(
+                    "atomic_number"
+                ),
+                collisional_ionization_rate_coefficient.index.get_level_values(
+                    "ion_number"
+                )
+                + 1,
+            ],
+            names=["atomic_number", "ion_number"],
+        )
+
         heating_rate = (
             electron_density.cgs.value
-            * ion_population.loc[(1, 1)]
+            * ion_population.loc[upper_ion_index].to_numpy()
             * level_population_ratio
             * rate_factor
         ).sum()

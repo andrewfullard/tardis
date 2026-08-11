@@ -1295,6 +1295,7 @@ class ContinuumMacroAtomSolver(BoundBoundMacroAtomSolver):
                 coll_ion_cool_arr,
                 fb_cool_rate,
                 fb_cool_probs_arr,
+                spontaneous_recombination_coeff.index,
                 ff_cool_rate,
             )
         )
@@ -1632,6 +1633,7 @@ class ContinuumMacroAtomSolver(BoundBoundMacroAtomSolver):
                 coll_ion_cool_arr,
                 fb_cool_rate,
                 fb_cool_probs_arr,
+                spontaneous_recombination_coeff.index,
                 ff_cool_rate,
             )
         )
@@ -1712,6 +1714,7 @@ class ContinuumMacroAtomSolver(BoundBoundMacroAtomSolver):
         coll_ion_cool_arr: np.ndarray,
         fb_cool_rate: np.ndarray,
         fb_cool_probs_arr: np.ndarray,
+        fb_cool_destinations: pd.MultiIndex,
         ff_cool_rate: np.ndarray,
     ) -> tuple[pd.DataFrame, pd.DataFrame]:
         """
@@ -1741,6 +1744,9 @@ class ContinuumMacroAtomSolver(BoundBoundMacroAtomSolver):
             Free-bound cooling rates per cell.
         fb_cool_probs_arr
             Array of free-bound cooling probabilities by bound level.
+        fb_cool_destinations
+            Bound-level index corresponding to the columns of
+            ``fb_cool_probs_arr``.
         ff_cool_rate
             Free-free (bremsstrahlung) cooling rates per cell.
 
@@ -1760,7 +1766,9 @@ class ContinuumMacroAtomSolver(BoundBoundMacroAtomSolver):
             metadata_size = len(macro_atom_transition_metadata)
             ff_cool_metadata = create_free_free_cooling_metadata(metadata_size)
             fb_cool_metadata = create_free_bound_cooling_metadata(
-                metadata_size + len(ff_cool_metadata), fb_cool_probs_arr
+                metadata_size + len(ff_cool_metadata),
+                fb_cool_probs_arr,
+                fb_cool_destinations,
             )
             coll_exc_cool_metadata = create_coll_excitation_cooling_metadata(
                 metadata_size + len(ff_cool_metadata) + len(fb_cool_metadata),

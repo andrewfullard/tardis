@@ -855,7 +855,9 @@ def create_free_free_cooling_metadata(
 
 
 def create_free_bound_cooling_metadata(
-    transition_starting_index: int, fb_cool_probs_arr: np.ndarray
+    transition_starting_index: int,
+    fb_cool_probs_arr: np.ndarray,
+    fb_cool_destinations: pd.MultiIndex,
 ) -> pd.DataFrame:
     """
     Create metadata for free-bound (radiative recombination) cooling transitions.
@@ -867,18 +869,16 @@ def create_free_bound_cooling_metadata(
     fb_cool_probs_arr
         Array containing free-bound cooling probabilities.
         Shape is (n_zones, n_bound_levels).
+    fb_cool_destinations
+        Bound-level index corresponding to the columns of
+        ``fb_cool_probs_arr``.
 
     Returns
     -------
     pd.DataFrame
         Metadata DataFrame describing the free-bound cooling transitions for each bound level.
     """
-    destinations = [
-        (1, 0, i) for i in range(fb_cool_probs_arr.shape[1])
-    ]  # hard coded for hydrogen
-    # TODO: Fix by grabbing the destinations from something fed in which can identify the free-bound cooling associated atoms.
-    # However note that I don't think it matters because this is a deactivation transition, so destination is largely irrelevant.
-    # transition_line_idx however will need to make sure order is preserved.
+    destinations = fb_cool_destinations.tolist()
 
     free_bound_cooling_metadata = pd.DataFrame(
         {
