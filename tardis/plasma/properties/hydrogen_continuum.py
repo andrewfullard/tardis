@@ -714,20 +714,38 @@ class HydrogenContinuumFractionalHeating(ProcessingPlasmaProperty):
 
 class HydrogenContinuumIonRatio(ProcessingPlasmaProperty):
     """
-    Calculate the hydrogen ionization ratio.
+    Calculate the first configured continuum ionization ratio.
 
     Attributes
     ----------
     ion_ratio : pandas.Series
-        Ratio of H II to H I number density in each zone.
+        Ratio of the upper to lower ion-stage number density in each zone.
     """
 
     outputs = ("ion_ratio",)
 
     @staticmethod
-    def calculate(ion_number_density):
-        """Calculate the H II to H I population ratio."""
+    def calculate(
+        ion_number_density: pd.DataFrame,
+        continuum_interaction_species: pd.MultiIndex,
+    ) -> pd.Series:
+        """Calculate the configured continuum population ratio.
+
+        Parameters
+        ----------
+        ion_number_density : pandas.DataFrame
+            Ion populations indexed by atomic and ion number.
+        continuum_interaction_species : pandas.MultiIndex
+            Configured continuum lower ion stages.
+
+        Returns
+        -------
+        pandas.Series
+            Upper-to-lower ion population ratio for the first continuum species.
+        """
+        atomic_number, ion_number = continuum_interaction_species[0]
         ion_ratio = (
-            ion_number_density.loc[(1, 1)] / ion_number_density.loc[(1, 0)]
+            ion_number_density.loc[(atomic_number, ion_number + 1)]
+            / ion_number_density.loc[(atomic_number, ion_number)]
         )
         return ion_ratio

@@ -13,7 +13,6 @@ from tardis.io.atom_data.parse_atom_data import parse_atom_data
 from tardis.model import SimulationState
 from tardis.opacities.macro_atom.macroatom_solver import (
     ContinuumMacroAtomSolver,
-    LegacyMacroAtomSolver,
 )
 from tardis.opacities.opacity_solver import OpacitySolver
 from tardis.opacities.opacity_state_continuum import (
@@ -135,9 +134,11 @@ class TypeIIPWorkflow:
         # After initializing NLTE
         line_interaction_type = configuration.plasma.line_interaction_type
         continuum_interactions = configuration.plasma.continuum_interaction
-        if "H I" not in continuum_interactions.species:
+        if not continuum_interactions.species:
             raise ValueError(
-                "Continuum interactions for 'H I' must be included for the IIP workflow. Check plasma.continuum_interaction.species in the configuration."
+                "At least one continuum interaction species must be configured "
+                "for the IIP workflow. Check "
+                "plasma.continuum_interaction.species in the configuration."
             )
 
         self.opacity_solver = OpacitySolver(
@@ -150,13 +151,12 @@ class TypeIIPWorkflow:
             self.atom_data.lines,
             self.atom_data.photoionization_data,
             self.atom_data.ionization_data,
-            selected_continuum_transitions=np.array([(1, 0)]),
+            selected_continuum_transitions=np.asarray(
+                factory.continuum_interaction_species_multi_index.tolist()
+            ),
             line_interaction_type=line_interaction_type,
             nthreads=configuration.montecarlo.nthreads,
         )
-        self.legacy_macro_atom_solver = LegacyMacroAtomSolver(normalize=False)
-        self._synchronize_plasma_contract()
-
         self.transport_state = None
         self.transport_solver = MCTransportSolverIIP.from_config(
             configuration,
@@ -258,18 +258,21 @@ class TypeIIPWorkflow:
 
         sigma_T = const.sigma_T.cgs.value
 
-        N_H = number_density.loc[1].values
+        if 1 in number_density.index:
+            electron_density_proxy = number_density.loc[1].values
+        else:
+            electron_density_proxy = number_density.sum(axis=0).values
 
         # alternative tau calculation from ctardis
         # v_inner = geometry_state.v_inner_active.value
         # doppler_factor = 1.0 - v_inner / const.c.cgs.value
-        # tau_e_shell = sigma_T * delta_r * N_H
+        # tau_e_shell = sigma_T * delta_r * electron_density_proxy
 
         # tau = tau_e_shell - (1 - doppler_factor) * tau_e_shell ** (
         #    2.25 * doppler_factor
         # )
 
-        tau = sigma_T * delta_r * N_H
+        tau = sigma_T * delta_r * electron_density_proxy
         tau = tau[::-1].cumsum()[::-1]
         T_eff4 = t_inner**4 / (tau[0] + 2.0 / 3.0)
         tau_middle = interp1d(r_inner, tau, fill_value="extrapolate")(r_middle)
@@ -721,27 +724,6 @@ class TypeIIPWorkflow:
         self.continuum_opacity_state = ContinuumOpacityState.from_plasma(
             self.plasma_solver, self.continuum_state
         )
-        self._synchronize_plasma_contract()
-
-    def _synchronize_plasma_contract(self) -> None:
-        """Expose continuum and legacy macro-atom outputs on the plasma."""
-        self.plasma_solver.p_fb_deactivation = (
-            self.continuum_opacity_state.p_fb_deactivation
-        )
-        self.plasma_solver.chi_bf = self.continuum_opacity_state.chi_bf
-        if hasattr(self, "legacy_macro_atom_solver"):
-            self.plasma_solver.transition_probabilities = (
-                self.legacy_macro_atom_solver.solve_transition_probabilities(
-                    self.atom_data,
-                    pd.DataFrame(
-                        self.plasma_solver.j_blues,
-                        index=self.plasma_solver.lines.index,
-                    ),
-                    self.plasma_solver.tau_sobolevs,
-                    self.plasma_solver.beta_sobolev,
-                    self.plasma_solver.stimulated_emission_factor,
-                )
-            )
 
     def normalize_continuum_estimators(
         self, continuum_estimators, j_blues, j_estimators
@@ -876,7 +858,6 @@ class TypeIIPWorkflow:
             beta_sobolev=self.plasma_solver.beta_sobolev,
         )
         macro_atom_state = self.solve_macro_atom_state()
-        self._synchronize_plasma_contract()
 
         return {
             "opacity_state": opacity_state,
