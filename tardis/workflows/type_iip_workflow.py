@@ -5,6 +5,7 @@ import numpy.typing as npt
 import pandas as pd
 from astropy import units as u
 from scipy.interpolate import interp1d
+from scipy.optimize import OptimizeResult
 from scipy.optimize import least_squares as lsq
 from scipy.sparse import block_diag
 
@@ -535,31 +536,15 @@ class TypeIIPWorkflow:
 
         update_kwargs = {
             "previous_ion_number_density": pl.ion_number_density.copy(),
-            "previous_electron_densities": electron_densities,
+            "previous_electron_densities": pd.Series(
+                electron_densities, index=pl.electron_densities.index
+            ),
+            "previous_level_number_density": pl.level_number_density.copy(),
             "link_t_rad_t_electron": link_t_rad_t_electron,
+            "iteration": pl.iteration,
         }
-        legacy_continuum_outputs = {
-            "previous_beta_sobolev",
-            "previous_b",
-            "previous_t_electrons",
-        }
-        if legacy_continuum_outputs <= set(self.plasma_solver.outputs_dict):
-            update_kwargs.update(
-                previous_beta_sobolev=pl.beta_sobolev.copy(),
-                previous_b=pl.b,
-                previous_t_electrons=pl.t_rad * link_t_rad_t_electron,
-            )
-        else:
-            update_kwargs.update(
-                previous_electron_densities=pd.Series(
-                    electron_densities,
-                    index=self.plasma_solver.electron_densities.index,
-                ),
-                previous_level_number_density=(pl.level_number_density.copy()),
-                iteration=1,
-            )
-            if "previous_beta_sobolev" in self.plasma_solver.outputs_dict:
-                update_kwargs["previous_beta_sobolev"] = pl.beta_sobolev.copy()
+        if "previous_beta_sobolev" in pl.outputs_dict:
+            update_kwargs["previous_beta_sobolev"] = pl.beta_sobolev.copy()
         self.plasma_solver.update(**update_kwargs)
 
         solution = np.zeros(2 * len(self.plasma_solver.fractional_heating))
@@ -601,10 +586,17 @@ class TypeIIPWorkflow:
         logger.info("Heating: %s", self.plasma_solver.fractional_heating)
         return solution
 
-    def solve_thermal_balance(self):
-        """Solve the heating and cooling balance of the plasma iteratively,
-        setting the electron number density and link_t_rad_t_electron
-        to values that satisfy thermal balance
+    def solve_thermal_balance(self) -> OptimizeResult:
+        """Solve the heating and cooling balance of the plasma iteratively.
+
+        The solver sets the electron number density and link_t_rad_t_electron
+        to values that satisfy thermal balance.
+
+        Returns
+        -------
+        scipy.optimize.OptimizeResult
+            The least-squares convergence result for the thermal-balance
+            solve.
         """
         link_t_rad_t_electron_start = np.asarray(
             self.plasma_solver.link_t_rad_t_electron
@@ -683,7 +675,6 @@ class TypeIIPWorkflow:
             )
             initial_guess = np.clip(initial_guess, lower_bound, upper_bound)
 
-        self.plasma_solver.plasma_converged = False
         thermal_lsq_result = lsq(
             self.thermal_balance_iteration,
             initial_guess,
@@ -698,7 +689,6 @@ class TypeIIPWorkflow:
             gtol=1e-14,
             args=(max_electron_number_density,),
         )
-        self.plasma_solver.plasma_converged = True
         # final thermal_balance_iteration to set values in plasma
         self.thermal_balance_iteration(
             thermal_lsq_result.x, max_electron_number_density
@@ -715,6 +705,7 @@ class TypeIIPWorkflow:
             / ion_ratio**-1
         )
         logger.info("Ion Ratio Convergence: %s", ion_ratio_conv)
+        return thermal_lsq_result
 
     def solve_continuum_state(self, continuum_estimators):
         """Refresh continuum coefficients from the equilibrium plasma."""

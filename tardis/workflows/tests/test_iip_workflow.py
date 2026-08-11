@@ -9,6 +9,9 @@ from astropy import units as u
 
 from tardis.conftest import assert_regression_dataframe
 from tardis.iip_plasma.continuum.base_continuum import BaseContinuum
+from tardis.iip_plasma.properties.continuum import (
+    IIpWorkflowContinuumConnectors,
+)
 from tardis.iip_plasma.standard_plasmas import LegacyPlasmaArray
 from tardis.io.configuration.config_reader import Configuration
 from tardis.plasma.equilibrium.continuum import (
@@ -142,30 +145,13 @@ LEGACY_PLASMA_REGRESSION_OUTPUTS = (
 
 
 WORKFLOW_INITIAL_REGRESSION_CASES = (
-    pytest.param(
-        "transition_probabilities",
-        marks=pytest.mark.xfail(
-            strict=True,
-            reason="Initial macro-atom transition parity is not yet within "
-            "the Step 2 gate.",
-        ),
-    ),
     "ion_number_density",
     "tau_sobolevs",
     "beta_sobolev",
     "level_number_density",
     "electron_densities",
     "p_fb_deactivation",
-    pytest.param(
-        "chi_bf",
-        marks=pytest.mark.xfail(
-            strict=True,
-            reason="Initial bound-free opacity parity is not yet within the "
-            "Step 2 gate.",
-        ),
-    ),
     "stimulated_emission_factor",
-    "ion_ratio",
     "t_electrons",
     "link_t_rad_t_electron",
     "j_blues",
@@ -722,6 +708,124 @@ def test_standard_initial_continuum_factor_matches_legacy_fixture(
     )
 
 
+def test_standard_initial_bound_free_opacity_matches_legacy_calculation(
+    initial_type_iip_workflow: TypeIIPWorkflow,
+) -> None:
+    """Compare opacity with the legacy calculation using identical inputs."""
+    workflow = initial_type_iip_workflow
+    plasma = workflow.plasma_solver
+    continuum = workflow.continuum_state
+    legacy_outputs = IIpWorkflowContinuumConnectors(None).calculate(
+        workflow.atom_data,
+        continuum.radiative_recombination_rate,
+        plasma.electron_densities,
+        plasma.ion_number_density,
+        plasma.lte_ion_number_density,
+        plasma.t_electrons,
+        plasma.level_number_density,
+        plasma.lte_level_number_density,
+        continuum.radiative_ionization_rate,
+        continuum.collisional_deexcitation_rate,
+    )
+    legacy_chi_bf = legacy_outputs[3]
+    expected = legacy_chi_bf.loc[
+        workflow.continuum_opacity_state.level2continuum_idx.index
+    ]
+    pd.testing.assert_frame_equal(
+        workflow.continuum_opacity_state.chi_bf,
+        expected,
+        rtol=1e-5,
+        atol=0.0,
+        check_dtype=False,
+        check_names=False,
+    )
+
+
+def test_standard_initial_macro_atom_state_matches_legacy_topology(
+    initial_type_iip_workflow: TypeIIPWorkflow,
+    initial_continuum_numerical_contract: tuple[
+        ContinuumRateState,
+        BaseContinuum,
+        LegacyPlasmaArray,
+    ],
+) -> None:
+    """Compare bound-bound topology and normalization with the IIP oracle."""
+    _, legacy_continuum, legacy_plasma = initial_continuum_numerical_contract
+    legacy_probabilities = legacy_continuum.transition_probabilities.dataframe
+    legacy_bound_bound = legacy_probabilities.loc[
+        legacy_probabilities.transition_type.isin([-1, 0, 1])
+    ]
+    legacy_bound_bound = legacy_bound_bound.set_index(
+        "transition_type", append=True
+    )
+
+    standard_state = initial_type_iip_workflow.solve_macro_atom_state()
+    standard_bound_bound = (
+        standard_state.transition_metadata.transition_type.isin([-1, 0, 1])
+    )
+    standard_metadata = standard_state.transition_metadata.loc[
+        standard_bound_bound, ["source", "destination", "transition_type"]
+    ]
+    source_index = pd.MultiIndex.from_tuples(standard_metadata.source)
+    destination_index = pd.MultiIndex.from_tuples(
+        standard_metadata.destination
+    )
+    references = legacy_plasma.atomic_data.macro_atom_references.references_idx
+    standard_metadata.index = pd.MultiIndex.from_arrays(
+        [
+            references.loc[source_index].to_numpy(),
+            references.loc[destination_index].to_numpy(),
+            standard_metadata.transition_type.to_numpy(),
+        ]
+    )
+    pd.testing.assert_index_equal(
+        standard_metadata.index.sort_values(),
+        legacy_bound_bound.index.sort_values(),
+        check_names=False,
+    )
+
+    legacy_source_probabilities = legacy_probabilities.iloc[:, 2:].groupby(
+        level=0
+    ).sum()
+    active_legacy_sources = legacy_source_probabilities.loc[
+        legacy_source_probabilities.sum(axis=1) > 0.0
+    ]
+    np.testing.assert_allclose(
+        active_legacy_sources.to_numpy(), 1.0, rtol=1e-12, atol=0.0
+    )
+    standard_source_probabilities = (
+        standard_state.transition_probabilities.assign(
+            source=standard_state.transition_metadata.source
+        )
+        .groupby("source")
+        .sum()
+    )
+    active_sources = standard_source_probabilities.loc[
+        standard_source_probabilities.sum(axis=1) > 0.0
+    ]
+    np.testing.assert_allclose(
+        active_sources.to_numpy(), 1.0, rtol=1e-12, atol=0.0
+    )
+
+
+def test_standard_initial_ion_ratio_matches_ion_populations(
+    initial_type_iip_workflow: TypeIIPWorkflow,
+) -> None:
+    """Derive the continuum ion ratio from the owned ion populations."""
+    plasma = initial_type_iip_workflow.plasma_solver
+    expected = plasma.ion_number_density.loc[(1, 1)] / plasma.ion_number_density.loc[
+        (1, 0)
+    ]
+    pd.testing.assert_series_equal(
+        plasma.ion_ratio,
+        expected,
+        check_dtype=False,
+        check_names=False,
+        rtol=1e-12,
+        atol=0.0,
+    )
+
+
 def test_initial_continuum_level_factor_uses_dilute_lte_without_estimators(
     initial_type_iip_workflow: TypeIIPWorkflow,
 ) -> None:
@@ -1259,7 +1363,9 @@ def test_thermal_balance_solver(
     )
     assert np.all(np.isfinite(initial_residual))
 
-    type_iip_workflow.solve_thermal_balance()
+    thermal_balance_result = type_iip_workflow.solve_thermal_balance()
+    assert thermal_balance_result.success
+    assert np.all(np.isfinite(thermal_balance_result.fun))
     type_iip_workflow.solve_continuum_state(continuum_estimators)
 
     tau_sobolevs_ctardis = pd.read_hdf(
@@ -1440,12 +1546,31 @@ def test_standard_workflow_completes_two_owned_iterations(
         workflow.solve_simulation_state(estimated_values)
         continuum_estimators, j_blues = workflow.update_estimators()
         workflow.solve_plasma(continuum_estimators, j_blues)
-        workflow.solve_thermal_balance()
+        thermal_balance_result = workflow.solve_thermal_balance()
+        assert thermal_balance_result.success
+        assert np.all(np.isfinite(thermal_balance_result.fun))
         workflow.solve_continuum_state(continuum_estimators)
 
         plasma = workflow.plasma_solver
+        assert plasma.iteration == _iteration + 1
         assert np.all(np.isfinite(plasma.electron_densities.to_numpy()))
         assert np.all(np.isfinite(plasma.level_number_density.to_numpy()))
+        level_totals = plasma.level_number_density.groupby(
+            level=["atomic_number", "ion_number"]
+        ).sum()
+        np.testing.assert_allclose(
+            level_totals,
+            plasma.ion_number_density.loc[level_totals.index],
+            rtol=1e-12,
+            atol=0.0,
+        )
+        np.testing.assert_allclose(
+            plasma.ion_number_density.groupby(level="atomic_number").sum(),
+            plasma.number_density,
+            rtol=1e-12,
+            atol=0.0,
+        )
+        assert np.all(np.isfinite(plasma.t_electrons))
         assert np.all(
             np.isfinite(
                 workflow.continuum_state.radiative_recombination_rate.to_numpy()
@@ -1453,6 +1578,11 @@ def test_standard_workflow_completes_two_owned_iterations(
         )
         assert np.all(
             np.isfinite(workflow.continuum_opacity_state.chi_bf.to_numpy())
+        )
+        assert np.all(
+            np.isfinite(
+                opacity_states["macro_atom_state"].transition_probabilities.to_numpy()
+            )
         )
 
         workflow.completed_iterations += 1

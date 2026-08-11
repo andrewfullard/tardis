@@ -41,7 +41,7 @@ class SobolevPopulationSolver:
     max_iterations : int, optional
         Maximum number of population/beta updates, by default ``200``.
     relaxation_floor : float, optional
-        Smallest relaxation factor used after a growing update.
+        Smallest relaxation factor used after a growing or reversing update.
     """
 
     def __init__(
@@ -155,12 +155,11 @@ class SobolevPopulationSolver:
         if not np.isfinite(beta_sobolev.to_numpy()).all():
             raise PlasmaIonizationError("Initial Sobolev beta is nonfinite")
 
-        accepted_merit = np.inf
+        previous_merit = np.inf
         update_norm = np.inf
         population_norm = np.inf
         relaxation = 1.0
-        retry_origin_beta = beta_sobolev
-        retry_target_beta = beta_sobolev
+        previous_scaled_update: npt.NDArray[np.float64] | None = None
         converged = False
         for _iteration in range(1, self.max_iterations + 1):
             population_state = self.charge_conservation_solver.solve(
@@ -180,20 +179,21 @@ class SobolevPopulationSolver:
                     "Sobolev fixed-point update is nonfinite"
                 )
             update_merit = max(update_norm, population_norm)
-            if update_merit > accepted_merit:
-                if relaxation <= self.relaxation_floor:
-                    raise PlasmaIonizationError(
-                        "Sobolev fixed-point damping reached its floor: "
-                        f"update_norm={update_norm}, "
-                        f"population_norm={population_norm}, "
-                        f"accepted_merit={accepted_merit}, "
-                        f"relaxation={relaxation}"
-                    )
-                relaxation = max(self.relaxation_floor, relaxation / 2.0)
-                beta_sobolev = retry_origin_beta + relaxation * (
-                    retry_target_beta - retry_origin_beta
+            beta_update = proposed_beta.to_numpy() - beta_sobolev.to_numpy()
+            beta_scale = np.maximum.reduce(
+                (
+                    np.abs(proposed_beta.to_numpy()),
+                    np.abs(beta_sobolev.to_numpy()),
+                    np.full(beta_sobolev.shape, 1e-300),
                 )
-                continue
+            )
+            scaled_update = beta_update / beta_scale
+            update_reversed = (
+                previous_scaled_update is not None
+                and np.vdot(previous_scaled_update, scaled_update) < 0.0
+            )
+            if update_merit > previous_merit or update_reversed:
+                relaxation = max(self.relaxation_floor, relaxation / 2.0)
             initial_electron_densities = (
                 population_state.electron_densities.copy(deep=True)
             )
@@ -206,11 +206,11 @@ class SobolevPopulationSolver:
                 converged = True
                 break
             level_number_density = new_level_number_density
-            retry_origin_beta = beta_sobolev
-            retry_target_beta = proposed_beta
-            beta_sobolev = proposed_beta
-            accepted_merit = update_merit
-            relaxation = 1.0
+            beta_sobolev = beta_sobolev + relaxation * (
+                proposed_beta - beta_sobolev
+            )
+            previous_merit = update_merit
+            previous_scaled_update = scaled_update
 
         if not converged:
             raise PlasmaIonizationError(
