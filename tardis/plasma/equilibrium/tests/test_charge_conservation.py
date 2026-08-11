@@ -6,6 +6,7 @@ import numpy.testing as npt
 import pandas as pd
 import pandas.testing as pdt
 import pytest
+from scipy.special import expit
 
 from tardis.plasma.electron_energy_distribution import (
     ThermalElectronEnergyDistribution,
@@ -406,6 +407,37 @@ def test_charge_conservation_solver_is_density_scale_independent() -> None:
     )
 
 
+def test_charge_conservation_solver_resolves_steep_normalized_root() -> None:
+    """Meet the residual tolerance when the charge root is steep."""
+    elemental_number_density = pd.DataFrame(
+        [[1.0]], index=pd.Index([1], name="atomic_number"), columns=[0]
+    )
+    transition_fraction = 0.4321987654321
+    steepness = 1e7
+
+    def solve_trial(electron_density: pd.Series) -> pd.DataFrame:
+        ionized = expit(
+            steepness * (transition_fraction - electron_density.iloc[0])
+        )
+        return pd.DataFrame(
+            [[1.0 - ionized], [ionized]],
+            index=pd.MultiIndex.from_tuples(
+                [(1, 0), (1, 1)],
+                names=["atomic_number", "ion_number"],
+            ),
+            columns=[0],
+        )
+
+    state = ChargeConservationSolver(
+        elemental_number_density, CallbackPopulationSolver(solve_trial)
+    ).solve(pd.DataFrame(columns=[0]))
+    charge_residual = (
+        state.ion_number_density.loc[(1, 1), 0] - state.electron_densities[0]
+    )
+
+    assert abs(charge_residual) <= 1e-10
+
+
 def test_charge_conservation_solver_includes_all_carbon_stages() -> None:
     """Include every ion stage, including bare carbon, in charge density."""
     elemental_number_density = pd.DataFrame(
@@ -493,6 +525,41 @@ def test_charge_conservation_solver_accepts_zero_maximum_density() -> None:
     ).solve(pd.DataFrame(columns=[0]))
 
     npt.assert_allclose(state.electron_densities, [0.0])
+
+
+def test_charge_conservation_solver_accepts_batched_roundoff() -> None:
+    """Allow charge-weighted roundoff from the final batched solve."""
+    columns = pd.Index([0, 1], name="shell")
+    elemental_number_density = pd.DataFrame(
+        [[1.0, 1.0]],
+        index=pd.Index([1], name="atomic_number"),
+        columns=columns,
+    )
+    roundoff_residual = 5e-10
+
+    def solve_trial(electron_density: pd.Series) -> pd.DataFrame:
+        ionized = electron_density.to_numpy(copy=True)
+        if len(electron_density) > 1:
+            ionized += roundoff_residual
+        return pd.DataFrame(
+            [1.0 - ionized, ionized],
+            index=pd.MultiIndex.from_tuples(
+                [(1, 0), (1, 1)],
+                names=["atomic_number", "ion_number"],
+            ),
+            columns=electron_density.index,
+        )
+
+    state = ChargeConservationSolver(
+        elemental_number_density, CallbackPopulationSolver(solve_trial)
+    ).solve(pd.DataFrame(columns=columns))
+    charge_residual = (
+        state.ion_number_density.loc[(1, 1)] - state.electron_densities
+    )
+
+    npt.assert_allclose(
+        charge_residual.to_numpy(), roundoff_residual, rtol=0.0, atol=1e-18
+    )
 
 
 def test_charge_conservation_solver_validates_final_state() -> None:

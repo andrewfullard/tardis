@@ -28,6 +28,9 @@ from tardis.spectrum.luminosity import (
     calculate_filtered_luminosity,
 )
 from tardis.transport.montecarlo.configuration import montecarlo_globals
+from tardis.transport.montecarlo.estimators.util import (
+    bound_free_estimator_array2frame,
+)
 from tardis.transport.montecarlo.modes.iip.solver import (
     MCTransportSolverIIP,
 )
@@ -717,10 +720,12 @@ class TypeIIPWorkflow:
         )
 
     def normalize_continuum_estimators(
-        self, continuum_estimators, j_blues, j_estimators
-    ):
-        """Compute and apply normalization factors for the continuum estimators
-        and J_blues.
+        self,
+        continuum_estimators: dict[str, object],
+        j_blues: pd.DataFrame,
+        j_estimators: npt.NDArray[np.float64],
+    ) -> tuple[dict[str, object], pd.DataFrame]:
+        """Normalize the continuum estimators and J_blues.
 
         Parameters
         ----------
@@ -745,6 +750,21 @@ class TypeIIPWorkflow:
             ).value
         )
         damping_factor = self.get_radiation_field_damping_factor(j_estimators)
+
+        for estimator_name in (
+            "photoionization_rate_estimator",
+            "stimulated_recombination_rate_estimator",
+            "bound_free_heating_estimator",
+            "stimulated_recombination_cooling_estimator",
+        ):
+            estimator = continuum_estimators[estimator_name]
+            if not isinstance(estimator, pd.DataFrame):
+                continuum_estimators[estimator_name] = (
+                    bound_free_estimator_array2frame(
+                        estimator,
+                        self.atom_data.level2continuum_edge_idx,
+                    )
+                )
 
         continuum_estimators["photoionization_rate_estimator"] *= (
             photo_ion_norm_factor * damping_factor

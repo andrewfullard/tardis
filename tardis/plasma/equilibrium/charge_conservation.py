@@ -37,7 +37,9 @@ class ChargeConservationSolver:
     population_solver : object
         Solver used for every trial electron-density population evaluation.
     tolerance : float, optional
-        Maximum allowed normalized charge residual, by default ``1e-10``.
+        Maximum allowed normalized charge residual, by default ``1e-9``.
+        This includes roundoff propagated from the independently validated
+        elemental population solves into the charge-weighted sum.
     max_solver_iterations : int, optional
         Maximum number of iterations for each bounded scalar solve, by default
         ``100``.
@@ -47,7 +49,7 @@ class ChargeConservationSolver:
         self,
         elemental_number_density: pd.DataFrame,
         population_solver: object,
-        tolerance: float = 1e-10,
+        tolerance: float = 1e-9,
         max_solver_iterations: int = 100,
     ) -> None:
         """Initialize the charge-conservation solver.
@@ -239,6 +241,7 @@ class ChargeConservationSolver:
             return float(lower_fraction) * maximum_electron_number_density
         if upper_residual == 0.0:
             return upper_fraction * maximum_electron_number_density
+        machine_epsilon = np.finfo(float).eps
         electron_density_fraction = brentq(
             self._calculate_shell_charge_residual,
             float(lower_fraction),
@@ -247,8 +250,8 @@ class ChargeConservationSolver:
                 shell,
                 maximum_electron_number_density,
             ),
-            xtol=1e-14,
-            rtol=1e-14,
+            xtol=machine_epsilon,
+            rtol=4 * machine_epsilon,
             maxiter=self.max_solver_iterations,
         )
         return electron_density_fraction * maximum_electron_number_density

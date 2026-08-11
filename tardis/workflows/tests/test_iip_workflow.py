@@ -767,9 +767,7 @@ def test_standard_initial_macro_atom_state_matches_legacy_topology(
         standard_bound_bound, ["source", "destination", "transition_type"]
     ]
     source_index = pd.MultiIndex.from_tuples(standard_metadata.source)
-    destination_index = pd.MultiIndex.from_tuples(
-        standard_metadata.destination
-    )
+    destination_index = pd.MultiIndex.from_tuples(standard_metadata.destination)
     references = legacy_plasma.atomic_data.macro_atom_references.references_idx
     standard_metadata.index = pd.MultiIndex.from_arrays(
         [
@@ -784,9 +782,9 @@ def test_standard_initial_macro_atom_state_matches_legacy_topology(
         check_names=False,
     )
 
-    legacy_source_probabilities = legacy_probabilities.iloc[:, 2:].groupby(
-        level=0
-    ).sum()
+    legacy_source_probabilities = (
+        legacy_probabilities.iloc[:, 2:].groupby(level=0).sum()
+    )
     active_legacy_sources = legacy_source_probabilities.loc[
         legacy_source_probabilities.sum(axis=1) > 0.0
     ]
@@ -813,9 +811,10 @@ def test_standard_initial_ion_ratio_matches_ion_populations(
 ) -> None:
     """Derive the continuum ion ratio from the owned ion populations."""
     plasma = initial_type_iip_workflow.plasma_solver
-    expected = plasma.ion_number_density.loc[(1, 1)] / plasma.ion_number_density.loc[
-        (1, 0)
-    ]
+    expected = (
+        plasma.ion_number_density.loc[(1, 1)]
+        / plasma.ion_number_density.loc[(1, 0)]
+    )
     pd.testing.assert_series_equal(
         plasma.ion_ratio,
         expected,
@@ -1342,6 +1341,68 @@ def test_standard_beta_sobolev_satisfies_escape_probability_identity(
     )
 
 
+def test_continuum_estimator_normalization_preserves_level_labels(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Transport tallies must become level-indexed continuum inputs."""
+    workflow = object.__new__(TypeIIPWorkflow)
+    photo_ion_index = pd.MultiIndex.from_tuples(
+        [(1, 0, 1), (1, 0, 0)],
+        names=["atomic_number", "ion_number", "level_number"],
+    )
+    workflow.atom_data = SimpleNamespace(
+        level2continuum_edge_idx=pd.Series([0, 1], index=photo_ion_index)
+    )
+    workflow.transport_state = SimpleNamespace(
+        time_of_simulation=1.0 * u.s,
+        geometry_state_numba=SimpleNamespace(volume=np.ones(2) * u.cm**3),
+    )
+    workflow.plasma_solver = SimpleNamespace(
+        ion_number_density=None,
+        electron_densities=pd.Series(np.ones(2)),
+        t_electrons=None,
+    )
+    monkeypatch.setattr(
+        workflow,
+        "get_radiation_field_damping_factor",
+        lambda _j_estimators: np.ones(2),
+    )
+    monkeypatch.setattr(
+        workflow,
+        "get_ff_heating_norm_factor",
+        lambda *_args: np.ones(2),
+    )
+    raw_bound_free_estimator = np.arange(4.0).reshape(2, 2) + 1.0
+    continuum_estimators = {
+        "photoionization_rate_estimator": raw_bound_free_estimator.copy(),
+        "stimulated_recombination_rate_estimator": (
+            raw_bound_free_estimator.copy()
+        ),
+        "bound_free_heating_estimator": raw_bound_free_estimator.copy(),
+        "stimulated_recombination_cooling_estimator": (
+            raw_bound_free_estimator.copy()
+        ),
+        "free_free_heating_estimator": np.ones(2),
+    }
+
+    normalized_estimators, _ = workflow.normalize_continuum_estimators(
+        continuum_estimators,
+        pd.DataFrame(np.ones((1, 2))),
+        np.ones(2),
+    )
+
+    expected_index = photo_ion_index.sort_values()
+    for estimator_name in (
+        "photoionization_rate_estimator",
+        "stimulated_recombination_rate_estimator",
+        "bound_free_heating_estimator",
+        "stimulated_recombination_cooling_estimator",
+    ):
+        estimator = normalized_estimators[estimator_name]
+        assert isinstance(estimator, pd.DataFrame)
+        pd.testing.assert_index_equal(estimator.index, expected_index)
+
+
 def test_thermal_balance_solver(
     iip_regression_path: object,
     type_iip_workflow: TypeIIPWorkflow,
@@ -1581,7 +1642,9 @@ def test_standard_workflow_completes_two_owned_iterations(
         )
         assert np.all(
             np.isfinite(
-                opacity_states["macro_atom_state"].transition_probabilities.to_numpy()
+                opacity_states[
+                    "macro_atom_state"
+                ].transition_probabilities.to_numpy()
             )
         )
 
