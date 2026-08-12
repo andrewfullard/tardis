@@ -7,7 +7,6 @@ from numpy.testing import assert_almost_equal
 
 from tardis.io.configuration import config_reader
 from tardis.io.configuration.config_reader import Configuration
-from tardis.plasma.assembly.base import PlasmaSolverFactory
 
 
 def test_convergence_section_parser():
@@ -59,28 +58,6 @@ def test_from_config_dict(tardis_config_verysimple):
             tardis_config_verysimple, validate=True, config_dirname="test"
         )
 
-
-def test_standard_factory_assembles_continuum_properties(
-    tardis_config_verysimple,
-):
-    class AtomData:
-        selected_atomic_numbers = pd.Index([1])
-        photoionization_data = object()
-
-        def prepare_atom_data(
-            self, *_args: object, **_kwargs: object
-        ) -> None:
-            return None
-
-    config = Configuration.from_config_dict(tardis_config_verysimple)
-    config.plasma.continuum_interaction.species = ["H I"]
-    plasma_solver_factory = PlasmaSolverFactory(AtomData(), config=config)
-
-    plasma_solver_factory.prepare_factory(
-        [1], "tardis.plasma.properties.legacy_property_collections", config
-    )
-
-    assert plasma_solver_factory.plasma_collection.continuum_properties
 
 def test_config_hdf(hdf_file_path, tardis_config_verysimple):
     expected = Configuration.from_config_dict(

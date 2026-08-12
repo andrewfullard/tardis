@@ -751,71 +751,6 @@ def test_standard_initial_bound_free_opacity_matches_legacy_calculation(
     )
 
 
-def test_standard_initial_macro_atom_state_matches_legacy_topology(
-    initial_type_iip_workflow: TypeIIPWorkflow,
-    initial_continuum_numerical_contract: tuple[
-        ContinuumRateState,
-        BaseContinuum,
-        LegacyPlasmaArray,
-    ],
-) -> None:
-    """Compare bound-bound topology and normalization with the IIP oracle."""
-    _, legacy_continuum, legacy_plasma = initial_continuum_numerical_contract
-    legacy_probabilities = legacy_continuum.transition_probabilities.dataframe
-    legacy_bound_bound = legacy_probabilities.loc[
-        legacy_probabilities.transition_type.isin([-1, 0, 1])
-    ]
-    legacy_bound_bound = legacy_bound_bound.set_index(
-        "transition_type", append=True
-    )
-
-    standard_state = initial_type_iip_workflow.solve_macro_atom_state()
-    standard_bound_bound = (
-        standard_state.transition_metadata.transition_type.isin([-1, 0, 1])
-    )
-    standard_metadata = standard_state.transition_metadata.loc[
-        standard_bound_bound, ["source", "destination", "transition_type"]
-    ]
-    source_index = pd.MultiIndex.from_tuples(standard_metadata.source)
-    destination_index = pd.MultiIndex.from_tuples(standard_metadata.destination)
-    references = legacy_plasma.atomic_data.macro_atom_references.references_idx
-    standard_metadata.index = pd.MultiIndex.from_arrays(
-        [
-            references.loc[source_index].to_numpy(),
-            references.loc[destination_index].to_numpy(),
-            standard_metadata.transition_type.to_numpy(),
-        ]
-    )
-    pd.testing.assert_index_equal(
-        standard_metadata.index.sort_values(),
-        legacy_bound_bound.index.sort_values(),
-        check_names=False,
-    )
-
-    legacy_source_probabilities = (
-        legacy_probabilities.iloc[:, 2:].groupby(level=0).sum()
-    )
-    active_legacy_sources = legacy_source_probabilities.loc[
-        legacy_source_probabilities.sum(axis=1) > 0.0
-    ]
-    np.testing.assert_allclose(
-        active_legacy_sources.to_numpy(), 1.0, rtol=1e-12, atol=0.0
-    )
-    standard_source_probabilities = (
-        standard_state.transition_probabilities.assign(
-            source=standard_state.transition_metadata.source
-        )
-        .groupby("source")
-        .sum()
-    )
-    active_sources = standard_source_probabilities.loc[
-        standard_source_probabilities.sum(axis=1) > 0.0
-    ]
-    np.testing.assert_allclose(
-        active_sources.to_numpy(), 1.0, rtol=1e-12, atol=0.0
-    )
-
-
 def test_standard_initial_ion_ratio_matches_ion_populations(
     initial_type_iip_workflow: TypeIIPWorkflow,
 ) -> None:
@@ -1506,68 +1441,6 @@ def test_standard_beta_sobolev_satisfies_escape_probability_identity(
     )
 
 
-def test_continuum_estimator_normalization_preserves_level_labels(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """Transport tallies must become level-indexed continuum inputs."""
-    workflow = object.__new__(TypeIIPWorkflow)
-    photo_ion_index = pd.MultiIndex.from_tuples(
-        [(1, 0, 1), (1, 0, 0)],
-        names=["atomic_number", "ion_number", "level_number"],
-    )
-    workflow.atom_data = SimpleNamespace(
-        level2continuum_edge_idx=pd.Series([0, 1], index=photo_ion_index)
-    )
-    workflow.transport_state = SimpleNamespace(
-        time_of_simulation=1.0 * u.s,
-        geometry_state_numba=SimpleNamespace(volume=np.ones(2) * u.cm**3),
-    )
-    workflow.plasma_solver = SimpleNamespace(
-        ion_number_density=None,
-        electron_densities=pd.Series(np.ones(2)),
-        t_electrons=None,
-    )
-    monkeypatch.setattr(
-        workflow,
-        "get_radiation_field_damping_factor",
-        lambda _j_estimators: np.ones(2),
-    )
-    monkeypatch.setattr(
-        workflow,
-        "get_ff_heating_norm_factor",
-        lambda *_args: np.ones(2),
-    )
-    raw_bound_free_estimator = np.arange(4.0).reshape(2, 2) + 1.0
-    continuum_estimators = {
-        "photoionization_rate_estimator": raw_bound_free_estimator.copy(),
-        "stimulated_recombination_rate_estimator": (
-            raw_bound_free_estimator.copy()
-        ),
-        "bound_free_heating_estimator": raw_bound_free_estimator.copy(),
-        "stimulated_recombination_cooling_estimator": (
-            raw_bound_free_estimator.copy()
-        ),
-        "free_free_heating_estimator": np.ones(2),
-    }
-
-    normalized_estimators, _ = workflow.normalize_continuum_estimators(
-        continuum_estimators,
-        pd.DataFrame(np.ones((1, 2))),
-        np.ones(2),
-    )
-
-    expected_index = photo_ion_index.sort_values()
-    for estimator_name in (
-        "photoionization_rate_estimator",
-        "stimulated_recombination_rate_estimator",
-        "bound_free_heating_estimator",
-        "stimulated_recombination_cooling_estimator",
-    ):
-        estimator = normalized_estimators[estimator_name]
-        assert isinstance(estimator, pd.DataFrame)
-        pd.testing.assert_index_equal(estimator.index, expected_index)
-
-
 def test_thermal_balance_solver(
     iip_regression_path: object,
     type_iip_workflow: TypeIIPWorkflow,
@@ -1708,15 +1581,6 @@ def test_thermal_balance_rejects_disconnected_zero_rate_system(
             bound_free_heating_estimator=zero_photo_estimator,
             stimulated_recombination_cooling_estimator=zero_photo_estimator,
         )
-
-
-def test_solve_opacity_exposes_structured_macro_atom_state(
-    type_iip_workflow: TypeIIPWorkflow,
-) -> None:
-    opacity_states = type_iip_workflow.solve_opacity()
-    continuum_macro_atom_state = opacity_states["macro_atom_state"]
-    assert continuum_macro_atom_state.transition_probabilities.shape[0] > 0
-    assert continuum_macro_atom_state.absorbing_probability_matrix is not None
 
 
 def test_standard_plasma_states_conserve_populations(

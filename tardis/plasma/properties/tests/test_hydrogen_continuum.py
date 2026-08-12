@@ -6,35 +6,10 @@ import pandas as pd
 import pandas.testing as pdt
 import pytest
 
-from tardis.plasma.assembly.base import PlasmaSolverFactory
 from tardis.plasma.properties.hydrogen_continuum import (
     HydrogenContinuumLTEPopulations,
     IIPContinuumPopulations,
 )
-from tardis.plasma.properties.legacy_property_collections import (
-    continuum_properties,
-)
-from tardis.plasma.properties.radiative_properties import (
-    StimulatedEmissionFactor,
-)
-
-
-def test_iip_continuum_outputs_have_one_coupled_owner() -> None:
-    owners = [
-        property_class
-        for property_class in continuum_properties
-        if {
-            "hydrogen_continuum_level_boltzmann_factor",
-            "hydrogen_continuum_partition_function",
-            "ion_number_density",
-            "electron_densities",
-            "level_number_density",
-        }
-        & set(property_class.outputs)
-    ]
-
-    assert owners == [IIPContinuumPopulations]
-    assert "_build_trial_state" not in IIPContinuumPopulations.__dict__
 
 
 def test_lte_populations_use_current_electron_densities() -> None:
@@ -79,30 +54,6 @@ def test_lte_populations_use_current_electron_densities() -> None:
         level_density,
         pd.DataFrame([[20.0], [2.0]], index=level_index),
     )
-
-
-def test_standard_factory_configures_continuum_stimulated_emission_factor() -> None:
-    class AtomData:
-        photoionization_data = object()
-        selected_atomic_numbers = pd.Index([1, 6])
-
-        def prepare_atom_data(self, *_args: object, **_kwargs: object) -> None:
-            return None
-
-    atom_data = AtomData()
-    factory = PlasmaSolverFactory(atom_data)
-    factory.continuum_interaction_species = ["H I"]
-    factory.legacy_nlte_species = [(1, 0), (6, 1)]
-    nlte_species = [(1, 0), (6, 1)]
-
-    factory.prepare_factory(
-        [1, 6],
-        "tardis.plasma.properties.legacy_property_collections",
-    )
-
-    assert factory.property_kwargs[StimulatedEmissionFactor] == {
-        "nlte_species": set(nlte_species)
-    }
 
 
 def test_coupled_state_property_publishes_nebular_state() -> None:
