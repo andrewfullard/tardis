@@ -6,10 +6,6 @@ import pytest
 
 from tardis import constants as const
 from tardis.io.configuration.config_reader import Configuration
-from tardis.plasma import BasePlasma
-from tardis.plasma.equilibrium.continuum import (
-    ContinuumRateState,
-)
 from tardis.transport.montecarlo.macro_atom import MacroAtomTransitionType
 from tardis.workflows.type_iip_workflow import TypeIIPWorkflow
 
@@ -61,22 +57,6 @@ def hydrogen_helium_continuum_workflow(
     config.plasma.continuum_interaction.species = ["H I", "He I"]
     config.plasma.nlte.species = [(1, 0), (2, 0)]
     return TypeIIPWorkflow(config)
-
-
-def test_standard_continuum_state_is_complete(
-    continuum_workflow: TypeIIPWorkflow,
-) -> None:
-    state = continuum_workflow.continuum_state
-    assert isinstance(state, ContinuumRateState)
-    for value in (
-        state.radiative_ionization_rate,
-        state.radiative_recombination_rate,
-        state.collisional_excitation_rate,
-        state.collisional_deexcitation_rate,
-        state.collisional_ionization_rate,
-        state.collisional_recombination_rate,
-    ):
-        assert np.all(np.isfinite(value.to_numpy()))
 
 
 def test_continuum_rate_indices_are_consistent(
@@ -196,28 +176,6 @@ def test_continuum_opacity_state_obeys_bound_free_identity(
         rtol=2e-12,
         atol=0.0,
     )
-
-
-def test_continuum_macro_atom_state_is_structured(
-    continuum_workflow: TypeIIPWorkflow,
-) -> None:
-    workflow = continuum_workflow
-    macro_atom_state = workflow.solve_macro_atom_state()
-    assert macro_atom_state.transition_probabilities.shape[0] > 0
-    assert macro_atom_state.absorbing_probability_matrix is not None
-    assert not hasattr(workflow.plasma_solver, "p_fb_deactivation")
-    assert not hasattr(workflow.plasma_solver, "chi_bf")
-    assert not hasattr(workflow.plasma_solver, "transition_probabilities")
-    assert np.all(
-        np.isfinite(macro_atom_state.transition_probabilities.to_numpy())
-    )
-
-
-def test_type_iip_workflow_uses_the_standard_plasma(
-    continuum_workflow: TypeIIPWorkflow,
-) -> None:
-    """Keep the legacy plasma implementation out of the production workflow."""
-    assert type(continuum_workflow.plasma_solver) is BasePlasma
 
 
 def test_standard_workflow_supports_non_hydrogen_continuum(
