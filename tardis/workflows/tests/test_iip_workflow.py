@@ -29,6 +29,10 @@ from tardis.plasma.equilibrium.rates.heating_cooling_rates import (
 )
 from tardis.plasma.equilibrium.thermal_balance import ThermalBalanceSolver
 from tardis.plasma.exceptions import PlasmaIonizationError
+from tardis.plasma.properties.ion_population import (
+    SahaFactor,
+    ThermalPhiSahaLTE,
+)
 from tardis.plasma.properties.level_population import LevelNumberDensity
 from tardis.plasma.radiation_field import DilutePlanckianRadiationField
 from tardis.workflows.type_iip_workflow import TypeIIPWorkflow
@@ -76,6 +80,74 @@ def _assert_regression_dataframe(
         check_dtype=False,
         check_names=False,
     )
+
+
+def _calculate_standard_phi_lucy(plasma: object) -> tuple[pd.DataFrame, pd.DataFrame]:
+    phi_te = ThermalPhiSahaLTE(None).calculate(
+        plasma.thermal_g_electron,
+        plasma.beta_electron,
+        plasma.thermal_lte_partition_function,
+        plasma.ionization_data,
+    )
+    phi_lucy = SahaFactor(None).calculate(
+        phi_te,
+        plasma.thermal_lte_level_boltzmann_factor,
+        plasma.thermal_lte_partition_function,
+    )
+    return phi_te, phi_lucy
+
+
+def _legacy_continuum_connector_outputs(
+    workflow: TypeIIPWorkflow,
+) -> tuple[object, ...]:
+    plasma = workflow.plasma_solver
+    continuum = workflow.continuum_state
+    return IIpWorkflowContinuumConnectors(None).calculate(
+        workflow.atom_data,
+        continuum.radiative_recombination_rate,
+        plasma.electron_densities,
+        plasma.ion_number_density,
+        plasma.lte_ion_number_density,
+        plasma.t_electrons,
+        plasma.level_number_density,
+        plasma.lte_level_number_density,
+        continuum.radiative_ionization_rate,
+        continuum.collisional_deexcitation_rate,
+    )
+
+
+def _solve_standard_post_mc_state(
+    workflow: TypeIIPWorkflow,
+    continuum_estimators: dict[str, object],
+    legacy_plasma: LegacyPlasmaArray,
+    iip_regression_path: Path,
+) -> TypeIIPWorkflow:
+    workflow.simulation_state.t_radiative = legacy_plasma.t_rad * u.K
+    workflow.simulation_state.dilution_factor = legacy_plasma.w
+    population_owner = workflow.plasma_solver.outputs_dict["electron_densities"]
+    population_owner.electron_densities = pd.read_hdf(
+        iip_regression_path / "ctardis_electron_densities_init_nlte.h5",
+        key="data",
+    )
+    population_owner.ion_number_density = pd.read_hdf(
+        iip_regression_path / "ctardis_ion_density_init_nlte.h5",
+        key="data",
+    )
+    population_owner.level_number_density = pd.read_hdf(
+        iip_regression_path / "ctardis_level_number_density_init_nlte.h5",
+        key="data",
+    )
+    previous_beta_sobolev = pd.read_hdf(
+        iip_regression_path / "ctardis_beta_sobolevs_init_nlte.h5",
+        key="data",
+    )
+    previous_beta_sobolev.index = workflow.plasma_solver.lines.index
+    beta_owner = workflow.plasma_solver.outputs_dict["beta_sobolev"]
+    beta_owner.beta_sobolev = previous_beta_sobolev
+
+    workflow.solve_plasma(continuum_estimators, legacy_plasma.j_blues)
+    workflow.solve_continuum_state(continuum_estimators)
+    return workflow
 
 
 @pytest.fixture
@@ -718,25 +790,65 @@ def test_standard_initial_continuum_factor_matches_legacy_fixture(
     )
 
 
+def test_standard_nebular_auxiliary_intermediates_match_iip(
+    initial_type_iip_workflow: TypeIIPWorkflow,
+    iip_plasma_nlte_init: LegacyPlasmaArray,
+) -> None:
+    """Compare nebular intermediates that should be direct formula parity."""
+    plasma = initial_type_iip_workflow.plasma_solver
+    phi_te, phi_lucy = _calculate_standard_phi_lucy(plasma)
+
+    pd.testing.assert_frame_equal(
+        plasma.delta,
+        iip_plasma_nlte_init.delta,
+        check_dtype=False,
+        check_names=False,
+        rtol=1e-5,
+        atol=0.0,
+    )
+    pd.testing.assert_frame_equal(
+        phi_te,
+        iip_plasma_nlte_init.phi_Te,
+        check_dtype=False,
+        check_names=False,
+        rtol=1e-5,
+        atol=0.0,
+    )
+    pd.testing.assert_frame_equal(
+        phi_lucy,
+        iip_plasma_nlte_init.phi_lucy,
+        check_dtype=False,
+        check_names=False,
+        rtol=1e-5,
+        atol=0.0,
+    )
+
+
+@pytest.mark.xfail(
+    strict=True,
+    reason="standard nebular phi does not yet match the IIP oracle",
+)
+def test_standard_nebular_phi_matches_iip(
+    initial_type_iip_workflow: TypeIIPWorkflow,
+    iip_plasma_nlte_init: LegacyPlasmaArray,
+) -> None:
+    """Gate the current percent-level nebular-ionization mismatch."""
+    pd.testing.assert_frame_equal(
+        initial_type_iip_workflow.plasma_solver.phi,
+        iip_plasma_nlte_init.phi,
+        check_dtype=False,
+        check_names=False,
+        rtol=1e-5,
+        atol=0.0,
+    )
+
+
 def test_standard_initial_bound_free_opacity_matches_legacy_calculation(
     initial_type_iip_workflow: TypeIIPWorkflow,
 ) -> None:
     """Compare opacity with the legacy calculation using identical inputs."""
     workflow = initial_type_iip_workflow
-    plasma = workflow.plasma_solver
-    continuum = workflow.continuum_state
-    legacy_outputs = IIpWorkflowContinuumConnectors(None).calculate(
-        workflow.atom_data,
-        continuum.radiative_recombination_rate,
-        plasma.electron_densities,
-        plasma.ion_number_density,
-        plasma.lte_ion_number_density,
-        plasma.t_electrons,
-        plasma.level_number_density,
-        plasma.lte_level_number_density,
-        continuum.radiative_ionization_rate,
-        continuum.collisional_deexcitation_rate,
-    )
+    legacy_outputs = _legacy_continuum_connector_outputs(workflow)
     legacy_chi_bf = legacy_outputs[3]
     expected = legacy_chi_bf.loc[
         workflow.continuum_opacity_state.level2continuum_idx.index
@@ -1198,33 +1310,11 @@ def test_standard_post_mc_fixed_point_parity_diagnostic(
     iip_regression_path: Path,
 ) -> None:
     """Compare standard and legacy states from identical post-MC estimators."""
-    workflow = type_iip_workflow
-    workflow.simulation_state.t_radiative = iip_plasma_after_mc.t_rad * u.K
-    workflow.simulation_state.dilution_factor = iip_plasma_after_mc.w
-    population_owner = workflow.plasma_solver.outputs_dict["electron_densities"]
-    population_owner.electron_densities = pd.read_hdf(
-        iip_regression_path / "ctardis_electron_densities_init_nlte.h5",
-        key="data",
-    )
-    population_owner.ion_number_density = pd.read_hdf(
-        iip_regression_path / "ctardis_ion_density_init_nlte.h5",
-        key="data",
-    )
-    population_owner.level_number_density = pd.read_hdf(
-        iip_regression_path / "ctardis_level_number_density_init_nlte.h5",
-        key="data",
-    )
-    previous_beta_sobolev = pd.read_hdf(
-        iip_regression_path / "ctardis_beta_sobolevs_init_nlte.h5",
-        key="data",
-    )
-    previous_beta_sobolev.index = workflow.plasma_solver.lines.index
-    beta_owner = workflow.plasma_solver.outputs_dict["beta_sobolev"]
-    beta_owner.beta_sobolev = previous_beta_sobolev
-
-    workflow.solve_plasma(
+    workflow = _solve_standard_post_mc_state(
+        type_iip_workflow,
         ctardis_after_mc_continuum_estimators,
-        iip_plasma_after_mc.j_blues,
+        iip_plasma_after_mc,
+        iip_regression_path,
     )
     plasma = workflow.plasma_solver
 
@@ -1261,6 +1351,128 @@ def test_standard_post_mc_fixed_point_parity_diagnostic(
     np.testing.assert_allclose(
         plasma.beta_sobolev.to_numpy(),
         iip_plasma_after_mc.beta_sobolev.to_numpy(),
+        rtol=1e-5,
+        atol=0.0,
+    )
+
+
+def test_standard_post_mc_line_inputs_match_iip(
+    type_iip_workflow: TypeIIPWorkflow,
+    ctardis_after_mc_continuum_estimators: dict[str, object],
+    iip_plasma_after_mc: LegacyPlasmaArray,
+    iip_regression_path: Path,
+) -> None:
+    """Compare post-MC line-radiation inputs not covered by population gates."""
+    workflow = _solve_standard_post_mc_state(
+        type_iip_workflow,
+        ctardis_after_mc_continuum_estimators,
+        iip_plasma_after_mc,
+        iip_regression_path,
+    )
+    plasma = workflow.plasma_solver
+    np.testing.assert_allclose(
+        np.asarray(plasma.stimulated_emission_factor),
+        np.asarray(iip_plasma_after_mc.stimulated_emission_factor),
+        rtol=1e-5,
+        atol=0.0,
+    )
+    np.testing.assert_allclose(
+        np.asarray(plasma.j_blues),
+        np.asarray(iip_plasma_after_mc.j_blues),
+        rtol=1e-12,
+        atol=0.0,
+    )
+
+
+def test_standard_post_mc_continuum_rates_match_iip(
+    type_iip_workflow: TypeIIPWorkflow,
+    ctardis_after_mc_continuum_estimators: dict[str, object],
+    iip_plasma_after_mc: LegacyPlasmaArray,
+    iip_regression_path: Path,
+) -> None:
+    """Compare directly equivalent structured post-MC continuum rates."""
+    workflow = _solve_standard_post_mc_state(
+        type_iip_workflow,
+        ctardis_after_mc_continuum_estimators,
+        iip_plasma_after_mc,
+        iip_regression_path,
+    )
+    standard_state = workflow.continuum_state
+
+    np.testing.assert_allclose(
+        standard_state.radiative_recombination_rate,
+        iip_plasma_after_mc.alpha_sp.loc[
+            standard_state.radiative_recombination_rate.index
+        ],
+        rtol=1e-5,
+        atol=0.0,
+    )
+    np.testing.assert_allclose(
+        standard_state.collisional_excitation_rate,
+        iip_plasma_after_mc.coll_exc_coeff.loc[
+            standard_state.collisional_excitation_rate.index
+        ],
+        rtol=LEGACY_COLLISIONAL_RATE_RTOL,
+        atol=0.0,
+    )
+    np.testing.assert_allclose(
+        standard_state.collisional_deexcitation_rate,
+        iip_plasma_after_mc.coll_deexc_coeff.loc[
+            standard_state.collisional_deexcitation_rate.index
+        ],
+        rtol=LEGACY_COLLISIONAL_RATE_RTOL,
+        atol=0.0,
+    )
+    pd.testing.assert_frame_equal(
+        standard_state.collisional_ionization_rate,
+        iip_plasma_after_mc.coll_ion_coeff.loc[
+            standard_state.collisional_ionization_rate.index
+        ],
+        rtol=LEGACY_COLLISIONAL_RATE_RTOL,
+        check_names=False,
+        check_column_type=False,
+    )
+    np.testing.assert_allclose(
+        standard_state.collisional_recombination_rate,
+        iip_plasma_after_mc.coll_recomb_coeff.loc[
+            standard_state.collisional_recombination_rate.index
+        ],
+        rtol=LEGACY_COLLISIONAL_RATE_RTOL,
+        atol=1e-29,
+    )
+
+
+def test_standard_post_mc_opacity_and_deactivation_match_iip(
+    type_iip_workflow: TypeIIPWorkflow,
+    ctardis_after_mc_continuum_estimators: dict[str, object],
+    iip_plasma_after_mc: LegacyPlasmaArray,
+    iip_regression_path: Path,
+) -> None:
+    """Compare post-MC bound-free opacity and deactivation probabilities."""
+    workflow = _solve_standard_post_mc_state(
+        type_iip_workflow,
+        ctardis_after_mc_continuum_estimators,
+        iip_plasma_after_mc,
+        iip_regression_path,
+    )
+    legacy_outputs = _legacy_continuum_connector_outputs(workflow)
+    expected_p_fb = legacy_outputs[2]
+    expected_chi_bf = legacy_outputs[3].loc[
+        workflow.continuum_opacity_state.level2continuum_idx.index
+    ]
+    pd.testing.assert_frame_equal(
+        workflow.continuum_opacity_state.p_fb_deactivation,
+        expected_p_fb,
+        check_dtype=False,
+        check_names=False,
+        rtol=1e-5,
+        atol=0.0,
+    )
+    pd.testing.assert_frame_equal(
+        workflow.continuum_opacity_state.chi_bf,
+        expected_chi_bf,
+        check_dtype=False,
+        check_names=False,
         rtol=1e-5,
         atol=0.0,
     )
@@ -1530,6 +1742,28 @@ def test_thermal_balance_solver(
         level_number_density_ctardis,
         rtol=6e-7,
         atol=0,
+        check_dtype=False,
+        check_names=False,
+    )
+
+    legacy_outputs = _legacy_continuum_connector_outputs(type_iip_workflow)
+    expected_p_fb = legacy_outputs[2]
+    expected_chi_bf = legacy_outputs[3].loc[
+        type_iip_workflow.continuum_opacity_state.level2continuum_idx.index
+    ]
+    pd.testing.assert_frame_equal(
+        type_iip_workflow.continuum_opacity_state.p_fb_deactivation,
+        expected_p_fb,
+        rtol=1e-5,
+        atol=0.0,
+        check_dtype=False,
+        check_names=False,
+    )
+    pd.testing.assert_frame_equal(
+        type_iip_workflow.continuum_opacity_state.chi_bf,
+        expected_chi_bf,
+        rtol=1e-5,
+        atol=0.0,
         check_dtype=False,
         check_names=False,
     )
