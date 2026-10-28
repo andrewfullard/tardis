@@ -284,14 +284,31 @@ class IonNumberDensity(ProcessingPlasmaProperty):
 
     def __init__(
         self,
-        plasma_parent,
-        ion_zero_threshold=ION_ZERO_THRESHOLD,
-        electron_densities=None,
-    ):
+        plasma_parent: object,
+        ion_zero_threshold: float = ION_ZERO_THRESHOLD,
+        electron_densities: pd.Series | None = None,
+        electron_density_tolerance: float = 0.05,
+    ) -> None:
+        """Initialize the ion number density property.
+
+        Parameters
+        ----------
+        plasma_parent : object
+            Plasma that owns this property.
+        ion_zero_threshold : float, optional
+            Ion number densities below this value are set to zero.
+        electron_densities : pandas.Series, optional
+            Fixed electron densities. When given, the charge balance is not
+            solved.
+        electron_density_tolerance : float, optional
+            Relative change in the electron density between iterations at
+            which the charge balance is considered converged.
+        """
         super().__init__(plasma_parent)
         self.ion_zero_threshold = ion_zero_threshold
         self.block_ids = None
         self._electron_densities = electron_densities
+        self.electron_density_tolerance = electron_density_tolerance
 
     @staticmethod
     def calculate_with_n_electron(
@@ -337,7 +354,7 @@ class IonNumberDensity(ProcessingPlasmaProperty):
 
     def calculate(self, phi, partition_function, number_density):
         if self._electron_densities is None:
-            n_e_convergence_threshold = 0.05
+            n_e_convergence_threshold = self.electron_density_tolerance
             n_electron = number_density.sum(axis=0)
             n_electron_iterations = 0
 

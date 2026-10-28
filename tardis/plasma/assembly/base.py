@@ -41,6 +41,9 @@ class PlasmaSolverFactory:
     ## Statistical Balance Solver
     legacy_nlte_species: list = []
 
+    ## Ionization options
+    electron_density_tolerance: float = 0.05
+
     ## Helium Treatment options
     helium_treatment: str = "none"
     heating_rate_data_file: str = "none"
@@ -330,7 +333,8 @@ class PlasmaSolverFactory:
             )
         else:
             self.property_kwargs[IonNumberDensity] = dict(
-                electron_densities=electron_densities
+                electron_densities=electron_densities,
+                electron_density_tolerance=self.electron_density_tolerance,
             )
 
     def assemble(

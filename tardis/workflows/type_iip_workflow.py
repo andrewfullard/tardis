@@ -78,6 +78,10 @@ from tardis.workflows.workflow_logger import WorkflowLogger
 # logging support
 logger = logging.getLogger(__name__)
 
+# The initial nebular ionization conserves charge to the precision of the
+# C-TARDIS root solve rather than the 5% default of the legacy plasma.
+INITIAL_ELECTRON_DENSITY_TOLERANCE = 1e-12
+
 
 class TypeIIPWorkflow:
     """Coordinate Type IIP plasma, transport, and thermal-balance solves."""
@@ -152,6 +156,7 @@ class TypeIIPWorkflow:
 
         factory = PlasmaSolverFactory(self.atom_data, configuration)
         factory.helium_treatment = "none"
+        factory.electron_density_tolerance = INITIAL_ELECTRON_DENSITY_TOLERANCE
         factory.legacy_nlte_species = list(
             dict.fromkeys([*factory.legacy_nlte_species, (1, 0)])
         )

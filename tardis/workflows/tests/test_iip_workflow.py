@@ -108,10 +108,13 @@ def test_workflow_initial_populations_match_ctardis(
         check_dtype=False,
         check_names=False,
     )
+    # Both codes solve nebular ionization with exact charge conservation.
+    # A shell-independent offset of ~7e-8 remains between their Saha
+    # factors, which 1e-6 allows while rejecting the 5% legacy tolerance.
     pd.testing.assert_series_equal(
         plasma.electron_densities,
         electron_densities,
-        rtol=1e-4,
+        rtol=1e-6,
         atol=0.0,
         check_dtype=False,
         check_names=False,
